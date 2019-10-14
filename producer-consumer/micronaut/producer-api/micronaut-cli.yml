@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: com.mycompany.producerapi
+---
+testFramework: junit
+sourceLanguage: java

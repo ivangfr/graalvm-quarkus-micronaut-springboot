@@ -65,5 +65,5 @@ docker run -d --rm --name micronaut-book-api-native -p 9088:8080 -e MYSQL_HOST=m
 
 To stop and remove application containers run
 ```
-docker stop micronaut-book-api micronaut-native-book-api
+docker stop micronaut-book-api-jvm micronaut-book-api-native
 ```

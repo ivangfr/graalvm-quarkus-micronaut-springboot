@@ -1,0 +1,61 @@
+---
+micronaut:
+  application:
+    name: consumer-api
+
+---
+micronaut:
+  metrics:
+    enabled: true
+
+---
+endpoints:
+  info:
+    enabled: true
+    sensitive: false
+  beans:
+    enabled: true
+    sensitive: false
+  env:
+    enabled: true
+    sensitive: false
+  health:
+    details-visible: ANONYMOUS
+    disk-space:
+      enabled: true
+    jdbc:
+      enabled: true
+
+---
+tracing:
+  zipkin:
+    enabled: true
+    http:
+      url: http://${ZIPKIN_HOST:localhost}:${ZIPKIN_PORT:9411}
+    sampler:
+      probability: 1.0
+
+---
+micronaut:
+  metrics:
+    enabled: true
+    binders:
+      kafka:
+        enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: true
+
+---
+kafka:
+  bootstrap:
+    servers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
+
+---
+app:
+  kafka:
+    group-id: consumerApiGroup
+    input:
+      topics: micronaut.news.json

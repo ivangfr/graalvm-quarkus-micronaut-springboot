@@ -1,0 +1,9 @@
+FROM adoptopenjdk/openjdk11-openj9:jdk-11.0.4_11_openj9-0.15.1-alpine-slim
+
+LABEL maintainer="ivangfr@yahoo.com.br"
+
+COPY build/libs/consumer-api-*-all.jar consumer-api.jar
+
+CMD java -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar consumer-api.jar
+
+EXPOSE 8080

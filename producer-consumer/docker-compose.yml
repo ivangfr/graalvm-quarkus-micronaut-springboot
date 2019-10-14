@@ -1,0 +1,98 @@
+version: "3.7"
+
+services:
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.2.2
+    container_name: zookeeper
+    restart: unless-stopped
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      TZ: "${TZ-Europe/Berlin}"
+    healthcheck:
+      test: "echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT"
+      start_period: 30s
+
+  kafka:
+    image: confluentinc/cp-kafka:5.2.2
+    container_name: kafka
+    restart: unless-stopped
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_DELETE_TOPIC_ENABLE: "true"
+      TZ: "${TZ-Europe/Berlin}"
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "9092" ]
+      start_period: 30s
+
+  kafka-rest-proxy:
+    image: confluentinc/cp-kafka-rest:5.2.2
+    container_name: kafka-rest-proxy
+    restart: unless-stopped
+    depends_on:
+      - zookeeper
+      - kafka
+    ports:
+      - "8082:8082"
+    environment:
+      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
+      KAFKA_REST_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_REST_HOST_NAME: kafka-rest-proxy
+      KAFKA_REST_LISTENERS: http://0.0.0.0:8082
+      KAFKA_REST_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      KAFKA_REST_CONSUMER_REQUEST_TIMEOUT_MS: 30000
+      TZ: "${TZ-Europe/Berlin}"
+    healthcheck:
+      test: "curl -f http://localhost:8082 || exit 1"
+      start_period: 30s
+
+  kafka-topics-ui:
+    image: landoop/kafka-topics-ui:0.9.4
+    container_name: kafka-topics-ui
+    restart: unless-stopped
+    depends_on:
+      - kafka-rest-proxy
+    ports:
+      - "8085:8000"
+    environment:
+      KAFKA_REST_PROXY_URL: http://kafka-rest-proxy:8082
+      PROXY: "true"
+    healthcheck:
+      test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
+      start_period: 30s
+
+  kafka-manager:
+    container_name: kafka-manager
+    image: hlebalbau/kafka-manager:2.0.0.2
+    restart: unless-stopped
+    depends_on:
+      - zookeeper
+    ports:
+      - "9000:9000"
+    environment:
+      ZK_HOSTS: zookeeper:2181
+      APPLICATION_SECRET: "random-secret"
+    command: -Dpidfile.path=/dev/null
+#    healthcheck:
+#      test: ""
+#      start_period: 30s
+
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin:2.16.2
+    restart: unless-stopped
+    ports:
+      - "9411:9411"
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "9411" ]
+      start_period: 30s

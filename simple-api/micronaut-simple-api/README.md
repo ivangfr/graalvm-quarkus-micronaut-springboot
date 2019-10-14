@@ -60,5 +60,5 @@ docker run -d --rm --name micronaut-simple-api-native -p 9083:8080 docker.mycomp
 
 To stop and remove application containers run
 ```
-docker stop micronaut-simple-api micronaut-native-simple-api
+docker stop micronaut-simple-api-jvm micronaut-simple-api-native
 ```
