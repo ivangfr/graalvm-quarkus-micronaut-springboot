@@ -1,0 +1,13 @@
+FROM oracle/graalvm-ce:19.2.0.1 as graalvm
+
+LABEL maintainer="ivangfr@yahoo.com.br"
+
+COPY build/libs/micronaut-book-api-*-all.jar /home/app/micronaut-book-api/build/libs/micronaut-book-api.jar
+WORKDIR /home/app/micronaut-book-api
+RUN gu install native-image
+RUN native-image --no-server --no-fallback -cp build/libs/micronaut-book-api.jar
+
+FROM frolvlad/alpine-glibc
+EXPOSE 8080
+COPY --from=graalvm /home/app/micronaut-book-api .
+ENTRYPOINT ["./micronaut-book-api"]

@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: com.mycompany.micronautsimpleapi
+---
+testFramework: junit
+sourceLanguage: java

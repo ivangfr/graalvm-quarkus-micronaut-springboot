@@ -1,0 +1,38 @@
+micronaut:
+  application:
+    name: micronaut-book-api
+
+---
+endpoints:
+  info:
+    enabled: true
+    sensitive: false
+  beans:
+    enabled: true
+    sensitive: false
+  env:
+    enabled: true
+    sensitive: false
+  health:
+    details-visible: ANONYMOUS
+    disk-space:
+      enabled: true
+    jdbc:
+      enabled: true
+---
+datasources.default: {}
+
+---
+datasources:
+  default:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/bookdb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: secret
+    driverClassName: com.mysql.cj.jdbc.Driver
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        show-sql: false

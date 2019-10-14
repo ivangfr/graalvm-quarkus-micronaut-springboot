@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: springboot-book-api
+  main:
+    banner-mode: "off"
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/bookdb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: secret
+
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: /
+      exposure:
+        include: info, health, beans, metrics, env
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+      show-details: always
+    beans:
+      enabled: true
+    metrics:
+      enabled: true
+    env:
+      enabled: true
