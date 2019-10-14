@@ -20,7 +20,7 @@ POST /api/news {"source": "...", "title": "..."}
 
 ## Running applications
 
-> Note: `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here]()
+> Note: `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
 
 ### `producer-api`
 
