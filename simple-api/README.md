@@ -5,11 +5,11 @@ In this example, we will implement three versions of a simple Greeting REST API 
 
 ## Applications
 
-#### quarkus-simple-api
+#### [quarkus-simple-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/simple-api/quarkus-simple-api#graalvm-quarkus-micronaut-springboot)
 
-#### micronaut-simple-api
+#### [micronaut-simple-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/simple-api/micronaut-simple-api#graalvm-quarkus-micronaut-springboot)
 
-#### springboot-simple-api
+#### [springboot-simple-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/simple-api/springboot-simple-api#graalvm-quarkus-micronaut-springboot)
 
 ## Comparison 
 

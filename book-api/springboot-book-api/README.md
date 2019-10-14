@@ -17,7 +17,7 @@ POST /api/books {"isbn": "...", "title": "..."}
 
 ## Running application
 
-> Note: the `MySQL` container must be running and initialized as explained [here]()
+> Note: `MySQL` container must be running and initialized as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#start-environment)
 
 ### Development Mode
 

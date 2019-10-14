@@ -8,6 +8,6 @@ Besides, as `Quarkus` and `Micronaut` support [`GraalVM`](https://www.graalvm.or
 
 ## Examples
 
-### simple-api
+### [simple-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/simple-api#graalvm-quarkus-micronaut-springboot)
 
-### book-api
+### [book-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#graalvm-quarkus-micronaut-springboot)
