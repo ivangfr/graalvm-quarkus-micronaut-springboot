@@ -30,7 +30,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/book-api/quarku
 Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
 `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder run
 ```
-./mvnw clean package -DskipTests
+./mvnw clean package
 ```
 
 Then, build the image with the script
@@ -48,7 +48,7 @@ docker run -d --rm --name quarkus-book-api-jvm -p 9085:8080 -e MYSQL_HOST=mysql 
 Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
 `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder run
 ```
-./mvnw clean package -Pnative -Dnative-image.docker-build=true -DskipTests
+./mvnw clean package -Pnative -Dnative-image.docker-build=true
 ```
 
 Then, build the image with the script

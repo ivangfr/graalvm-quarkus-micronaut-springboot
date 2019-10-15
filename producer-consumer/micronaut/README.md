@@ -34,7 +34,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consum
 ### Docker in JVM Mode
 
 Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut/producer-api`  folder run
+`graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut/producer-api` folder run
 ```
 ./gradlew clean assemble
 ```
@@ -73,13 +73,14 @@ docker run -d --rm --name micronaut-producer-api-native --network producer-consu
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut/consumer-api` folder run
 ```
+export MICRONAUT_SERVER_PORT=8081
 ./gradlew run
 ```
 
 ### Docker in JVM Mode
 
 Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut/consumer-api`  folder run
+`graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut/consumer-api` folder run
 ```
 ./gradlew clean assemble
 ```

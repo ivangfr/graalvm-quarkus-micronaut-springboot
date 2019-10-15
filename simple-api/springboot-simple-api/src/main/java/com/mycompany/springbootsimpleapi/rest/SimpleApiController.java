@@ -19,7 +19,7 @@ public class SimpleApiController {
 
     @GetMapping
     public Greeting greetName(@RequestParam(defaultValue = "World") String name) {
-        return greetingService.greet(name+"-Ivan");
+        return greetingService.greet(name);
     }
 
 }

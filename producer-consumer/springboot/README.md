@@ -35,7 +35,7 @@ Open a terminal and inside `springboot-cloudkarafka` root folder run
 
 In a terminal and inside `springboot-cloudkarafka` folder run
 ```
-./mvnw clean package dockerfile:build -DskipTests --projects spring-kafka/producer-kafka
+./mvnw clean package dockerfile:build --projects spring-kafka/producer-kafka
 ```
 
 Then, run the container using
@@ -60,7 +60,7 @@ Open a terminal and inside `springboot-cloudkarafka` folder run
 
 In a terminal and inside `springboot-cloudkarafka` folder run
 ```
-./mvnw clean package dockerfile:build -DskipTests --projects spring-kafka/consumer-kafka
+./mvnw clean package dockerfile:build --projects spring-kafka/consumer-kafka
 ```
 
 Then, run the container using

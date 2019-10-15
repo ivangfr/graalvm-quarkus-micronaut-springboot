@@ -1,7 +1,7 @@
 package com.mycompany.producerapi.rest;
 
 import com.mycompany.producerapi.kafka.NewsClient;
-import com.mycompany.producerapi.kafka.NewsMessage;
+import com.mycompany.producerapi.domain.News;
 import com.mycompany.producerapi.rest.dto.CreateNewsDto;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
@@ -24,7 +24,7 @@ public class NewsController {
     @Post
     public String createNews(@Valid @Body CreateNewsDto createNewsDto) {
         String id = UUID.randomUUID().toString();
-        NewsMessage newsMessage = new NewsMessage(createNewsDto.getSource(), createNewsDto.getTitle());
+        News newsMessage = new News(id, createNewsDto.getSource(), createNewsDto.getTitle());
         log.info("Sending News message: id={}, {}", id, newsMessage);
         newsClient.send(id, newsMessage);
         return id;
