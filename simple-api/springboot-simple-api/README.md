@@ -35,7 +35,8 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name springboot-simple-api -p 9084:8080 docker.mycompany.com/springboot-simple-api:1.0.0
+docker run -d --rm --name springboot-simple-api -p 9084:8080 \
+  docker.mycompany.com/springboot-simple-api:1.0.0
 ```
 
 ### Docker in Native Mode

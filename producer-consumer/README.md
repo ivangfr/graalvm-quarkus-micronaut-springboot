@@ -5,11 +5,11 @@ In this example, we will implement three versions of a producer and a consumer a
 
 ## Applications
 
-#### [`Quarkus`: producer-api & consumer-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/quarkus#graalvm-quarkus-micronaut-springboot)
+#### [quarkus-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/quarkus-producer-consumer#graalvm-quarkus-micronaut-springboot)
 
-#### [`Micronaut`: producer-api & consumer-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/micronaut#graalvm-quarkus-micronaut-springboot)
+#### [micronaut-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/micronaut-producer-consumer#graalvm-quarkus-micronaut-springboot)
 
-#### [`Spring Boot`: producer-kafka & consumer-kafka](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot#graalvm-quarkus-micronaut-springboot)
+#### [springboot-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot-producer-consumer#graalvm-quarkus-micronaut-springboot)
 
 ## Start environment
 

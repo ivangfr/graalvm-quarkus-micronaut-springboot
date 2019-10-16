@@ -72,10 +72,6 @@
       <version>${lombok.version}</version>
       <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-context-propagation</artifactId>
-    </dependency>
   </dependencies>
   <build>
     <plugins>

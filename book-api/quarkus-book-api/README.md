@@ -40,7 +40,9 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name quarkus-book-api-jvm -p 9085:8080 -e MYSQL_HOST=mysql --network book-api_default docker.mycompany.com/quarkus-book-api-jvm:1.0.0
+docker run -d --rm --name quarkus-book-api-jvm \
+  -p 9085:8080 -e MYSQL_HOST=mysql --network book-api_default \
+  docker.mycompany.com/quarkus-book-api-jvm:1.0.0
 ```
 
 ### Docker in Native Mode
@@ -58,7 +60,9 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name quarkus-book-api-native -p 9086:8080 -e MYSQL_HOST=mysql --network book-api_default docker.mycompany.com/quarkus-book-api-native:1.0.0
+docker run -d --rm --name quarkus-book-api-native \
+  -p 9086:8080 -e MYSQL_HOST=mysql --network book-api_default \
+  docker.mycompany.com/quarkus-book-api-native:1.0.0
 ```
 
 ## Shutdown

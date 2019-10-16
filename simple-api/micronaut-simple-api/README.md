@@ -35,7 +35,8 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name micronaut-simple-api-jvm -p 9082:8080 docker.mycompany.com/micronaut-simple-api-jvm:1.0.0
+docker run -d --rm --name micronaut-simple-api-jvm -p 9082:8080 \
+  docker.mycompany.com/micronaut-simple-api-jvm:1.0.0
 ```
 
 ### Docker in Native Mode
@@ -53,7 +54,8 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name micronaut-simple-api-native -p 9083:8080 docker.mycompany.com/micronaut-native-simple-api-native:1.0.0
+docker run -d --rm --name micronaut-simple-api-native -p 9083:8080 \
+  docker.mycompany.com/micronaut-native-simple-api-native:1.0.0
 ```
 
 ## Shutdown

@@ -1,7 +1,7 @@
 # `graalvm-quarkus-micronaut-springboot`
-## `> producer-consumer > springboot`
+## `> producer-consumer > springboot-producer-consumer`
 
-Instead of re-implement a new Kafka `producer` and `consumer` using [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/), we will re-use the ones implemented in the repository [`springboot-cloudkarafka`](https://github.com/ivangfr/springboot-cloudkarafka).
+Instead of re-implement a new Kafka `producer` and `consumer` using [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/), we will re-use the ones in the repository [`springboot-cloudkarafka`](https://github.com/ivangfr/springboot-cloudkarafka).
 
 So, go ahead and clone it
 ```
@@ -28,7 +28,7 @@ In this documentation, we will use the `Spring Kafka` implementation.
 
 Open a terminal and inside `springboot-cloudkarafka` root folder run
 ```
-./mvnw spring-boot:run --projects spring-kafka/producer-kafka -Dspring-boot.run.jvmArguments="-Dserver.port=9104"
+./mvnw spring-boot:run --projects spring-kafka/producer-kafka
 ```
 
 ### Docker in JVM Mode
@@ -40,7 +40,9 @@ In a terminal and inside `springboot-cloudkarafka` folder run
 
 Then, run the container using
 ```
-docker run -d --rm --name producer-kafka --network producer-consumer_default -e KAFKA_URL=kafka:9092 -p 9104:8080 docker.mycompany.com/producer-kafka:1.0.0
+docker run -d --rm --name producer-kafka \
+  -p 9104:8080 -e KAFKA_URL=kafka:9092 --network producer-consumer_default \
+  docker.mycompany.com/producer-kafka:1.0.0
 ```
 
 ### Docker in Native Mode
@@ -53,7 +55,7 @@ Spring team is working on supporting for `GraalVM` native images, https://github
 
 Open a terminal and inside `springboot-cloudkarafka` folder run
 ```
-./mvnw spring-boot:run --projects spring-kafka/consumer-kafka -Dspring-boot.run.jvmArguments="-Dserver.port=9109"
+./mvnw spring-boot:run --projects spring-kafka/consumer-kafka -Dspring-boot.run.jvmArguments="-Dserver.port=8081"
 ```
 
 ### Docker in JVM Mode
@@ -65,7 +67,9 @@ In a terminal and inside `springboot-cloudkarafka` folder run
 
 Then, run the container using
 ```
-docker run -d --rm --name consumer-kafka --network producer-consumer_default -e KAFKA_URL=kafka:9092 -p 9109:8080 docker.mycompany.com/consumer-kafka:1.0.0
+docker run -d --rm --name consumer-kafka \
+  -p 9109:8080 -e KAFKA_URL=kafka:9092 --network producer-consumer_default \
+  docker.mycompany.com/consumer-kafka:1.0.0
 ```
 
 ### Docker in Native Mode

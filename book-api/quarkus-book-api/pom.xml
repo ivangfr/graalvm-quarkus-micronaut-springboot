@@ -7,6 +7,7 @@
     <artifactId>quarkus-book-api</artifactId>
     <version>1.0.0</version>
     <properties>
+        <lombok.version>1.18.10</lombok.version>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <surefire-plugin.version>2.22.0</surefire-plugin.version>
@@ -69,6 +70,12 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-metrics</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
     <build>

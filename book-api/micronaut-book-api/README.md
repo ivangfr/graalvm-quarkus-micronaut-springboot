@@ -40,7 +40,9 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name micronaut-book-api-jvm -p 9087:8080 -e MYSQL_HOST=mysql --network book-api_default docker.mycompany.com/micronaut-book-api-jvm:1.0.0
+docker run -d --rm --name micronaut-book-api-jvm \
+  -p 9087:8080 -e MYSQL_HOST=mysql --network book-api_default \
+  docker.mycompany.com/micronaut-book-api-jvm:1.0.0
 ```
 
 ### Docker in Native Mode
@@ -58,7 +60,9 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name micronaut-book-api-native -p 9088:8080 -e MYSQL_HOST=mysql --network book-api_default docker.mycompany.com/micronaut-book-api-native:1.0.0
+docker run -d --rm --name micronaut-book-api-native \
+  -p 9088:8080 -e MYSQL_HOST=mysql --network book-api_default \
+  docker.mycompany.com/micronaut-book-api-native:1.0.0
 ```
 
 ## Shutdown

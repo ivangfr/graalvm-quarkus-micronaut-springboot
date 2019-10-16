@@ -41,7 +41,9 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name springboot-book-api -p 9089:8080 -e MYSQL_HOST=mysql --network book-api_default docker.mycompany.com/springboot-book-api:1.0.0
+docker run -d --rm --name springboot-book-api \
+  -p 9089:8080 -e MYSQL_HOST=mysql --network book-api_default \
+  docker.mycompany.com/springboot-book-api:1.0.0
 ```
 
 ### Docker in Native Mode

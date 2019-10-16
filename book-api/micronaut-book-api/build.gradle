@@ -29,13 +29,13 @@ configurations {
 }
 
 ext {
-    set('micronautVersion', '1.2.3')
+    set('micronautVersion', '1.2.4')
     set('micronautDataVersion', '1.0.0.M3')
     set('micronautHibernateJpaVersion', '1.2.1')
     set('lombokVersion', '1.18.8')
     set('orikaVersion', '1.5.4')
     set('logbackVersion', '1.2.3')
-    set('mysqlConnectorVersion', '8.0.17')
+    set('mysqlConnectorVersion', '8.0.18')
 }
 
 dependencies {

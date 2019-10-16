@@ -35,7 +35,8 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name quarkus-simple-api-jvm -p 9080:8080 docker.mycompany.com/quarkus-simple-api-jvm:1.0.0
+docker run -d --rm --name quarkus-simple-api-jvm -p 9080:8080 \
+  docker.mycompany.com/quarkus-simple-api-jvm:1.0.0
 ```
 
 ### Docker in Native Mode
@@ -53,7 +54,8 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name quarkus-simple-api-native -p 9081:8080 docker.mycompany.com/quarkus-simple-api-native:1.0.0
+docker run -d --rm --name quarkus-simple-api-native -p 9081:8080 \
+  docker.mycompany.com/quarkus-simple-api-native:1.0.0
 ```
 
 ## Shutdown
