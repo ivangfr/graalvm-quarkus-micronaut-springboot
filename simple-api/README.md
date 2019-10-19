@@ -13,8 +13,8 @@ In this example, we will implement three versions of a simple Greeting REST API 
 
 ## Comparison 
 
-|                                      | Quarkus-JVM | Quarkus-Native | Micronaut-Jar | Micronaut-Native | Spring Boot |
-| ------------------------------------ | ----------- | -------------- | ------------- | -----------------| ----------- |
+| Criteria                             | Quarkus-JVM | Quarkus-Native | Micronaut-JVM | Micronaut-Native | Spring Boot |
+| ------------------------------------ | ----------- | -------------- | ------------- | ---------------- | ----------- |
 | Jar packaging time                   |             |                |               |                  |             |
 | Size of the jar                      |             |                |               |                  |             |
 | Docker building time                 |             |                |               |                  |             |
@@ -26,18 +26,11 @@ In this example, we will implement three versions of a simple Greeting REST API 
 
 <sup>1</sup> `ab` tests used
 ```
-// Quarkus-JVM
-ab -n 10000 -c 100 http://localhost:9080/api/greeting?name=Ivan
-
-// Quarkus-Native
-ab -n 10000 -c 100 http://localhost:9081/api/greeting?name=Ivan
-
-// Micronaut-JVM
-ab -n 10000 -c 100 http://localhost:9082/api/greeting?name=Ivan
-
-// Micronaut-Native
-ab -n 10000 -c 100 http://localhost:9083/api/greeting?name=Ivan
-
-// Spring Boot
-ab -n 10000 -c 100 http://localhost:9084/api/greeting?name=Ivan
+| Framework-Mode   | ab Test |
+| ---------------- | ------- |
+| Quarkus-JVM      | ab -n 10000 -c 100 http://localhost:9080/api/greeting?name=Ivan |
+| Quarkus-Native   | ab -n 10000 -c 100 http://localhost:9081/api/greeting?name=Ivan |
+| Micronaut-JVM    | ab -n 10000 -c 100 http://localhost:9082/api/greeting?name=Ivan |
+| Micronaut-Native | ab -n 10000 -c 100 http://localhost:9083/api/greeting?name=Ivan |
+| Spring Boot      | ab -n 10000 -c 100 http://localhost:9084/api/greeting?name=Ivan |
 ```
