@@ -144,4 +144,5 @@ docker stop quarkus-producer-api-jvm quarkus-producer-api-native quarkus-consume
 
 ## Issue
 
+- https://github.com/smallrye/smallrye-reactive-messaging/issues/268
 - https://github.com/quarkusio/quarkus/issues/4683
