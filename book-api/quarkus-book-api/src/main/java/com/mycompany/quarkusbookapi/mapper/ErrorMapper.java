@@ -36,4 +36,5 @@ public class ErrorMapper implements ExceptionMapper<Exception> {
                 )
                 .build();
     }
+
 }

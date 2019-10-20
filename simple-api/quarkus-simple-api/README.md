@@ -17,7 +17,7 @@ GET /api/greeting[?name=...]
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/quarkus-simple-api` folder run
 ```
-./mvnw compile quarkus:dev
+./mvnw clean compile quarkus:dev
 ```
 
 ### Docker in JVM Mode

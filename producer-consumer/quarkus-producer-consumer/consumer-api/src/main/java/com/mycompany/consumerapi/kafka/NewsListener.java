@@ -5,23 +5,21 @@ import io.smallrye.reactive.messaging.kafka.KafkaMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 
+import java.util.concurrent.CompletionStage;
+
 @Slf4j
 public class NewsListener {
 
     @Incoming("news")
-    public void receive(News news) {
+    public CompletionStage<Void> receive(KafkaMessage<String, News> kafkaMessage) {
         log.info("Received message\n---\nTOPIC: {}; PARTITION: {}; OFFSET: {}; TIMESTAMP: {};\nKEY: {}\nPAYLOAD: {}\n---",
-                "", "", "", "", "", news);
+                kafkaMessage.getTopic(),
+                kafkaMessage.getPartition(),
+                "", //kafkaMessage.getOffset(),
+                kafkaMessage.getTimestamp(),
+                kafkaMessage.getKey(),
+                kafkaMessage.getPayload());
+        return kafkaMessage.ack();
     }
 
-//    @Incoming("news")
-//    public void receive(KafkaMessage<String, News> kafkaMessage) {
-//        log.info("Received message\n---\nTOPIC: {}; PARTITION: {}; OFFSET: {}; TIMESTAMP: {};\nKEY: {}\nPAYLOAD: {}\n---",
-//                kafkaMessage.getTopic(),
-//                kafkaMessage.getPartition(),
-//                "",
-//                kafkaMessage.getTimestamp(),
-//                kafkaMessage.getKey(),
-//                kafkaMessage.getPayload());
-//    }
 }

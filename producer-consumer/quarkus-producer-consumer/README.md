@@ -32,7 +32,7 @@ POST /api/news {"source": "...", "title": "..."}
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
-./mvnw compile quarkus:dev --projects producer-api
+./mvnw clean compile quarkus:dev --projects producer-api
 ```
 
 ### Docker in JVM Mode
@@ -81,7 +81,7 @@ docker run -d --rm --name quarkus-producer-api-native \
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
-./mvnw compile quarkus:dev -Ddebug=5006 -Dquarkus.http.port=8081 --projects consumer-api
+./mvnw clean compile quarkus:dev -Ddebug=5006 -Dquarkus.http.port=8081 --projects consumer-api
 ```
 
 ### Docker in JVM Mode
@@ -141,3 +141,7 @@ To stop and remove application containers run
 ```
 docker stop quarkus-producer-api-jvm quarkus-producer-api-native quarkus-consumer-api-jvm quarkus-consumer-api-native
 ```
+
+## Issue
+
+- https://github.com/quarkusio/quarkus/issues/4683

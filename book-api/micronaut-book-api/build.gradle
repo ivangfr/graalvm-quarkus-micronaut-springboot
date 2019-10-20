@@ -29,7 +29,7 @@ configurations {
 }
 
 ext {
-    set('micronautVersion', '1.2.4')
+    set('micronautVersion', '1.2.5')
     set('micronautDataVersion', '1.0.0.M3')
     set('micronautHibernateJpaVersion', '1.2.1')
     set('lombokVersion', '1.18.8')
