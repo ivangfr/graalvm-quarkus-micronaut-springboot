@@ -109,7 +109,3 @@ WARNING [io.ver.cor.imp.BlockedThreadChecker] (vertx-blocked-thread-checker) Thr
         at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
         at java.lang.Thread.run(Thread.java:748)
 ```
-
-## Issues
-
-- https://github.com/micronaut-projects/micronaut-kafka/issues/68

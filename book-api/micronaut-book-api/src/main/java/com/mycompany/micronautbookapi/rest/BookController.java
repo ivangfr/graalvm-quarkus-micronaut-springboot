@@ -1,6 +1,7 @@
 package com.mycompany.micronautbookapi.rest;
 
 import com.mycompany.micronautbookapi.exception.BookNotFoundException;
+import com.mycompany.micronautbookapi.mapper.BookMapper;
 import com.mycompany.micronautbookapi.model.Book;
 import com.mycompany.micronautbookapi.rest.dto.CreateBookDto;
 import com.mycompany.micronautbookapi.service.BookService;
@@ -8,7 +9,6 @@ import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
-import ma.glasnost.orika.MapperFacade;
 
 import javax.validation.Valid;
 
@@ -16,11 +16,11 @@ import javax.validation.Valid;
 public class BookController {
 
     private final BookService bookService;
-    private final MapperFacade mapperFacade;
+    private final BookMapper bookMapper;
 
-    public BookController(BookService bookService, MapperFacade mapperFacade) {
+    public BookController(BookService bookService, BookMapper bookMapper) {
         this.bookService = bookService;
-        this.mapperFacade = mapperFacade;
+        this.bookMapper = bookMapper;
     }
 
     @Get
@@ -35,7 +35,7 @@ public class BookController {
 
     @Post
     public Book saveBook(@Valid @Body CreateBookDto createBookDto) {
-        Book book = mapperFacade.map(createBookDto, Book.class);
+        Book book = bookMapper.toBook(createBookDto);
         return bookService.saveBook(book);
     }
 

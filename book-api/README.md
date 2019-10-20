@@ -72,7 +72,3 @@ To stop and remove containers, networks and volumes, run
 ```
 docker-compose down -v
 ```
-
-## Issues
-
-- [Unable to build using GraalVM native-image tool #166](https://github.com/micronaut-projects/micronaut-data/issues/166)

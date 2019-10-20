@@ -1,6 +1,7 @@
 package com.mycompany.quarkusbookapi.rest;
 
 import com.mycompany.quarkusbookapi.exception.BookNotFoundException;
+import com.mycompany.quarkusbookapi.mapper.BookMapper;
 import com.mycompany.quarkusbookapi.model.Book;
 import com.mycompany.quarkusbookapi.rest.dto.CreateBookDto;
 import com.mycompany.quarkusbookapi.service.BookService;
@@ -24,6 +25,9 @@ public class BookResource {
     @Inject
     BookService bookService;
 
+    @Inject
+    BookMapper bookMapper;
+
     @GET
     public Iterable<Book> getBooks() {
         return bookService.getBooks();
@@ -37,11 +41,8 @@ public class BookResource {
 
     @POST
     public Response createBook(@Valid CreateBookDto createBookDto) {
-        Book book = new Book();
-        book.setIsbn(createBookDto.getIsbn());
-        book.setTitle(createBookDto.getTitle());
+        Book book = bookMapper.toBook(createBookDto);
         book = bookService.saveBook(book);
-
         return Response.status(Response.Status.CREATED).entity(book).build();
     }
 

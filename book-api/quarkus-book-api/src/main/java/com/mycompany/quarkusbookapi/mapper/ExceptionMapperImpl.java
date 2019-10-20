@@ -11,7 +11,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Provider
-public class ErrorMapper implements ExceptionMapper<Exception> {
+public class ExceptionMapperImpl implements ExceptionMapper<Exception> {
 
     @Override
     public Response toResponse(Exception exception) {

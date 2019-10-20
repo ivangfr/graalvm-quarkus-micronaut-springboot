@@ -33,7 +33,7 @@ ext {
     set('micronautDataVersion', '1.0.0.M3')
     set('micronautHibernateJpaVersion', '1.2.1')
     set('lombokVersion', '1.18.8')
-    set('orikaVersion', '1.5.4')
+    set('mapstructVersion', '1.3.1.Final')
     set('logbackVersion', '1.2.3')
     set('mysqlConnectorVersion', '8.0.18')
 }
@@ -63,7 +63,8 @@ dependencies {
     implementation "io.micronaut.data:micronaut-data-hibernate-jpa:$micronautDataVersion", {
         exclude group:'io.micronaut.configuration', module:'micronaut-hibernate-jpa'
     }
-    implementation "ma.glasnost.orika:orika-core:${orikaVersion}"
+    compileOnly "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     runtimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
     runtimeOnly "mysql:mysql-connector-java:${mysqlConnectorVersion}"
     testAnnotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
