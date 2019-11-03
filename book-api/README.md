@@ -32,23 +32,23 @@ Finally, run the script below to initialize the database
 ## Comparison
 
 ```
-                   Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
------------------------------- + -------------- + ---------------- + ----------------- + ----------------- |
-          quarkus-book-api-jvm |            13s |           443792 |               23s |             120MB |
-        micronaut-book-api-jvm |            16s |         32803668 |                3s |             276MB |
-       springboot-book-api-jvm |             5s |         42354478 |                4s |             127MB |
-       quarkus-book-api-native |           364s |           443925 |                9s |             153MB |
-     micronaut-book-api-native |            17s |         32803649 |              601s |             145MB |
+               Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
+-------------------------- + -------------- + ---------------- + ----------------- + ----------------- |
+      quarkus-book-api-jvm |            13s |           443792 |               23s |             120MB |
+    micronaut-book-api-jvm |            16s |         32803668 |                3s |             276MB |
+   springboot-book-api-jvm |             5s |         42354478 |                4s |             127MB |
+   quarkus-book-api-native |           364s |           443925 |                9s |             153MB |
+ micronaut-book-api-native |            17s |         32803649 |              601s |             145MB |
 ```
 
 ```
-                   Application | Statup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
------------------------------- + ----------- + -------------------------- + --------------- + ------------------------ |
-          quarkus-book-api-jvm |      6377ms |                   143.4MiB |             30s |                 167.4MiB |
-        micronaut-book-api-jvm |      9838ms |                   82.02MiB |             40s |                 162.2MiB |
-       springboot-book-api-jvm |     14009ms |                   492.1MiB |             46s |                 600.9MiB |
-       quarkus-book-api-native |        30ms |                   4.059MiB |             17s |                 253.9MiB |
-     micronaut-book-api-native |           - |                          - |               - |                        - |
+               Application | Statup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
+-------------------------- + ----------- + -------------------------- + --------------- + ------------------------ |
+      quarkus-book-api-jvm |      6377ms |                   143.4MiB |             30s |                 167.4MiB |
+    micronaut-book-api-jvm |      9838ms |                   82.02MiB |             40s |                 162.2MiB |
+   springboot-book-api-jvm |     14009ms |                   492.1MiB |             46s |                 600.9MiB |
+   quarkus-book-api-native |        30ms |                   4.059MiB |             17s |                 253.9MiB |
+ micronaut-book-api-native |           - |                          - |               - |                        - |
 ```
 > Note. There is no results for `micronaut-book-api-native` because we are getting an error while trying to run it. It
 > id related to this [issue](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues) 

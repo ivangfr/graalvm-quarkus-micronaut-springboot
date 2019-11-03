@@ -13,3 +13,14 @@ Besides, as `Quarkus` and `Micronaut` support [`GraalVM`](https://www.graalvm.or
 ### [book-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#graalvm-quarkus-micronaut-springboot)
 
 ### [producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#graalvm-quarkus-micronaut-springboot)
+
+## Comparing Frameworks
+
+In order to make it easier to collect data that will be used for comparing the frameworks, we've implemented some bash
+scripts. Here they are:
+
+| Bash script                             | Description |
+| --------------------------------------- | ----------- |
+| collect-jvm-jar-docker-size-times.sh    | it packages/assembles jar files and builds docker images of all JVM applications, collecting data like: jar packaging Time, size of the jar, docker build time and docker image size |
+| collect-native-jar-docker-size-times.sh | it packages/assembles jar files and builds docker images of all Native applications, collecting data like: jar packaging Time, size of the jar, docker build time and docker image size |
+| collect-startup-ab-times.sh             | it starts docker container of all applications (JVM and Native), collecting data like: startup time, initial memory consumption, time spent to run some ab tests and final memory consumption |
