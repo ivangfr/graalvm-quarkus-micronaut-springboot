@@ -1,0 +1,18 @@
+spring:
+  main:
+    banner-mode: "off"
+
+kafka:
+  bootstrap-servers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
+  consumer:
+    group-id: consumerApiGroup
+    auto-offset-reset: earliest
+    topic: springboot.news.json
+
+management:
+  endpoints:
+    web:
+      exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always

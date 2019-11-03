@@ -45,7 +45,7 @@ Before building the docker image, you need to package the application `jar` file
 
 Then, build the image with the script
 ```
-cd producer-api && sh ./docker-build.sh && cd ..
+cd producer-api && ./docker-build.sh && cd ..
 ```
 
 Finally, run the container using
@@ -65,7 +65,7 @@ Before building the docker image, you need to package the application `jar` file
 
 Then, build the image with the script
 ```
-cd producer-api && sh ./docker-build.sh native && cd ..
+cd producer-api && ./docker-build.sh native && cd ..
 ```
 
 Finally, run the container using
@@ -95,7 +95,7 @@ Before building the docker image, you need to package the application `jar` file
 
 Then, build the image with the script
 ```
-cd consumer-api && sh ./docker-build.sh && cd ..
+cd consumer-api && ./docker-build.sh && cd ..
 ```
 
 Finally, run the container using
@@ -115,7 +115,7 @@ Before building the docker image, you need to package the application `jar` file
 
 Then, build the image with the script
 ```
-cd consumer-api && sh ./docker-build.sh native && cd ..
+cd consumer-api && ./docker-build.sh native && cd ..
 ```
 
 Finally, run the container using

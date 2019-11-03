@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: producer-api
+  zipkin:
+    baseUrl: http://${ZIPKIN_HOST:localhost}:${ZIPKIN_PORT:9411}
+    sender.type: web

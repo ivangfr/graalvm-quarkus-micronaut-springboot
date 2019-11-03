@@ -32,7 +32,7 @@ POST /api/news {"source": "...", "title": "..."}
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
-./mvnw clean compile quarkus:dev --projects producer-api
+./mvnw compile quarkus:dev --projects producer-api
 ```
 
 ### Docker in JVM Mode
@@ -45,13 +45,12 @@ Before building the docker image, you need to package the application `jar` file
 
 Then, build the image with the script
 ```
-cd producer-api && sh ./docker-build.sh && cd ..
+cd producer-api && ./docker-build.sh && cd ..
 ```
 
 Finally, run the container using
 ```
-docker run -d --rm --name quarkus-producer-api-jvm \
-  -p 9100:8080 -e KAFKA_HOST=kafka --network producer-consumer_default \
+docker run -d --rm --name quarkus-producer-api-jvm -p 9100:8080 --network producer-consumer_default \
   docker.mycompany.com/quarkus-producer-api-jvm:1.0.0
 ```
 
@@ -65,13 +64,12 @@ Before building the docker image, you need to package the application `jar` file
 
 Then, build the image with the script
 ```
-cd producer-api && sh ./docker-build.sh native && cd .. 
+cd producer-api && ./docker-build.sh native && cd .. 
 ```
 
 Finally, run the container using
 ```
-docker run -d --rm --name quarkus-producer-api-native \
-  -p 9101:8080 -e KAFKA_HOST=kafka --network producer-consumer_default \
+docker run -d --rm --name quarkus-producer-api-native -p 9101:8080 --network producer-consumer_default \
   docker.mycompany.com/quarkus-producer-api-native:1.0.0
 ```
 
@@ -81,7 +79,7 @@ docker run -d --rm --name quarkus-producer-api-native \
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
-./mvnw clean compile quarkus:dev -Ddebug=5006 -Dquarkus.http.port=8081 --projects consumer-api
+./mvnw compile quarkus:dev -Ddebug=5006 -Dquarkus.http.port=8081 --projects consumer-api
 ```
 
 ### Docker in JVM Mode
@@ -94,13 +92,12 @@ Before building the docker image, you need to package the application `jar` file
 
 Then, build the image with the script
 ```
-cd consumer-api && sh ./docker-build.sh && cd ..
+cd consumer-api && ./docker-build.sh && cd ..
 ```
 
 Finally, run the container using
 ```
-docker run -d --rm --name quarkus-consumer-api-jvm \
-  -p 9105:8080 -e KAFKA_HOST=kafka --network producer-consumer_default \
+docker run -d --rm --name quarkus-consumer-api-jvm -p 9105:8080 --network producer-consumer_default \
   docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0
 ```
 
@@ -114,13 +111,12 @@ Before building the docker image, you need to package the application `jar` file
 
 Then, build the image with the script
 ```
-cd consumer-api && sh ./docker-build.sh native && cd ..
+cd consumer-api && ./docker-build.sh native && cd ..
 ```
 
 Finally, run the container using
 ```
-docker run -d --rm --name quarkus-consumer-api-native \
-  -p 9106:8080 -e KAFKA_HOST=kafka --network producer-consumer_default \
+docker run -d --rm --name quarkus-consumer-api-native -p 9106:8080 --network producer-consumer_default \
   docker.mycompany.com/quarkus-consumer-api-native:1.0.0
 ```
 

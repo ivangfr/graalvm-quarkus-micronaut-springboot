@@ -4,6 +4,8 @@ import com.mycompany.producerapi.domain.News;
 import com.mycompany.producerapi.rest.dto.CreateNewsDto;
 import io.smallrye.reactive.messaging.annotations.Channel;
 import io.smallrye.reactive.messaging.annotations.Emitter;
+import io.smallrye.reactive.messaging.annotations.OnOverflow;
+import io.smallrye.reactive.messaging.annotations.OnOverflow.Strategy;
 import io.smallrye.reactive.messaging.kafka.KafkaMessage;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +21,7 @@ public class NewsResource {
 
     @Inject
     @Channel("news")
+    @OnOverflow(value = Strategy.BUFFER)
     Emitter<KafkaMessage<String, News>> emitter;
 
     @POST

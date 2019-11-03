@@ -22,7 +22,7 @@ POST /api/books {"isbn": "...", "title": "..."}
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder run
 ```
-./mvnw clean compile quarkus:dev
+./mvnw compile quarkus:dev
 ```
 
 ### Docker in JVM Mode

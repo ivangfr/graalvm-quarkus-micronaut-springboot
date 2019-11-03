@@ -1,7 +1,8 @@
 # `graalvm-quarkus-micronaut-springboot`
 ## `> book-api`
 
-In this example, we will implement three versions of a Restful API for handling Books using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks. The books information are store in a database.
+In this example, we will implement three versions of a Restful API for handling Books using `Quarkus`, `Micronaut` and
+`Spring Boot` Frameworks. The books information are store in a database.
 
 ## Applications
 
@@ -28,43 +29,40 @@ Finally, run the script below to initialize the database
 ./init-db.sh
 ```
 
-## Comparison 
+## Comparison
 
-| Criteria                                  | Quarkus-JVM | Quarkus-Native | Micronaut-JVM | Micronaut-Native | Spring Boot |
-| ----------------------------------------- | ----------- | -------------- | ------------- | ---------------- | ------------|
-| Jar packaging time                        |             |                |               |                  |             |
-| Size of the jar                           |             |                |               |                  |             |
-| Docker building time                      |             |                |               |                  |             |
-| Docker image size                         |             |                |               |                  |             |
-| Startup time                              |             |                |               |                  |             |
-| Initial memory consumption                |             |                |               |                  |             |
-| Time to run the ab test POST <sup>1</sup> |             |                |               |                  |             |
-| Time to run the ab test GET <sup>2</sup>  |             |                |               |                  |             |
-| Final memory consumption                  |             |                |               |                  |             |
-
-<sup>1</sup> `ab` tests used
 ```
-| Framework-Mode   | ab Test |
-| ---------------- | ------- |
-| Quarkus-JVM      | ab -p test-books.json -T 'application/json' -n 10000 -c 100 http://localhost:9085/api/books |
-| Quarkus-Native   | ab -p test-books.json -T 'application/json' -n 10000 -c 100 http://localhost:9086/api/books |
-| Micronaut-JVM    | ab -p test-books.json -T 'application/json' -n 10000 -c 100 http://localhost:9087/api/books |
-| Micronaut-Native | ab -p test-books.json -T 'application/json' -n 10000 -c 100 http://localhost:9088/api/books |
-| Spring Boot      | ab -p test-books.json -T 'application/json' -n 10000 -c 100 http://localhost:9089/api/books |
+                   Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
+------------------------------ + -------------- + ---------------- + ----------------- + ----------------- |
+          quarkus-book-api-jvm |            13s |           443792 |               23s |             120MB |
+        micronaut-book-api-jvm |            16s |         32803668 |                3s |             276MB |
+       springboot-book-api-jvm |             5s |         42354478 |                4s |             127MB |
+       quarkus-book-api-native |           364s |           443925 |                9s |             153MB |
+     micronaut-book-api-native |            17s |         32803649 |              601s |             145MB |
 ```
 
-<sup>2</sup> `ab` tests used
 ```
-| Framework-Mode   | ab Test |
-| ---------------- | ------- |
-| Quarkus-JVM      | ab -n 10000 -c 100 http://localhost:9085/api/books/1 |
-| Quarkus-Native   | ab -n 10000 -c 100 http://localhost:9086/api/books/1 |
-| Micronaut-JVM    | ab -n 10000 -c 100 http://localhost:9087/api/books/1 |
-| Micronaut-Native | ab -n 10000 -c 100 http://localhost:9088/api/books/1 |
-| Spring Boot      | ab -n 10000 -c 100 http://localhost:9089/api/books/1 |
+                   Application | Statup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
+------------------------------ + ----------- + -------------------------- + --------------- + ------------------------ |
+          quarkus-book-api-jvm |      6377ms |                   143.4MiB |             30s |                 167.4MiB |
+        micronaut-book-api-jvm |      9838ms |                   82.02MiB |             40s |                 162.2MiB |
+       springboot-book-api-jvm |     14009ms |                   492.1MiB |             46s |                 600.9MiB |
+       quarkus-book-api-native |        30ms |                   4.059MiB |             17s |                 253.9MiB |
+     micronaut-book-api-native |           - |                          - |               - |                        - |
 ```
+> Note. There is no results for `micronaut-book-api-native` because we are getting an error while trying to run it. It
+> id related to this [issue](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues) 
 
-<sup>3</sup> Unable to run `native-image` while building docker image. See **Issues** section.
+`ab` tests used
+```
+               Application |                                                                                  ab Test |
+-------------------------- | ---------------------------------------------------------------------------------------- |
+      quarkus-book-api-jvm | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9085/api/books |
+    micronaut-book-api-jvm | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9087/api/books |
+   springboot-book-api-jvm | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9089/api/books |
+   quarkus-book-api-native | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9086/api/books |
+ micronaut-book-api-native | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9088/api/books |
+```
 
 ## Shutdown
 

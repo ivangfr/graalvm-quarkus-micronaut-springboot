@@ -17,7 +17,7 @@ GET /api/greeting[?name=...]
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/quarkus-simple-api` folder run
 ```
-./mvnw clean compile quarkus:dev
+./mvnw compile quarkus:dev
 ```
 
 ### Docker in JVM Mode
@@ -42,7 +42,7 @@ docker run -d --rm --name quarkus-simple-api-jvm -p 9080:8080 \
 ### Docker in Native Mode
 
 Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`quarkus-graalvm-apis/quarkus-simple-api` folder run
+`graalvm-quarkus-micronaut-springboot/quarkus-simple-api` folder run
 ```
 ./mvnw clean package -Pnative -Dnative-image.docker-build=true
 ```

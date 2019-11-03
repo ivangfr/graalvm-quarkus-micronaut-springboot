@@ -35,8 +35,8 @@ Then, build the image with the script
 
 Finally, run the container using
 ```
-docker run -d --rm --name springboot-simple-api -p 9084:8080 \
-  docker.mycompany.com/springboot-simple-api:1.0.0
+docker run -d --rm --name springboot-simple-api-jvm -p 9084:8080 \
+  docker.mycompany.com/springboot-simple-api-jvm:1.0.0
 ```
 
 ### Docker in Native Mode
@@ -47,5 +47,5 @@ Spring team is working on supporting for `GraalVM` native images, https://github
 
 To stop and remove application container run
 ```
-docker stop springboot-simple-api
+docker stop springboot-simple-api-jvm
 ```

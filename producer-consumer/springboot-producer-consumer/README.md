@@ -1,75 +1,91 @@
 # `graalvm-quarkus-micronaut-springboot`
 ## `> producer-consumer > springboot-producer-consumer`
 
-Instead of re-implement a new Kafka `producer` and `consumer` using [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/), we will re-use the ones in the repository [`springboot-cloudkarafka`](https://github.com/ivangfr/springboot-cloudkarafka).
-
-So, go ahead and clone it
-```
-git clone https://github.com/ivangfr/springboot-cloudkarafka.git
-```
-
-It contains two types of implementations for `producer` and `consumer`. One uses [`Spring Kafka`](https://github.com/ivangfr/springboot-cloudkarafka/tree/master/spring-kafka#springboot-cloudkarafka) and another [`Spring Cloud Stream`](https://github.com/ivangfr/springboot-cloudkarafka/tree/master/spring-cloud-stream#springboot-cloudkarafka).
-
-In this documentation, we will use the `Spring Kafka` implementation.
+The goal of this project is to implement two [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
+applications: one that _produces_ messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_
+those messages.
 
 ## Applications
 
-### [producer-kafka](https://github.com/ivangfr/springboot-cloudkarafka/tree/master/spring-kafka#producer-kafka)
+### producer-api
 
-### [consumer-kafka](https://github.com/ivangfr/springboot-cloudkarafka/tree/master/spring-kafka#consumer-kafka)
+`Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made,
+`producer-api` pushes a message about the `news` to `Kafka`.
+
+It has the following endpoint:
+```
+POST /api/news {"source": "...", "title": "..."}
+```
+
+### consumer-api
+
+`Spring Boot` Web Java application that listens to messages (published by the `producer-api`) and logs it.
 
 ## Running applications
 
-> Note: `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
+> Note: `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as
+explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
 
-### `producer-kafka`
+### `producer-api`
 
 ### Development Mode
 
-Open a terminal and inside `springboot-cloudkarafka` root folder run
+Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
 ```
-./mvnw spring-boot:run --projects spring-kafka/producer-kafka
+./mvnw spring-boot:run --projects producer-api
 ```
 
 ### Docker in JVM Mode
 
-In a terminal and inside `springboot-cloudkarafka` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
+`graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
 ```
-./mvnw clean package dockerfile:build --projects spring-kafka/producer-kafka
+./mvnw clean package --projects producer-api
 ```
 
-Then, run the container using
+Then, build the image with the script
 ```
-docker run -d --rm --name producer-kafka \
-  -p 9104:8080 -e KAFKA_URL=kafka:9092 --network producer-consumer_default \
-  docker.mycompany.com/producer-kafka:1.0.0
+cd producer-api && ./docker-build.sh && cd ..
+```
+
+Finally, run the container using
+```
+docker run -d --rm --name springboot-producer-api-jvm \
+  -p 9104:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
+  docker.mycompany.com/springboot-producer-api-jvm:1.0.0
 ```
 
 ### Docker in Native Mode
 
 Spring team is working on supporting for `GraalVM` native images, https://github.com/spring-projects/spring-framework/wiki/GraalVM-native-image-support
 
-### `consumer-kafka`
+### `consumer-api`
 
 ### Development Mode
 
-Open a terminal and inside `springboot-cloudkarafka` folder run
+Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
 ```
-./mvnw spring-boot:run --projects spring-kafka/consumer-kafka -Dspring-boot.run.jvmArguments="-Dserver.port=8081"
+./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=8081" --projects consumer-api
 ```
 
 ### Docker in JVM Mode
 
-In a terminal and inside `springboot-cloudkarafka` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
+`graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
 ```
-./mvnw clean package dockerfile:build --projects spring-kafka/consumer-kafka
+./mvnw clean package --projects consumer-api
 ```
 
-Then, run the container using
+Then, build the image with the script
 ```
-docker run -d --rm --name consumer-kafka \
-  -p 9109:8080 -e KAFKA_URL=kafka:9092 --network producer-consumer_default \
-  docker.mycompany.com/consumer-kafka:1.0.0
+cd consumer-api && ./docker-build.sh && cd ..
+```
+
+Finally, run the container using
+```
+docker run -d --rm --name springboot-consumer-api-jvm \
+  -p 9109:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
+  docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
 ```
 
 ### Docker in Native Mode
@@ -84,11 +100,11 @@ Spring team is working on supporting for `GraalVM` native images, https://github
 http :9104/api/news source="Spring Boot Blog" title="Spring Boot Framework"
 ```
 
-- See `producer-kafka` and `consumer-kafka` Docker logs
+- See `springboot-producer-api-jvm` and `springboot-consumer-api-jvm` Docker logs
 
 ## Shutdown
 
 To stop and remove application containers run
 ```
-docker stop producer-kafka consumer-kafka
+docker stop springboot-producer-api-jvm springboot-consumer-api-jvm
 ```

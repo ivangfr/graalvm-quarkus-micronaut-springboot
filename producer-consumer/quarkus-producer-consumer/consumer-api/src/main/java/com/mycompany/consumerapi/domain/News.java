@@ -1,7 +1,9 @@
 package com.mycompany.consumerapi.domain;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.Data;
 
+@RegisterForReflection
 @Data
 public class News {
 

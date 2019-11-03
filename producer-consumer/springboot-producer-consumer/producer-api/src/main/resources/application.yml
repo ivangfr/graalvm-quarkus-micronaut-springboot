@@ -1,0 +1,17 @@
+spring:
+  main:
+    banner-mode: "off"
+
+kafka:
+  bootstrap-servers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
+  producer:
+    topic: springboot.news.json
+    num-partitions: 1
+
+management:
+  endpoints:
+    web:
+      exposure.include: "*"
+  endpoint:
+    health:
+      show-details: always

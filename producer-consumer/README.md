@@ -1,7 +1,8 @@
 # `graalvm-quarkus-micronaut-springboot`
 ## `> producer-consumer`
 
-In this example, we will implement three versions of a producer and a consumer applications using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks.
+In this example, we will implement three versions of a producer and a consumer applications using `Quarkus`, `Micronaut`
+and `Spring Boot` Frameworks.
 
 ## Applications
 
@@ -25,42 +26,48 @@ docker-compose ps
 
 ## Comparison
 
-### Producer results
-
-| Criteria                              | Quarkus-JVM | Quarkus-Native | Micronaut-JVM | Micronaut-Native | Spring Boot |
-| ------------------------------------- | ----------- | -------------- | ------------- | ---------------- | ----------- |
-| Jar packaging time                    |             |                |               |                  |             |
-| Size of the jar                       |             |                |               |                  |             |
-| Docker building time                  |             |                |               |                  |             |
-| Docker image size                     |             |                |               |                  |             |
-| Startup time                          |             |                |               |                  |             |
-| Initial memory consumption            |             |                |               |                  |             |
-| Time to produce 10k news <sup>1</sup> |             |                |               |                  |             |
-| Final memory consumption              |             |                |               |                  |             |
-
-<sup>1</sup> `ab` tests used
 ```
-| Framework-Mode   | ab Test |
-| ---------------- | ------- |
-| Quarkus-JVM      | ab -p test-news.json -T 'application/json' -c 100 -n 10000 http://localhost:9090/api/news |
-| Quarkus-Native   | ab -p test-news.json -T 'application/json' -c 100 -n 10000 http://localhost:9091/api/news |
-| Micronaut-JVM    | ab -p test-news.json -T 'application/json' -c 100 -n 10000 http://localhost:9092/api/news |
-| Micronaut-Native | ab -p test-news.json -T 'application/json' -c 100 -n 10000 http://localhost:9093/api/news |
-| Spring Boot      | ab -p test-news.json -T 'application/json' -c 100 -n 10000 http://localhost:9094/api/news |
+                   Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
+------------------------------ + -------------- + ---------------- + ----------------- + ----------------- |
+      quarkus-producer-api-jvm |            11s |           359418 |               24s |             116MB |
+    micronaut-producer-api-jvm |            11s |         24486929 |                4s |             267MB |
+   springboot-producer-api-jvm |             7s |         33715188 |                4s |             119MB |
+   quarkus-producer-api-native |           272s |           359507 |                7s |             128MB |
+ micronaut-producer-api-native |            12s |         24486909 |              385s |             108MB |
+.............................. + .............. + ................ + ................. + ................. |
+      quarkus-consumer-api-jvm |            10s |           323143 |               21s |             114MB |
+    micronaut-consumer-api-jvm |            12s |         24462502 |                3s |             267MB |
+   springboot-consumer-api-jvm |             8s |         33712531 |                5s |             119MB |
+   quarkus-consumer-api-native |           260s |           323141 |                7s |             126MB |
+ micronaut-consumer-api-native |            10s |         24462514 |              377s |             108MB |
 ```
 
-### Consumer results
+```
+                   Application | Statup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
+------------------------------ + ----------- + -------------------------- + --------------- + ------------------------ |
+      quarkus-producer-api-jvm |      7154ms |                   132.6MiB |             31s |                 162.4MiB |
+    micronaut-producer-api-jvm |      7920ms |                   58.02MiB |             60s |                   158MiB |
+   springboot-producer-api-jvm |      9515ms |                   256.3MiB |             32s |                 389.3MiB |
+   quarkus-producer-api-native |        31ms |                   4.535MiB |             19s |                 262.9MiB |
+ micronaut-producer-api-native |       118ms |                   14.91MiB |             25s |                   268MiB |
+.............................. + ........... + .......................... + ............... + ........................ |
+      quarkus-consumer-api-jvm |      6498ms |                   100.7MiB |             35s |                 124.6MiB |
+    micronaut-consumer-api-jvm |      7468ms |                   63.52MiB |              4s |                 68.17MiB |
+   springboot-consumer-api-jvm |     10256ms |                   264.8MiB |              3s |                 262.4MiB |
+   quarkus-consumer-api-native |        66ms |                       5MiB |             21s |                 260.1MiB |
+ micronaut-consumer-api-native |       134ms |                   17.18MiB |              2s |                 174.6MiB |
+```
 
-| Criteria                   | Quarkus-JVM | Quarkus-Native | Micronaut-JVM | Micronaut-Native | Spring Boot |
-| -------------------------- | ----------- | -------------- | ------------- | ---------------- | ----------- |
-| Jar packaging time         |             |                |               |                  |             |
-| Size of the jar            |             |                |               |                  |             |
-| Docker building time       |             |                |               |                  |             |
-| Docker image size          |             |                |               |                  |             |
-| Startup time               |             |                |               |                  |             |
-| Initial memory consumption |             |                |               |                  |             |
-| Time to consume 10k news   |             |                |               |                  |             |
-| Final memory consumption   |             |                |               |                  |             |
+`ab` tests used
+```
+                   Application |                                                                                ab Test |
+------------------------------ | -------------------------------------------------------------------------------------- |
+      quarkus-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9100/api/news |
+    micronaut-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9102/api/news |
+   springboot-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9104/api/news |
+   quarkus-producer-api-native | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9101/api/news |
+ micronaut-producer-api-native | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9103/api/news |
+```
 
 ## Shutdown
 

@@ -12,7 +12,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <surefire-plugin.version>2.22.0</surefire-plugin.version>
-        <quarkus.version>0.25.0</quarkus.version>
+        <quarkus.version>0.27.0</quarkus.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
