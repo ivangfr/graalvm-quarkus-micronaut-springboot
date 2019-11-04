@@ -44,10 +44,10 @@ Finally, run the script below to initialize the database
 ```
                Application | Statup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
 -------------------------- + ----------- + -------------------------- + --------------- + ------------------------ |
-      quarkus-book-api-jvm |      6377ms |                   143.4MiB |             30s |                 167.4MiB |
-    micronaut-book-api-jvm |      9838ms |                   82.02MiB |             40s |                 162.2MiB |
-   springboot-book-api-jvm |     14009ms |                   492.1MiB |             46s |                 600.9MiB |
-   quarkus-book-api-native |        30ms |                   4.059MiB |             17s |                 253.9MiB |
+      quarkus-book-api-jvm |      6122ms |                   140.4MiB |             32s |                   167MiB |
+    micronaut-book-api-jvm |      5182ms |                   74.01MiB |             38s |                 158.5MiB |
+   springboot-book-api-jvm |     13098ms |                   357.8MiB |             29s |                 417.3MiB |
+   quarkus-book-api-native |        28ms |                   4.043MiB |             18s |                 255.7MiB |
  micronaut-book-api-native |           - |                          - |               - |                        - |
 ```
 > Note. There is no results for `micronaut-book-api-native` because we are getting an error while trying to run it. It

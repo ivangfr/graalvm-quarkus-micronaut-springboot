@@ -249,7 +249,7 @@ springboot_book_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time
 
 springboot_book_api_jvm[initial_memory_consumption]=$(get_container_memory_consumption "springboot-book-api-jvm")
 
-run_command "ab -p test-books.json -T 'application/json' -c 10 -n 5000 http://localhost:9089/api/books"
+run_command "ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9089/api/books"
 springboot_book_api_jvm[ab_testing_time]=$run_command_exec_time
 
 springboot_book_api_jvm[final_memory_consumption]=$(get_container_memory_consumption "springboot-book-api-jvm")

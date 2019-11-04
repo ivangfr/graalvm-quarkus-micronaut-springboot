@@ -45,18 +45,22 @@ docker-compose ps
 ```
                    Application | Statup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
 ------------------------------ + ----------- + -------------------------- + --------------- + ------------------------ |
-      quarkus-producer-api-jvm |      7154ms |                   132.6MiB |             31s |                 162.4MiB |
-    micronaut-producer-api-jvm |      7920ms |                   58.02MiB |             60s |                   158MiB |
-   springboot-producer-api-jvm |      9515ms |                   256.3MiB |             32s |                 389.3MiB |
-   quarkus-producer-api-native |        31ms |                   4.535MiB |             19s |                 262.9MiB |
- micronaut-producer-api-native |       118ms |                   14.91MiB |             25s |                   268MiB |
+      quarkus-producer-api-jvm |      7209ms |                   131.3MiB |             29s |                   155MiB |
+    micronaut-producer-api-jvm |      3391ms |                   54.25MiB |             59s |                 155.2MiB |
+   springboot-producer-api-jvm |      9346ms |                   245.2MiB |             30s |                 303.5MiB |
+   quarkus-producer-api-native |        23ms |                   4.523MiB |             17s |                 263.1MiB |
+ micronaut-producer-api-native |        88ms |                   14.94MiB |             26s |                   268MiB |
 .............................. + ........... + .......................... + ............... + ........................ |
-      quarkus-consumer-api-jvm |      6498ms |                   100.7MiB |             35s |                 124.6MiB |
-    micronaut-consumer-api-jvm |      7468ms |                   63.52MiB |              4s |                 68.17MiB |
-   springboot-consumer-api-jvm |     10256ms |                   264.8MiB |              3s |                 262.4MiB |
-   quarkus-consumer-api-native |        66ms |                       5MiB |             21s |                 260.1MiB |
- micronaut-consumer-api-native |       134ms |                   17.18MiB |              2s |                 174.6MiB |
+      quarkus-consumer-api-jvm |      8091ms |                   97.06MiB |             36s |                 126.7MiB |
+    micronaut-consumer-api-jvm |      3969ms |                   64.02MiB |              7s |                 66.21MiB |
+   springboot-consumer-api-jvm |      9146ms |                   258.4MiB |              3s |                 259.6MiB |
+   quarkus-consumer-api-native |        76ms |                   4.973MiB |             27s |                 259.8MiB |
+ micronaut-consumer-api-native |       148ms |                   17.23MiB |              2s |                 174.5MiB |
 ```
+> Note. We can see that the performance of the `quarkus-consumer-api-jvm` and `quarkus-consumer-api-native` is really
+> slow compared to other consumers. Checking the logs, it seems that the bottleneck is SmallRye Reactive Messaging. I
+> have opened an issue related to it. For more information, see
+>[`Consumer reads 500 messages and stops 3 seconds #290`](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
 
 `ab` tests used
 ```

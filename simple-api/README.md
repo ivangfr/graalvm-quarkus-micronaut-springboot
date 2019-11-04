@@ -27,11 +27,11 @@ In this example, we will implement three versions of a simple Greeting REST API 
 ```
                  Application | Statup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
 ---------------------------- + ----------- + -------------------------- + --------------- + ------------------------ |
-      quarkus-simple-api-jvm |      2684ms |                   84.34MiB |             16s |                 124.1MiB |
-    micronaut-simple-api-jvm |      5916ms |                   53.53MiB |             23s |                 130.5MiB |
-   springboot-simple-api-jvm |      5905ms |                   179.2MiB |             16s |                 254.6MiB |
-   quarkus-simple-api-native |        30ms |                   2.508MiB |             10s |                 253.9MiB |
- micronaut-simple-api-native |        65ms |                   11.64MiB |             12s |                 259.2MiB |
+      quarkus-simple-api-jvm |      2953ms |                   83.16MiB |             17s |                 132.4MiB |
+    micronaut-simple-api-jvm |      2776ms |                   51.39MiB |             26s |                 128.1MiB |
+   springboot-simple-api-jvm |      5608ms |                   234.8MiB |             17s |                 342.2MiB |
+   quarkus-simple-api-native |        18ms |                   2.527MiB |             10s |                 254.6MiB |
+ micronaut-simple-api-native |        55ms |                   11.61MiB |             12s |                 258.7MiB |
 ```
 
 `ab` tests used
