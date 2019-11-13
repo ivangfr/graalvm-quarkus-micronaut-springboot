@@ -29,41 +29,6 @@ Finally, run the script below to initialize the database
 ./init-db.sh
 ```
 
-## Comparison
-
-```
-               Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
--------------------------- + -------------- + ---------------- + ----------------- + ----------------- |
-      quarkus-book-api-jvm |            13s |           443792 |               23s |             120MB |
-    micronaut-book-api-jvm |            16s |         32803668 |                3s |             276MB |
-   springboot-book-api-jvm |             5s |         42354478 |                4s |             127MB |
-   quarkus-book-api-native |           364s |           443925 |                9s |             153MB |
- micronaut-book-api-native |            17s |         32803649 |              601s |             145MB |
-```
-
-```
-               Application | Statup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
--------------------------- + ----------- + -------------------------- + --------------- + ------------------------ |
-      quarkus-book-api-jvm |      6122ms |                   140.4MiB |             32s |                   167MiB |
-    micronaut-book-api-jvm |      5182ms |                   74.01MiB |             38s |                 158.5MiB |
-   springboot-book-api-jvm |     13098ms |                   357.8MiB |             29s |                 417.3MiB |
-   quarkus-book-api-native |        28ms |                   4.043MiB |             18s |                 255.7MiB |
- micronaut-book-api-native |           - |                          - |               - |                        - |
-```
-> Note. There is no results for `micronaut-book-api-native` because we are getting an error while trying to run it. It
-> id related to this [issue](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues) 
-
-`ab` tests used
-```
-               Application |                                                                                  ab Test |
--------------------------- | ---------------------------------------------------------------------------------------- |
-      quarkus-book-api-jvm | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9085/api/books |
-    micronaut-book-api-jvm | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9087/api/books |
-   springboot-book-api-jvm | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9089/api/books |
-   quarkus-book-api-native | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9086/api/books |
- micronaut-book-api-native | ab -p test-books.json -T 'application/json' -c 5 -n 2500 http://localhost:9088/api/books |
-```
-
 ## Shutdown
 
 To stop and remove containers, networks and volumes, run

@@ -24,55 +24,6 @@ Wait a little bit until all containers `Up (healthy)`. You can check it by runni
 docker-compose ps
 ```
 
-## Comparison
-
-```
-                   Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
------------------------------- + -------------- + ---------------- + ----------------- + ----------------- |
-      quarkus-producer-api-jvm |            11s |           359418 |               24s |             116MB |
-    micronaut-producer-api-jvm |            11s |         24486929 |                4s |             267MB |
-   springboot-producer-api-jvm |             7s |         33715188 |                4s |             119MB |
-   quarkus-producer-api-native |           272s |           359507 |                7s |             128MB |
- micronaut-producer-api-native |            12s |         24486909 |              385s |             108MB |
-.............................. + .............. + ................ + ................. + ................. |
-      quarkus-consumer-api-jvm |            10s |           323143 |               21s |             114MB |
-    micronaut-consumer-api-jvm |            12s |         24462502 |                3s |             267MB |
-   springboot-consumer-api-jvm |             8s |         33712531 |                5s |             119MB |
-   quarkus-consumer-api-native |           260s |           323141 |                7s |             126MB |
- micronaut-consumer-api-native |            10s |         24462514 |              377s |             108MB |
-```
-
-```
-                   Application | Statup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
------------------------------- + ----------- + -------------------------- + --------------- + ------------------------ |
-      quarkus-producer-api-jvm |      7209ms |                   131.3MiB |             29s |                   155MiB |
-    micronaut-producer-api-jvm |      3391ms |                   54.25MiB |             59s |                 155.2MiB |
-   springboot-producer-api-jvm |      9346ms |                   245.2MiB |             30s |                 303.5MiB |
-   quarkus-producer-api-native |        23ms |                   4.523MiB |             17s |                 263.1MiB |
- micronaut-producer-api-native |        88ms |                   14.94MiB |             26s |                   268MiB |
-.............................. + ........... + .......................... + ............... + ........................ |
-      quarkus-consumer-api-jvm |      8091ms |                   97.06MiB |             36s |                 126.7MiB |
-    micronaut-consumer-api-jvm |      3969ms |                   64.02MiB |              7s |                 66.21MiB |
-   springboot-consumer-api-jvm |      9146ms |                   258.4MiB |              3s |                 259.6MiB |
-   quarkus-consumer-api-native |        76ms |                   4.973MiB |             27s |                 259.8MiB |
- micronaut-consumer-api-native |       148ms |                   17.23MiB |              2s |                 174.5MiB |
-```
-> Note. We can see that the performance of the `quarkus-consumer-api-jvm` and `quarkus-consumer-api-native` is really
-> slow compared to other consumers. Checking the logs, it seems that the bottleneck is SmallRye Reactive Messaging. I
-> have opened an issue related to it. For more information, see
->[`Consumer reads 500 messages and stops 3 seconds #290`](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
-
-`ab` tests used
-```
-                   Application |                                                                                ab Test |
------------------------------- | -------------------------------------------------------------------------------------- |
-      quarkus-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9100/api/news |
-    micronaut-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9102/api/news |
-   springboot-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9104/api/news |
-   quarkus-producer-api-native | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9101/api/news |
- micronaut-producer-api-native | ab -p test-news.json -T 'application/json' -c 5 -n 5000 http://localhost:9103/api/news |
-```
-
 ## Shutdown
 
 To stop and remove containers, networks and volumes, run

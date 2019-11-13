@@ -40,8 +40,8 @@ cd simple-api/quarkus-simple-api
 
 package_jar_build_image \
   "./mvnw clean" \
-  "./mvnw package -Pnative -Dnative-image.docker-build=true" \
-  "target/quarkus-simple-api-1.0.0-runner.jar" \
+  "./mvnw package -Pnative -Dquarkus.native.container-build=true" \
+  "target/quarkus-simple-api-1.0.0-runner" \
   "./docker-build.sh native" \
   "docker.mycompany.com/quarkus-simple-api-native:1.0.0"
 quarkus_simple_api_native[packaging_time]=$package_jar_build_image_packaging_time
@@ -81,8 +81,8 @@ cd ../../book-api/quarkus-book-api
 
 package_jar_build_image \
   "./mvnw clean" \
-  "./mvnw package -Pnative -Dnative-image.docker-build=true" \
-  "target/quarkus-book-api-1.0.0-runner.jar" \
+  "./mvnw package -Pnative -Dquarkus.native.container-build=true" \
+  "target/quarkus-book-api-1.0.0-runner" \
   "./docker-build.sh native" \
   "docker.mycompany.com/quarkus-book-api-native:1.0.0"
 quarkus_book_api_native[packaging_time]=$package_jar_build_image_packaging_time
@@ -122,8 +122,8 @@ cd ../../producer-consumer/quarkus-producer-consumer
 
 package_jar_build_image \
   "./mvnw clean --projects producer-api" \
-  "./mvnw package -Pnative -Dnative-image.docker-build=true --projects producer-api" \
-  "producer-api/target/producer-api-1.0.0-runner.jar" \
+  "./mvnw package -Pnative -Dquarkus.native.container-build=true --projects producer-api" \
+  "producer-api/target/producer-api-1.0.0-runner" \
   "cd producer-api && ./docker-build.sh native && cd .." \
   "docker.mycompany.com/quarkus-producer-api-native:1.0.0"
 quarkus_producer_api_native[packaging_time]=$package_jar_build_image_packaging_time
@@ -138,8 +138,8 @@ echo "-----------------------------------------------"
 
 package_jar_build_image \
   "./mvnw clean --projects consumer-api" \
-  "./mvnw package -Pnative -Dnative-image.docker-build=true --projects consumer-api" \
-  "consumer-api/target/consumer-api-1.0.0-runner.jar" \
+  "./mvnw package -Pnative -Dquarkus.native.container-build=true --projects consumer-api" \
+  "consumer-api/target/consumer-api-1.0.0-runner" \
   "cd consumer-api && ./docker-build.sh native && cd .." \
   "docker.mycompany.com/quarkus-consumer-api-native:1.0.0"
 quarkus_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_time

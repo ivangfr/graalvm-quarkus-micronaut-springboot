@@ -50,7 +50,7 @@ docker run -d --rm --name quarkus-book-api-jvm \
 Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
 `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder run
 ```
-./mvnw clean package -Pnative -Dnative-image.docker-build=true
+./mvnw clean package -Pnative -Dquarkus.native.container-build=true
 ```
 
 Then, build the image with the script

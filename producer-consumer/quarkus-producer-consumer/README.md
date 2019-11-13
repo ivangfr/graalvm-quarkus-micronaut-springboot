@@ -59,7 +59,7 @@ docker run -d --rm --name quarkus-producer-api-jvm -p 9100:8080 --network produc
 Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
 `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
-./mvnw clean package -Pnative -Dnative-image.docker-build=true --projects producer-api
+./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects producer-api
 ```
 
 Then, build the image with the script
@@ -106,7 +106,7 @@ docker run -d --rm --name quarkus-consumer-api-jvm -p 9105:8080 --network produc
 Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
 `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
-./mvnw clean package -Pnative -Dnative-image.docker-build=true --projects consumer-api
+./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects consumer-api
 ```
 
 Then, build the image with the script
