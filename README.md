@@ -24,7 +24,7 @@ We are using the following Framework versions
 
 | Framework   | Version       |
 | ----------- | ------------- |
-| Quarkus     | 1.0.0.RC1     |
+| Quarkus     | 1.0.0.Final   |
 | Micronaut   | 1.2.6         |
 | Spring Boot | 2.2.1.RELEASE |
 
@@ -35,9 +35,9 @@ scripts.
 
 | Bash script                             | Description |
 | --------------------------------------- | ----------- |
-| collect-jvm-jar-docker-size-times.sh    | packages/assembles jar files and builds docker images of all JVM applications, collecting data like: jar packaging Time, size of the jar, docker build time and docker image size |
-| collect-native-jar-docker-size-times.sh | packages/assembles jar files and builds docker images of all Native applications, collecting data like: jar packaging Time, size of the jar, docker build time and docker image size |
-| collect-startup-ab-times.sh             | starts docker container of all applications (JVM and Native), collecting data like: startup time, initial memory consumption, time spent to run some ab tests and final memory consumption |
+| collect-jvm-jar-docker-size-times.sh    | it packages/assembles jar files and builds docker images of all JVM applications, collecting data like: jar packaging Time, size of the jar, docker build time and docker image size |
+| collect-native-jar-docker-size-times.sh | it packages/assembles jar files and builds docker images of all Native applications, collecting data like: jar packaging Time, size of the jar, docker build time and docker image size |
+| collect-startup-ab-times.sh             | it starts docker container of all applications (JVM and Native), collecting data like: startup time, initial memory consumption, time spent to run some ab tests and final memory consumption |
 
 ## Comparison
 
@@ -45,67 +45,67 @@ The following table shows the results after running the script `collect-jvm-jar-
 ```
                    Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
 ------------------------------ + -------------- + ---------------- + ----------------- + ----------------- |
-        quarkus-simple-api-jvm |            11s |           279841 |               17s |             101MB |
-      micronaut-simple-api-jvm |            10s |         14089963 |                3s |             251MB |
-     springboot-simple-api-jvm |             3s |         19465377 |                3s |             104MB |
+        quarkus-simple-api-jvm |             8s |           293940 |               15s |             101MB |
+      micronaut-simple-api-jvm |             7s |         14089963 |                3s |             251MB |
+     springboot-simple-api-jvm |             5s |         19465377 |                2s |             104MB |
 .............................. + .............. + ................ + ................. + ................. |
-          quarkus-book-api-jvm |            17s |           444524 |               26s |             160MB |
-        micronaut-book-api-jvm |            19s |         32806941 |                4s |             270MB |
-       springboot-book-api-jvm |             6s |         42358353 |                5s |             127MB |
+          quarkus-book-api-jvm |            12s |           465106 |               24s |             161MB |
+        micronaut-book-api-jvm |            19s |         32832619 |                3s |             270MB |
+       springboot-book-api-jvm |             5s |         42358353 |                4s |             127MB |
 .............................. + .............. + ................ + ................. + ................. |
-      quarkus-producer-api-jvm |            14s |           359990 |               28s |             152MB |
-    micronaut-producer-api-jvm |            15s |         24490195 |                3s |             262MB |
-   springboot-producer-api-jvm |             9s |         33717616 |                4s |             119MB |
+      quarkus-producer-api-jvm |            11s |           379626 |               23s |             152MB |
+    micronaut-producer-api-jvm |            12s |         24490214 |                3s |             262MB |
+   springboot-producer-api-jvm |             7s |         33717616 |                3s |             119MB |
 .............................. + .............. + ................ + ................. + ................. |
-      quarkus-consumer-api-jvm |            13s |           323850 |               26s |             149MB |
-    micronaut-consumer-api-jvm |            11s |         24465734 |                3s |             262MB |
-   springboot-consumer-api-jvm |             7s |         33714996 |                5s |             119MB |
+      quarkus-consumer-api-jvm |            11s |           341476 |               22s |             149MB |
+    micronaut-consumer-api-jvm |            11s |         24465735 |                3s |             262MB |
+   springboot-consumer-api-jvm |             7s |         33714996 |                3s |             119MB |
 ```
 
 Table below shows the results after running the script `collect-native-jar-docker-size-times.sh`
 ```
                    Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
 ------------------------------ + -------------- + ---------------- + ----------------- + ----------------- |
-     quarkus-simple-api-native |           339s |         25975800 |                5s |             116MB |
-   micronaut-simple-api-native |             7s |         14089954 |              510s |            87.1MB |
+     quarkus-simple-api-native |           182s |         25963512 |                4s |             116MB |
+   micronaut-simple-api-native |            12s |         14089966 |              286s |            87.1MB |
 .............................. + .............. + ................ + ................. + ................. |
-       quarkus-book-api-native |           546s |         63337952 |                8s |             153MB |
-     micronaut-book-api-native |            17s |         32806929 |              656s |             145MB |
+       quarkus-book-api-native |           305s |         63260128 |                6s |             153MB |
+     micronaut-book-api-native |            17s |         32832610 |              548s |             145MB |
 .............................. + .............. + ................ + ................. + ................. |
-   quarkus-producer-api-native |           288s |         37868928 |                5s |             128MB |
- micronaut-producer-api-native |            12s |         24490209 |              383s |             108MB |
+   quarkus-producer-api-native |           237s |         37852544 |                5s |             128MB |
+ micronaut-producer-api-native |            11s |         24490205 |              329s |             108MB |
 .............................. + .............. + ................ + ................. + ................. |
-   quarkus-consumer-api-native |           272s |         35730816 |                5s |             126MB |
- micronaut-consumer-api-native |            10s |         24465737 |              386s |             108MB |
+   quarkus-consumer-api-native |           219s |         35706240 |                4s |             126MB |
+ micronaut-consumer-api-native |            10s |         24465722 |              315s |             108MB |
 ```
 
 Finally, the following table shows the results after running the script `collect-startup-ab-times.sh`
 ```
                    Application | Startup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
 ------------------------------ + ------------ + -------------------------- + --------------- + ------------------------ |
-        quarkus-simple-api-jvm |       2964ms |                   82.98MiB |             21s |                 127.8MiB |
-      micronaut-simple-api-jvm |       5880ms |                   127.3MiB |             28s |                 165.4MiB |
-     springboot-simple-api-jvm |       5686ms |                   226.5MiB |             21s |                 355.5MiB |
-     quarkus-simple-api-native |         15ms |                   2.539MiB |             15s |                 258.7MiB |
-   micronaut-simple-api-native |         55ms |                   11.57MiB |             17s |                 263.3MiB |
-.............................. + ............ + .......................... + ............... + ........................ |
-          quarkus-book-api-jvm |       6140ms |                     126MiB |             28s |                 164.2MiB |
-        micronaut-book-api-jvm |       8118ms |                   78.22MiB |             33s |                 160.5MiB |
-       springboot-book-api-jvm |      13955ms |                   409.4MiB |             28s |                   432MiB |
-       quarkus-book-api-native |         20ms |                   4.105MiB |             17s |                 257.4MiB |
+        quarkus-simple-api-jvm |       1130ms |                   83.55MiB |             16s |                 117.7MiB |
+      micronaut-simple-api-jvm |       5382ms |                   52.44MiB |             26s |                 130.2MiB |
+     springboot-simple-api-jvm |       3142ms |                   221.9MiB |             20s |                 360.3MiB |
+     quarkus-simple-api-native |         12ms |                   2.539MiB |             11s |                 256.1MiB |
+   micronaut-simple-api-native |         54ms |                   11.64MiB |             14s |                 263.3MiB |
+.............................. +  ........... + .......................... + ............... + ........................ |
+          quarkus-book-api-jvm |       2716ms |                   144.5MiB |             21s |                 165.9MiB |
+        micronaut-book-api-jvm |       6766ms |                   79.27MiB |             27s |                 162.8MiB |
+       springboot-book-api-jvm |       6927ms |                   403.8MiB |             22s |                 434.3MiB |
+       quarkus-book-api-native |         23ms |                   4.066MiB |             13s |                 255.5MiB |
      micronaut-book-api-native |            - |                          - |               - |                        - |
-.............................. + ............ + .......................... + ............... + ........................ |
-      quarkus-producer-api-jvm |       7689ms |                   122.9MiB |             33s |                 159.9MiB |
-    micronaut-producer-api-jvm |       6681ms |                   53.13MiB |             60s |                 170.9MiB |
-   springboot-producer-api-jvm |      10657ms |                     256MiB |             32s |                 387.1MiB |
-   quarkus-producer-api-native |         25ms |                   4.555MiB |             19s |                 265.6MiB |
- micronaut-producer-api-native |         60ms |                   14.92MiB |             25s |                   269MiB |
-.............................. + ............ + .......................... + ............... + ........................ |
-      quarkus-consumer-api-jvm |       6482ms |                   101.7MiB |             38s |                   121MiB |
-    micronaut-consumer-api-jvm |       8317ms |                   60.69MiB |              5s |                 68.09MiB |
-   springboot-consumer-api-jvm |       9858ms |                   286.1MiB |              3s |                 310.5MiB |
-   quarkus-consumer-api-native |         65ms |                    4.98MiB |             23s |                 258.9MiB |
- micronaut-consumer-api-native |        145ms |                    17.2MiB |              2s |                 174.6MiB |
+.............................. +  ........... + .......................... + ............... + ........................ |
+      quarkus-producer-api-jvm |       2334ms |                   112.1MiB |             22s |                 149.6MiB |
+    micronaut-producer-api-jvm |       5701ms |                   55.46MiB |             42s |                   154MiB |
+   springboot-producer-api-jvm |       5006ms |                   253.3MiB |             24s |                 369.1MiB |
+   quarkus-producer-api-native |         36ms |                   4.512MiB |             14s |                 265.8MiB |
+ micronaut-producer-api-native |       3069ms |                    14.9MiB |             18s |                 267.9MiB |
+.............................. +  ........... + .......................... + ............... + ........................ |
+      quarkus-consumer-api-jvm |       4285ms |                   96.49MiB |             29s |                 141.8MiB |
+    micronaut-consumer-api-jvm |       2963ms |                   60.42MiB |              8s |                 67.68MiB |
+   springboot-consumer-api-jvm |       5542ms |                   285.5MiB |              5s |                 307.4MiB |
+   quarkus-consumer-api-native |         99ms |                   4.953MiB |             14s |                   260MiB |
+ micronaut-consumer-api-native |         91ms |                   17.23MiB |              2s |                 174.4MiB |
 ```
 
 > Note 1. There is no results for `micronaut-book-api-native` because we are getting an error while trying to run it. It
@@ -114,7 +114,7 @@ Finally, the following table shows the results after running the script `collect
 > Note 2. We can see that the performance of the `quarkus-consumer-api-jvm` and `quarkus-consumer-api-native` is really
 > slow compared to other consumers. Checking the logs, it seems that the bottleneck is SmallRye Reactive Messaging. I
 > have opened an issue related to it. For more information, see
->[`Consumer reads 500 messages and stops 3 seconds #290`](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
+> [Consumer reads 500 messages and stops a few seconds #290](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
 
 `ab` tests used
 ```

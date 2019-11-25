@@ -138,7 +138,6 @@ To stop and remove application containers run
 docker stop quarkus-producer-api-jvm quarkus-producer-api-native quarkus-consumer-api-jvm quarkus-consumer-api-native
 ```
 
-## Issue
+## Issues
 
-- https://github.com/smallrye/smallrye-reactive-messaging/issues/268
-- https://github.com/quarkusio/quarkus/issues/4683
+- [Consumer reads 500 messages and stops a few seconds #290](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
