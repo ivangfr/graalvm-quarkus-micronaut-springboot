@@ -1,16 +1,13 @@
 # `graalvm-quarkus-micronaut-springboot`
 ## `> producer-consumer > quarkus-producer-consumer`
 
-The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) applications: one that _produces_
-messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_ those messages. Besides, we will
-use `GraalVM`'s `native-image` tool to generate the native image of the applications.
+The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) applications: one that _produces_ messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_ those messages. Besides, we will use `GraalVM`'s `native-image` tool to generate the native image of the applications.
 
 ## Applications
 
 ### producer-api
 
-`Quarkus` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made,
-`producer-api` pushes a message about the `news` to `Kafka`.
+`Quarkus` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `producer-api` pushes a message about the `news` to `Kafka`.
 
 It has the following endpoint:
 ```
@@ -23,8 +20,7 @@ POST /api/news {"source": "...", "title": "..."}
 
 ## Running applications
 
-> Note: `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as
-> explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
+> **Note:** `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
 
 ### `producer-api`
 
@@ -37,8 +33,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consum
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
 ./mvnw clean package --projects producer-api
 ```
@@ -56,8 +51,7 @@ docker run -d --rm --name quarkus-producer-api-jvm -p 9100:8080 --network produc
 
 ### Docker in Native Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
 ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects producer-api
 ```
@@ -84,8 +78,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consum
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
 ./mvnw clean package --projects consumer-api
 ```
@@ -103,8 +96,7 @@ docker run -d --rm --name quarkus-consumer-api-jvm -p 9105:8080 --network produc
 
 ### Docker in Native Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder run
 ```
 ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects consumer-api
 ```
@@ -123,12 +115,11 @@ docker run -d --rm --name quarkus-consumer-api-native -p 9106:8080 --network pro
 ## Simple Test
 
 - Posting a news
-> I am using [HTTPie](https://httpie.org/) 
-```
-http :9100/api/news source="Quarkus Blog" title="Quarkus Framework"
-http :9101/api/news source="Quarkus Blog" title="Quarkus Framework & GraalVM"
-```
-
+  > [HTTPie](https://httpie.org/) is being used here
+  ```
+  http :9100/api/news source="Quarkus Blog" title="Quarkus Framework"
+  http :9101/api/news source="Quarkus Blog" title="Quarkus Framework & GraalVM"
+  ```
 - See `producer` and `consumer` Docker logs
 
 ## Shutdown

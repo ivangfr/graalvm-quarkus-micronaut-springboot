@@ -1,22 +1,16 @@
 # `graalvm-quarkus-micronaut-springboot`
 
-The goal of this project is to compare some Java frameworks like: [`Quarkus`](https://quarkus.io/),
-[`Micronaut`](https://micronaut.io/) and [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/).
-For it, we will implement applications using those frameworks, measure their start-up times, memory footprint, etc.
+The goal of this project is to compare some Java frameworks like: [`Quarkus`](https://quarkus.io/), [`Micronaut`](https://micronaut.io/) and [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/). For it, we will implement applications using those frameworks, measure their start-up times, memory footprint, etc.
 
-Besides, as `Quarkus` and `Micronaut` support [`GraalVM`](https://www.graalvm.org/) out-of-the-box, we will use
-`GraalVM`’s `native-image` tool to build `Quarkus` and `Micronaut` native applications.
+Besides, as `Quarkus` and `Micronaut` support [`GraalVM`](https://www.graalvm.org/) out-of-the-box, we will use `GraalVM`’s `native-image` tool to build `Quarkus` and `Micronaut` native applications.
 
-> Note: Spring team is working on supporting for `GraalVM` native images,
-https://github.com/spring-projects/spring-framework/wiki/GraalVM-native-image-support
+> **Note:** Spring team is working on supporting for `GraalVM` native images, https://github.com/spring-projects/spring-framework/wiki/GraalVM-native-image-support
 
 ## Examples
 
-### [simple-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/simple-api#graalvm-quarkus-micronaut-springboot)
-
-### [book-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#graalvm-quarkus-micronaut-springboot)
-
-### [producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#graalvm-quarkus-micronaut-springboot)
+- ### [simple-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/simple-api#graalvm-quarkus-micronaut-springboot)
+- ### [book-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#graalvm-quarkus-micronaut-springboot)
+- ### [producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#graalvm-quarkus-micronaut-springboot)
 
 ## Framework version
 
@@ -30,8 +24,7 @@ We are using the following Framework versions
 
 ## Bash scripts
 
-In order to make it easier to collect data that will be used for comparing the frameworks, we've implemented some bash
-scripts.
+In order to make it easier to collect data that will be used for comparing the frameworks, we've implemented some bash scripts.
 
 | Bash script                             | Description |
 | --------------------------------------- | ----------- |
@@ -108,13 +101,9 @@ Finally, the following table shows the results after running the script `collect
  micronaut-consumer-api-native |         91ms |                   17.23MiB |              2s |                 174.4MiB |
 ```
 
-> Note 1. There is no results for `micronaut-book-api-native` because we are getting an error while trying to run it. It
-> id related to this [issue](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues) 
+> **Note 1:** There is no results for `micronaut-book-api-native` because we are getting an error while trying to run it. It id related to this [issue](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues)
 
-> Note 2. We can see that the performance of the `quarkus-consumer-api-jvm` and `quarkus-consumer-api-native` is really
-> slow compared to other consumers. Checking the logs, it seems that the bottleneck is SmallRye Reactive Messaging. I
-> have opened an issue related to it. For more information, see
-> [Consumer reads 500 messages and stops a few seconds #290](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
+> **Note 2:** We can see that the performance of the `quarkus-consumer-api-jvm` and `quarkus-consumer-api-native` is really slow compared to other consumers. Checking the logs, it seems that the bottleneck is SmallRye Reactive Messaging. I have opened an issue related to it. For more information, see [Consumer reads 500 messages and stops a few seconds #290](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
 
 `ab` tests used
 ```

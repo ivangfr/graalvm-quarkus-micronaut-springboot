@@ -1,16 +1,13 @@
 # `graalvm-quarkus-micronaut-springboot`
 ## `> producer-consumer`
 
-In this example, we will implement three versions of a producer and a consumer applications using `Quarkus`, `Micronaut`
-and `Spring Boot` Frameworks.
+In this example, we will implement three versions of a producer and a consumer applications using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks.
 
 ## Applications
 
-#### [quarkus-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/quarkus-producer-consumer#graalvm-quarkus-micronaut-springboot)
-
-#### [micronaut-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/micronaut-producer-consumer#graalvm-quarkus-micronaut-springboot)
-
-#### [springboot-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot-producer-consumer#graalvm-quarkus-micronaut-springboot)
+- ### [quarkus-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/quarkus-producer-consumer#graalvm-quarkus-micronaut-springboot)
+- ### [micronaut-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/micronaut-producer-consumer#graalvm-quarkus-micronaut-springboot)
+- ### [springboot-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot-producer-consumer#graalvm-quarkus-micronaut-springboot)
 
 ## Start environment
 
@@ -46,7 +43,7 @@ docker-compose down -v
 - First, you must create a new cluster. Click on `Cluster` (dropdown on the header) and then on `Add Cluster`
 - Type the name of your cluster in `Cluster Name` field, for example: `MyZooCluster`
 - Type `zookeeper:2181` in `Cluster Zookeeper Hosts` field
-- Enable checkbox `Poll consumer information (Not recommended for large # of consumers if ZK is used for offsets tracking on older Kafka versions)`
+- Enable checkbox `Poll consumer information (Not recommended for large # of consumers)`
 - Click on `Save` button at the bottom of the page.
 
 ## Troubleshooting

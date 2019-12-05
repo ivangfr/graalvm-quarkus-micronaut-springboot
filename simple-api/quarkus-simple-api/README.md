@@ -5,8 +5,7 @@
 
 ### quarkus-simple-api
 
-[`Quarkus`](https://quarkus.io/) Java Web application that expose a simple REST API for greetings. It has the
-following endpoint
+[`Quarkus`](https://quarkus.io/) Java Web application that expose a simple REST API for greetings. It has the following endpoint
 ```
 GET /api/greeting[?name=...]
 ```
@@ -22,8 +21,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/quar
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/simple-api/quarkus-simple-api` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/quarkus-simple-api` folder run
 ```
 ./mvnw clean package
 ```
@@ -41,8 +39,7 @@ docker run -d --rm --name quarkus-simple-api-jvm -p 9080:8080 \
 
 ### Docker in Native Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/quarkus-simple-api` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/quarkus-simple-api` folder run
 ```
 ./mvnw clean package -Pnative -Dquarkus.native.container-build=true
 ```

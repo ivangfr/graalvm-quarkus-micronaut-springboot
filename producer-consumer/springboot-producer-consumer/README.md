@@ -1,16 +1,13 @@
 # `graalvm-quarkus-micronaut-springboot`
 ## `> producer-consumer > springboot-producer-consumer`
 
-The goal of this project is to implement two [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/)
-applications: one that _produces_ messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_
-those messages.
+The goal of this project is to implement two [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) applications: one that _produces_ messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_ those messages.
 
 ## Applications
 
 ### producer-api
 
-`Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made,
-`producer-api` pushes a message about the `news` to `Kafka`.
+`Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `producer-api` pushes a message about the `news` to `Kafka`.
 
 It has the following endpoint:
 ```
@@ -23,8 +20,7 @@ POST /api/news {"source": "...", "title": "..."}
 
 ## Running applications
 
-> Note: `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as
-explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
+> **Note:** `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
 
 ### `producer-api`
 
@@ -37,8 +33,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consum
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
 ```
 ./mvnw clean package --projects producer-api
 ```
@@ -70,8 +65,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consum
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
 ```
 ./mvnw clean package --projects consumer-api
 ```
@@ -95,11 +89,10 @@ Spring team is working on supporting for `GraalVM` native images, https://github
 ## Simple Test
 
 - Posting a news
-> I am using [HTTPie](https://httpie.org/) 
-```
-http :9104/api/news source="Spring Boot Blog" title="Spring Boot Framework"
-```
-
+  > [HTTPie](https://httpie.org/) is being used here 
+  ```
+  http :9104/api/news source="Spring Boot Blog" title="Spring Boot Framework"
+  ```
 - See `springboot-producer-api-jvm` and `springboot-consumer-api-jvm` Docker logs
 
 ## Shutdown

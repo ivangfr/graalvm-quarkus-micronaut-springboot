@@ -1,16 +1,13 @@
 # `graalvm-quarkus-micronaut-springboot`
 ## `> producer-consumer > micronaut-producer-consumer`
 
-The goal of this project is to implement two [`Micronaut`](https://micronaut.io/) applications: one that _produces_
-messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_ those messages. Besides, we will
-use `GraalVM`'s `native-image` tool to generate the native image of the applications.
+The goal of this project is to implement two [`Micronaut`](https://micronaut.io/) applications: one that _produces_ messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_ those messages. Besides, we will use `GraalVM`'s `native-image` tool to generate the native image of the applications.
 
 ## Applications
 
 ### producer-api
 
-`Micronaut` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made,
-`producer-api` pushes a message about the `news` to `Kafka`.
+`Micronaut` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `producer-api` pushes a message about the `news` to `Kafka`.
 
 It has the following endpoint:
 ```
@@ -23,8 +20,7 @@ POST /api/news {"source": "...", "title": "..."}
 
 ## Running applications
 
-> Note: `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as
-> explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
+> **Note:** `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
 
 ### `producer-api`
 
@@ -37,8 +33,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consum
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder run
 ```
 ./gradlew producer-api:clean producer-api:assemble 
 ```
@@ -57,8 +52,7 @@ docker run -d --rm --name micronaut-producer-api-jvm \
 
 ### Docker in Native Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder run
 ```
 ./gradlew producer-api:clean producer-api:assemble 
 ```
@@ -87,8 +81,7 @@ export MICRONAUT_SERVER_PORT=8081
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder run
 ```
 ./gradlew consumer-api:clean consumer-api:assemble 
 ```
@@ -107,8 +100,7 @@ docker run -d --rm --name micronaut-consumer-api-jvm \
 
 ### Docker in Native Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder run
 ```
 ./gradlew consumer-api:clean consumer-api:assemble 
 ```
@@ -128,12 +120,11 @@ docker run -d --rm --name micronaut-consumer-api-native \
 ## Simple Test
 
 - Posting a news
-> I am using [HTTPie](https://httpie.org/) 
-```
-http :9102/api/news source="Micronaut Blog" title="Micronaut Framework"
-http :9103/api/news source="Micronaut Blog" title="Micronaut Framework & GraalVM"
-```
-
+  > [HTTPie](https://httpie.org/) is being used here 
+  ```
+  http :9102/api/news source="Micronaut Blog" title="Micronaut Framework"
+  http :9103/api/news source="Micronaut Blog" title="Micronaut Framework & GraalVM"
+  ```
 - See `producer` and `consumer` Docker logs
 
 ## Shutdown

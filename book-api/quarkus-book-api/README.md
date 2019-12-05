@@ -16,7 +16,7 @@ POST /api/books {"isbn": "...", "title": "..."}
 
 ## Running application
 
-> Note: `MySQL` container must be running and initialized as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#start-environment)
+> **Note:** `MySQL` container must be running and initialized as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#start-environment)
 
 ### Development Mode
 
@@ -27,8 +27,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/book-api/quarku
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder run
 ```
 ./mvnw clean package
 ```
@@ -47,8 +46,7 @@ docker run -d --rm --name quarkus-book-api-jvm \
 
 ### Docker in Native Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder run
 ```
 ./mvnw clean package -Pnative -Dquarkus.native.container-build=true
 ```

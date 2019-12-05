@@ -5,8 +5,7 @@
 
 ### micronaut-simple-api
 
-[`Micronaut`](https://micronaut.io/) Java Web application that expose a simple REST API for greetings. It has the
-following endpoint
+[`Micronaut`](https://micronaut.io/) Java Web application that expose a simple REST API for greetings. It has the following endpoint
 ```
 GET /api/greeting[?name=...]
 ```
@@ -22,8 +21,7 @@ In a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/micron
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder run
 ```
 ./gradlew clean assemble
 ```
@@ -41,8 +39,7 @@ docker run -d --rm --name micronaut-simple-api-jvm -p 9082:8080 \
 
 ### Docker in Native Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder run
 ```
 ./gradlew clean assemble
 ```

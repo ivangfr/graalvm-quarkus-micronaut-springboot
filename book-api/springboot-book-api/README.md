@@ -5,8 +5,7 @@
 
 ### springboot-book-api
 
-[`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that
-exposes a REST API for managing books.
+[`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a REST API for managing books.
 
 It has the following endpoints:
 ```
@@ -17,7 +16,7 @@ POST /api/books {"isbn": "...", "title": "..."}
 
 ## Running application
 
-> Note: `MySQL` container must be running and initialized as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#start-environment)
+> **Note:** `MySQL` container must be running and initialized as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#start-environment)
 
 ### Development Mode
 
@@ -28,8 +27,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/book-api/spring
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/book-api/springboot-book-api` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/book-api/springboot-book-api` folder run
 ```
 ./gradlew clean assemble
 ```

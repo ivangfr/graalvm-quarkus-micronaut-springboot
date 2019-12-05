@@ -5,8 +5,7 @@
 
 ### springboot-simple-api
 
-[`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that expose
-a simple REST API for greetings. It has the following endpoint
+[`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that expose a simple REST API for greetings. It has the following endpoint
 ```
 GET /api/greeting[?name=...]
 ```
@@ -22,8 +21,7 @@ Open a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/spri
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside
-`graalvm-quarkus-micronaut-springboot/simple-api/springboot-simple-api` folder run
+Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/springboot-simple-api` folder run
 ```
 ./gradlew clean assemble
 ```
