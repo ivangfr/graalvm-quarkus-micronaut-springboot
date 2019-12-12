@@ -34,5 +34,5 @@ jpa:
     properties:
       hibernate:
         hbm2ddl:
-          auto: none
+          auto: update
         show-sql: false
