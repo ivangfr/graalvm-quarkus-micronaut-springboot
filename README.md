@@ -18,9 +18,9 @@ We are using the following Framework versions
 
 | Framework   | Version       |
 | ----------- | ------------- |
-| Quarkus     | 1.0.1.Final   |
+| Quarkus     | 1.2.0.Final   |
 | Micronaut   | 1.2.7         |
-| Spring Boot | 2.2.2.RELEASE |
+| Spring Boot | 2.2.4.RELEASE |
 
 ## Bash scripts
 
