@@ -54,7 +54,7 @@ docker run -d --rm --name micronaut-producer-api-jvm \
 
 Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder run
 ```
-./gradlew producer-api:clean producer-api:assemble 
+./gradlew producer-api:clean producer-api:assemble
 ```
 
 Then, build the image with the script

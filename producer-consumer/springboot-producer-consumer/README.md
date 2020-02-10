@@ -28,7 +28,7 @@ POST /api/news {"source": "...", "title": "..."}
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
 ```
-./mvnw spring-boot:run --projects producer-api
+./mvnw clean spring-boot:run --projects producer-api
 ```
 
 ### Docker in JVM Mode
@@ -60,7 +60,7 @@ Spring team is working on supporting for `GraalVM` native images, https://github
 
 Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
 ```
-./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=8081" --projects consumer-api
+./mvnw clean spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=8081" --projects consumer-api
 ```
 
 ### Docker in JVM Mode

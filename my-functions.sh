@@ -25,7 +25,7 @@ function wait_for_container_log() {
       echo "${log_waiting} TIMEOUT"
       wait_for_container_log_exec_time="999999"
       wait_for_container_log_matched_row=""
-      break;
+      break
     fi
     sleep 1
   done

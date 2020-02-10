@@ -1,5 +1,5 @@
 plugins {
-    id "com.github.johnrengelman.shadow" version "5.0.0"
+    id "com.github.johnrengelman.shadow" version "5.2.0"
     id "application"
     id "net.ltgt.apt-eclipse" version "0.21"
 }
@@ -18,7 +18,7 @@ configurations {
 }
 
 ext {
-    set('micronautVersion', '1.2.7')
+    set('micronautVersion', '1.2.10')
     set('lombokVersion', '1.18.8')
     set('logbackVersion', '1.2.3')
 }
