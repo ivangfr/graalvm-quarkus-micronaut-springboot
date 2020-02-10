@@ -29,15 +29,6 @@ public class NewsProducerConfig {
     @Value("${kafka.producer.num-partitions}")
     private Integer numPartitions;
 
-    @Value("${kafka.configuration.security.protocol:#{null}}")
-    private String securityProtocol;
-
-    @Value("${kafka.configuration.sasl.mechanism:#{null}}")
-    private String saslMechanism;
-
-    @Value("${kafka.configuration.sasl.jaas.config:#{null}}")
-    private String saslJaasConfig;
-
     @Bean
     ProducerFactory<String, News> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
@@ -50,11 +41,6 @@ public class NewsProducerConfig {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         props.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
-        if (securityProtocol != null) {
-            props.put("security.protocol", securityProtocol);
-            props.put("sasl.mechanism", saslMechanism);
-            props.put("sasl.jaas.config", saslJaasConfig);
-        }
         return props;
     }
 
