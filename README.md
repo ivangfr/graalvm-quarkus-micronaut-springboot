@@ -1,4 +1,4 @@
-# `graalvm-quarkus-micronaut-springboot`
+# graalvm-quarkus-micronaut-springboot
 
 The goal of this project is to compare some Java frameworks like: [`Quarkus`](https://quarkus.io/), [`Micronaut`](https://micronaut.io/) and [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/). For it, we will implement applications using those frameworks, measure their start-up times, memory footprint, etc.
 

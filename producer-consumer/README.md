@@ -1,4 +1,4 @@
-# `graalvm-quarkus-micronaut-springboot`
+# graalvm-quarkus-micronaut-springboot
 ## `> producer-consumer`
 
 In this example, we will implement three versions of a producer and a consumer applications using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks.
@@ -11,40 +11,44 @@ In this example, we will implement three versions of a producer and a consumer a
 
 ## Start environment
 
-Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer` folder run
-```
-docker-compose up -d
-```
+- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer` folder
 
-Wait a little bit until all containers `Up (healthy)`. You can check it by running
-```
-docker-compose ps
-```
+- Run the command
+  ```
+  docker-compose up -d
+  ```
+
+- Wait a little bit until all containers `Up (healthy)`. You can check it by running
+  ```
+  docker-compose ps
+  ```
 
 ## Shutdown
 
-To stop and remove containers, networks and volumes, run
-```
-docker-compose down -v
-```
+- In a terminal, make sure you are in `graalvm-quarkus-micronaut-springboot/producer-consumer` folder
+
+- To stop and remove docker-compose containers, networks and volumes, run
+  ```
+  docker-compose down -v
+  ```
 
 ## Useful links
 
-### Kafka Topics UI
+- **Kafka Topics UI**
      
-`Kafka Topics UI` can be accessed at http://localhost:8085
+  `Kafka Topics UI` can be accessed at http://localhost:8085
 
-### Kafka Manager
+- **Kafka Manager**
      
-`Kafka Manager` can be accessed at http://localhost:9000
+  `Kafka Manager` can be accessed at http://localhost:9000
 
-**Configuration**
+  *Configuration*
 
-- First, you must create a new cluster. Click on `Cluster` (dropdown on the header) and then on `Add Cluster`
-- Type the name of your cluster in `Cluster Name` field, for example: `MyZooCluster`
-- Type `zookeeper:2181` in `Cluster Zookeeper Hosts` field
-- Enable checkbox `Poll consumer information (Not recommended for large # of consumers)`
-- Click on `Save` button at the bottom of the page.
+  - First, you must create a new cluster. Click on `Cluster` (dropdown on the header) and then on `Add Cluster`
+  - Type the name of your cluster in `Cluster Name` field, for example: `MyZooCluster`
+  - Type `zookeeper:2181` in `Cluster Zookeeper Hosts` field
+  - Enable checkbox `Poll consumer information (Not recommended for large # of consumers)`
+  - Click on `Save` button at the bottom of the page.
 
 ## Troubleshooting
 

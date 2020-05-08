@@ -1,63 +1,71 @@
-# `graalvm-quarkus-micronaut-springboot`
+# graalvm-quarkus-micronaut-springboot
 ## `> simple-api > micronaut-simple-api`
 
 ## Application
 
-### micronaut-simple-api
+- **micronaut-simple-api**
 
-[`Micronaut`](https://micronaut.io/) Java Web application that expose a simple REST API for greetings. It has the following endpoint
-```
-GET /api/greeting[?name=...]
-```
+  [`Micronaut`](https://micronaut.io/) Java Web application that expose a simple REST API for greetings. It has the following endpoint
+  ```
+  GET /api/greeting[?name=...]
+  ```
 
 ## Running application
 
 ### Development Mode
 
-In a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder run
-```
-./gradlew run
-```
+- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder
+
+- Run the command below
+  ```
+  ./gradlew run
+  ```
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder run
-```
-./gradlew clean assemble
-```
+- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder
 
-Then, build the image with the script
-```
-./docker-build.sh
-```
+- Package the application `jar` file
+  ```
+  ./gradlew clean assemble
+  ```
 
-Finally, run the container using
-```
-docker run -d --rm --name micronaut-simple-api-jvm -p 9082:8080 \
-  docker.mycompany.com/micronaut-simple-api-jvm:1.0.0
-```
+- Run the script below to build the Docker image
+  ```
+  ./docker-build.sh
+  ```
+
+- Run the following command to start the Docker container
+  ```
+  docker run -d --rm --name micronaut-simple-api-jvm -p 9082:8080 \
+    docker.mycompany.com/micronaut-simple-api-jvm:1.0.0
+  ```
 
 ### Docker in Native Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder run
-```
-./gradlew clean assemble
-```
+- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder
 
-Then, build the image with the script
-```
-./docker-build.sh native
-```
+- Package the application `jar` file
+  ```
+  ./gradlew clean assemble
+  ```
 
-Finally, run the container using
-```
-docker run -d --rm --name micronaut-simple-api-native -p 9083:8080 \
-  docker.mycompany.com/micronaut-simple-api-native:1.0.0
-```
+- Run the script below to build the Docker image
+  ```
+  ./docker-build.sh native
+  ```
+
+- Run the following command to start the Docker container
+  ```
+  docker run -d --rm --name micronaut-simple-api-native -p 9083:8080 \
+    docker.mycompany.com/micronaut-simple-api-native:1.0.0
+  ```
 
 ## Shutdown
 
-To stop and remove application containers run
-```
-docker stop micronaut-simple-api-jvm micronaut-simple-api-native
-```
+- Open a terminal
+
+- To stop and remove application container run
+  ```
+  docker stop micronaut-simple-api-jvm micronaut-simple-api-native
+  ```

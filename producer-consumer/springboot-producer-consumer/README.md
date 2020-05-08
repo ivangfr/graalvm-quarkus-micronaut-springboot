@@ -1,22 +1,22 @@
-# `graalvm-quarkus-micronaut-springboot`
+# graalvm-quarkus-micronaut-springboot
 ## `> producer-consumer > springboot-producer-consumer`
 
 The goal of this project is to implement two [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) applications: one that _produces_ messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_ those messages.
 
 ## Applications
 
-### producer-api
+- **producer-api**
 
-`Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `producer-api` pushes a message about the `news` to `Kafka`.
+  `Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `producer-api` pushes a message about the `news` to `Kafka`.
 
-It has the following endpoint:
-```
-POST /api/news {"source": "...", "title": "..."}
-```
+  It has the following endpoint:
+  ```
+  POST /api/news {"source": "...", "title": "..."}
+  ```
 
-### consumer-api
+- **consumer-api**
 
-`Spring Boot` Web Java application that listens to messages (published by the `producer-api`) and logs it.
+  `Spring Boot` Web Java application that listens to messages (published by the `producer-api`) and logs it.
 
 ## Running applications
 
@@ -26,29 +26,33 @@ POST /api/news {"source": "...", "title": "..."}
 
 ### Development Mode
 
-Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
-```
-./mvnw clean spring-boot:run --projects producer-api
-```
+- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+
+- Run the command below
+  ```
+  ./mvnw clean spring-boot:run --projects producer-api
+  ```
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
-```
-./mvnw clean package --projects producer-api
-```
+- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
 
-Then, build the image with the script
-```
-cd producer-api && ./docker-build.sh && cd ..
-```
+- Package the application `jar` file
+  ```
+  ./mvnw clean package --projects producer-api
+  ```
 
-Finally, run the container using
-```
-docker run -d --rm --name springboot-producer-api-jvm \
-  -p 9104:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
-  docker.mycompany.com/springboot-producer-api-jvm:1.0.0
-```
+- Run the script below to build the Docker image
+  ```
+  cd producer-api && ./docker-build.sh && cd ..
+  ```
+
+- Run the following command to start the Docker container
+  ```
+  docker run -d --rm --name springboot-producer-api-jvm \
+    -p 9104:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
+    docker.mycompany.com/springboot-producer-api-jvm:1.0.0
+  ```
 
 ### Docker in Native Mode
 
@@ -58,29 +62,33 @@ Spring team is working on supporting for `GraalVM` native images, https://github
 
 ### Development Mode
 
-Open a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
-```
-./mvnw clean spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=8081" --projects consumer-api
-```
+- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+
+- Run the command below
+  ```
+  ./mvnw clean spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=8081" --projects consumer-api
+  ```
 
 ### Docker in JVM Mode
 
-Before building the docker image, you need to package the application `jar` file. So, in a terminal and inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder run
-```
-./mvnw clean package --projects consumer-api
-```
+- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
 
-Then, build the image with the script
-```
-cd consumer-api && ./docker-build.sh && cd ..
-```
+- Package the application `jar` file
+  ```
+  ./mvnw clean package --projects consumer-api
+  ```
 
-Finally, run the container using
-```
-docker run -d --rm --name springboot-consumer-api-jvm \
-  -p 9109:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
-  docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
-```
+- Run the script below to build the Docker image
+  ```
+  cd consumer-api && ./docker-build.sh && cd ..
+  ```
+
+- Run the following command to start the Docker container
+  ```
+  docker run -d --rm --name springboot-consumer-api-jvm \
+    -p 9109:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
+    docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
+  ```
 
 ### Docker in Native Mode
 
@@ -97,7 +105,9 @@ Spring team is working on supporting for `GraalVM` native images, https://github
 
 ## Shutdown
 
-To stop and remove application containers run
-```
-docker stop springboot-producer-api-jvm springboot-consumer-api-jvm
-```
+- Open a terminal
+
+- To stop and remove application container run
+  ```
+  docker stop springboot-producer-api-jvm springboot-consumer-api-jvm
+  ```
