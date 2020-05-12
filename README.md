@@ -71,6 +71,7 @@ Table below shows the results after running the script `collect-native-jar-docke
    quarkus-consumer-api-native |           375s |         43764696 |                6s |             193MB |
  micronaut-consumer-api-native |            11s |         26723218 |              377s |             113MB |
 ```
+> **Note 1:** There is no results for `micronaut-book-api-native` because I was not able to build it. This is the [issue](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues)
 
 Finally, the following table shows the results after running the script `collect-startup-ab-times.sh`
 ```
@@ -101,7 +102,7 @@ Finally, the following table shows the results after running the script `collect
  micronaut-consumer-api-native |        124ms |                   111.6MiB |              1s |                 144.9MiB |
 ```
 
-> **Note 1:** There is no results for `micronaut-book-api-native` because we are getting an error while trying to run it. It id related to this [issue](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues)
+> **Note 1:** There is no results for `micronaut-book-api-native` because I was not able to build it. This is the [issue](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues)
 
 > **Note 2:** We can see that the performance of the `quarkus-consumer-api-jvm` and `quarkus-consumer-api-native` are really slow compared to other consumers. Checking the logs, it seems that the bottleneck is SmallRye Reactive Messaging. I have opened an issue related to it. For more information, see [Consumer reads 500 messages and stops a few seconds #290](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
 
