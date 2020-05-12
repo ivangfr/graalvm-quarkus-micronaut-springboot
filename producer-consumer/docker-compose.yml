@@ -3,7 +3,7 @@ version: "3.7"
 services:
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.3.1
+    image: confluentinc/cp-zookeeper:5.4.1
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -16,7 +16,7 @@ services:
       start_period: 30s
 
   kafka:
-    image: confluentinc/cp-kafka:5.3.1
+    image: confluentinc/cp-kafka:5.4.1
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -36,7 +36,7 @@ services:
       start_period: 30s
 
   kafka-rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.3.1
+    image: confluentinc/cp-kafka-rest:5.4.1
     container_name: kafka-rest-proxy
     restart: unless-stopped
     depends_on:
@@ -73,7 +73,7 @@ services:
 
   kafka-manager:
     container_name: kafka-manager
-    image: hlebalbau/kafka-manager:2.0.0.2
+    image: hlebalbau/kafka-manager:3.0.0.4
     restart: unless-stopped
     depends_on:
       - zookeeper
@@ -83,13 +83,13 @@ services:
       ZK_HOSTS: zookeeper:2181
       APPLICATION_SECRET: "random-secret"
     command: -Dpidfile.path=/dev/null
-#    healthcheck:
-#      test: ""
-#      start_period: 30s
+    healthcheck:
+      test: "curl -f http://localhost:9000 || exit 1"
+      start_period: 30s
 
   zipkin:
     container_name: zipkin
-    image: openzipkin/zipkin:2.18.0
+    image: openzipkin/zipkin:2.20.2
     restart: unless-stopped
     ports:
       - "9411:9411"

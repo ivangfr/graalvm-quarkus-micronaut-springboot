@@ -1,26 +1,14 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.hibernate:hibernate-gradle-plugin:5.4.6.Final"
-    }
-}
-
 plugins {
+    id "net.ltgt.apt-eclipse" version "0.21"
     id "com.github.johnrengelman.shadow" version "5.2.0"
     id "application"
-    id "net.ltgt.apt-eclipse" version "0.21"
 }
-
-apply plugin: 'org.hibernate.orm'
 
 version "1.0.0"
 group "com.mycompany.micronautbookapi"
 
 repositories {
-    mavenCentral()
-    maven { url "https://jcenter.bintray.com" }
+    jcenter()
 }
 
 configurations {
@@ -29,50 +17,49 @@ configurations {
 }
 
 ext {
-    set('micronautVersion', '1.2.10')
-    set('micronautDataVersion', '1.0.0')
-    set('micronautHibernateJpaVersion', '1.2.1')
-    set('lombokVersion', '1.18.8')
+    set('micronautVersion', '2.0.0.M3')
+    set('lombokVersion', '1.18.12')
     set('mapstructVersion', '1.3.1.Final')
     set('logbackVersion', '1.2.3')
-    set('mysqlConnectorVersion', '8.0.18')
+    set('mysqlConnectorVersion', '8.0.19')
 }
 
 dependencies {
-    annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "io.micronaut:micronaut-graal"
-    annotationProcessor "io.micronaut:micronaut-inject-java"
-    annotationProcessor "io.micronaut:micronaut-validation"
-    annotationProcessor "io.micronaut.data:micronaut-data-processor:${micronautDataVersion}"
-    compileOnly "com.oracle.substratevm:svm"
-    implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-    implementation "io.micronaut:micronaut-management"
-    implementation "io.micronaut.configuration:micronaut-micrometer-core"
-    implementation "io.micronaut:micronaut-http-client"
-    implementation "io.micronaut.configuration:micronaut-micrometer-registry-prometheus"
-    implementation "io.micronaut.configuration:micronaut-jdbc-hikari"
-    implementation "io.micronaut:micronaut-inject"
-    implementation "io.micronaut:micronaut-validation"
-    implementation "io.micronaut:micronaut-runtime"
-    implementation "io.micronaut:micronaut-http-server-netty"
-    implementation "io.micronaut.configuration:micronaut-hibernate-jpa:${micronautHibernateJpaVersion}", {
-        exclude group:'io.micronaut.configuration', module:'micronaut-hibernate-jpa-spring'
-    }
-    implementation "io.micronaut.data:micronaut-data-hibernate-jpa"
-    implementation "io.micronaut.data:micronaut-data-hibernate-jpa:$micronautDataVersion", {
-        exclude group:'io.micronaut.configuration', module:'micronaut-hibernate-jpa'
-    }
-    compileOnly "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-    runtimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
-    runtimeOnly "mysql:mysql-connector-java:${mysqlConnectorVersion}"
-    testAnnotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
-    testImplementation "org.junit.jupiter:junit-jupiter-api"
-    testImplementation "io.micronaut.test:micronaut-test-junit5"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+    //-- IMPORTANT!
+    //  Lombok annotation processor must place before the Micronaut processors in the build configuration
+    /// since Micronaut needs to see the mutations to the AST that Lombok applies.
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    //--
+    annotationProcessor(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    annotationProcessor("io.micronaut:micronaut-inject-java")
+    annotationProcessor("io.micronaut:micronaut-validation")
+    annotationProcessor("io.micronaut:micronaut-graal")
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+    compileOnly(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    compileOnly("org.graalvm.nativeimage:svm")
+    implementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    implementation("io.micronaut:micronaut-management")
+    implementation("io.micronaut.configuration:micronaut-micrometer-core")
+    implementation("io.micronaut.configuration:micronaut-micrometer-registry-prometheus")
+    implementation("io.micronaut:micronaut-inject")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("io.micronaut:micronaut-http-server-netty")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+    implementation("io.micronaut.configuration:micronaut-jdbc-hikari")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    compileOnly("org.mapstruct:mapstruct-jdk8:$mapstructVersion")
+    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    runtimeOnly("ch.qos.logback:logback-classic:$logbackVersion")
+    runtimeOnly("mysql:mysql-connector-java:$mysqlConnectorVersion")
+    testAnnotationProcessor(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+    testImplementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("io.micronaut.test:micronaut-test-junit5")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
 test.classpath += configurations.developmentOnly
@@ -83,21 +70,21 @@ test {
     useJUnitPlatform()
 }
 
+java {
+    sourceCompatibility = JavaVersion.toVersion('1.8')
+    targetCompatibility = JavaVersion.toVersion('1.8')
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+    options.compilerArgs.add('-parameters')
+}
+
 shadowJar {
     mergeServiceFiles()
 }
 
-hibernate {
-    enhance {
-        enableLazyInitialization= true
-        enableDirtyTracking = true
-        enableAssociationManagement = true
-    }
-}
-
-run.classpath += configurations.developmentOnly
-run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-    options.compilerArgs.add('-parameters')
+tasks.withType(JavaExec) {
+    classpath += configurations.developmentOnly
+    jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
 }

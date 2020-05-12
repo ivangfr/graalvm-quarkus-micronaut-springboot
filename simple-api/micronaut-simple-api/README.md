@@ -16,10 +16,17 @@
 
 - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder
 
-- Run the command below
+- Run the command below to start the application
   ```
-  ./gradlew run
+  ./gradlew clean run
   ```
+
+- A simple test can be done by opening a new terminal and running
+  ```
+  curl "localhost:8080/api/greeting?name=Ivan"
+  ```
+
+- To stop the application, press `Ctrl+C` in its terminals
 
 ### Docker in JVM Mode
 
@@ -37,9 +44,16 @@
 
 - Run the following command to start the Docker container
   ```
-  docker run -d --rm --name micronaut-simple-api-jvm -p 9082:8080 \
+  docker run --rm --name micronaut-simple-api-jvm -p 9082:8080 \
     docker.mycompany.com/micronaut-simple-api-jvm:1.0.0
   ```
+
+- A simple test can be done by opening a new terminal and running
+  ```
+  curl "localhost:9082/api/greeting?name=Ivan"
+  ```
+
+- To stop and remove application Docker container, press `Ctrl+C` in its terminals
 
 ### Docker in Native Mode
 
@@ -57,15 +71,16 @@
 
 - Run the following command to start the Docker container
   ```
-  docker run -d --rm --name micronaut-simple-api-native -p 9083:8080 \
+  docker run --rm --name micronaut-simple-api-native -p 9083:8080 \
     docker.mycompany.com/micronaut-simple-api-native:1.0.0
   ```
 
-## Shutdown
-
-- Open a terminal
-
-- To stop and remove application container run
+- A simple test can be done by opening a new terminal and running
   ```
-  docker stop micronaut-simple-api-jvm micronaut-simple-api-native
+  curl "localhost:9083/api/greeting?name=Ivan"
+  ```
+
+- To stop and remove application Docker container, run in a terminal
+  ```
+  docker stop micronaut-simple-api-native
   ```

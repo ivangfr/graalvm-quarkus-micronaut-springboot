@@ -1,7 +1,7 @@
 # graalvm-quarkus-micronaut-springboot
 ## `> producer-consumer`
 
-In this example, we will implement three versions of a producer and a consumer applications using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks.
+In this example, we will implement three versions of `producer - consumer` applications using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks.
 
 ## Applications
 

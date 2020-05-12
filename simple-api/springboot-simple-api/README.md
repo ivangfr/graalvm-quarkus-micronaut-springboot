@@ -16,10 +16,17 @@
 
 - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/simple-api/springboot-simple-api` folder
 
-- Run the command below
+- Run the command below to start the application
   ```
-  ./gradlew bootRun
+  ./gradlew clean bootRun
   ```
+
+- A simple test can be done by opening a new terminal and running
+  ```
+  curl "localhost:8080/api/greeting?name=Ivan"
+  ```
+
+- To stop the application, press `Ctrl+C` in its terminals
 
 ### Docker in JVM Mode
 
@@ -37,19 +44,18 @@
 
 - Run the following command to start the Docker container
   ```
-  docker run -d --rm --name springboot-simple-api-jvm -p 9084:8080 \
+  docker run --rm --name springboot-simple-api-jvm -p 9084:8080 \
     docker.mycompany.com/springboot-simple-api-jvm:1.0.0
   ```
+
+- A simple test can be done by opening a new terminal and running
+  ```
+  curl "localhost:9084/api/greeting?name=Ivan"
+  ```
+
+- To stop and remove application Docker container, press `Ctrl+C` in its terminals
 
 ### Docker in Native Mode
 
 Spring team is working on supporting for `GraalVM` native images, https://github.com/spring-projects/spring-framework/wiki/GraalVM-native-image-support
 
-## Shutdown
-
-- Open a terminal
-
-- To stop and remove application container run
-  ```
-  docker stop springboot-simple-api-jvm
-  ```

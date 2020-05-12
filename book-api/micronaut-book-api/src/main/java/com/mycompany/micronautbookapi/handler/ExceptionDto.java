@@ -7,10 +7,10 @@ import lombok.Value;
 @Value
 public class ExceptionDto {
 
-    private String error;
-    private String message;
-    private String path;
-    private int status;
-    private String timestamp;
+    String error;
+    String message;
+    String path;
+    int status;
+    String timestamp;
 
 }

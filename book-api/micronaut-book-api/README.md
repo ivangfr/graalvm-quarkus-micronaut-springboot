@@ -22,10 +22,18 @@
 
 - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
 
-- Run the command below
+- Run the command below to start the application
+  > **Important:** Unable to run with `Java 8`. Using `Java 11` worked!
   ```
-  ./gradlew run
+  ./gradlew clean run
   ```
+
+- A simple test can be done by opening a new terminal and running
+  ```
+  curl localhost:8080/api/books
+  ```
+
+- To stop the application, press `Ctrl+C` in its terminals
 
 ### Docker in JVM Mode
 
@@ -43,10 +51,17 @@
 
 - Run the following command to start the Docker container
   ```
-  docker run -d --rm --name micronaut-book-api-jvm \
+  docker run --rm --name micronaut-book-api-jvm \
     -p 9087:8080 -e MYSQL_HOST=mysql --network book-api_default \
     docker.mycompany.com/micronaut-book-api-jvm:1.0.0
   ```
+
+- A simple test can be done by opening a new terminal and running
+  ```
+  curl localhost:9087/api/books
+  ```
+
+- To stop and remove application Docker container, press `Ctrl+C` in its terminals
 
 ### Docker in Native Mode
 
@@ -58,236 +73,69 @@
   ```
 
 - Run the script below to build the Docker image
+  > **Important:** Unable to build the Docker Native Image! I've tried with `Java 8` and `Java 11`. Exception log in [Issues](#issues)
   ```
   ./docker-build.sh native
   ```
 
 - Run the following command to start the Docker container
   ```
-  docker run -d --rm --name micronaut-book-api-native \
+  docker run --rm --name micronaut-book-api-native \
     -p 9088:8080 -e MYSQL_HOST=mysql --network book-api_default \
     docker.mycompany.com/micronaut-book-api-native:1.0.0
   ```
 
-## Shutdown
-
-- Open a terminal
-
-- To stop and remove application container run
+- A simple test can be done by opening a new terminal and running
   ```
-  docker stop micronaut-book-api-jvm micronaut-book-api-native
+  curl localhost:9088/api/books
   ```
+
+- To stop and remove application Docker container, press `Ctrl+C` in its terminals
 
 ## Issues
 
-- Using `MySQL` as database, I am having the exception shown below. It is a known issue for Oracle, https://bugs.mysql.com/bug.php?id=91968
+- Unable to build the Docker Native Image
   ```
-  ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Error thrown while acquiring connection from data source
-  java.lang.ClassCastException: com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
-          at com.mysql.cj.util.Util.getInstance(Util.java:169)
-          at com.mysql.cj.util.Util.getInstance(Util.java:174)
-          at com.mysql.cj.conf.ConnectionUrl.getConnectionUrlInstance(ConnectionUrl.java:200)
-          at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:196)
-          at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
-          at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:353)
-          at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
-          at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:473)
-          at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:562)
-          at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
-          at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
-          at io.micronaut.configuration.jdbc.hikari.HikariUrlDataSource.<init>(HikariUrlDataSource.java:36)
-          at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.dataSource(DatasourceFactory.java:67)
-          at io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$DataSource0Definition.build(Unknown Source)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:113)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.data.hibernate.runtime.$DataEntityManagerFactoryBean$HibernateStandardServiceRegistry0Definition.doBuild(Unknown Source)
-          at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:117)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:109)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateMetadataSources1Definition.doBuild(Unknown Source)
-          at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:117)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:109)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactoryBuilder2Definition.build(Unknown Source)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:113)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactory3Definition.build(Unknown Source)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:113)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.loadContextScopeBean(DefaultBeanContext.java:1888)
-          at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1262)
-          at io.micronaut.context.DefaultApplicationContext.initializeContext(DefaultApplicationContext.java:236)
-          at io.micronaut.context.DefaultBeanContext.readAllBeanDefinitionClasses(DefaultBeanContext.java:2446)
-          at io.micronaut.context.DefaultBeanContext.start(DefaultBeanContext.java:200)
-          at io.micronaut.context.DefaultApplicationContext.start(DefaultApplicationContext.java:187)
-          at io.micronaut.runtime.Micronaut.start(Micronaut.java:69)
-          at io.micronaut.runtime.Micronaut.run(Micronaut.java:307)
-          at io.micronaut.runtime.Micronaut.run(Micronaut.java:293)
-          at com.mycompany.micronautbookapi.Application.main(Application.java:8)
-  12:33:28.467 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
-  java.lang.ClassCastException: com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
-          at com.mysql.cj.util.Util.getInstance(Util.java:169)
-          at com.mysql.cj.util.Util.getInstance(Util.java:174)
-          at com.mysql.cj.conf.ConnectionUrl.getConnectionUrlInstance(ConnectionUrl.java:200)
-          at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:196)
-          at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
-          at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:353)
-          at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
-          at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:473)
-          at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:562)
-          at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
-          at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
-          at io.micronaut.configuration.jdbc.hikari.HikariUrlDataSource.<init>(HikariUrlDataSource.java:36)
-          at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.dataSource(DatasourceFactory.java:67)
-          at io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$DataSource0Definition.build(Unknown Source)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:113)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.data.hibernate.runtime.$DataEntityManagerFactoryBean$HibernateStandardServiceRegistry0Definition.doBuild(Unknown Source)
-          at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:117)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:109)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateMetadataSources1Definition.doBuild(Unknown Source)
-          at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:117)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:109)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactoryBuilder2Definition.build(Unknown Source)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:113)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactory3Definition.build(Unknown Source)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:113)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.loadContextScopeBean(DefaultBeanContext.java:1888)
-          at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1262)
-          at io.micronaut.context.DefaultApplicationContext.initializeContext(DefaultApplicationContext.java:236)
-          at io.micronaut.context.DefaultBeanContext.readAllBeanDefinitionClasses(DefaultBeanContext.java:2446)
-          at io.micronaut.context.DefaultBeanContext.start(DefaultBeanContext.java:200)
-          at io.micronaut.context.DefaultApplicationContext.start(DefaultApplicationContext.java:187)
-          at io.micronaut.runtime.Micronaut.start(Micronaut.java:69)
-          at io.micronaut.runtime.Micronaut.run(Micronaut.java:307)
-          at io.micronaut.runtime.Micronaut.run(Micronaut.java:293)
-          at com.mycompany.micronautbookapi.Application.main(Application.java:8)
-  12:33:28.468 [main] ERROR io.micronaut.runtime.Micronaut - Error starting Micronaut server: Bean definition [org.hibernate.SessionFactory] could not be loaded: Error instantiating bean of type  [org.hibernate.boot.registry.StandardServiceRegistry]
-  
-  Message: Failed to initialize pool: com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
-  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]) --> SessionFactoryBuilder.hibernateSessionFactoryBuilder([MetadataSources metadataSources],ValidatorFactory validatorFactory) --> MetadataSources.hibernateMetadataSources(JpaConfiguration jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
-  io.micronaut.context.exceptions.BeanInstantiationException: Bean definition [org.hibernate.SessionFactory] could not be loaded: Error instantiating bean of type  [org.hibernate.boot.registry.StandardServiceRegistry]
-  
-  Message: Failed to initialize pool: com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
-  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]) --> SessionFactoryBuilder.hibernateSessionFactoryBuilder([MetadataSources metadataSources],ValidatorFactory validatorFactory) --> MetadataSources.hibernateMetadataSources(JpaConfiguration jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
-          at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1264)
-          at io.micronaut.context.DefaultApplicationContext.initializeContext(DefaultApplicationContext.java:236)
-          at io.micronaut.context.DefaultBeanContext.readAllBeanDefinitionClasses(DefaultBeanContext.java:2446)
-          at io.micronaut.context.DefaultBeanContext.start(DefaultBeanContext.java:200)
-          at io.micronaut.context.DefaultApplicationContext.start(DefaultApplicationContext.java:187)
-          at io.micronaut.runtime.Micronaut.start(Micronaut.java:69)
-          at io.micronaut.runtime.Micronaut.run(Micronaut.java:307)
-          at io.micronaut.runtime.Micronaut.run(Micronaut.java:293)
-          at com.mycompany.micronautbookapi.Application.main(Application.java:8)
-  Caused by: io.micronaut.context.exceptions.BeanInstantiationException: Error instantiating bean of type  [org.hibernate.boot.registry.StandardServiceRegistry]
-  
-  Message: Failed to initialize pool: com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
-  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]) --> SessionFactoryBuilder.hibernateSessionFactoryBuilder([MetadataSources metadataSources],ValidatorFactory validatorFactory) --> MetadataSources.hibernateMetadataSources(JpaConfiguration jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1624)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.data.hibernate.runtime.$DataEntityManagerFactoryBean$HibernateStandardServiceRegistry0Definition.doBuild(Unknown Source)
-          at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:117)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:109)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateMetadataSources1Definition.doBuild(Unknown Source)
-          at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:117)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:109)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactoryBuilder2Definition.build(Unknown Source)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:113)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:1989)
-          at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:1963)
-          at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1082)
-          at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1007)
-          at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactory3Definition.build(Unknown Source)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:113)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2307)
-          at io.micronaut.context.DefaultBeanContext.loadContextScopeBean(DefaultBeanContext.java:1888)
-          at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1262)
-          ... 8 common frames omitted
-  Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool: com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
-          at com.zaxxer.hikari.pool.HikariPool.throwPoolInitializationException(HikariPool.java:597)
-          at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:576)
-          at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
-          at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
-          at io.micronaut.configuration.jdbc.hikari.HikariUrlDataSource.<init>(HikariUrlDataSource.java:36)
-          at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.dataSource(DatasourceFactory.java:67)
-          at io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$DataSource0Definition.build(Unknown Source)
-          at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:113)
-          at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1598)
-          ... 45 common frames omitted
-  Caused by: java.lang.ClassCastException: com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
-          at com.mysql.cj.util.Util.getInstance(Util.java:169)
-          at com.mysql.cj.util.Util.getInstance(Util.java:174)
-          at com.mysql.cj.conf.ConnectionUrl.getConnectionUrlInstance(ConnectionUrl.java:200)
-          at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:196)
-          at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
-          at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:353)
-          at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
-          at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:473)
-          at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:562)
-          ... 52 common frames omitted
+  Fatal error: java.lang.SecurityException: java.lang.SecurityException: Prohibited package name: java.lang
+    at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+    at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+    at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+    at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+    at java.base/java.util.concurrent.ForkJoinTask.getThrowableException(ForkJoinTask.java:600)
+    at java.base/java.util.concurrent.ForkJoinTask.get(ForkJoinTask.java:1006)
+    at com.oracle.svm.hosted.NativeImageGenerator.run(NativeImageGenerator.java:462)
+    at com.oracle.svm.hosted.NativeImageGeneratorRunner.buildImage(NativeImageGeneratorRunner.java:357)
+    at com.oracle.svm.hosted.NativeImageGeneratorRunner.build(NativeImageGeneratorRunner.java:501)
+    at com.oracle.svm.hosted.NativeImageGeneratorRunner.main(NativeImageGeneratorRunner.java:115)
+    at com.oracle.svm.hosted.NativeImageGeneratorRunner$JDK9Plus.main(NativeImageGeneratorRunner.java:528)
+  Caused by: java.lang.SecurityException: Prohibited package name: java.lang
+    at java.base/java.lang.ClassLoader.preDefineClass(ClassLoader.java:898)
+    at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1014)
+    at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:174)
+    at java.base/java.net.URLClassLoader.defineClass(URLClassLoader.java:550)
+    at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:458)
+    at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:452)
+    at java.base/java.security.AccessController.doPrivileged(Native Method)
+    at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:451)
+    at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:588)
+    at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
+    at java.base/java.lang.Class.forName0(Native Method)
+    at java.base/java.lang.Class.forName(Class.java:398)
+    at com.oracle.svm.hosted.ImageClassLoader.forName(ImageClassLoader.java:459)
+    at com.oracle.svm.hosted.ImageClassLoader.findClassByName(ImageClassLoader.java:449)
+    at com.oracle.svm.hosted.FeatureImpl$FeatureAccessImpl.findClassByName(FeatureImpl.java:108)
+    at com.oracle.svm.hosted.ServiceLoaderFeature.handleType(ServiceLoaderFeature.java:201)
+    at com.oracle.svm.hosted.ServiceLoaderFeature.duringAnalysis(ServiceLoaderFeature.java:112)
+    at com.oracle.svm.hosted.NativeImageGenerator.lambda$runPointsToAnalysis$8(NativeImageGenerator.java:715)
+    at com.oracle.svm.hosted.FeatureHandler.forEachFeature(FeatureHandler.java:63)
+    at com.oracle.svm.hosted.NativeImageGenerator.runPointsToAnalysis(NativeImageGenerator.java:715)
+    at com.oracle.svm.hosted.NativeImageGenerator.doRun(NativeImageGenerator.java:530)
+    at com.oracle.svm.hosted.NativeImageGenerator.lambda$run$0(NativeImageGenerator.java:445)
+    at java.base/java.util.concurrent.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1407)
+    at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+    at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+    at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+    at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+    at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
+  Error: Image build request failed with exit status 1
   ```

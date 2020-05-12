@@ -92,21 +92,26 @@ quarkus_book_api_native[docker_image_size]=$package_jar_build_image_docker_image
 
 echo
 echo "-------------------------"
-echo "MICRONAUT-BOOK-API-NATIVE"
+echo "MICRONAUT-BOOK-API-NATIVE (DISABLED: Unable to build the Docker Native Image & MySQL unsupported)"
 echo "-------------------------"
 
 cd ../micronaut-book-api
 
-package_jar_build_image \
-  "./gradlew clean" \
-  "./gradlew assemble" \
-  "build/libs/micronaut-book-api-1.0.0-all.jar" \
-  "./docker-build.sh native" \
-  "docker.mycompany.com/micronaut-book-api-native:1.0.0"
-micronaut_book_api_native[packaging_time]=$package_jar_build_image_packaging_time
-micronaut_book_api_native[jar_size]=$package_jar_build_image_jar_size
-micronaut_book_api_native[building_time]=$package_jar_build_image_building_time
-micronaut_book_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+# package_jar_build_image \
+#   "./gradlew clean" \
+#   "./gradlew assemble" \
+#   "build/libs/micronaut-book-api-1.0.0-all.jar" \
+#   "./docker-build.sh native" \
+#   "docker.mycompany.com/micronaut-book-api-native:1.0.0"
+# micronaut_book_api_native[packaging_time]=$package_jar_build_image_packaging_time
+# micronaut_book_api_native[jar_size]=$package_jar_build_image_jar_size
+# micronaut_book_api_native[building_time]=$package_jar_build_image_building_time
+# micronaut_book_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+
+micronaut_book_api_native[packaging_time]="-"
+micronaut_book_api_native[jar_size]="-"
+micronaut_book_api_native[building_time]="-"
+micronaut_book_api_native[docker_image_size]="-"
 
 echo
 echo "================="
@@ -119,6 +124,13 @@ echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
 echo "-----------------------------------------------"
 
 cd ../../producer-consumer/quarkus-producer-consumer
+
+echo
+echo "*****************************"
+echo "Switch from Java 8 to Java 11"
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+echo "*****************************"
+echo
 
 package_jar_build_image \
   "./mvnw clean --projects producer-api" \
@@ -146,6 +158,12 @@ quarkus_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_t
 quarkus_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
 quarkus_consumer_api_native[building_time]=$package_jar_build_image_building_time
 quarkus_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+
+echo
+echo "*****************************"
+echo "Switch from Java 11 to Java 8"
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+echo "*****************************"
 
 echo
 echo "-------------------------------------------------"

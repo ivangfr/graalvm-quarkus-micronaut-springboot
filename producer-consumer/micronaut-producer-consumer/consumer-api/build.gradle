@@ -1,15 +1,14 @@
 plugins {
+    id "net.ltgt.apt-eclipse" version "0.21"
     id "com.github.johnrengelman.shadow" version "5.2.0"
     id "application"
-    id "net.ltgt.apt-eclipse" version "0.21"
 }
 
 version "1.0.0"
 group "com.mycompany.consumerapi"
 
 repositories {
-    mavenCentral()
-    maven { url "https://jcenter.bintray.com" }
+    jcenter()
 }
 
 configurations {
@@ -18,40 +17,46 @@ configurations {
 }
 
 ext {
-    set('micronautVersion', '1.2.10')
-    set('lombokVersion', '1.18.8')
+    set('micronautVersion', '2.0.0.M3')
+    set('lombokVersion', '1.18.12')
     set('logbackVersion', '1.2.3')
 }
 
 dependencies {
-    annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    annotationProcessor "io.micronaut:micronaut-graal"
-    annotationProcessor "io.micronaut:micronaut-inject-java"
-    annotationProcessor "io.micronaut:micronaut-validation"
-    compileOnly "com.oracle.substratevm:svm"
-    implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-    implementation "io.micronaut:micronaut-management"
-    implementation "io.micronaut.configuration:micronaut-micrometer-core"
-    implementation "io.opentracing.brave:brave-opentracing"
-    implementation "io.micronaut:micronaut-tracing"
-    implementation "io.micronaut:micronaut-http-client"
-    implementation "io.micronaut.configuration:micronaut-micrometer-registry-prometheus"
-    implementation "io.micronaut:micronaut-inject"
-    implementation "io.micronaut:micronaut-validation"
-    implementation "io.micronaut:micronaut-runtime"
-    implementation "io.micronaut.configuration:micronaut-kafka"
-    implementation "io.micronaut:micronaut-http-server-netty"
-    runtimeOnly "io.zipkin.brave:brave-instrumentation-http"
-    runtimeOnly "io.zipkin.reporter2:zipkin-reporter"
-    runtimeOnly "ch.qos.logback:logback-classic:${logbackVersion}"
-    testAnnotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
-    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-    testImplementation "org.junit.jupiter:junit-jupiter-api"
-    testImplementation "io.micronaut.test:micronaut-test-junit5"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+    //-- IMPORTANT!
+    //  Lombok annotation processor must place before the Micronaut processors in the build configuration
+    /// since Micronaut needs to see the mutations to the AST that Lombok applies.
+    compileOnly("org.projectlombok:lombok:$lombokVersion")
+    annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+    //--
+    annotationProcessor(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    annotationProcessor("io.micronaut:micronaut-inject-java")
+    annotationProcessor("io.micronaut:micronaut-validation")
+    annotationProcessor("io.micronaut:micronaut-graal")
+    compileOnly(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    compileOnly("org.graalvm.nativeimage:svm")
+    implementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    implementation("io.micronaut:micronaut-management")
+    implementation("io.micronaut.configuration:micronaut-micrometer-core")
+    implementation("io.opentracing.brave:brave-opentracing")
+    implementation("io.micronaut:micronaut-tracing")
+    implementation("io.micronaut.configuration:micronaut-micrometer-registry-prometheus")
+    implementation("io.micronaut:micronaut-inject")
+    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut:micronaut-runtime")
+    implementation("io.micronaut:micronaut-http-server-netty")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut.kafka:micronaut-kafka")
+    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+    runtimeOnly("io.zipkin.brave:brave-instrumentation-http")
+    runtimeOnly("io.zipkin.reporter2:zipkin-reporter")
+    runtimeOnly("ch.qos.logback:logback-classic:$logbackVersion")
+    testAnnotationProcessor(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+    testImplementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("io.micronaut.test:micronaut-test-junit5")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
 test.classpath += configurations.developmentOnly
@@ -62,13 +67,21 @@ test {
     useJUnitPlatform()
 }
 
+java {
+    sourceCompatibility = JavaVersion.toVersion('1.8')
+    targetCompatibility = JavaVersion.toVersion('1.8')
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+    options.compilerArgs.add('-parameters')
+}
+
 shadowJar {
     mergeServiceFiles()
 }
 
-run.classpath += configurations.developmentOnly
-run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-    options.compilerArgs.add('-parameters')
+tasks.withType(JavaExec) {
+    classpath += configurations.developmentOnly
+    jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
 }

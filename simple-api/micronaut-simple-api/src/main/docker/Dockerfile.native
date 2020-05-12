@@ -1,13 +1,15 @@
-FROM oracle/graalvm-ce:19.2.1 as graalvm
-
-LABEL maintainer="ivangfr@yahoo.com.br"
+FROM oracle/graalvm-ce:20.0.0-java8 as graalvm
+# For JDK 11
+#FROM oracle/graalvm-ce:20.0.0-java11 as graalvm
+RUN gu install native-image
 
 COPY build/libs/micronaut-simple-api-*-all.jar /home/app/micronaut-simple-api/build/libs/micronaut-simple-api.jar
 WORKDIR /home/app/micronaut-simple-api
-RUN gu install native-image
+
 RUN native-image --no-server -cp build/libs/micronaut-simple-api.jar
 
 FROM frolvlad/alpine-glibc
+RUN apk update && apk add libstdc++
 EXPOSE 8080
 COPY --from=graalvm /home/app/micronaut-simple-api .
 ENTRYPOINT ["./micronaut-simple-api"]

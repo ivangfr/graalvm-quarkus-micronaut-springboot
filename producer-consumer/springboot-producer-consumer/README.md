@@ -22,92 +22,102 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
 > **Note:** `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
 
-### `producer-api`
-
 ### Development Mode
 
-- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+- **Startup**
 
-- Run the command below
-  ```
-  ./mvnw clean spring-boot:run --projects producer-api
-  ```
+  - **producer-api**
+
+    - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+
+    - Run the command below to start the application
+      ```
+      ./mvnw clean spring-boot:run --projects producer-api
+      ```
+
+  - **consumer-api**
+
+    - Open another terminal and make sure your are in `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+
+    - Run the command below to start the application
+      ```
+      ./mvnw clean spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=8081" --projects consumer-api
+      ```
+
+- **Simple Test**
+
+  - In a new terminal, post a news
+    ```
+    curl -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
+      -d '{ "source":"Spring Boot Blog", "title":"Dev Spring Boot Framework" }'
+    ```
+
+  - See `producer-api` and `consumer-api` logs
+
+- **Shutdown**
+
+  Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
 
 ### Docker in JVM Mode
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+- **Startup**
 
-- Package the application `jar` file
-  ```
-  ./mvnw clean package --projects producer-api
-  ```
+  - **producer-api**
 
-- Run the script below to build the Docker image
-  ```
-  cd producer-api && ./docker-build.sh && cd ..
-  ```
+    - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
 
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name springboot-producer-api-jvm \
-    -p 9104:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
-    docker.mycompany.com/springboot-producer-api-jvm:1.0.0
-  ```
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects producer-api
+      ```
+
+    - Run the script below to build the Docker image
+      ```
+      cd producer-api && ./docker-build.sh && cd ..
+      ```
+
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name springboot-producer-api-jvm -p 9104:8080 \
+        -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
+        docker.mycompany.com/springboot-producer-api-jvm:1.0.0
+      ```
+
+  - **consumer-api**
+
+    - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects consumer-api
+      ```
+
+    - Run the script below to build the Docker image
+      ```
+      cd consumer-api && ./docker-build.sh && cd ..
+      ```
+
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name springboot-consumer-api-jvm -p 9109:8080 \
+        -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
+        docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
+      ```
+
+- **Simple Test**
+
+  - In a new terminal, post a news
+    ```
+    curl -X POST localhost:9104/api/news -H 'Content-Type: application/json' \
+      -d '{ "source":"Spring Boot Blog", "title":"Dev Spring Boot Framework" }'
+    ```
+
+  - See `producer-api` and `consumer-api` logs
+
+- **Shutdown**
+
+  Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
 
 ### Docker in Native Mode
 
 Spring team is working on supporting for `GraalVM` native images, https://github.com/spring-projects/spring-framework/wiki/GraalVM-native-image-support
-
-### `consumer-api`
-
-### Development Mode
-
-- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
-
-- Run the command below
-  ```
-  ./mvnw clean spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=8081" --projects consumer-api
-  ```
-
-### Docker in JVM Mode
-
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
-
-- Package the application `jar` file
-  ```
-  ./mvnw clean package --projects consumer-api
-  ```
-
-- Run the script below to build the Docker image
-  ```
-  cd consumer-api && ./docker-build.sh && cd ..
-  ```
-
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name springboot-consumer-api-jvm \
-    -p 9109:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
-    docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
-  ```
-
-### Docker in Native Mode
-
-Spring team is working on supporting for `GraalVM` native images, https://github.com/spring-projects/spring-framework/wiki/GraalVM-native-image-support
-
-## Simple Test
-
-- Posting a news
-  > [HTTPie](https://httpie.org/) is being used here 
-  ```
-  http :9104/api/news source="Spring Boot Blog" title="Spring Boot Framework"
-  ```
-- See `springboot-producer-api-jvm` and `springboot-consumer-api-jvm` Docker logs
-
-## Shutdown
-
-- Open a terminal
-
-- To stop and remove application container run
-  ```
-  docker stop springboot-producer-api-jvm springboot-consumer-api-jvm
-  ```

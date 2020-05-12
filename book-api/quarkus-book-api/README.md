@@ -22,10 +22,17 @@
 
 - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder
 
-- Run the command below
+- Run the command below to start the application
   ```
-  ./mvnw compile quarkus:dev
+  ./mvnw clean compile quarkus:dev
   ```
+
+- A simple test can be done by opening a new terminal and running
+  ```
+  curl localhost:8080/api/books
+  ```
+
+- To stop the application, press `Ctrl+C` in its terminals
 
 ### Docker in JVM Mode
 
@@ -43,10 +50,17 @@
 
 - Run the following command to start the Docker container
   ```
-  docker run -d --rm --name quarkus-book-api-jvm \
+  docker run --rm --name quarkus-book-api-jvm \
     -p 9085:8080 -e MYSQL_HOST=mysql --network book-api_default \
     docker.mycompany.com/quarkus-book-api-jvm:1.0.0
   ```
+
+- A simple test can be done by opening a new terminal and running
+  ```
+  curl localhost:9085/api/books
+  ```
+
+- To stop and remove application Docker container, press `Ctrl+C` in its terminals
 
 ### Docker in Native Mode
 
@@ -64,16 +78,14 @@
 
 - Run the following command to start the Docker container
   ```
-  docker run -d --rm --name quarkus-book-api-native \
+  docker run --rm --name quarkus-book-api-native \
     -p 9086:8080 -e MYSQL_HOST=mysql --network book-api_default \
     docker.mycompany.com/quarkus-book-api-native:1.0.0
   ```
 
-## Shutdown
-
-- Open a terminal
-
-- To stop and remove application container run
+- A simple test can be done by opening a new terminal and running
   ```
-  docker stop quarkus-book-api-jvm quarkus-book-api-native
+  curl localhost:9086/api/books
   ```
+
+- To stop and remove application Docker container, press `Ctrl+C` in its terminals

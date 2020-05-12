@@ -22,128 +22,165 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
 > **Note:** `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
 
-### `producer-api`
-
 ### Development Mode
 
-- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+- **Startup**
 
-- Run the command below
-  ```
-  ./gradlew producer-api:run
-  ```
+  - **producer-api**
+
+    - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+
+    - Run the command below
+      ```
+      ./gradlew producer-api:clean producer-api:run
+      ```
+
+  - **consumer-api**
+
+    - Open another terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+
+    - Run the command below
+      ```
+      export MICRONAUT_SERVER_PORT=8081 && ./gradlew consumer-api:clean consumer-api:run
+      ```
+
+- **Simple Test**
+
+  - In a new terminal, post a news
+    ```
+    curl -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
+      -d '{ "source":"Micronaut Blog", "title":"Dev Micronaut Framework" }'
+    ```
+
+  - See `producer-api` and `consumer-api` logs
+
+- **Shutdown**
+
+  Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
 
 ### Docker in JVM Mode
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+- **Startup**
 
-- Package the application `jar` file
-  ```
-  ./gradlew producer-api:clean producer-api:assemble 
-  ```
+  - **producer-api**
 
-- Run the script below to build the Docker image
-  ```
-  cd producer-api && ./docker-build.sh && cd ..
-  ```
+    - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name micronaut-producer-api-jvm \
-    -p 9102:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
-    docker.mycompany.com/micronaut-producer-api-jvm:1.0.0
-  ```
+    - Package the application `jar` file
+      ```
+      ./gradlew producer-api:clean producer-api:assemble 
+      ```
 
-### Docker in Native Mode
+    - Run the script below to build the Docker image
+      ```
+      cd producer-api && ./docker-build.sh && cd ..
+      ```
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name micronaut-producer-api-jvm \
+        -p 9102:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin \
+        --network producer-consumer_default \
+        docker.mycompany.com/micronaut-producer-api-jvm:1.0.0
+      ```
 
-- Package the application `jar` file
-  ```
-  ./gradlew producer-api:clean producer-api:assemble
-  ```
+  - **consumer-api**
 
-- Run the script below to build the Docker image
-  ```
-  cd producer-api && ./docker-build.sh native && cd ..
-  ```
+    - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name micronaut-producer-api-native \
-    -p 9103:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
-    docker.mycompany.com/micronaut-producer-api-native:1.0.0
-  ```
+    - Package the application `jar` file
+      ```
+      ./gradlew consumer-api:clean consumer-api:assemble 
+      ```
 
-### `consumer-api`
+    - Run the script below to build the Docker image
+      ```
+      cd consumer-api && ./docker-build.sh && cd ..
+      ```
 
-### Development Mode
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name micronaut-consumer-api-jvm \
+        -p 9107:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin \
+        --network producer-consumer_default \
+        docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0
+      ```
 
-- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+- **Simple Test**
 
-- Run the command below
-  ```
-  export MICRONAUT_SERVER_PORT=8081
-  ./gradlew consumer-api:run
-  ```
+  - In a new terminal, post a news
+    ```
+    curl -X POST localhost:9102/api/news -H 'Content-Type: application/json' \
+      -d '{ "source":"Micronaut Blog", "title":"Micronaut Framework" }'
+    ```
 
-### Docker in JVM Mode
+  - See `producer-api` and `consumer-api` Docker logs
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+- **Shutdown**
 
-- Package the application `jar` file
-  ```
-  ./gradlew consumer-api:clean consumer-api:assemble 
-  ```
-
-- Run the script below to build the Docker image
-  ```
-  cd consumer-api && ./docker-build.sh && cd ..
-  ```
-
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name micronaut-consumer-api-jvm \
-    -p 9107:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
-    docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0
-  ```
+  Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
 
 ### Docker in Native Mode
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+- **Startup**
 
-- Package the application `jar` file
-  ```
-  ./gradlew consumer-api:clean consumer-api:assemble 
-  ```
+  - **producer-api**
 
-- Run the script below to build the Docker image
-  ```
-  cd consumer-api && ./docker-build.sh native && cd ..
-  ```
+    - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name micronaut-consumer-api-native \
-    -p 9108:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin --network producer-consumer_default \
-    docker.mycompany.com/micronaut-consumer-api-native:1.0.0
-  ```
+    - Package the application `jar` file
+      ```
+      ./gradlew producer-api:clean producer-api:assemble
+      ```
 
-## Simple Test
+    - Run the script below to build the Docker image
+      ```
+      cd producer-api && ./docker-build.sh native && cd ..
+      ```
 
-- Posting a news
-  > [HTTPie](https://httpie.org/) is being used here 
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name micronaut-producer-api-native \
+        -p 9103:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin \
+        --network producer-consumer_default \
+        docker.mycompany.com/micronaut-producer-api-native:1.0.0
+      ```
+
+  - **consumer-api**
+
+    - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+
+    - Package the application `jar` file
+      ```
+      ./gradlew consumer-api:clean consumer-api:assemble 
+      ```
+
+    - Run the script below to build the Docker image
+      ```
+      cd consumer-api && ./docker-build.sh native && cd ..
+      ```
+
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name micronaut-consumer-api-native \
+        -p 9108:8080 -e KAFKA_HOST=kafka -e ZIPKIN_HOST=zipkin \
+        --network producer-consumer_default \
+        docker.mycompany.com/micronaut-consumer-api-native:1.0.0
+      ```
+
+- **Simple Test**
+
+  - In a new terminal, post a news
+    ```
+    curl -X POST localhost:9103/api/news -H 'Content-Type: application/json' \
+      -d '{ "source":"Micronaut Blog", "title":"Micronaut Framework & GraalVM" }'
+    ```
+
+  - See `producer-api` and `consumer-api` Docker logs
+
+- **Shutdown**
+
+  To stop and remove `producer-api` and `consumer-api` Docker containers, run in a terminal
   ```
-  http :9102/api/news source="Micronaut Blog" title="Micronaut Framework"
-  http :9103/api/news source="Micronaut Blog" title="Micronaut Framework & GraalVM"
-  ```
-- See `producer` and `consumer` Docker logs
-
-## Shutdown
-
-- Open a terminal
-
-- To stop and remove application container run
-  ```
-  docker stop micronaut-producer-api-jvm micronaut-producer-api-native micronaut-consumer-api-jvm micronaut-consumer-api-native
+  docker stop micronaut-producer-api-native micronaut-consumer-api-native
   ```

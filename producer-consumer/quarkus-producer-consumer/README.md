@@ -22,127 +22,185 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
 > **Note:** `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#start-environment)
 
-### `producer-api`
-
 ### Development Mode
 
-- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
+- **Startup**
 
-- Run the command below
-  ```
-  ./mvnw compile quarkus:dev --projects producer-api
-  ```
+  - **producer-api**
+
+    - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
+
+    - Run the command below to start the application
+      ```
+      ./mvnw clean compile quarkus:dev --projects producer-api
+      ```
+
+  - **consumer-api**
+
+    - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
+
+    - Run the command below
+      ```
+      ./mvnw clean compile quarkus:dev -Ddebug=5006 -Dquarkus.http.port=8081 --projects consumer-api
+      ```
+
+- **Simple Test**
+
+  - In a new terminal, post a news
+    ```
+    curl -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
+      -d '{ "source":"Quarkus Blog", "title":"Dev Quarkus Framework" }'
+    ```
+  - See `producer-api` and `consumer-api` logs
+
+- **Shutdown**
+
+  Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
 
 ### Docker in JVM Mode
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
+- **Startup**
 
-- Package the application `jar` file
-  ```
-  ./mvnw clean package --projects producer-api
-  ```
+  - **producer-api**
 
-- Run the script below to build the Docker image
-  ```
-  cd producer-api && ./docker-build.sh && cd ..
-  ```
+    - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name quarkus-producer-api-jvm -p 9100:8080 --network producer-consumer_default \
-    docker.mycompany.com/quarkus-producer-api-jvm:1.0.0
-  ```
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects producer-api
+      ```
 
-### Docker in Native Mode
+    - Run the script below to build the Docker image
+      ```
+      cd producer-api && ./docker-build.sh && cd ..
+      ```
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name quarkus-producer-api-jvm -p 9100:8080 \
+        --network producer-consumer_default \
+        docker.mycompany.com/quarkus-producer-api-jvm:1.0.0
+      ```
 
-- Package the application `jar` file
-  ```
-  ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects producer-api
-  ```
+  - **consumer-api**
 
-- Run the script below to build the Docker image
-  ```
-  cd producer-api && ./docker-build.sh native && cd .. 
-  ```
+    - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name quarkus-producer-api-native -p 9101:8080 --network producer-consumer_default \
-    docker.mycompany.com/quarkus-producer-api-native:1.0.0
-  ```
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects consumer-api
+      ```
 
-### `consumer-api`
+    - Run the script below to build the Docker image
+      ```
+      cd consumer-api && ./docker-build.sh && cd ..
+      ```
 
-### Development Mode
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name quarkus-consumer-api-jvm -p 9105:8080 \
+        --network producer-consumer_default \
+        docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0
+      ```
 
-- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
+- **Simple Test**
 
-- Run the command below
-  ```
-  ./mvnw compile quarkus:dev -Ddebug=5006 -Dquarkus.http.port=8081 --projects consumer-api
-  ```
+  - In a new terminal, post a news
+    ```
+    curl -X POST localhost:9100/api/news -H 'Content-Type: application/json' \
+      -d '{ "source":"Quarkus Blog", "title":"Quarkus Framework" }'
+    ```
+  - See `producer-api` and `consumer-api` logs
 
-### Docker in JVM Mode
+- **Shutdown**
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
+  Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
 
-- Package the application `jar` file
-  ```
-  ./mvnw clean package --projects consumer-api
-  ```
-
-- Run the script below to build the Docker image
-  ```
-  cd consumer-api && ./docker-build.sh && cd ..
-  ```
-
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name quarkus-consumer-api-jvm -p 9105:8080 --network producer-consumer_default \
-    docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0
-  ```
 
 ### Docker in Native Mode
 
-- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
+- **Startup**
 
-- Run the command below
-  ```
-  ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects consumer-api
-  ```
+  - **producer-api**
 
-- Run the script below to build the Docker image
-  ```
-  cd consumer-api && ./docker-build.sh native && cd ..
-  ```
+    - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-- Run the following command to start the Docker container
-  ```
-  docker run -d --rm --name quarkus-consumer-api-native -p 9106:8080 --network producer-consumer_default \
-    docker.mycompany.com/quarkus-consumer-api-native:1.0.0
-  ```
+    - Package the application `jar` file
+      > **Important:** Unable to package native image with `Java 8`. Using `Java 11` worked!
+      ```
+      ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects producer-api
+      ```
 
-## Simple Test
+    - Run the script below to build the Docker image
+      ```
+      cd producer-api && ./docker-build.sh native && cd ..
+      ```
 
-- Posting a news
-  > [HTTPie](https://httpie.org/) is being used here
-  ```
-  http :9100/api/news source="Quarkus Blog" title="Quarkus Framework"
-  http :9101/api/news source="Quarkus Blog" title="Quarkus Framework & GraalVM"
-  ```
-- See `producer` and `consumer` Docker logs
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name quarkus-producer-api-native -p 9101:8080 \
+        --network producer-consumer_default \
+        docker.mycompany.com/quarkus-producer-api-native:1.0.0
+      ```
 
-## Shutdown
+  - **consumer-api**
 
-- Open a terminal
+    - Open another terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-- To stop and remove application container run
-  ```
-  docker stop quarkus-producer-api-jvm quarkus-producer-api-native quarkus-consumer-api-jvm quarkus-consumer-api-native
-  ```
+    - Run the command below
+      > **Important:** Unable to package native image with `Java 8`. Using `Java 11` worked!
+      ```
+      ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects consumer-api
+      ```
+
+    - Run the script below to build the Docker image
+      ```
+      cd consumer-api && ./docker-build.sh native && cd ..
+      ```
+
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name quarkus-consumer-api-native -p 9106:8080 \
+        --network producer-consumer_default \
+        docker.mycompany.com/quarkus-consumer-api-native:1.0.0
+      ```
+
+- **Simple Test**
+
+  - In a new terminal, post a news
+    ```
+    curl -X POST localhost:9101/api/news -H 'Content-Type: application/json' \
+      -d '{ "source":"Quarkus Blog", "title":"Quarkus Framework & GraalVM" }'
+    ```
+  - See `producer-api` and `consumer-api` logs
+
+- **Shutdown**
+
+  Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
 
 ## Issues
+
+- Unable to package native image with `Java 8`
+  ```
+  [ERROR] Failed to execute goal io.quarkus:quarkus-maven-plugin:1.4.2.Final:build (default) on project   producer-api: Failed to build quarkus application: io.quarkus.builder.BuildException: Build failure: Build   failed due to errors
+  [ERROR] 	[error]: Build step io.quarkus.deployment.pkg.steps.NativeImageBuildStep#build threw an   exception: java.lang.RuntimeException: Failed to build native image
+  [ERROR] 	at io.quarkus.deployment.pkg.steps.NativeImageBuildStep.build(NativeImageBuildStep.java:353)
+  [ERROR] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+  [ERROR] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  [ERROR] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  [ERROR] 	at java.lang.reflect.Method.invoke(Method.java:498)
+  [ERROR] 	at io.quarkus.deployment.ExtensionLoader$2.execute(ExtensionLoader.java:931)
+  [ERROR] 	at io.quarkus.builder.BuildContext.run(BuildContext.java:277)
+  [ERROR] 	at org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.  java:35)
+  [ERROR] 	at org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:2046)
+  [ERROR] 	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1578)
+  [ERROR] 	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1452)
+  [ERROR] 	at java.lang.Thread.run(Thread.java:745)
+  [ERROR] 	at org.jboss.threads.JBossThread.run(JBossThread.java:479)
+  [ERROR] Caused by: java.lang.RuntimeException: Image generation failed. Exit code: 1
+  [ERROR] 	at io.quarkus.deployment.pkg.steps.NativeImageBuildStep.imageGenerationFailed  (NativeImageBuildStep.java:369)
+  [ERROR] 	at io.quarkus.deployment.pkg.steps.NativeImageBuildStep.build(NativeImageBuildStep.java:339)
+  [ERROR] 	... 12 more
+  ```
 
 - [Consumer reads 500 messages and stops a few seconds #290](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
