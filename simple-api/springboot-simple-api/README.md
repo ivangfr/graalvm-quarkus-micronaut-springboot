@@ -23,7 +23,7 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl "localhost:8080/api/greeting?name=Ivan"
+  curl -i "localhost:8080/api/greeting?name=Ivan"
   ```
 
 - To stop the application, press `Ctrl+C` in its terminals
@@ -50,7 +50,7 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl "localhost:9084/api/greeting?name=Ivan"
+  curl -i "localhost:9084/api/greeting?name=Ivan"
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminals

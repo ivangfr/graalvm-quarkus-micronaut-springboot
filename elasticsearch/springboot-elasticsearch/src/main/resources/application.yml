@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: springboot-elasticsearch
+  main:
+    banner-mode: "off"
+  data:
+    elasticsearch:
+      cluster-name: docker-es-cluster
+      cluster-nodes: ${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_PORT:9300}
+  elasticsearch:
+    rest:
+      uris: http://${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_REST_PORT:9200}
+
+elasticsearch:
+  indexes:
+    movies: springboot.movies
+
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      base-path: /
+      exposure:
+        include: info, health, beans, metrics, env
+  endpoint:
+    info:
+      enabled: true
+    health:
+      enabled: true
+      show-details: always
+    beans:
+      enabled: true
+    metrics:
+      enabled: true
+    env:
+      enabled: true
+

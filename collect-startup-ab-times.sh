@@ -25,6 +25,12 @@ declare -A micronaut_consumer_api_native
 declare -A springboot_producer_api_jvm
 declare -A springboot_consumer_api_jvm
 
+declare -A quarkus_elasticsearch_jvm
+declare -A quarkus_elasticsearch_native
+declare -A micronaut_elasticsearch_jvm
+declare -A micronaut_elasticsearch_native
+declare -A springboot_elasticsearch_jvm
+
 echo
 echo "==> START : $(date)"
 
@@ -495,6 +501,112 @@ echo "=============="
 
 docker-compose down -v
 
+echo
+echo "============="
+echo "ELASTICSEARCH"
+echo "============="
+
+cd ../elasticsearch
+
+echo
+echo "=============="
+echo "DOCKER-COMPOSE"
+echo "=============="
+
+docker-compose up -d
+wait_for_container_status_healthy "9200"
+
+./init-indexes.sh
+
+echo
+echo "-------------------------"
+echo "QUARKUS-ELASTICSEARCH-JVM"
+echo "-------------------------"
+
+docker run -d --rm --name quarkus-elasticsearch-jvm -p 9105:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+  docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0
+
+wait_for_container_log "quarkus-elasticsearch-jvm" "started in"
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+quarkus_elasticsearch_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+
+quarkus_elasticsearch_jvm[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-elasticsearch-jvm")
+
+run_command "ab -p test-movies.json -T 'application/json' -c 5 -n 2500 http://localhost:9105/api/movies"
+quarkus_elasticsearch_jvm[ab_testing_time]=$run_command_exec_time
+
+quarkus_elasticsearch_jvm[final_memory_consumption]=$(get_container_memory_consumption "quarkus-elasticsearch-jvm")
+
+docker stop quarkus-elasticsearch-jvm
+
+echo
+echo "----------------------------"
+echo "QUARKUS-ELASTICSEARCH-NATIVE"
+echo "----------------------------"
+
+quarkus_elasticsearch_native[startup_time]="-"
+quarkus_elasticsearch_native[initial_memory_consumption]="-"
+quarkus_elasticsearch_native[ab_testing_time]="-"
+quarkus_elasticsearch_native[final_memory_consumption]="-"
+
+echo
+echo "---------------------------"
+echo "MICRONAUT-ELASTICSEARCH-JVM"
+echo "---------------------------"
+
+docker run -d --rm --name micronaut-elasticsearch-jvm -p 9107:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+  docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0
+
+wait_for_container_log "micronaut-elasticsearch-jvm" "Startup completed in"
+micronaut_elasticsearch_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+
+micronaut_elasticsearch_jvm[initial_memory_consumption]=$(get_container_memory_consumption "micronaut-elasticsearch-jvm")
+
+run_command "ab -p test-movies.json -T 'application/json' -c 5 -n 2500 http://localhost:9107/api/movies"
+micronaut_elasticsearch_jvm[ab_testing_time]=$run_command_exec_time
+
+micronaut_elasticsearch_jvm[final_memory_consumption]=$(get_container_memory_consumption "micronaut-elasticsearch-jvm")
+
+docker stop micronaut-elasticsearch-jvm
+
+echo
+echo "------------------------------"
+echo "MICRONAUT-ELASTICSEARCH-NATIVE"
+echo "------------------------------"
+
+micronaut_elasticsearch_native[startup_time]="-"
+micronaut_elasticsearch_native[initial_memory_consumption]="-"
+micronaut_elasticsearch_native[ab_testing_time]="-"
+micronaut_elasticsearch_native[final_memory_consumption]="-"
+
+echo
+echo "------------------------"
+echo "SPRINGBOOT-ELASTICSEARCH"
+echo "------------------------"
+
+docker run -d --rm --name springboot-elasticsearch-jvm -p 9109:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+  docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0
+
+wait_for_container_log "springboot-elasticsearch-jvm" "Started"
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+springboot_elasticsearch_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+
+springboot_elasticsearch_jvm[initial_memory_consumption]=$(get_container_memory_consumption "springboot-elasticsearch-jvm")
+
+run_command "ab -p test-movies.json -T 'application/json' -c 5 -n 2500 http://localhost:9109/api/movies"
+springboot_elasticsearch_jvm[ab_testing_time]=$run_command_exec_time
+
+springboot_elasticsearch_jvm[final_memory_consumption]=$(get_container_memory_consumption "springboot-elasticsearch-jvm")
+
+docker stop springboot-elasticsearch-jvm
+
+echo
+echo "=============="
+echo "DOCKER-COMPOSE"
+echo "=============="
+
+docker-compose down -v
+
 printf "\n"
 printf "%30s | %12s | %26s | %15s | %24s |\n" "Application" "Startup Time" "Initial Memory Consumption" "Ab Testing Time" "Final Memory Consumption"
 printf "%30s + %12s + %26s + %15s + %24s |\n" "------------------------------" "------------" "--------------------------" "---------------" "------------------------"
@@ -521,6 +633,12 @@ printf "%30s | %12s | %26s | %15s | %24s |\n" "micronaut-consumer-api-jvm" ${mic
 printf "%30s | %12s | %26s | %15s | %24s |\n" "springboot-consumer-api-jvm" ${springboot_consumer_api_jvm[startup_time]} ${springboot_consumer_api_jvm[initial_memory_consumption]} ${springboot_consumer_api_jvm[ab_testing_time]} ${springboot_consumer_api_jvm[final_memory_consumption]}
 printf "%30s | %12s | %26s | %15s | %24s |\n" "quarkus-consumer-api-native" ${quarkus_consumer_api_native[startup_time]} ${quarkus_consumer_api_native[initial_memory_consumption]} ${quarkus_consumer_api_native[ab_testing_time]} ${quarkus_consumer_api_native[final_memory_consumption]}
 printf "%30s | %12s | %26s | %15s | %24s |\n" "micronaut-consumer-api-native" ${micronaut_consumer_api_native[startup_time]} ${micronaut_consumer_api_native[initial_memory_consumption]} ${micronaut_consumer_api_native[ab_testing_time]} ${micronaut_consumer_api_native[final_memory_consumption]}
+printf "%30s + %12s + %26s + %15s + %24s |\n" ".............................." "..........." ".........................." "..............." "........................"
+printf "%30s | %12s | %26s | %15s | %24s |\n" "quarkus-elasticsearch-jvm" ${quarkus_elasticsearch_jvm[startup_time]} ${quarkus_elasticsearch_jvm[initial_memory_consumption]} ${quarkus_elasticsearch_jvm[ab_testing_time]} ${quarkus_elasticsearch_jvm[final_memory_consumption]}
+printf "%30s | %12s | %26s | %15s | %24s |\n" "micronaut-elasticsearch-jvm" ${micronaut_elasticsearch_jvm[startup_time]} ${micronaut_elasticsearch_jvm[initial_memory_consumption]} ${micronaut_elasticsearch_jvm[ab_testing_time]} ${micronaut_elasticsearch_jvm[final_memory_consumption]}
+printf "%30s | %12s | %26s | %15s | %24s |\n" "springboot-elasticsearch-jvm" ${springboot_elasticsearch_jvm[startup_time]} ${springboot_elasticsearch_jvm[initial_memory_consumption]} ${springboot_elasticsearch_jvm[ab_testing_time]} ${springboot_elasticsearch_jvm[final_memory_consumption]}
+printf "%30s | %12s | %26s | %15s | %24s |\n" "quarkus-elasticsearch-native" ${quarkus_elasticsearch_native[startup_time]} ${quarkus_elasticsearch_native[initial_memory_consumption]} ${quarkus_elasticsearch_native[ab_testing_time]} ${quarkus_elasticsearch_native[final_memory_consumption]}
+printf "%30s | %12s | %26s | %15s | %24s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[startup_time]} ${micronaut_elasticsearch_native[initial_memory_consumption]} ${micronaut_elasticsearch_native[ab_testing_time]} ${micronaut_elasticsearch_native[final_memory_consumption]}
 
 echo
 echo "==> FINISH : $(date)"

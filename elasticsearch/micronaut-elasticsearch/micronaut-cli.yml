@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.mycompany
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [app-name, docker, elasticsearch, graalvm, gradle, http-client, java, java-application, junit, logback, management, micrometer, micrometer-prometheus, netty-server, readme, shade, yaml]

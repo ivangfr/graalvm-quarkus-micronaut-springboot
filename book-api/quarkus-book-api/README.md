@@ -29,7 +29,8 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl localhost:8080/api/books
+  curl -i -X POST localhost:8080/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn Java"}'
+  curl -i localhost:8080/api/books
   ```
 
 - To stop the application, press `Ctrl+C` in its terminals
@@ -57,7 +58,8 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl localhost:9085/api/books
+  curl -i -X POST localhost:9085/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn Docker"}'
+  curl -i localhost:9085/api/books
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminals
@@ -85,7 +87,8 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl localhost:9086/api/books
+  curl -i -X POST localhost:9086/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn GraalVM"}'
+  curl -i localhost:9086/api/books
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminals

@@ -23,14 +23,14 @@
 - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
 
 - Run the command below to start the application
-  > **Important:** Unable to run with `Java 8`. Using `Java 11` worked!
   ```
   ./gradlew clean run
   ```
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl localhost:8080/api/books
+  curl -i -X POST localhost:8080/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn Java"}'
+  curl -i localhost:8080/api/books
   ```
 
 - To stop the application, press `Ctrl+C` in its terminals
@@ -58,7 +58,8 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl localhost:9087/api/books
+  curl -i -X POST localhost:9087/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn Docker"}'
+  curl -i localhost:9087/api/books
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminals
@@ -73,12 +74,12 @@
   ```
 
 - Run the script below to build the Docker image
-  > **Important:** Unable to build the Docker Native Image! I've tried with `Java 8` and `Java 11`. Exception log in [Issues](#issues)
   ```
   ./docker-build.sh native
   ```
 
 - Run the following command to start the Docker container
+  > **Important:** Unable to run the Docker Native Image. For more details see [issues](#issues)
   ```
   docker run --rm --name micronaut-book-api-native \
     -p 9088:8080 -e MYSQL_HOST=mysql --network book-api_default \
@@ -87,55 +88,56 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl localhost:9088/api/books
+  curl -i -X POST localhost:9088/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn GraalVM"}'
+  curl -i localhost:9088/api/books
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminals
 
 ## Issues
 
-- Unable to build the Docker Native Image
+- Unable to run the Docker Native Image. It seems that there's a [`MySQL` compatibility issue with `GraalVM`](https://bugs.mysql.com/bug.php?id=91968)
   ```
-  Fatal error: java.lang.SecurityException: java.lang.SecurityException: Prohibited package name: java.lang
-    at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-    at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
-    at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-    at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
-    at java.base/java.util.concurrent.ForkJoinTask.getThrowableException(ForkJoinTask.java:600)
-    at java.base/java.util.concurrent.ForkJoinTask.get(ForkJoinTask.java:1006)
-    at com.oracle.svm.hosted.NativeImageGenerator.run(NativeImageGenerator.java:462)
-    at com.oracle.svm.hosted.NativeImageGeneratorRunner.buildImage(NativeImageGeneratorRunner.java:357)
-    at com.oracle.svm.hosted.NativeImageGeneratorRunner.build(NativeImageGeneratorRunner.java:501)
-    at com.oracle.svm.hosted.NativeImageGeneratorRunner.main(NativeImageGeneratorRunner.java:115)
-    at com.oracle.svm.hosted.NativeImageGeneratorRunner$JDK9Plus.main(NativeImageGeneratorRunner.java:528)
-  Caused by: java.lang.SecurityException: Prohibited package name: java.lang
-    at java.base/java.lang.ClassLoader.preDefineClass(ClassLoader.java:898)
-    at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1014)
-    at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:174)
-    at java.base/java.net.URLClassLoader.defineClass(URLClassLoader.java:550)
-    at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:458)
-    at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:452)
-    at java.base/java.security.AccessController.doPrivileged(Native Method)
-    at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:451)
-    at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:588)
-    at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
-    at java.base/java.lang.Class.forName0(Native Method)
-    at java.base/java.lang.Class.forName(Class.java:398)
-    at com.oracle.svm.hosted.ImageClassLoader.forName(ImageClassLoader.java:459)
-    at com.oracle.svm.hosted.ImageClassLoader.findClassByName(ImageClassLoader.java:449)
-    at com.oracle.svm.hosted.FeatureImpl$FeatureAccessImpl.findClassByName(FeatureImpl.java:108)
-    at com.oracle.svm.hosted.ServiceLoaderFeature.handleType(ServiceLoaderFeature.java:201)
-    at com.oracle.svm.hosted.ServiceLoaderFeature.duringAnalysis(ServiceLoaderFeature.java:112)
-    at com.oracle.svm.hosted.NativeImageGenerator.lambda$runPointsToAnalysis$8(NativeImageGenerator.java:715)
-    at com.oracle.svm.hosted.FeatureHandler.forEachFeature(FeatureHandler.java:63)
-    at com.oracle.svm.hosted.NativeImageGenerator.runPointsToAnalysis(NativeImageGenerator.java:715)
-    at com.oracle.svm.hosted.NativeImageGenerator.doRun(NativeImageGenerator.java:530)
-    at com.oracle.svm.hosted.NativeImageGenerator.lambda$run$0(NativeImageGenerator.java:445)
-    at java.base/java.util.concurrent.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1407)
-    at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
-    at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
-    at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
-    at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
-    at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
-  Error: Image build request failed with exit status 1
+  Error starting Micronaut server: Bean definition [javax.sql.DataSource] could not be loaded: Error   instantiating bean of type [javax.sql.DataSource]: Failed to initialize pool: com.mysql.cj.exceptions.  CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
+  io.micronaut.context.exceptions.BeanInstantiationException: Bean definition [javax.sql.DataSource]   could not be loaded: Error instantiating bean of type [javax.sql.DataSource]: Failed to initialize   pool: com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.  WrongArgumentException
+  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1466)
+  	at io.micronaut.context.DefaultApplicationContext.initializeContext(DefaultApplicationContext.  java:220)
+  	at io.micronaut.context.DefaultBeanContext.readAllBeanDefinitionClasses(DefaultBeanContext.java:2682)
+  	at io.micronaut.context.DefaultBeanContext.start(DefaultBeanContext.java:216)
+  	at io.micronaut.context.DefaultApplicationContext.start(DefaultApplicationContext.java:166)
+  	at io.micronaut.runtime.Micronaut.start(Micronaut.java:64)
+  	at io.micronaut.runtime.Micronaut.run(Micronaut.java:294)
+  	at io.micronaut.runtime.Micronaut.run(Micronaut.java:280)
+  	at com.mycompany.micronautbookapi.Application.main(Application.java:12)
+  Caused by: io.micronaut.context.exceptions.BeanInstantiationException: Error instantiating bean of type   [javax.sql.DataSource]: Failed to initialize pool: com.mysql.cj.exceptions.CJException cannot be cast   to com.mysql.cj.exceptions.WrongArgumentException
+  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1842)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.  java:2549)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2535)
+  	at io.micronaut.context.DefaultBeanContext.loadContextScopeBean(DefaultBeanContext.java:2089)
+  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1464)
+  	... 8 common frames omitted
+  Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool:   com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
+  	at com.zaxxer.hikari.pool.HikariPool.throwPoolInitializationException(HikariPool.java:589)
+  	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:575)
+  	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+  	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+  	at io.micronaut.configuration.jdbc.hikari.HikariUrlDataSource.<init>(HikariUrlDataSource.java:35)
+  	at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.dataSource(DatasourceFactory.java:66)
+  	at io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$DataSource0Definition.build(Unknown   Source)
+  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:137)
+  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1814)
+  	... 12 common frames omitted
+  Caused by: java.lang.ClassCastException: com.mysql.cj.exceptions.CJException cannot be cast to com.  mysql.cj.exceptions.WrongArgumentException
+  	at com.mysql.cj.util.Util.getInstance(Util.java:169)
+  	at com.mysql.cj.util.Util.getInstance(Util.java:174)
+  	at com.mysql.cj.conf.ConnectionUrl$Type.getImplementingInstance(ConnectionUrl.java:241)
+  	at com.mysql.cj.conf.ConnectionUrl$Type.getConnectionUrlInstance(ConnectionUrl.java:211)
+  	at com.mysql.cj.conf.ConnectionUrl.getConnectionUrlInstance(ConnectionUrl.java:280)
+  	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:194)
+  	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+  	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:354)
+  	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
+  	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:473)
+  	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:554)
+  	... 19 common frames omitted
   ```

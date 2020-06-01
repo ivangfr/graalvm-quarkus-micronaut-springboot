@@ -1,0 +1,12 @@
+{
+  "mappings": {
+    "properties": {
+      "imdb": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text"
+      }
+    }
+  }
+}

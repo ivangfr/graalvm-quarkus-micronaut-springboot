@@ -48,7 +48,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
   - In a new terminal, post a news
     ```
-    curl -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
+    curl -i -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
       -d '{ "source":"Quarkus Blog", "title":"Dev Quarkus Framework" }'
     ```
   - See `producer-api` and `consumer-api` logs
@@ -107,7 +107,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
   - In a new terminal, post a news
     ```
-    curl -X POST localhost:9100/api/news -H 'Content-Type: application/json' \
+    curl -i -X POST localhost:9100/api/news -H 'Content-Type: application/json' \
       -d '{ "source":"Quarkus Blog", "title":"Quarkus Framework" }'
     ```
   - See `producer-api` and `consumer-api` logs
@@ -169,7 +169,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
   - In a new terminal, post a news
     ```
-    curl -X POST localhost:9101/api/news -H 'Content-Type: application/json' \
+    curl -i -X POST localhost:9101/api/news -H 'Content-Type: application/json' \
       -d '{ "source":"Quarkus Blog", "title":"Quarkus Framework & GraalVM" }'
     ```
   - See `producer-api` and `consumer-api` logs

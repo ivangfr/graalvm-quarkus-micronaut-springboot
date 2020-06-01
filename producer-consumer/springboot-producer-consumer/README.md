@@ -48,7 +48,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
   - In a new terminal, post a news
     ```
-    curl -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
+    curl -i -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
       -d '{ "source":"Spring Boot Blog", "title":"Dev Spring Boot Framework" }'
     ```
 
@@ -108,7 +108,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
   - In a new terminal, post a news
     ```
-    curl -X POST localhost:9104/api/news -H 'Content-Type: application/json' \
+    curl -i -X POST localhost:9104/api/news -H 'Content-Type: application/json' \
       -d '{ "source":"Spring Boot Blog", "title":"Dev Spring Boot Framework" }'
     ```
 

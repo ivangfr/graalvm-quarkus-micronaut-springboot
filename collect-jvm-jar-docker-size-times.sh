@@ -14,7 +14,10 @@ docker rmi \
   docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0 \
   docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0 \
   docker.mycompany.com/springboot-producer-api-jvm:1.0.0 \
-  docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
+  docker.mycompany.com/springboot-consumer-api-jvm:1.0.0 \
+  docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0 \
+  docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0 \
+  docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0
 
 declare -A quarkus_simple_api_jvm
 declare -A micronaut_simple_api_jvm
@@ -30,6 +33,10 @@ declare -A micronaut_producer_api_jvm
 declare -A micronaut_consumer_api_jvm
 declare -A springboot_producer_api_jvm
 declare -A springboot_consumer_api_jvm
+
+declare -A quarkus_elasticsearch_jvm
+declare -A micronaut_elasticsearch_jvm
+declare -A springboot_elasticsearch_jvm
 
 echo
 echo "==> START : $(date)"
@@ -259,6 +266,65 @@ springboot_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
 springboot_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
 springboot_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+echo
+echo "============="
+echo "ELASTICSEARCH"
+echo "============="
+
+echo
+echo "-------------------------"
+echo "QUARKUS-ELASTICSEARCH-JVM"
+echo "-------------------------"
+
+cd ../../elasticsearch/quarkus-elasticsearch
+
+package_jar_build_image \
+  "./mvnw clean" \
+  "./mvnw package" \
+  "target/quarkus-elasticsearch-1.0.0-runner.jar" \
+  "./docker-build.sh" \
+  "docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0"
+quarkus_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
+quarkus_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
+quarkus_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
+quarkus_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+
+echo
+echo "---------------------------"
+echo "MICRONAUT-ELASTICSEARCH-JVM"
+echo "---------------------------"
+
+cd ../micronaut-elasticsearch
+
+package_jar_build_image \
+  "./gradlew clean" \
+  "./gradlew assemble" \
+  "build/libs/micronaut-elasticsearch-1.0.0-all.jar" \
+  "./docker-build.sh" \
+  "docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0"
+micronaut_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
+micronaut_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
+micronaut_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
+micronaut_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+
+echo
+echo "------------------------"
+echo "SPRINGBOOT-ELASTICSEARCH"
+echo "------------------------"
+
+cd ../springboot-elasticsearch
+
+package_jar_build_image \
+  "./mvnw clean" \
+  "./mvnw package" \
+  "target/springboot-elasticsearch-1.0.0.jar" \
+  "./docker-build.sh" \
+  "docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0"
+springboot_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
+springboot_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
+springboot_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
+springboot_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+
 printf "\n"
 printf "%30s | %14s | %16s | %17s | %17s |\n" "Application" "Packaging Time" "Jar Size (bytes)" "Docker Build Time" "Docker Image Size"
 printf "%30s + %14s + %16s + %17s + %17s |\n" "------------------------------" "--------------" "----------------" "-----------------" "-----------------"
@@ -277,6 +343,10 @@ printf "%30s + %14s + %16s + %17s + %17s |\n" ".............................." "
 printf "%30s | %14s | %16s | %17s | %17s |\n" "quarkus-consumer-api-jvm" ${quarkus_consumer_api_jvm[packaging_time]} ${quarkus_consumer_api_jvm[jar_size]} ${quarkus_consumer_api_jvm[building_time]} ${quarkus_consumer_api_jvm[docker_image_size]}
 printf "%30s | %14s | %16s | %17s | %17s |\n" "micronaut-consumer-api-jvm" ${micronaut_consumer_api_jvm[packaging_time]} ${micronaut_consumer_api_jvm[jar_size]} ${micronaut_consumer_api_jvm[building_time]} ${micronaut_consumer_api_jvm[docker_image_size]}
 printf "%30s | %14s | %16s | %17s | %17s |\n" "springboot-consumer-api-jvm" ${springboot_consumer_api_jvm[packaging_time]} ${springboot_consumer_api_jvm[jar_size]} ${springboot_consumer_api_jvm[building_time]} ${springboot_consumer_api_jvm[docker_image_size]}
+printf "%30s + %14s + %16s + %17s + %17s |\n" ".............................." ".............." "................" "................." "................."
+printf "%30s | %14s | %16s | %17s | %17s |\n" "quarkus-elasticsearch-jvm" ${quarkus_elasticsearch_jvm[packaging_time]} ${quarkus_elasticsearch_jvm[jar_size]} ${quarkus_elasticsearch_jvm[building_time]} ${quarkus_elasticsearch_jvm[docker_image_size]}
+printf "%30s | %14s | %16s | %17s | %17s |\n" "micronaut-elasticsearch-jvm" ${micronaut_elasticsearch_jvm[packaging_time]} ${micronaut_elasticsearch_jvm[jar_size]} ${micronaut_elasticsearch_jvm[building_time]} ${micronaut_elasticsearch_jvm[docker_image_size]}
+printf "%30s | %14s | %16s | %17s | %17s |\n" "springboot-elasticsearch-jvm" ${springboot_elasticsearch_jvm[packaging_time]} ${springboot_elasticsearch_jvm[jar_size]} ${springboot_elasticsearch_jvm[building_time]} ${springboot_elasticsearch_jvm[docker_image_size]}
 
 echo
 echo "==> FINISH : $(date)"

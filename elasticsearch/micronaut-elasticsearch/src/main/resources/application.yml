@@ -1,0 +1,23 @@
+micronaut:
+  application:
+    name: micronautElasticsearch
+
+endpoints:
+  info:
+    enabled: true
+    sensitive: false
+  beans:
+    enabled: true
+    sensitive: false
+  env:
+    enabled: true
+    sensitive: false
+  health:
+    details-visible: ANONYMOUS
+    disk-space:
+      enabled: true
+
+elasticsearch:
+  httpHosts: http://${ELASTICSEARCH_HOST:localhost}:${ELASTICSEARCH_REST_PORT:9200}
+  indexes:
+    movies: micronaut.movies

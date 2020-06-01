@@ -48,7 +48,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   - In a new terminal, post a news
     ```
-    curl -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
+    curl -i -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
       -d '{ "source":"Micronaut Blog", "title":"Dev Micronaut Framework" }'
     ```
 
@@ -110,7 +110,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   - In a new terminal, post a news
     ```
-    curl -X POST localhost:9102/api/news -H 'Content-Type: application/json' \
+    curl -i -X POST localhost:9102/api/news -H 'Content-Type: application/json' \
       -d '{ "source":"Micronaut Blog", "title":"Micronaut Framework" }'
     ```
 
@@ -172,7 +172,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   - In a new terminal, post a news
     ```
-    curl -X POST localhost:9103/api/news -H 'Content-Type: application/json' \
+    curl -i -X POST localhost:9103/api/news -H 'Content-Type: application/json' \
       -d '{ "source":"Micronaut Blog", "title":"Micronaut Framework & GraalVM" }'
     ```
 
