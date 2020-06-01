@@ -85,6 +85,7 @@
   ```
 
 - A simple test can be done by opening a new terminal and running
+  > **Important:** an exception is thrown when the application a request. For more details see [issues](#issues)
   ```
   curl -i -X POST "localhost:9106/api/movies" -H "Content-type: application/json" -d '{"imdb": "789", "title": "Resident Evil"}'
   curl -i "localhost:9106/api/movies?title=evil"
@@ -94,12 +95,18 @@
 
 ## Issues
 
-- When application receives a request, the following response is returned. It seems and problem while njecting RestHighLevelClient in MovieServiceImpl class.
-```
-curl -i "localhost:9106/api/movies?title=evil"
-HTTP/1.1 500 Internal Server Error
-Content-Length: 217
-Content-Type: application/json
-
-{"error":"Internal Server Error","message":"Error injecting org.elasticsearch.client.RestHighLevelClient com.mycompany.service.MovieServiceImpl.client","path":"","status":500,"timestamp":"2020-05-31T19:15:14.907585Z"}
-```
+- When application receives a request, the following response is returned. It seems and problem injecting `RestHighLevelClient`
+  ```
+  curl -i "localhost:9106/api/movies?title=evil"
+  HTTP/1.1 500 Internal Server Error
+  Content-Length: 217
+  Content-Type: application/json
+  
+  {
+    "error": "Internal Server Error",
+    "message": "Error injecting org.elasticsearch.client.  RestHighLevelClient com.mycompany.service.  MovieServiceImpl.client",
+    "path": "",
+    "status": 500,
+    "timestamp": "..."
+  }
+  ```
