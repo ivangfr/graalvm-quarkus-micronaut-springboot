@@ -95,7 +95,7 @@
 
 ## Issues
 
-- When application receives a request, the following exception is thrown. It seems and problem initializing `RestClient` bean
+- When application receives a request, the following exception is thrown. It seems and problem initializing `RestClient` bean. I've opened to `micronaut-elasticsearch` this issue: [Could not initialize class org.elasticsearch.client.RestClient](https://github.com/micronaut-projects/micronaut-elasticsearch/issues/34)
   ```
   [nioEventLoopGroup-1-3] ERROR i.m.h.s.netty.RoutingInBoundHandler - Unexpected error occurred: Error   instantiating bean of type  [com.mycompany.service.MovieServiceImpl]
   

@@ -31,8 +31,7 @@ declare -A micronaut_elasticsearch_jvm
 declare -A micronaut_elasticsearch_native
 declare -A springboot_elasticsearch_jvm
 
-echo
-echo "==> START : $(date)"
+start_time=$(date)
 
 echo
 echo "=========="
@@ -47,7 +46,7 @@ echo "----------------------"
 docker run -d --rm --name quarkus-simple-api-jvm -p 9080:8080 docker.mycompany.com/quarkus-simple-api-jvm:1.0.0
 
 wait_for_container_log "quarkus-simple-api-jvm" "started in"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
 quarkus_simple_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
 quarkus_simple_api_jvm[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-simple-api-jvm")
@@ -67,7 +66,7 @@ echo "-------------------------"
 docker run -d --rm --name quarkus-simple-api-native -p 9081:8080 docker.mycompany.com/quarkus-simple-api-native:1.0.0
 
 wait_for_container_log "quarkus-simple-api-native" "started in"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
 quarkus_simple_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
 quarkus_simple_api_native[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-simple-api-native")
@@ -163,7 +162,7 @@ docker run -d --rm --name quarkus-book-api-jvm -p 9085:8080 -e MYSQL_HOST=mysql 
   docker.mycompany.com/quarkus-book-api-jvm:1.0.0
 
 wait_for_container_log "quarkus-book-api-jvm" "started in"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
 quarkus_book_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
 quarkus_book_api_jvm[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-book-api-jvm")
@@ -184,7 +183,7 @@ docker run -d --rm --name quarkus-book-api-native -p 9086:8080 -e MYSQL_HOST=mys
   docker.mycompany.com/quarkus-book-api-native:1.0.0
 
 wait_for_container_log "quarkus-book-api-native" "started in"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
 quarkus_book_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
 quarkus_book_api_native[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-book-api-native")
@@ -235,7 +234,6 @@ echo "-------------------------"
 #micronaut_book_api_native[final_memory_consumption]=$(get_container_memory_consumption "micronaut-book-api-native")
 #
 #docker stop micronaut-book-api-native
-
 micronaut_book_api_native[startup_time]="-"
 micronaut_book_api_native[initial_memory_consumption]="-"
 micronaut_book_api_native[ab_testing_time]="-"
@@ -293,7 +291,7 @@ docker run -d --rm --name quarkus-producer-api-jvm -p 9100:8080 --network produc
   docker.mycompany.com/quarkus-producer-api-jvm:1.0.0
 
 wait_for_container_log "quarkus-producer-api-jvm" "started in"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
 quarkus_producer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
 quarkus_producer_api_jvm[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-producer-api-jvm")
@@ -312,7 +310,7 @@ docker run -d --rm --name quarkus-consumer-api-jvm -p 9105:8080 --network produc
   docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0
 
 wait_for_container_log "quarkus-consumer-api-jvm" "started in"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
 quarkus_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
 quarkus_consumer_api_jvm[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-consumer-api-jvm")
@@ -335,7 +333,7 @@ docker run -d --rm --name quarkus-producer-api-native -p 9101:8080 --network pro
   docker.mycompany.com/quarkus-producer-api-native:1.0.0
 
 wait_for_container_log "quarkus-producer-api-native" "started in"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
 quarkus_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
 quarkus_producer_api_native[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-producer-api-native")
@@ -354,7 +352,7 @@ docker run -d --rm --name quarkus-consumer-api-native -p 9106:8080 --network pro
   docker.mycompany.com/quarkus-consumer-api-native:1.0.0
 
 wait_for_container_log "quarkus-consumer-api-native" "started in"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
 quarkus_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
 quarkus_consumer_api_native[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-consumer-api-native")
@@ -519,6 +517,7 @@ wait_for_container_status_healthy "9200"
 ./init-indexes.sh
 
 echo
+echo
 echo "-------------------------"
 echo "QUARKUS-ELASTICSEARCH-JVM"
 echo "-------------------------"
@@ -527,7 +526,7 @@ docker run -d --rm --name quarkus-elasticsearch-jvm -p 9105:8080 -e ELASTICSEARC
   docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0
 
 wait_for_container_log "quarkus-elasticsearch-jvm" "started in"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$14,0,length(\$14)-2)}")
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
 quarkus_elasticsearch_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
 quarkus_elasticsearch_jvm[initial_memory_consumption]=$(get_container_memory_consumption "quarkus-elasticsearch-jvm")
@@ -641,5 +640,6 @@ printf "%30s | %12s | %26s | %15s | %24s |\n" "quarkus-elasticsearch-native" ${q
 printf "%30s | %12s | %26s | %15s | %24s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[startup_time]} ${micronaut_elasticsearch_native[initial_memory_consumption]} ${micronaut_elasticsearch_native[ab_testing_time]} ${micronaut_elasticsearch_native[final_memory_consumption]}
 
 echo
-echo "==> FINISH : $(date)"
+echo "==>  START AT: ${start_time}"
+echo "==> FINISH AT: $(date)"
 echo

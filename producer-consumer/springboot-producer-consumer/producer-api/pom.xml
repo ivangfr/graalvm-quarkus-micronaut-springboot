@@ -15,7 +15,9 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
+        <jib.maven-plugin.version>2.3.0</jib.maven-plugin.version>
+        <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -69,6 +71,17 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib.maven-plugin.version}</version>
+                <configuration>
+                    <!-- This value is overwritten in docker-build.sh -->
+                    <to>
+                        <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
+                    </to>
+                </configuration>
             </plugin>
         </plugins>
     </build>

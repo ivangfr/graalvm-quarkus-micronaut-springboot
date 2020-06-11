@@ -184,3 +184,49 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
   ```
   docker stop micronaut-producer-api-native micronaut-consumer-api-native
   ```
+
+## Issues
+
+- Unable to update `micronaut-producer-api-native` to `Java 11`. The image compiles successfully. However, when the application receives the first request, the error below appears. The same doesn't occur when application is configured with Java version `1.8` in `build.gradle` and uses `oracle/graalvm-ce:20.0.0-java8` for natine image.
+
+  ```
+  ...
+  16:59:23.631 [kafka-producer-network-thread | producer-1] WARN  o.a.k.c.producer.internals.Sender - [Producer clientId=producer-1] Got error produce response with correlation id 3 on topic-partition micronaut.news.json-0, retrying (2147483646 attempts left). Error: CORRUPT_MESSAGE
+  16:59:23.736 [kafka-producer-network-thread | producer-1] WARN  o.a.k.c.producer.internals.Sender - [Producer clientId=producer-1] Got error produce response with correlation id 4 on topic-partition micronaut.news.json-0, retrying (2147483645 attempts left). Error: CORRUPT_MESSAGE
+  16:59:23.842 [kafka-producer-network-thread | producer-1] WARN  o.a.k.c.producer.internals.Sender - [Producer clientId=producer-1] Got error produce response with correlation id 5 on topic-partition micronaut.news.json-0, retrying (2147483644 attempts left). Error: CORRUPT_MESSAGE
+  ...
+  ```
+
+- Unable to update `micronaut-consumer-api-native` to `Java 11`. The image compiles successfully. However, when the application listens the first message, the error below appears. The same doesn't occur when application is configured with Java version `1.8` in `build.gradle` and uses `oracle/graalvm-ce:20.0.0-java8` for natine image.
+  ```
+  ...
+  18:34:43.409 [pool-3-thread-1] ERROR i.m.c.k.e.KafkaListenerExceptionHandler - Kafka consumer [com.mycompany.consumerapi.kafka.  NewsListener@7f6b41801280] produced error: Received exception when fetching the next record from micronaut.news.json-0. If needed, please   seek past the record to continue consumption.
+  org.apache.kafka.common.KafkaException: Received exception when fetching the next record from micronaut.news.json-0. If needed, please seek   past the record to continue consumption.
+  	at org.apache.kafka.clients.consumer.internals.Fetcher$CompletedFetch.fetchRecords(Fetcher.java:1519)
+  	at org.apache.kafka.clients.consumer.internals.Fetcher$CompletedFetch.access$1700(Fetcher.java:1374)
+  	at org.apache.kafka.clients.consumer.internals.Fetcher.fetchRecords(Fetcher.java:676)
+  	at org.apache.kafka.clients.consumer.internals.Fetcher.fetchedRecords(Fetcher.java:631)
+  	at org.apache.kafka.clients.consumer.KafkaConsumer.pollForFetches(KafkaConsumer.java:1282)
+  	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1240)
+  	at org.apache.kafka.clients.consumer.KafkaConsumer.poll(KafkaConsumer.java:1211)
+  	at io.micronaut.configuration.kafka.processor.KafkaConsumerProcessor.lambda$process$7(KafkaConsumerProcessor.java:393)
+  	at io.micrometer.core.instrument.composite.CompositeTimer.record(CompositeTimer.java:79)
+  	at io.micrometer.core.instrument.Timer.lambda$wrap$0(Timer.java:144)
+  	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+  	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+  	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+  	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+  	at java.lang.Thread.run(Thread.java:834)
+  	at com.oracle.svm.core.thread.JavaThreads.threadStartRoutine(JavaThreads.java:527)
+  	at com.oracle.svm.core.posix.thread.PosixJavaThreads.pthreadStartRoutine(PosixJavaThreads.java:193)
+  Caused by: org.apache.kafka.common.KafkaException: Record batch for partition micronaut.news.json-0 at offset 0 is invalid, cause: Record is   corrupt (stored crc = 3058354739, computed crc = 1282275124)
+  	at org.apache.kafka.clients.consumer.internals.Fetcher$CompletedFetch.maybeEnsureValid(Fetcher.java:1432)
+  	at org.apache.kafka.clients.consumer.internals.Fetcher$CompletedFetch.nextFetchedRecord(Fetcher.java:1476)
+  	at org.apache.kafka.clients.consumer.internals.Fetcher$CompletedFetch.fetchRecords(Fetcher.java:1533)
+  	at org.apache.kafka.clients.consumer.internals.Fetcher$CompletedFetch.access$1700(Fetcher.java:1374)
+  	at org.apache.kafka.clients.consumer.internals.Fetcher.fetchRecords(Fetcher.java:676)
+  	at org.apache.kafka.clients.consumer.internals.Fetcher.fetchedRecords(Fetcher.java:631)
+  	at org.apache.kafka.clients.consumer.KafkaConsumer.pollForFetches(KafkaConsumer.java:1313)
+  	... 12 common frames omitted
+    ...
+  ```

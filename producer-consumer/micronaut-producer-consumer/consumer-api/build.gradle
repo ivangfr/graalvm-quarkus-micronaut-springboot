@@ -1,6 +1,7 @@
 plugins {
     id "net.ltgt.apt-eclipse" version "0.21"
     id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "com.google.cloud.tools.jib" version "2.3.0"
     id "application"
 }
 
@@ -85,3 +86,6 @@ tasks.withType(JavaExec) {
     classpath += configurations.developmentOnly
     jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
 }
+
+// This value is overwritten in docker-build.sh
+jib.to.image = "docker.mycompany.com/micronaut-consumer-api:${project.version}"

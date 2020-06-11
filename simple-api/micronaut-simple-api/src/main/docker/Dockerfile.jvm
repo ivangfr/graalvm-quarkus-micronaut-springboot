@@ -1,3 +1,4 @@
+# As we are using jib, this file is not used
 FROM openjdk:14-alpine
 COPY build/libs/micronaut-simple-api-*-all.jar micronaut-simple-api.jar
 EXPOSE 8080

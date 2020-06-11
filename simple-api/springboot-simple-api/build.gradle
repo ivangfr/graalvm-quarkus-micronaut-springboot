@@ -1,12 +1,13 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'com.google.cloud.tools.jib' version '2.3.0'
 	id 'java'
 }
 
 group = 'com.mycompany'
 version = '1.0.0'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
@@ -25,3 +26,6 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+// This value is overwritten in docker-build.sh
+jib.to.image = "docker.mycompany.com/springboot-simple-api:${project.version}"

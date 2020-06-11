@@ -1,5 +1,5 @@
+# As we are using jib, this file is not used
 FROM openjdk:14-alpine
-LABEL maintainer="ivangfr@yahoo.com.br"
 COPY build/libs/producer-api-*-all.jar producer-api.jar
 EXPOSE 8080
 CMD ["java", "-Dcom.sun.management.jmxremote", "-Xmx128m", "-jar", "producer-api.jar"]

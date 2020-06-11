@@ -38,8 +38,7 @@ declare -A quarkus_elasticsearch_jvm
 declare -A micronaut_elasticsearch_jvm
 declare -A springboot_elasticsearch_jvm
 
-echo
-echo "==> START : $(date)"
+start_time=$(date)
 
 echo
 echo "=========="
@@ -349,5 +348,6 @@ printf "%30s | %14s | %16s | %17s | %17s |\n" "micronaut-elasticsearch-jvm" ${mi
 printf "%30s | %14s | %16s | %17s | %17s |\n" "springboot-elasticsearch-jvm" ${springboot_elasticsearch_jvm[packaging_time]} ${springboot_elasticsearch_jvm[jar_size]} ${springboot_elasticsearch_jvm[building_time]} ${springboot_elasticsearch_jvm[docker_image_size]}
 
 echo
-echo "==> FINISH : $(date)"
+echo "==>  START AT: ${start_time}"
+echo "==> FINISH AT: $(date)"
 echo

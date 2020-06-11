@@ -180,27 +180,4 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
 ## Issues
 
-- Unable to package native image with `Java 8`
-  ```
-  [ERROR] Failed to execute goal io.quarkus:quarkus-maven-plugin:1.4.2.Final:build (default) on project   producer-api: Failed to build quarkus application: io.quarkus.builder.BuildException: Build failure: Build   failed due to errors
-  [ERROR] 	[error]: Build step io.quarkus.deployment.pkg.steps.NativeImageBuildStep#build threw an   exception: java.lang.RuntimeException: Failed to build native image
-  [ERROR] 	at io.quarkus.deployment.pkg.steps.NativeImageBuildStep.build(NativeImageBuildStep.java:353)
-  [ERROR] 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-  [ERROR] 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-  [ERROR] 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-  [ERROR] 	at java.lang.reflect.Method.invoke(Method.java:498)
-  [ERROR] 	at io.quarkus.deployment.ExtensionLoader$2.execute(ExtensionLoader.java:931)
-  [ERROR] 	at io.quarkus.builder.BuildContext.run(BuildContext.java:277)
-  [ERROR] 	at org.jboss.threads.ContextClassLoaderSavingRunnable.run(ContextClassLoaderSavingRunnable.  java:35)
-  [ERROR] 	at org.jboss.threads.EnhancedQueueExecutor.safeRun(EnhancedQueueExecutor.java:2046)
-  [ERROR] 	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.doRunTask(EnhancedQueueExecutor.java:1578)
-  [ERROR] 	at org.jboss.threads.EnhancedQueueExecutor$ThreadBody.run(EnhancedQueueExecutor.java:1452)
-  [ERROR] 	at java.lang.Thread.run(Thread.java:745)
-  [ERROR] 	at org.jboss.threads.JBossThread.run(JBossThread.java:479)
-  [ERROR] Caused by: java.lang.RuntimeException: Image generation failed. Exit code: 1
-  [ERROR] 	at io.quarkus.deployment.pkg.steps.NativeImageBuildStep.imageGenerationFailed  (NativeImageBuildStep.java:369)
-  [ERROR] 	at io.quarkus.deployment.pkg.steps.NativeImageBuildStep.build(NativeImageBuildStep.java:339)
-  [ERROR] 	... 12 more
-  ```
-
 - [Consumer reads 500 messages and stops a few seconds #290](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)

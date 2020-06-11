@@ -6,7 +6,7 @@ if [ "$1" = "native" ];
 then
   docker build -f src/main/docker/Dockerfile.native -t docker.mycompany.com/micronaut-consumer-api-native:1.0.0 .
 else
-  docker build -f src/main/docker/Dockerfile.jvm -t docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0 .
+  ../gradlew jibDockerBuild -Djib.to.image=docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0
 fi
 
 duration=$SECONDS

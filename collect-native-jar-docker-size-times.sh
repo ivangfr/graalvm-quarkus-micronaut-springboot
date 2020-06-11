@@ -28,8 +28,7 @@ declare -A micronaut_consumer_api_native
 declare -A quarkus_elasticsearch_native
 declare -A micronaut_elasticsearch_native
 
-echo
-echo "==> START : $(date)"
+start_time=$(date)
 
 echo
 echo "=========="
@@ -97,21 +96,21 @@ quarkus_book_api_native[docker_image_size]=$package_jar_build_image_docker_image
 
 echo
 echo "-------------------------"
-echo "MICRONAUT-BOOK-API-NATIVE (DISABLED: Unable to build the Docker Native Image & MySQL unsupported)"
+echo "MICRONAUT-BOOK-API-NATIVE"
 echo "-------------------------"
 
 cd ../micronaut-book-api
 
-# package_jar_build_image \
-#   "./gradlew clean" \
-#   "./gradlew assemble" \
-#   "build/libs/micronaut-book-api-1.0.0-all.jar" \
-#   "./docker-build.sh native" \
-#   "docker.mycompany.com/micronaut-book-api-native:1.0.0"
-# micronaut_book_api_native[packaging_time]=$package_jar_build_image_packaging_time
-# micronaut_book_api_native[jar_size]=$package_jar_build_image_jar_size
-# micronaut_book_api_native[building_time]=$package_jar_build_image_building_time
-# micronaut_book_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+package_jar_build_image \
+  "./gradlew clean" \
+  "./gradlew assemble" \
+  "build/libs/micronaut-book-api-1.0.0-all.jar" \
+  "./docker-build.sh native" \
+  "docker.mycompany.com/micronaut-book-api-native:1.0.0"
+micronaut_book_api_native[packaging_time]=$package_jar_build_image_packaging_time
+micronaut_book_api_native[jar_size]=$package_jar_build_image_jar_size
+micronaut_book_api_native[building_time]=$package_jar_build_image_building_time
+micronaut_book_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
 echo
 echo "================="
@@ -124,13 +123,6 @@ echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
 echo "-----------------------------------------------"
 
 cd ../../producer-consumer/quarkus-producer-consumer
-
-echo
-echo "*****************************"
-echo "Switch from Java 8 to Java 11"
-export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-echo "*****************************"
-echo
 
 package_jar_build_image \
   "./mvnw clean --projects producer-api" \
@@ -160,12 +152,6 @@ quarkus_consumer_api_native[building_time]=$package_jar_build_image_building_tim
 quarkus_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
 echo
-echo "*****************************"
-echo "Switch from Java 11 to Java 8"
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-echo "*****************************"
-
-echo
 echo "-------------------------------------------------"
 echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
 echo "-------------------------------------------------"
@@ -188,16 +174,16 @@ echo "-------------------------------------------------"
 echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
 echo "-------------------------------------------------"
 
-# package_jar_build_image \
-#   "./gradlew consumer-api:clean" \
-#   "./gradlew consumer-api:assemble" \
-#   "consumer-api/build/libs/consumer-api-1.0.0-all.jar" \
-#   "cd consumer-api && ./docker-build.sh native && cd .." \
-#   "docker.mycompany.com/micronaut-consumer-api-native:1.0.0"
-# micronaut_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-# micronaut_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
-# micronaut_consumer_api_native[building_time]=$package_jar_build_image_building_time
-# micronaut_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+package_jar_build_image \
+  "./gradlew consumer-api:clean" \
+  "./gradlew consumer-api:assemble" \
+  "consumer-api/build/libs/consumer-api-1.0.0-all.jar" \
+  "cd consumer-api && ./docker-build.sh native && cd .." \
+  "docker.mycompany.com/micronaut-consumer-api-native:1.0.0"
+micronaut_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_time
+micronaut_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
+micronaut_consumer_api_native[building_time]=$package_jar_build_image_building_time
+micronaut_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
 echo
 echo "============="
@@ -259,5 +245,6 @@ printf "%30s | %14s | %16s | %17s | %17s |\n" "quarkus-elasticsearch-native" ${q
 printf "%30s | %14s | %16s | %17s | %17s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[packaging_time]} ${micronaut_elasticsearch_native[jar_size]} ${micronaut_elasticsearch_native[building_time]} ${micronaut_elasticsearch_native[docker_image_size]}
 
 echo
-echo "==> FINISH : $(date)"
+echo "==>  START AT: ${start_time}"
+echo "==> FINISH AT: $(date)"
 echo
