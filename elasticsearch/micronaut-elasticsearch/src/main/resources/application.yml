@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: micronautElasticsearch
+    name: micronaut-elasticsearch
 
 endpoints:
   info:

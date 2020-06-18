@@ -69,7 +69,7 @@ dependencies {
 
 test.classpath += configurations.developmentOnly
 
-mainClassName = "com.mycompany.Application"
+mainClassName = "com.mycompany.micronautelasticsearch.Application"
 
 // use JUnit 5 platform
 test {

@@ -104,7 +104,7 @@
   
   {
     "error": "Internal Server Error",
-    "message": "Error injecting org.elasticsearch.client.  RestHighLevelClient com.mycompany.service.  MovieServiceImpl.client",
+    "message": "Error injecting org.elasticsearch.client.  RestHighLevelClient com.mycompany.quarkuselasticsearch.service.  MovieServiceImpl.client",
     "path": "",
     "status": 500,
     "timestamp": "..."

@@ -97,7 +97,7 @@
 
 - When application receives a request, the following exception is thrown. It seems and problem initializing `RestClient` bean. I've opened to `micronaut-elasticsearch` this issue: [Could not initialize class org.elasticsearch.client.RestClient](https://github.com/micronaut-projects/micronaut-elasticsearch/issues/34)
   ```
-  [nioEventLoopGroup-1-3] ERROR i.m.h.s.netty.RoutingInBoundHandler - Unexpected error occurred: Error   instantiating bean of type  [com.mycompany.service.MovieServiceImpl]
+  [nioEventLoopGroup-1-3] ERROR i.m.h.s.netty.RoutingInBoundHandler - Unexpected error occurred: Error   instantiating bean of type  [com.mycompany.micronautelasticsearch.service.MovieServiceImpl]
   
   Message: Could not initialize class org.elasticsearch.client.RestClient
   Path Taken: new $MovieControllerDefinition$Intercepted([MovieService movieService],MovieMapper   movieMapper,BeanContext beanContext,Qualifier qualifier,Interceptor[] interceptors) --> new   MovieServiceImpl([RestHighLevelClient client],MovieMapper movieMapper,ObjectMapper objectMapper)
@@ -111,7 +111,7 @@
   	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2196)
   	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1198)
   	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.  java:1039)
-  	at com.mycompany.service.$MovieServiceImplDefinition.build(Unknown Source)
+  	at com.mycompany.micronautelasticsearch.service.$MovieServiceImplDefinition.build(Unknown Source)
   	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1814)
   	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.  java:2549)
   	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2535)
@@ -119,7 +119,7 @@
   	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2196)
   	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1198)
   	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.  java:1039)
-  	at com.mycompany.rest.$$MovieControllerDefinition$InterceptedDefinition.build(Unknown Source)
+  	at com.mycompany.micronautelasticsearch.rest.$$MovieControllerDefinition$InterceptedDefinition.build(Unknown Source)
   	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1814)
   	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.  java:2549)
   	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2535)
