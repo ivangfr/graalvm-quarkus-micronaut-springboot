@@ -6,12 +6,6 @@ Besides, as `Quarkus` and `Micronaut` support [`GraalVM`](https://www.graalvm.or
 
 > **Note:** Spring team is working on supporting for `GraalVM` native images, https://github.com/spring-projects/spring-framework/wiki/GraalVM-native-image-support
 
-## Prerequisites
-
-- `Java 11+`
-- `Docker`
-- `Docker-Compose`
-
 ## Examples
 
 - ### [simple-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/simple-api#graalvm-quarkus-micronaut-springboot)
@@ -28,6 +22,12 @@ We are using the following Framework versions
 | Quarkus     | 1.5.0.Final   |
 | Micronaut   | 2.0.0.M3      |
 | Spring Boot | 2.3.0.RELEASE |
+
+## Prerequisites
+
+- `Java 11+`
+- `Docker`
+- `Docker-Compose`
 
 ## Bash scripts
 

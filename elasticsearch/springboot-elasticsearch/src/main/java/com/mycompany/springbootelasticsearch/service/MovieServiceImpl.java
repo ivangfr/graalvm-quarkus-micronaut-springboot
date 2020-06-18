@@ -45,7 +45,7 @@ public class MovieServiceImpl implements MovieService {
             log.info("Document for '{}' {} successfully in ES. The id is: {}", movie, indexResponse.getResult(), id);
             return id;
         } catch (Exception e) {
-            String errorMessage = String.format("An exception occurred while indexing '%s'", movie);
+            String errorMessage = String.format("An exception occurred while indexing '%s'. %s", movie, e.getMessage());
             log.error(errorMessage);
             throw new MovieServiceException(errorMessage, e);
         }
@@ -62,10 +62,16 @@ public class MovieServiceImpl implements MovieService {
             log.info("Searching for '{}' took {} and found {}", title, searchResponse.getTook(), searchResponse.getHits().getTotalHits());
             return movieMapper.toSearchMovieResponse(searchResponse.getHits(), searchResponse.getTook());
         } catch (Exception e) {
-            String errorMessage = String.format("An exception occurred while searching for title '%s'", title);
+            String errorMessage = String.format("An exception occurred while searching for title '%s'. %s", title, e.getMessage());
             log.error(errorMessage);
-            throw new MovieServiceException(errorMessage, e);
+            return createSearchMovieResponseError(errorMessage);
         }
+    }
+
+    private SearchMovieResponse createSearchMovieResponseError(String errorMessage) {
+        SearchMovieResponse searchMovieResponse = new SearchMovieResponse();
+        searchMovieResponse.setError(new SearchMovieResponse.Error(errorMessage));
+        return searchMovieResponse;
     }
 
 }
