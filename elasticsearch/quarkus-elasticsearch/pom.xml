@@ -90,6 +90,9 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- LOG4J-to-SLF4J -->
+        <!-- It removes an error messages that says: -->
+        <!-- ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-to-slf4j</artifactId>

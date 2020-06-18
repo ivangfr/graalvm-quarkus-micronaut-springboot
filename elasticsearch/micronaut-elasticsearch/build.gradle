@@ -51,7 +51,11 @@ dependencies {
     implementation("io.micronaut.configuration:micronaut-micrometer-registry-prometheus")
     implementation("io.micronaut.configuration:micronaut-elasticsearch")
     implementation("org.elasticsearch.client:elasticsearch-rest-high-level-client:$elasticSearchClientVersion")
-    implementation("commons-logging:commons-logging:1.2")
+    //-- LOG4J-to-SLF4J
+    // It removes an error messages that says:
+    // ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
+    implementation("org.apache.logging.log4j:log4j-to-slf4j:$apacheLog4jToSlf4jVersion")
+    //--
     compileOnly("org.mapstruct:mapstruct-jdk8:$mapstructVersion")
     annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
     runtimeOnly("ch.qos.logback:logback-classic:$logbackVersion")

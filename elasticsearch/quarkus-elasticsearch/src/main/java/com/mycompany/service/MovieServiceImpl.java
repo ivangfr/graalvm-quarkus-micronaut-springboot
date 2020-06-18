@@ -61,7 +61,7 @@ public class MovieServiceImpl implements MovieService {
             searchRequest.source(searchSourceBuilder);
             SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
             log.info("Searching for '{}' took {} and found {}", title, searchResponse.getTook(), searchResponse.getHits().getTotalHits());
-            return movieMapper.toSearchMovieDto(searchResponse.getHits(), searchResponse.getTook());
+            return movieMapper.toSearchMovieResponse(searchResponse.getHits(), searchResponse.getTook());
         } catch (Exception e) {
             String errorMessage = String.format("An exception occurred while searching for title '%s'", title);
             log.error(errorMessage);

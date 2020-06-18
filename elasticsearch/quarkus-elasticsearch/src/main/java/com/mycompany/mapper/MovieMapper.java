@@ -13,17 +13,17 @@ public interface MovieMapper {
 
     Movie toMovie(CreateMovieRequest createMovieRequest);
 
-    default SearchMovieResponse toSearchMovieDto(SearchHits searchHits, TimeValue took) {
-        SearchMovieResponse searchMovieDto = new SearchMovieResponse();
+    default SearchMovieResponse toSearchMovieResponse(SearchHits searchHits, TimeValue took) {
+        SearchMovieResponse searchMovieResponse = new SearchMovieResponse();
         for (SearchHit searchHit : searchHits.getHits()) {
             SearchMovieResponse.Hit hit = new SearchMovieResponse.Hit();
             hit.setIndex(searchHit.getIndex());
             hit.setId(searchHit.getId());
             hit.setScore(searchHit.getScore());
             hit.setSource(searchHit.getSourceAsString());
-            searchMovieDto.getHits().add(hit);
+            searchMovieResponse.getHits().add(hit);
         }
-        searchMovieDto.setTook(took.toString());
-        return searchMovieDto;
+        searchMovieResponse.setTook(took.toString());
+        return searchMovieResponse;
     }
 }
