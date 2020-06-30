@@ -85,7 +85,7 @@
   ```
 
 - A simple test can be done by opening a new terminal and running
-  > **Important:** an exception is thrown when the application a request. For more details see [issues](#issues)
+  > **Important:** an exception is thrown when the application receives a request. For more details see [issues](#issues)
   ```
   curl -i -X POST "localhost:9106/api/movies" -H "Content-type: application/json" -d '{"imdb": "789", "title": "Resident Evil"}'
   curl -i "localhost:9106/api/movies?title=evil"

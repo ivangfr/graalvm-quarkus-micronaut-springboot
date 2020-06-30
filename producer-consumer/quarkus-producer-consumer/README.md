@@ -126,7 +126,6 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
     - Package the application `jar` file
-      > **Important:** Unable to package native image with `Java 8`. Using `Java 11` worked!
       ```
       ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects producer-api
       ```
@@ -148,7 +147,6 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
     - Open another terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
     - Run the command below
-      > **Important:** Unable to package native image with `Java 8`. Using `Java 11` worked!
       ```
       ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects consumer-api
       ```
