@@ -1,6 +1,4 @@
-#FROM oracle/graalvm-ce:20.0.0-java8 as graalvm
-# For JDK 11
-FROM oracle/graalvm-ce:20.0.0-java11 as graalvm
+FROM oracle/graalvm-ce:20.1.0-java11 as graalvm
 RUN gu install native-image
 
 COPY build/libs/micronaut-simple-api-*-all.jar /home/app/micronaut-simple-api/build/libs/micronaut-simple-api.jar
