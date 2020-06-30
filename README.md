@@ -21,13 +21,13 @@ We are using the following Framework versions
 | ----------- | ------------- |
 | Quarkus     | 1.5.0.Final   |
 | Micronaut   | 2.0.0         |
-| Spring Boot | 2.3.0.RELEASE |
+| Spring Boot | 2.3.1.RELEASE |
 
 ## Prerequisites
 
-- `Java 11+`
-- `Docker`
-- `Docker-Compose`
+- [`Java 11+`](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- [`Docker`](https://www.docker.com/)
+- [`Docker-Compose`](https://docs.docker.com/compose/install/)
 
 ## Bash scripts
 
