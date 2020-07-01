@@ -514,7 +514,7 @@ echo "=============="
 docker-compose up -d
 wait_for_container_status_healthy "9200"
 
-./init-indexes.sh
+./init-es-indexes.sh
 
 echo
 echo

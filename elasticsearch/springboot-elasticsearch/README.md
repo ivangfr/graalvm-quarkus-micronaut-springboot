@@ -28,7 +28,9 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST "localhost:8080/api/movies" -H "Content-type: application/json" -d '{"imdb": "123", "title": "I, Tonya"}'
+  curl -i -X POST "localhost:8080/api/movies" -H "Content-type: application/json" \
+    -d '{"imdb": "123", "title": "I, Tonya"}'
+  
   curl "localhost:8080/api/movies?title=tonya"
   ```
 
@@ -57,7 +59,9 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST "localhost:9109/api/movies" -H "Content-type: application/json" -d '{"imdb": "456", "title": "American Pie"}'
+  curl -i -X POST "localhost:9109/api/movies" -H "Content-type: application/json" \
+    -d '{"imdb": "456", "title": "American Pie"}'
+  
   curl "localhost:9109/api/movies?title=american"
   ```
 

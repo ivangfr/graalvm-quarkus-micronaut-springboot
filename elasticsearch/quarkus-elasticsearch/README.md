@@ -28,7 +28,9 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST "localhost:8080/api/movies" -H "Content-type: application/json" -d '{"imdb": "123", "title": "I, Tonya"}'
+  curl -i -X POST "localhost:8080/api/movies" -H "Content-type: application/json" \
+    -d '{"imdb": "123", "title": "I, Tonya"}'
+  
   curl -i "localhost:8080/api/movies?title=tonya"
   ```
 
@@ -57,7 +59,9 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST "localhost:9105/api/movies" -H "Content-type: application/json" -d '{"imdb": "456", "title": "American Pie"}'
+  curl -i -X POST "localhost:9105/api/movies" -H "Content-type: application/json" \
+    -d '{"imdb": "456", "title": "American Pie"}'
+  
   curl -i "localhost:9105/api/movies?title=american"
   ```
 
@@ -87,7 +91,9 @@
 - A simple test can be done by opening a new terminal and running
   > **Important:** an exception is thrown when the application receives a request. For more details see [issues](#issues)
   ```
-  curl -i -X POST "localhost:9106/api/movies" -H "Content-type: application/json" -d '{"imdb": "789", "title": "Resident Evil"}'
+  curl -i -X POST "localhost:9106/api/movies" -H "Content-type: application/json" \
+    -d '{"imdb": "789", "title": "Resident Evil"}'
+  
   curl -i "localhost:9106/api/movies?title=evil"
   ```
 

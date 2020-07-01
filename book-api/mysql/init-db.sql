@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS `micronaut_books`;
+DROP TABLE IF EXISTS `springboot_books`;
+DROP TABLE IF EXISTS `quarkus_books`;
+
 CREATE TABLE `micronaut_books` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `isbn` varchar(255) NOT NULL,
