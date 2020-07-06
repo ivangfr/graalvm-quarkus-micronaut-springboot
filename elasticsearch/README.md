@@ -25,7 +25,7 @@ In this example, we will implement three versions of a Restful API for handling 
 
 - Finally, run the script below to initialize the `Elasticsearch` indexes
   ```
-  ./init-indexes.sh
+  ./init-es-indexes.sh
   ```
 
 ## Shutdown

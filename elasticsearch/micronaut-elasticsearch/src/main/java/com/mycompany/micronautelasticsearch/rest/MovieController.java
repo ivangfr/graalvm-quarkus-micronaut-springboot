@@ -6,6 +6,7 @@ import com.mycompany.micronautelasticsearch.rest.dto.CreateMovieRequest;
 import com.mycompany.micronautelasticsearch.rest.dto.SearchMovieResponse;
 import com.mycompany.micronautelasticsearch.service.MovieService;
 import io.micronaut.http.HttpStatus;
+import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
@@ -27,7 +28,7 @@ public class MovieController {
 
     @Status(HttpStatus.CREATED)
     @Post
-    public String createMovie(@Valid CreateMovieRequest createMovieRequest) {
+    public String createMovie(@Valid @Body CreateMovieRequest createMovieRequest) {
         Movie movie = movieMapper.toMovie(createMovieRequest);
         return movieService.saveMovie(movie);
     }

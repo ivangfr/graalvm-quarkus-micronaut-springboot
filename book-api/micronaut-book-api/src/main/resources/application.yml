@@ -25,7 +25,7 @@ datasources.default: {}
 ---
 datasources:
   default:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/bookdb?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&useLegacyDatetimeCode=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/bookdb?characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: secret
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -34,5 +34,5 @@ jpa:
     properties:
       hibernate:
         hbm2ddl:
-          auto: update
+          auto: none
         show-sql: false

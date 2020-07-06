@@ -16,6 +16,7 @@ public class SearchMovieResponse {
     private String took;
     private Error error;
 
+    @Introspected
     @Data
     public static class Hit {
         private String index;
@@ -24,6 +25,7 @@ public class SearchMovieResponse {
         private String source;
     }
 
+    @Introspected
     @Data
     @AllArgsConstructor
     public static class Error {

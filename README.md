@@ -19,15 +19,15 @@ We are using the following Framework versions
 
 | Framework   | Version       |
 | ----------- | ------------- |
-| Quarkus     | 1.5.0.Final   |
-| Micronaut   | 2.0.0.M3      |
-| Spring Boot | 2.3.0.RELEASE |
+| Quarkus     | 1.5.2.Final   |
+| Micronaut   | 2.0.0         |
+| Spring Boot | 2.3.1.RELEASE |
 
 ## Prerequisites
 
-- `Java 11+`
-- `Docker`
-- `Docker-Compose`
+- [`Java 11+`](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- [`Docker`](https://www.docker.com/)
+- [`Docker-Compose`](https://docs.docker.com/compose/install/)
 
 ## Bash scripts
 
@@ -45,89 +45,89 @@ The following table shows the results after running the script `collect-jvm-jar-
 ```
                    Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
 ------------------------------ + -------------- + ---------------- + ----------------- + ----------------- |
-        quarkus-simple-api-jvm |            11s |           307127 |                8s |             512MB |
-      micronaut-simple-api-jvm |            13s |         15705448 |                9s |             212MB |
-     springboot-simple-api-jvm |             4s |         21922346 |                9s |             218MB |
+        quarkus-simple-api-jvm |            10s |           307124 |               14s |             512MB |
+      micronaut-simple-api-jvm |            11s |         15961372 |               12s |             212MB |
+     springboot-simple-api-jvm |             4s |         21953979 |               11s |             218MB |
 .............................. + .............. + ................ + ................. + ................. |
-          quarkus-book-api-jvm |            11s |           520702 |               12s |             534MB |
-        micronaut-book-api-jvm |            17s |         34478536 |               13s |             231MB |
-       springboot-book-api-jvm |             6s |         43169753 |               12s |             239MB |
+          quarkus-book-api-jvm |            13s |           520577 |               14s |             534MB |
+        micronaut-book-api-jvm |            18s |         35134293 |               12s |             232MB |
+       springboot-book-api-jvm |             6s |         43213039 |               13s |             239MB |
 .............................. + .............. + ................ + ................. + ................. |
-      quarkus-producer-api-jvm |            12s |           419867 |               13s |             534MB |
-    micronaut-producer-api-jvm |            14s |         26742899 |               12s |             152MB |
-   springboot-producer-api-jvm |             6s |         35439214 |               13s |             231MB |
+      quarkus-producer-api-jvm |            11s |           419862 |               14s |             534MB |
+    micronaut-producer-api-jvm |            13s |         27253515 |               10s |             223MB |
+   springboot-producer-api-jvm |             7s |         35474718 |               12s |             231MB |
 .............................. + .............. + ................ + ................. + ................. |
-      quarkus-consumer-api-jvm |            11s |           396316 |               12s |             534MB |
-    micronaut-consumer-api-jvm |            10s |         26723265 |                8s |             152MB |
-   springboot-consumer-api-jvm |             5s |         35436506 |               12s |             231MB |
+      quarkus-consumer-api-jvm |            11s |           396332 |               13s |             534MB |
+    micronaut-consumer-api-jvm |            12s |         27233595 |               10s |             223MB |
+   springboot-consumer-api-jvm |             5s |         35472009 |               12s |             231MB |
 .............................. + .............. + ................ + ................. + ................. |
-     quarkus-elasticsearch-jvm |            10s |           336076 |               13s |             542MB |
-   micronaut-elasticsearch-jvm |            18s |         42408964 |               10s |             239MB |
-  springboot-elasticsearch-jvm |             8s |         54347679 |               16s |             248MB |
+     quarkus-elasticsearch-jvm |            10s |           337517 |               96s |             542MB |
+   micronaut-elasticsearch-jvm |            23s |         44921748 |               16s |             241MB |
+  springboot-elasticsearch-jvm |             9s |         54381935 |               16s |             248MB |
 ```
 
 Table below shows the results after running the script `collect-native-jar-docker-size-times.sh`
 ```
                    Application | Packaging Time | Jar Size (bytes) | Docker Build Time | Docker Image Size |
 ------------------------------ + -------------- + ---------------- + ----------------- + ----------------- |
-     quarkus-simple-api-native |           238s |         31280472 |                2s |             138MB |
-   micronaut-simple-api-native |             9s |         15705443 |              372s |            95.6MB |
+     quarkus-simple-api-native |           267s |         32238760 |                6s |             139MB |
+   micronaut-simple-api-native |            11s |         15961361 |              398s |              96MB |
 .............................. + .............. + ................ + ................. + ................. |
-       quarkus-book-api-native |           568s |         75261352 |                6s |             182MB |
-     micronaut-book-api-native |            16s |         34478524 |              889s |             152MB |
+       quarkus-book-api-native |           650s |         75265448 |                7s |             182MB |
+     micronaut-book-api-native |            20s |         35134276 |              826s |             159MB |
 .............................. + .............. + ................ + ................. + ................. |
-   quarkus-producer-api-native |           404s |         53223032 |                5s |             160MB |
- micronaut-producer-api-native |            12s |         26742894 |              375s |             114MB |
+   quarkus-producer-api-native |           402s |         53247608 |                6s |             160MB |
+ micronaut-producer-api-native |            16s |         27253512 |              469s |             119MB |
 .............................. + .............. + ................ + ................. + ................. |
-   quarkus-consumer-api-native |           344s |         47205336 |                4s |             154MB |
- micronaut-consumer-api-native |            12s |         26723260 |              370s |             114MB |
+   quarkus-consumer-api-native |           364s |         47229912 |                6s |             154MB |
+ micronaut-consumer-api-native |            15s |         27233595 |              442s |             118MB |
 .............................. + .............. + ................ + ................. + ................. |
-  quarkus-elasticsearch-native |           319s |         37936472 |                4s |             145MB |
-micronaut-elasticsearch-native |            19s |         42408980 |              591s |             131MB |
+  quarkus-elasticsearch-native |           325s |         39279960 |                5s |             146MB |
+micronaut-elasticsearch-native |            22s |         44921747 |              630s |             144MB |
 ```
 
 Finally, the following table shows the results after running the script `collect-startup-ab-times.sh`
 ```
                    Application | Startup Time | Initial Memory Consumption | Ab Testing Time | Final Memory Consumption |
 ------------------------------ + ------------ + -------------------------- + --------------- + ------------------------ |
-        quarkus-simple-api-jvm |       2209ms |                   101.8MiB |             20s |                 193.5MiB |
-      micronaut-simple-api-jvm |       2790ms |                   119.8MiB |             27s |                   360MiB |
-     springboot-simple-api-jvm |       5266ms |                   212.8MiB |             26s |                 404.5MiB |
-     quarkus-simple-api-native |        101ms |                   4.543MiB |             19s |                 261.9MiB |
-   micronaut-simple-api-native |        135ms |                   9.629MiB |             18s |                 328.7MiB |
+        quarkus-simple-api-jvm |       2579ms |                   98.53MiB |             28s |                   260MiB |
+      micronaut-simple-api-jvm |       3591ms |                   151.8MiB |             28s |                 410.5MiB |
+     springboot-simple-api-jvm |       6854ms |                   246.4MiB |             28s |                   458MiB |
+     quarkus-simple-api-native |         96ms |                   4.129MiB |             20s |                 260.8MiB |
+   micronaut-simple-api-native |         87ms |                   9.812MiB |             19s |                 394.5MiB |
 .............................. +  ........... + .......................... + ............... + ........................ |
-          quarkus-book-api-jvm |       4072ms |                   170.7MiB |             23s |                 284.9MiB |
-        micronaut-book-api-jvm |       5856ms |                   254.6MiB |             25s |                 477.2MiB |
-       springboot-book-api-jvm |       9437ms |                   340.5MiB |             29s |                 426.7MiB |
-       quarkus-book-api-native |        158ms |                   6.941MiB |             17s |                 257.1MiB |
+          quarkus-book-api-jvm |       5610ms |                   226.6MiB |             31s |                 371.7MiB |
+        micronaut-book-api-jvm |       8221ms |                   288.9MiB |             30s |                 586.2MiB |
+       springboot-book-api-jvm |      12664ms |                   419.7MiB |             32s |                 594.4MiB |
+       quarkus-book-api-native |         46ms |                    6.48MiB |             22s |                   262MiB |
      micronaut-book-api-native |            - |                          - |               - |                        - |
 .............................. +  ........... + .......................... + ............... + ........................ |
-      quarkus-producer-api-jvm |       5470ms |                   176.3MiB |             28s |                 232.4MiB |
-    micronaut-producer-api-jvm |       3188ms |                   167.4MiB |             35s |                 341.4MiB |
-   springboot-producer-api-jvm |       7172ms |                   226.4MiB |             27s |                 388.5MiB |
-   quarkus-producer-api-native |        221ms |                   6.297MiB |             20s |                 267.9MiB |
- micronaut-producer-api-native |        183ms |                   11.81MiB |             21s |                 268.1MiB |
+      quarkus-producer-api-jvm |       4340ms |                   162.5MiB |             35s |                 274.4MiB |
+    micronaut-producer-api-jvm |       4507ms |                   153.3MiB |             44s |                 512.8MiB |
+   springboot-producer-api-jvm |       9393ms |                   271.8MiB |             36s |                   458MiB |
+   quarkus-producer-api-native |         76ms |                   6.023MiB |             22s |                   265MiB |
+ micronaut-producer-api-native |        162ms |                   12.88MiB |             28s |                 400.9MiB |
 .............................. +  ........... + .......................... + ............... + ........................ |
-      quarkus-consumer-api-jvm |       2769ms |                   144.1MiB |             23s |                 246.9MiB |
-    micronaut-consumer-api-jvm |       3443ms |                   218.9MiB |              2s |                 267.5MiB |
-   springboot-consumer-api-jvm |       5691ms |                   252.7MiB |              3s |                 277.1MiB |
-   quarkus-consumer-api-native |        140ms |                   21.24MiB |             12s |                 252.3MiB |
- micronaut-consumer-api-native |        205ms |                   17.12MiB |              1s |                 145.3MiB |
+      quarkus-consumer-api-jvm |       3381ms |                   123.7MiB |             30s |                 279.9MiB |
+    micronaut-consumer-api-jvm |       5230ms |                   223.7MiB |              4s |                 248.6MiB |
+   springboot-consumer-api-jvm |       8608ms |                   278.4MiB |              4s |                 313.8MiB |
+   quarkus-consumer-api-native |        110ms |                   23.08MiB |             18s |                 252.1MiB |
+ micronaut-consumer-api-native |        202ms |                   55.13MiB |              2s |                   130MiB |
 .............................. +  ........... + .......................... + ............... + ........................ |
-     quarkus-elasticsearch-jvm |       1987ms |                    99.6MiB |             26s |                 206.8MiB |
-   micronaut-elasticsearch-jvm |       2848ms |                   157.2MiB |             27s |                 413.8MiB |
-  springboot-elasticsearch-jvm |       7606ms |                   260.3MiB |             26s |                 419.1MiB |
+     quarkus-elasticsearch-jvm |       2414ms |                   113.5MiB |             33s |                   210MiB |
+   micronaut-elasticsearch-jvm |       3759ms |                   176.5MiB |             33s |                 452.5MiB |
+  springboot-elasticsearch-jvm |       9766ms |                   276.9MiB |             28s |                 441.9MiB |
   quarkus-elasticsearch-native |            - |                          - |               - |                        - |
-micronaut-elasticsearch-native |            - |                          - |               - |                        - |
+micronaut-elasticsearch-native |        150ms |                   10.41MiB |             23s |                 396.1MiB |
 ```
 
-> **Note 1:** There is no results for `micronaut-book-api-native` due to a `MySQL` compatibility issue with `GraalVM`. For more details see [`micronaut-book-api` issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues)
+> **Note 1:** There is no results for `micronaut-book-api-native` because of an exception during the application startup. For more details see [`micronaut-book-api` issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/micronaut-book-api#issues)
 
 > **Note 2:** We can see that the performance of the `quarkus-consumer-api-jvm` and `quarkus-consumer-api-native` are really slow compared to other consumers. Checking the logs, it seems that the bottleneck is SmallRye Reactive Messaging. I have opened an issue related to it. For more information, see [Consumer reads 500 messages and stops a few seconds #290](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)
 
-> **Note 3:** There is no results for `quarkus-elasticsearch-native` because an exception is thrown when the application a request. For more details see [`quarkus-elasticsearch-native` issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/quarkus-elasticsearch#issues)
+> **Note 3:** There is no results for `quarkus-elasticsearch-native` because of an exception is thrown when the application receives a request. For more details see [`quarkus-elasticsearch-native` issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/quarkus-elasticsearch#issues)
 
-> **Note 4:** There is no results for `micronaut-elasticsearch-native` because an exception is thrown when the application a request. For more details see [`micronaut-elasticsearch-native` issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/micronaut-elasticsearch#issues)
+> **Note 4:** There is no results for `micronaut-elasticsearch-native` because of an exception is thrown when the application receives a request. For more details see [`micronaut-elasticsearch-native` issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/micronaut-elasticsearch#issues)
 
 `ab` tests used
 ```

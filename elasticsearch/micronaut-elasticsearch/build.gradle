@@ -1,6 +1,6 @@
 plugins {
-    id "net.ltgt.apt-eclipse" version "0.21"
-    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "com.diffplug.eclipse.apt" version "3.22.0"
+    id "com.github.johnrengelman.shadow" version "6.0.0"
     id "com.google.cloud.tools.jib" version "2.4.0"
     id "application"
 }
@@ -9,6 +9,7 @@ version "1.0.0"
 group "com.mycompany"
 
 repositories {
+    mavenCentral()
     jcenter()
 }
 
@@ -18,12 +19,11 @@ configurations {
 }
 
 ext {
-    set('micronautVersion', '2.0.0.M3')
+    set('micronautVersion', '2.0.0')
     set('lombokVersion', '1.18.12')
     set('mapstructVersion', '1.3.1.Final')
-    set('logbackVersion', '1.2.3')
-    set('elasticSearchClientVersion', '7.6.2')
-    set('apacheLog4jToSlf4jVersion', '2.13.3')
+    set('slf4jLog4jOverSlf4jVersion', '1.7.30')
+    set('apacheLoggingLog4jVersion', '2.13.3')
 }
 
 dependencies {
@@ -33,35 +33,33 @@ dependencies {
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
     //--
-    annotationProcessor(platform("io.micronaut:micronaut-bom:$micronautVersion")) // using platform instead of enforcedPlatform in order to set ES 7
+    annotationProcessor(platform("io.micronaut:micronaut-bom:$micronautVersion"))
     annotationProcessor("io.micronaut:micronaut-inject-java")
     annotationProcessor("io.micronaut:micronaut-validation")
     annotationProcessor("io.micronaut:micronaut-graal")
-    compileOnly(platform("io.micronaut:micronaut-bom:$micronautVersion")) // using platform instead of enforcedPlatform in order to set ES 7
+    compileOnly(platform("io.micronaut:micronaut-bom:$micronautVersion"))
     compileOnly("org.graalvm.nativeimage:svm")
-    implementation(platform("io.micronaut:micronaut-bom:$micronautVersion")) // using platform instead of enforcedPlatform in order to set ES 7
+    implementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
     implementation("io.micronaut:micronaut-inject")
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut:micronaut-runtime")
+    implementation("javax.annotation:javax.annotation-api")
     implementation("io.micronaut:micronaut-http-server-netty")
     implementation("io.micronaut:micronaut-http-client")
-    implementation("io.micronaut.cache:micronaut-cache-caffeine")
     implementation("io.micronaut:micronaut-management")
-    implementation("io.micronaut.configuration:micronaut-micrometer-core")
-    implementation("io.micronaut.configuration:micronaut-micrometer-registry-prometheus")
-    implementation("io.micronaut.configuration:micronaut-elasticsearch")
-    implementation("org.elasticsearch.client:elasticsearch-rest-high-level-client:$elasticSearchClientVersion")
-    //-- LOG4J-to-SLF4J
-    // It removes an error messages that says:
-    // ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...
-    implementation("org.apache.logging.log4j:log4j-to-slf4j:$apacheLog4jToSlf4jVersion")
-    //--
+    implementation("io.micronaut.micrometer:micronaut-micrometer-core")
+    implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
+    implementation("io.micronaut.elasticsearch:micronaut-elasticsearch")
+    implementation("io.micronaut.cache:micronaut-cache-caffeine")
+    runtimeOnly("org.slf4j:log4j-over-slf4j:$slf4jLog4jOverSlf4jVersion")
+    implementation("org.apache.logging.log4j:log4j-api:$apacheLoggingLog4jVersion")
+    implementation("org.apache.logging.log4j:log4j-core:$apacheLoggingLog4jVersion")
     compileOnly("org.mapstruct:mapstruct-jdk8:$mapstructVersion")
     annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
-    runtimeOnly("ch.qos.logback:logback-classic:$logbackVersion")
-    testAnnotationProcessor(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    runtimeOnly("ch.qos.logback:logback-classic")
+    testAnnotationProcessor(platform("io.micronaut:micronaut-bom:$micronautVersion"))
     testAnnotationProcessor("io.micronaut:micronaut-inject-java")
-    testImplementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    testImplementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("io.micronaut.test:micronaut-test-junit5")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
@@ -81,9 +79,16 @@ java {
     targetCompatibility = JavaVersion.toVersion('11')
 }
 
-tasks.withType(JavaCompile){
+tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
-    options.compilerArgs.add('-parameters')
+    options.compilerArgs.addAll([
+            '-parameters',
+            // enables incremental compilation
+            '-Amicronaut.processing.incremental=true',
+            '-Amicronaut.processing.annotations=com.mycompany.micronautelasticsearch.*',
+            "-Amicronaut.processing.group=$project.group",
+            "-Amicronaut.processing.module=$project.name",
+    ])
 }
 
 shadowJar {
@@ -93,6 +98,13 @@ shadowJar {
 tasks.withType(JavaExec) {
     classpath += configurations.developmentOnly
     jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
+    if (gradle.startParameter.continuous) {
+        systemProperties(
+                'micronaut.io.watch.restart': 'true',
+                'micronaut.io.watch.enabled': 'true',
+                "micronaut.io.watch.paths": "src/main"
+        )
+    }
 }
 
 // This value is overwritten in docker-build.sh

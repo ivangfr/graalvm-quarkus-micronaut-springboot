@@ -29,7 +29,9 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST localhost:8080/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn Java"}'
+  curl -i -X POST localhost:8080/api/books -H "Content-Type: application/json" \
+    -d '{"isbn": "123", "title": "Learn Java"}'
+  
   curl -i localhost:8080/api/books
   ```
 
@@ -58,7 +60,9 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST localhost:9087/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn Docker"}'
+  curl -i -X POST localhost:9087/api/books -H "Content-Type: application/json" \
+    -d '{"isbn": "123", "title": "Learn Docker"}'
+  
   curl -i localhost:9087/api/books
   ```
 
@@ -88,7 +92,9 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST localhost:9088/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn GraalVM"}'
+  curl -i -X POST localhost:9088/api/books -H "Content-Type: application/json" \
+    -d '{"isbn": "123", "title": "Learn GraalVM"}'
+  
   curl -i localhost:9088/api/books
   ```
 
@@ -96,48 +102,33 @@
 
 ## Issues
 
-- Unable to run the Docker Native Image. It seems that there's a [`MySQL` compatibility issue with `GraalVM`](https://bugs.mysql.com/bug.php?id=91968)
+- Unable to run the Docker Native Image.
   ```
-  Error starting Micronaut server: Bean definition [javax.sql.DataSource] could not be loaded: Error   instantiating bean of type [javax.sql.DataSource]: Failed to initialize pool: com.mysql.cj.exceptions.  CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
-  io.micronaut.context.exceptions.BeanInstantiationException: Bean definition [javax.sql.DataSource]   could not be loaded: Error instantiating bean of type [javax.sql.DataSource]: Failed to initialize   pool: com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.  WrongArgumentException
-  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1466)
+  [main] ERROR io.micronaut.runtime.Micronaut - Error starting Micronaut server: Bean   definition [org.hibernate.SessionFactory] could not be loaded: Error instantiating bean of type    [org.hibernate.boot.registry.StandardServiceRegistry]
+  
+  Message: Bean Factory [Definition: io.micronaut.configuration.hibernate.jpa.  EntityManagerFactoryBean] returned null
+  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]  ) --> SessionFactoryBuilder.hibernateSessionFactoryBuilder([MetadataSources metadataSources],  ValidatorFactory validatorFactory) --> MetadataSources.hibernateMetadataSources(JpaConfiguration   jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
+  io.micronaut.context.exceptions.BeanInstantiationException: Bean definition [org.hibernate.  SessionFactory] could not be loaded: Error instantiating bean of type  [org.hibernate.boot.  registry.StandardServiceRegistry]
+  
+  Message: Bean Factory [Definition: io.micronaut.configuration.hibernate.jpa.  EntityManagerFactoryBean] returned null
+  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]  ) --> SessionFactoryBuilder.hibernateSessionFactoryBuilder([MetadataSources metadataSources],  ValidatorFactory validatorFactory) --> MetadataSources.hibernateMetadataSources(JpaConfiguration   jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
+  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1533)
   	at io.micronaut.context.DefaultApplicationContext.initializeContext(DefaultApplicationContext.  java:220)
-  	at io.micronaut.context.DefaultBeanContext.readAllBeanDefinitionClasses(DefaultBeanContext.java:2682)
-  	at io.micronaut.context.DefaultBeanContext.start(DefaultBeanContext.java:216)
+  	at io.micronaut.context.DefaultBeanContext.readAllBeanDefinitionClasses(DefaultBeanContext.  java:2763)
+  	at io.micronaut.context.DefaultBeanContext.start(DefaultBeanContext.java:227)
   	at io.micronaut.context.DefaultApplicationContext.start(DefaultApplicationContext.java:166)
   	at io.micronaut.runtime.Micronaut.start(Micronaut.java:64)
   	at io.micronaut.runtime.Micronaut.run(Micronaut.java:294)
   	at io.micronaut.runtime.Micronaut.run(Micronaut.java:280)
-  	at com.mycompany.micronautbookapi.Application.main(Application.java:12)
-  Caused by: io.micronaut.context.exceptions.BeanInstantiationException: Error instantiating bean of type   [javax.sql.DataSource]: Failed to initialize pool: com.mysql.cj.exceptions.CJException cannot be cast   to com.mysql.cj.exceptions.WrongArgumentException
-  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1842)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.  java:2549)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2535)
-  	at io.micronaut.context.DefaultBeanContext.loadContextScopeBean(DefaultBeanContext.java:2089)
-  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1464)
+  	at com.mycompany.micronautbookapi.Application.main(Application.java:18)
+  Caused by: io.micronaut.context.exceptions.BeanInstantiationException: Error instantiating bean   of type  [org.hibernate.boot.registry.StandardServiceRegistry]
+  
+  Message: Bean Factory [Definition: io.micronaut.configuration.hibernate.jpa.  EntityManagerFactoryBean] returned null
+  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]  ) --> SessionFactoryBuilder.hibernateSessionFactoryBuilder([MetadataSources metadataSources],  ValidatorFactory validatorFactory) --> MetadataSources.hibernateMetadataSources(JpaConfiguration   jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
+  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1897)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal  (DefaultBeanContext.java:2630)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.  java:2616)
+  	at io.micronaut.context.DefaultBeanContext.loadContextScopeBean(DefaultBeanContext.java:2166)
+  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1531)
   	... 8 common frames omitted
-  Caused by: com.zaxxer.hikari.pool.HikariPool$PoolInitializationException: Failed to initialize pool:   com.mysql.cj.exceptions.CJException cannot be cast to com.mysql.cj.exceptions.WrongArgumentException
-  	at com.zaxxer.hikari.pool.HikariPool.throwPoolInitializationException(HikariPool.java:589)
-  	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:575)
-  	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
-  	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
-  	at io.micronaut.configuration.jdbc.hikari.HikariUrlDataSource.<init>(HikariUrlDataSource.java:35)
-  	at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.dataSource(DatasourceFactory.java:66)
-  	at io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$DataSource0Definition.build(Unknown   Source)
-  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:137)
-  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1814)
-  	... 12 common frames omitted
-  Caused by: java.lang.ClassCastException: com.mysql.cj.exceptions.CJException cannot be cast to com.  mysql.cj.exceptions.WrongArgumentException
-  	at com.mysql.cj.util.Util.getInstance(Util.java:169)
-  	at com.mysql.cj.util.Util.getInstance(Util.java:174)
-  	at com.mysql.cj.conf.ConnectionUrl$Type.getImplementingInstance(ConnectionUrl.java:241)
-  	at com.mysql.cj.conf.ConnectionUrl$Type.getConnectionUrlInstance(ConnectionUrl.java:211)
-  	at com.mysql.cj.conf.ConnectionUrl.getConnectionUrlInstance(ConnectionUrl.java:280)
-  	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:194)
-  	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
-  	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:354)
-  	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:202)
-  	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:473)
-  	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:554)
-  	... 19 common frames omitted
   ```

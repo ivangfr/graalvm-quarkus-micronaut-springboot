@@ -217,7 +217,7 @@ docker stop micronaut-book-api-jvm
 
 echo
 echo "-------------------------"
-echo "MICRONAUT-BOOK-API-NATIVE (DISABLED: https://bugs.mysql.com/bug.php?id=91968)"
+echo "MICRONAUT-BOOK-API-NATIVE (DISABLED)"
 echo "-------------------------"
 
 #docker run -d --rm --name micronaut-book-api-native -p 9088:8080 -e MYSQL_HOST=mysql --network book-api_default \
@@ -514,7 +514,7 @@ echo "=============="
 docker-compose up -d
 wait_for_container_status_healthy "9200"
 
-./init-indexes.sh
+./init-es-indexes.sh
 
 echo
 echo
@@ -573,10 +573,20 @@ echo "------------------------------"
 echo "MICRONAUT-ELASTICSEARCH-NATIVE"
 echo "------------------------------"
 
-micronaut_elasticsearch_native[startup_time]="-"
-micronaut_elasticsearch_native[initial_memory_consumption]="-"
-micronaut_elasticsearch_native[ab_testing_time]="-"
-micronaut_elasticsearch_native[final_memory_consumption]="-"
+docker run -d --rm --name micronaut-elasticsearch-native -p 9108:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+  docker.mycompany.com/micronaut-elasticsearch-native:1.0.0
+
+wait_for_container_log "micronaut-elasticsearch-native" "Startup completed in"
+micronaut_elasticsearch_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+
+micronaut_elasticsearch_native[initial_memory_consumption]=$(get_container_memory_consumption "micronaut-elasticsearch-native")
+
+run_command "ab -p test-movies.json -T 'application/json' -c 5 -n 2500 http://localhost:9108/api/movies"
+micronaut_elasticsearch_native[ab_testing_time]=$run_command_exec_time
+
+micronaut_elasticsearch_native[final_memory_consumption]=$(get_container_memory_consumption "micronaut-elasticsearch-native")
+
+docker stop micronaut-elasticsearch-native
 
 echo
 echo "------------------------"

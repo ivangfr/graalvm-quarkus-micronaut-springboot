@@ -29,7 +29,9 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST localhost:8080/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn Java"}'
+  curl -i -X POST localhost:8080/api/books -H "Content-Type: application/json" \
+    -d '{"isbn": "123", "title": "Learn Java"}'
+  
   curl -i localhost:8080/api/books
   ```
 
@@ -58,7 +60,9 @@
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST localhost:9089/api/books -H "Content-Type: application/json" -d '{"isbn": "123", "title": "Learn Docker"}'
+  curl -i -X POST localhost:9089/api/books -H "Content-Type: application/json" \
+    -d '{"isbn": "123", "title": "Learn Docker"}'
+  
   curl -i localhost:9089/api/books
   ```
 
