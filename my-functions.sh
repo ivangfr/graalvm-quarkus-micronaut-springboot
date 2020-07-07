@@ -38,13 +38,13 @@ function extract_startup_time_from_log() {
   echo "$1" | awk "$2"
 }
 
-# -- get_container_memory_consumption --
+# -- get_container_memory_usage --
 # $1: docker container name
-function get_container_memory_consumption() {
+function get_container_memory_usage() {
   while true ; do
     local log=$(docker stats --no-stream 2>&1 | grep $1)
     if [ -n "$log" ] ; then
-      echo $log | awk '{print $4}'
+      echo $log | awk '{print $4"/"$6"("$7")"}'
       break
     fi
     sleep 1

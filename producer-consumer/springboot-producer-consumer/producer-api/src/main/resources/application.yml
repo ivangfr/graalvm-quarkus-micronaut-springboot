@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: producer-api
   main:
     banner-mode: "off"
 

@@ -28,6 +28,22 @@ In this example, we will implement three versions of a Restful API for handling 
   ./init-es-indexes.sh
   ```
 
+## Useful Commands
+
+- **Elasticsearch**
+
+  Check indexes
+  ```
+  curl "localhost:9200/_cat/indices?v"
+  ```
+
+  Perform search
+  ```
+  curl "localhost:9200/quarkus.movies/_search?pretty"
+  curl "localhost:9200/micronaut.movies/_search?pretty"
+  curl "localhost:9200/springboot.movies/_search?pretty"
+  ```
+
 ## Shutdown
 
 - In a terminal, make sure you are in `graalvm-quarkus-micronaut-springboot/elasticsearch` folder

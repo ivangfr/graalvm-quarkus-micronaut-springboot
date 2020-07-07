@@ -86,12 +86,3 @@ services:
       test: "curl -f http://localhost:9000 || exit 1"
       start_period: 30s
 
-  zipkin:
-    container_name: zipkin
-    image: openzipkin/zipkin:2.20.2
-    restart: unless-stopped
-    ports:
-      - "9411:9411"
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "9411" ]
-      start_period: 30s

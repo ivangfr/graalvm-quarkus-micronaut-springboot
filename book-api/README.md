@@ -28,6 +28,23 @@ In this example, we will implement three versions of a Restful API for handling 
   ./init-db.sh
   ```
 
+## Useful Commands
+
+- **MySQL**
+
+  Docker exec into `mysql` contatiner
+  ```
+  docker exec -it mysql mysql -uroot -psecret --database bookdb
+  ```
+
+  Insite `MySQL monitor` terminal
+  ```
+  show tables;
+  select * from quarkus_books;
+  select * from micronaut_books;
+  select * from springboot_books;
+  ```
+
 ## Shutdown
 
 - In a terminal, make sure you are in `graalvm-quarkus-micronaut-springboot/book-api` folder

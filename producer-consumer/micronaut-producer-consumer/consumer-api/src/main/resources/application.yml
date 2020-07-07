@@ -27,15 +27,6 @@ endpoints:
       enabled: true
 
 ---
-tracing:
-  zipkin:
-    enabled: true
-    http:
-      url: http://${ZIPKIN_HOST:localhost}:${ZIPKIN_PORT:9411}
-    sampler:
-      probability: 1.0
-
----
 micronaut:
   metrics:
     enabled: true
