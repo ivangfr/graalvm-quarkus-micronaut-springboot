@@ -1,22 +1,21 @@
-version: "3.7"
+version: "3.8"
 
 services:
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.4.1
+    image: confluentinc/cp-zookeeper:5.5.1
     container_name: zookeeper
     restart: unless-stopped
     ports:
       - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
-      TZ: "${TZ-Europe/Berlin}"
     healthcheck:
       test: "echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT"
       start_period: 30s
 
   kafka:
-    image: confluentinc/cp-kafka:5.4.1
+    image: confluentinc/cp-kafka:5.5.1
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -30,13 +29,12 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_DELETE_TOPIC_ENABLE: "true"
-      TZ: "${TZ-Europe/Berlin}"
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
       start_period: 30s
 
   kafka-rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.4.1
+    image: confluentinc/cp-kafka-rest:5.5.1
     container_name: kafka-rest-proxy
     restart: unless-stopped
     depends_on:
@@ -50,7 +48,6 @@ services:
       KAFKA_REST_HOST_NAME: kafka-rest-proxy
       KAFKA_REST_LISTENERS: http://0.0.0.0:8082
       KAFKA_REST_CONSUMER_REQUEST_TIMEOUT_MS: 30000
-      TZ: "${TZ-Europe/Berlin}"
     healthcheck:
       test: "curl -f http://localhost:8082 || exit 1"
       start_period: 30s

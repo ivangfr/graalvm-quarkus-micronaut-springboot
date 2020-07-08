@@ -318,7 +318,7 @@ echo "=============="
 echo "DOCKER-COMPOSE"
 echo "=============="
 
-docker-compose up -d
+docker-compose up -d zookeeper kafka
 wait_for_container_status_healthy "9092"
 
 echo

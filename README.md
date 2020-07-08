@@ -37,7 +37,7 @@ In order to make it easier to collect data that will be used for comparing the f
 | --------------------------------------- | ----------- |
 | collect-jvm-jar-docker-size-times.sh    | it packages/assembles jar files and builds docker images of all JVM applications, collecting data like: jar packaging Time, size of the jar, docker build time and docker image size |
 | collect-native-jar-docker-size-times.sh | it packages/assembles jar files and builds docker images of all Native applications, collecting data like: jar packaging Time, size of the jar, docker build time and docker image size |
-| collect-ab-times.sh                     | it starts docker container of all applications (JVM and Native), collecting data like: startup time, initial memory usage, time spent to run some ab tests, final memory usage and shutdown time |
+| collect-ab-times-memory-usage.sh        | it starts docker container of all applications (JVM and Native), collecting data like: startup time, initial memory usage, time spent to run some ab tests, final memory usage and shutdown time |
 
 ## Comparison
 
@@ -86,7 +86,7 @@ Table below shows the results after running the script `collect-native-jar-docke
 micronaut-elasticsearch-native |            21s |         44921753 |              442s |             144MB |
 ```
 
-Finally, the following table shows the results after running the script `collect-startup-ab-times.sh`
+Finally, the following table shows the results after running the script `collect-ab-times-memory-usage.sh`
 ```
                    Application | Startup Time |     Initial Memory Usage | Ab Testing Time |       Final Memory Usage | Shutdown Time |
 ------------------------------ + ------------ + ------------------------ + --------------- + ------------------------ + ------------- |
