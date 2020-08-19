@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   mysql:
-    image: mysql:8.0.20
+    image: mysql:8.0.21
     container_name: mysql
     restart: unless-stopped
     ports:

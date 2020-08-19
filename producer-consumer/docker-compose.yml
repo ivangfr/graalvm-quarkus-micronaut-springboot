@@ -69,7 +69,7 @@ services:
 
   kafka-manager:
     container_name: kafka-manager
-    image: hlebalbau/kafka-manager:3.0.0.4
+    image: hlebalbau/kafka-manager:3.0.0.5
     restart: unless-stopped
     depends_on:
       - zookeeper

@@ -1,7 +1,7 @@
 plugins {
     id "com.diffplug.eclipse.apt" version "3.22.0"
     id "com.github.johnrengelman.shadow" version "6.0.0"
-    id "com.google.cloud.tools.jib" version "2.4.0"
+    id "com.google.cloud.tools.jib" version "2.5.0"
     id "application"
 }
 
@@ -19,7 +19,7 @@ configurations {
 }
 
 ext {
-    set('micronautVersion', '2.0.0')
+    set('micronautVersion', '2.0.1')
     set('lombokVersion', '1.18.12')
 }
 
