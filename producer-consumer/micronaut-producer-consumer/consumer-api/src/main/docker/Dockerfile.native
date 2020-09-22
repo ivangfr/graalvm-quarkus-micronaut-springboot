@@ -1,4 +1,4 @@
-FROM oracle/graalvm-ce:20.1.0-java11 as graalvm
+FROM oracle/graalvm-ce:20.2.0-java11 as graalvm
 RUN gu install native-image
 
 COPY build/libs/consumer-api-*-all.jar /home/app/consumer-api/build/libs/consumer-api.jar

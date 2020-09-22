@@ -2,7 +2,6 @@ micronaut:
   application:
     name: micronaut-simple-api
 
----
 endpoints:
   info:
     enabled: true

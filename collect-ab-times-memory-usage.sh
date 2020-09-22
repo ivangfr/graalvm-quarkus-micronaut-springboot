@@ -36,10 +36,10 @@ start_time=$(date)
 JAVA_OPTS_XMX='-Xmx128m'
 CONTAINER_MAX_MEM=256M
 
-AB_PARAMS_SIMPLE_API='-c 10 -n 1000'
-AB_PARAMS_BOOK_API='-c 10 -n 500'
-AB_PARAMS_PRODUCER_CONSUME='-c 10 -n 2000'
-AB_PARAMS_ELASTICSEARCH='-c 10 -n 500'
+AB_PARAMS_SIMPLE_API='-c 10 -n 3000'
+AB_PARAMS_BOOK_API='-c 10 -n 2000'
+AB_PARAMS_PRODUCER_CONSUMER='-c 10 -n 4000'
+AB_PARAMS_ELASTICSEARCH='-c 10 -n 2000'
 
 echo
 echo "=========="
@@ -337,7 +337,7 @@ quarkus_producer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_tim
 
 quarkus_producer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-producer-api-jvm")
 
-run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUME http://localhost:9100/api/news"
+run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9100/api/news"
 quarkus_producer_api_jvm[ab_testing_time]=$run_command_exec_time
 
 quarkus_producer_api_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-producer-api-jvm")
@@ -358,7 +358,7 @@ quarkus_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_tim
 
 quarkus_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-jvm")
 
-wait_for_container_log "quarkus-consumer-api-jvm" "OFFSET: 1999"
+wait_for_container_log "quarkus-consumer-api-jvm" "OFFSET: 3999"
 quarkus_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
 quarkus_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-jvm")
@@ -387,7 +387,7 @@ quarkus_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_
 
 quarkus_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-producer-api-native")
 
-run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUME http://localhost:9101/api/news"
+run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9101/api/news"
 quarkus_producer_api_native[ab_testing_time]=$run_command_exec_time
 
 quarkus_producer_api_native[final_memory_usage]=$(get_container_memory_usage "quarkus-producer-api-native")
@@ -408,7 +408,7 @@ quarkus_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_
 
 quarkus_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-native")
 
-wait_for_container_log "quarkus-consumer-api-native" "OFFSET: 3999"
+wait_for_container_log "quarkus-consumer-api-native" "OFFSET: 7999"
 quarkus_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
 quarkus_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-native")
@@ -436,7 +436,7 @@ micronaut_producer_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_
 
 micronaut_producer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-producer-api-jvm")
 
-run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUME http://localhost:9102/api/news"
+run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9102/api/news"
 micronaut_producer_api_jvm[ab_testing_time]=$run_command_exec_time
 
 micronaut_producer_api_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-producer-api-jvm")
@@ -456,7 +456,7 @@ micronaut_consumer_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_
 
 micronaut_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-jvm")
 
-wait_for_container_log "micronaut-consumer-api-jvm" "OFFSET: 1999"
+wait_for_container_log "micronaut-consumer-api-jvm" "OFFSET: 3999"
 micronaut_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
 micronaut_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-jvm")
@@ -484,7 +484,7 @@ micronaut_producer_api_native[startup_time]=$(extract_startup_time_from_log "$wa
 
 micronaut_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-producer-api-native")
 
-run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUME http://localhost:9102/api/news"
+run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9102/api/news"
 micronaut_producer_api_native[ab_testing_time]=$run_command_exec_time
 
 micronaut_producer_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-producer-api-native")
@@ -504,7 +504,7 @@ micronaut_consumer_api_native[startup_time]=$(extract_startup_time_from_log "$wa
 
 micronaut_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-native")
 
-wait_for_container_log "micronaut-consumer-api-native" "OFFSET: 3999"
+wait_for_container_log "micronaut-consumer-api-native" "OFFSET: 7999"
 micronaut_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
 micronaut_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-native")
@@ -533,7 +533,7 @@ springboot_producer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_
 
 springboot_producer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-jvm")
 
-run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUME http://localhost:9104/api/news"
+run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9104/api/news"
 springboot_producer_api_jvm[ab_testing_time]=$run_command_exec_time
 
 springboot_producer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-jvm")
@@ -554,7 +554,7 @@ springboot_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_
 
 springboot_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
 
-wait_for_container_log "springboot-consumer-api-jvm" "OFFSET: 1999"
+wait_for_container_log "springboot-consumer-api-jvm" "OFFSET: 3999"
 springboot_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
 springboot_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")

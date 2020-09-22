@@ -2,7 +2,6 @@ micronaut:
   application:
     name: micronaut-book-api
 
----
 endpoints:
   info:
     enabled: true
@@ -19,10 +18,7 @@ endpoints:
       enabled: true
     jdbc:
       enabled: true
----
-datasources.default: {}
 
----
 datasources:
   default:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/bookdb?characterEncoding=UTF-8&serverTimezone=UTC

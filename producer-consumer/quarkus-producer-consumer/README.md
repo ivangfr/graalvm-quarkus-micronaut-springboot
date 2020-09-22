@@ -175,7 +175,3 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 - **Shutdown**
 
   Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
-
-## Issues
-
-- [Consumer reads 500 messages and stops a few seconds #290](https://github.com/smallrye/smallrye-reactive-messaging/issues/290)

@@ -19,7 +19,7 @@ configurations {
 }
 
 ext {
-    set('micronautVersion', '2.0.1')
+    set('micronautVersion', '2.0.2')
     set('lombokVersion', '1.18.12')
 }
 
