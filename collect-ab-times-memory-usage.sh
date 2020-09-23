@@ -249,31 +249,26 @@ micronaut_book_api_jvm[shutdown_time]=$run_command_exec_time
 
 echo
 echo "-------------------------"
-echo "MICRONAUT-BOOK-API-NATIVE (DISABLED)"
+echo "MICRONAUT-BOOK-API-NATIVE"
 echo "-------------------------"
 
-#docker run -d --rm --name micronaut-book-api-native -p 9088:8080 -e MYSQL_HOST=mysql \
-#  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-#  --network book-api_default \
-#  docker.mycompany.com/micronaut-book-api-native:1.0.0
-#
-#wait_for_container_log "micronaut-book-api-native" "Startup completed in"
-#micronaut_book_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
-#
-#micronaut_book_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-book-api-native")
-#
-#run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9088/api/books"
-#micronaut_book_api_native[ab_testing_time]=$run_command_exec_time
-#
-#micronaut_book_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-book-api-native")
-#
-#run_command "docker stop micronaut-book-api-native"
-#micronaut_book_api_native[shutdown_time]=$run_command_exec_time
-micronaut_book_api_native[startup_time]="-"
-micronaut_book_api_native[initial_memory_usage]="-"
-micronaut_book_api_native[ab_testing_time]="-"
-micronaut_book_api_native[final_memory_usage]="-"
-micronaut_book_api_native[shutdown_time]="-"
+docker run -d --rm --name micronaut-book-api-native -p 9088:8080 -e MYSQL_HOST=mysql \
+ -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+ --network book-api_default \
+ docker.mycompany.com/micronaut-book-api-native:1.0.0
+
+wait_for_container_log "micronaut-book-api-native" "Startup completed in"
+micronaut_book_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+
+micronaut_book_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-book-api-native")
+
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9088/api/books"
+micronaut_book_api_native[ab_testing_time]=$run_command_exec_time
+
+micronaut_book_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-book-api-native")
+
+run_command "docker stop micronaut-book-api-native"
+micronaut_book_api_native[shutdown_time]=$run_command_exec_time
 
 echo
 echo "-------------------"
@@ -621,10 +616,24 @@ echo "----------------------------"
 echo "QUARKUS-ELASTICSEARCH-NATIVE"
 echo "----------------------------"
 
-quarkus_elasticsearch_native[startup_time]="-"
-quarkus_elasticsearch_native[initial_memory_usage]="-"
-quarkus_elasticsearch_native[ab_testing_time]="-"
-quarkus_elasticsearch_native[final_memory_usage]="-"
+docker run -d --rm --name quarkus-elasticsearch-native -p 9106:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+  --network elasticsearch_default \
+  docker.mycompany.com/quarkus-elasticsearch-native:1.0.0
+
+wait_for_container_log "quarkus-elasticsearch-native" "started in"
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
+quarkus_elasticsearch_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+
+quarkus_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-elasticsearch-native")
+
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9106/api/movies"
+quarkus_elasticsearch_native[ab_testing_time]=$run_command_exec_time
+
+quarkus_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "quarkus-elasticsearch-native")
+
+run_command "docker stop quarkus-elasticsearch-native"
+quarkus_elasticsearch_native[shutdown_time]=$run_command_exec_time
 
 echo
 echo "---------------------------"

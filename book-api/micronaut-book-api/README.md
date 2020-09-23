@@ -83,7 +83,6 @@
   ```
 
 - Run the following command to start the Docker container
-  > **Important:** Unable to run the Docker Native Image. For more details see [issues](#issues)
   ```
   docker run --rm --name micronaut-book-api-native \
     -p 9088:8080 -e MYSQL_HOST=mysql --network book-api_default \
@@ -102,33 +101,80 @@
 
 ## Issues
 
-- Unable to run the Docker Native Image.
+- When uncommenting the dependencies `micronaut-micrometer-core` and `micronaut-micrometer-registry-prometheus` in `build.gradle`, building the native docker image of the app and running it, I am getting the following exception during the startup
   ```
-  [main] ERROR io.micronaut.runtime.Micronaut - Error starting Micronaut server: Bean   definition [org.hibernate.SessionFactory] could not be loaded: Error instantiating bean of type    [org.hibernate.boot.registry.StandardServiceRegistry]
+  [main] ERROR io.micronaut.runtime.Micronaut - Error starting Micronaut server: Bean definition [org.hibernate.SessionFactory] could not be   loaded: Error instantiating bean of type  [org.hibernate.boot.registry.StandardServiceRegistry]
   
-  Message: Bean Factory [Definition: io.micronaut.configuration.hibernate.jpa.  EntityManagerFactoryBean] returned null
-  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]  ) --> SessionFactoryBuilder.hibernateSessionFactoryBuilder([MetadataSources metadataSources],  ValidatorFactory validatorFactory) --> MetadataSources.hibernateMetadataSources(JpaConfiguration   jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
-  io.micronaut.context.exceptions.BeanInstantiationException: Bean definition [org.hibernate.  SessionFactory] could not be loaded: Error instantiating bean of type  [org.hibernate.boot.  registry.StandardServiceRegistry]
+  Message: Class must be instance of com.codahale.metrics.MetricRegistry or io.micrometer.core.instrument.MeterRegistry
+  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]) --> SessionFactoryBuilder.  hibernateSessionFactoryBuilder([MetadataSources metadataSources],ValidatorFactory validatorFactory) --> MetadataSources.  hibernateMetadataSources(JpaConfiguration jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
+  io.micronaut.context.exceptions.BeanInstantiationException: Bean definition [org.hibernate.SessionFactory] could not be loaded: Error   instantiating bean of type  [org.hibernate.boot.registry.StandardServiceRegistry]
   
-  Message: Bean Factory [Definition: io.micronaut.configuration.hibernate.jpa.  EntityManagerFactoryBean] returned null
-  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]  ) --> SessionFactoryBuilder.hibernateSessionFactoryBuilder([MetadataSources metadataSources],  ValidatorFactory validatorFactory) --> MetadataSources.hibernateMetadataSources(JpaConfiguration   jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
-  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1533)
-  	at io.micronaut.context.DefaultApplicationContext.initializeContext(DefaultApplicationContext.  java:220)
-  	at io.micronaut.context.DefaultBeanContext.readAllBeanDefinitionClasses(DefaultBeanContext.  java:2763)
-  	at io.micronaut.context.DefaultBeanContext.start(DefaultBeanContext.java:227)
+  Message: Class must be instance of com.codahale.metrics.MetricRegistry or io.micrometer.core.instrument.MeterRegistry
+  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]) --> SessionFactoryBuilder.  hibernateSessionFactoryBuilder([MetadataSources metadataSources],ValidatorFactory validatorFactory) --> MetadataSources.  hibernateMetadataSources(JpaConfiguration jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
+  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1540)
+  	at io.micronaut.context.DefaultApplicationContext.initializeContext(DefaultApplicationContext.java:220)
+  	at io.micronaut.context.DefaultBeanContext.readAllBeanDefinitionClasses(DefaultBeanContext.java:2771)
+  	at io.micronaut.context.DefaultBeanContext.start(DefaultBeanContext.java:228)
   	at io.micronaut.context.DefaultApplicationContext.start(DefaultApplicationContext.java:166)
   	at io.micronaut.runtime.Micronaut.start(Micronaut.java:64)
   	at io.micronaut.runtime.Micronaut.run(Micronaut.java:294)
   	at io.micronaut.runtime.Micronaut.run(Micronaut.java:280)
   	at com.mycompany.micronautbookapi.Application.main(Application.java:18)
-  Caused by: io.micronaut.context.exceptions.BeanInstantiationException: Error instantiating bean   of type  [org.hibernate.boot.registry.StandardServiceRegistry]
+  Caused by: io.micronaut.context.exceptions.BeanInstantiationException: Error instantiating bean of type  [org.hibernate.boot.registry.  StandardServiceRegistry]
   
-  Message: Bean Factory [Definition: io.micronaut.configuration.hibernate.jpa.  EntityManagerFactoryBean] returned null
-  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]  ) --> SessionFactoryBuilder.hibernateSessionFactoryBuilder([MetadataSources metadataSources],  ValidatorFactory validatorFactory) --> MetadataSources.hibernateMetadataSources(JpaConfiguration   jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
-  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1897)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal  (DefaultBeanContext.java:2630)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.  java:2616)
-  	at io.micronaut.context.DefaultBeanContext.loadContextScopeBean(DefaultBeanContext.java:2166)
-  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1531)
+  Message: Class must be instance of com.codahale.metrics.MetricRegistry or io.micrometer.core.instrument.MeterRegistry
+  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]) --> SessionFactoryBuilder.  hibernateSessionFactoryBuilder([MetadataSources metadataSources],ValidatorFactory validatorFactory) --> MetadataSources.  hibernateMetadataSources(JpaConfiguration jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
+  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1916)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
+  	at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:2296)
+  	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2270)
+  	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1240)
+  	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1013)
+  	at io.micronaut.data.hibernate.runtime.$DataEntityManagerFactoryBean$HibernateStandardServiceRegistry0Definition.doBuild(Unknown Source)
+  	at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:118)
+  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:139)
+  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
+  	at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:2296)
+  	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2270)
+  	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1240)
+  	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1013)
+  	at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateMetadataSources1Definition.doBuild(Unknown Source)
+  	at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:118)
+  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:139)
+  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
+  	at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:2296)
+  	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2270)
+  	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1240)
+  	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1013)
+  	at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactoryBuilder2Definition.build(Unknown Source)
+  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:143)
+  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
+  	at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:2296)
+  	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2270)
+  	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1240)
+  	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1013)
+  	at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactory3Definition.build(Unknown Source)
+  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:143)
+  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
+  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
+  	at io.micronaut.context.DefaultBeanContext.loadContextScopeBean(DefaultBeanContext.java:2163)
+  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1538)
   	... 8 common frames omitted
+  Caused by: java.lang.IllegalArgumentException: Class must be instance of com.codahale.metrics.MetricRegistry or io.micrometer.core.instrument.  MeterRegistry
+  	at com.zaxxer.hikari.HikariConfig.setMetricRegistry(HikariConfig.java:667)
+  	at com.zaxxer.hikari.HikariDataSource.setMetricRegistry(HikariDataSource.java:237)
+  	at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.addMeterRegistry(DatasourceFactory.java:79)
+  	at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.dataSource(DatasourceFactory.java:67)
+  	at io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$DataSource0Definition.build(Unknown Source)
+  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:143)
+  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
+  	... 50 common frames omitted
   ```

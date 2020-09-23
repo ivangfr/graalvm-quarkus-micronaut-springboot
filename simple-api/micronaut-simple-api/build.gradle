@@ -19,7 +19,7 @@ configurations {
 }
 
 ext {
-    set('micronautVersion', '2.0.2')
+    set('micronautVersion', '2.0.3')
 }
 
 dependencies {

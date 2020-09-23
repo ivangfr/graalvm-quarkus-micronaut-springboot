@@ -1,5 +1,6 @@
 package com.mycompany.quarkuselasticsearch.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.quarkuselasticsearch.exception.MovieServiceException;
 import com.mycompany.quarkuselasticsearch.mapper.MovieMapper;
 import com.mycompany.quarkuselasticsearch.model.Movie;
@@ -18,7 +19,6 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.json.bind.Jsonb;
 
 @Slf4j
 @ApplicationScoped
@@ -31,7 +31,7 @@ public class MovieServiceImpl implements MovieService {
     MovieMapper movieMapper;
 
     @Inject
-    Jsonb jsonb;
+    ObjectMapper mapper;
 
     @ConfigProperty(name = "elasticsearch.indexes.movies")
     String moviesIndex;
@@ -39,7 +39,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public String saveMovie(Movie movie) {
         try {
-            String movieAsJsonString = jsonb.toJson(movie);
+            String movieAsJsonString = mapper.writeValueAsString(movie);
             IndexRequest indexRequest = new IndexRequest(moviesIndex).source(movieAsJsonString, XContentType.JSON);
             IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
             String id = indexResponse.getId();

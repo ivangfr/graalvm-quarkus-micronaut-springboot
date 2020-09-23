@@ -96,4 +96,7 @@
   curl -i "localhost:9108/api/movies?title=evil"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminals
+- To stop and remove application Docker container, run in a terminal
+  ```
+  docker stop micronaut-elasticsearch-native
+  ```
