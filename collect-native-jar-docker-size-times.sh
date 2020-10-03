@@ -5,6 +5,7 @@ source my-functions.sh
 docker rmi \
   docker.mycompany.com/quarkus-simple-api-native:1.0.0 \
   docker.mycompany.com/micronaut-simple-api-native:1.0.0 \
+  docker.mycompany.com/springboot-simple-api-native:1.0.0 \
   docker.mycompany.com/quarkus-book-api-native:1.0.0 \
   docker.mycompany.com/micronaut-book-api-native:1.0.0 \
   docker.mycompany.com/quarkus-producer-api-native:1.0.0 \
@@ -16,6 +17,7 @@ docker rmi \
 
 declare -A quarkus_simple_api_native
 declare -A micronaut_simple_api_native
+declare -A springboot_simple_api_native
 
 declare -A quarkus_book_api_native
 declare -A micronaut_book_api_native
@@ -70,6 +72,24 @@ micronaut_simple_api_native[packaging_time]=$package_jar_build_image_packaging_t
 micronaut_simple_api_native[jar_size]=$package_jar_build_image_jar_size
 micronaut_simple_api_native[building_time]=$package_jar_build_image_building_time
 micronaut_simple_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+
+echo
+echo "----------------------------"
+echo "SPRINGBOOT-SIMPLE-API-NATIVE"
+echo "----------------------------"
+
+cd ../springboot-simple-api
+
+package_jar_build_image \
+  "./gradlew clean" \
+  "./gradlew assemble" \
+  "build/libs/springboot-simple-api-1.0.0.jar" \
+  "./docker-build.sh native" \
+  "docker.mycompany.com/springboot-simple-api-native:1.0.0"
+springboot_simple_api_native[packaging_time]=$package_jar_build_image_packaging_time
+springboot_simple_api_native[jar_size]=$package_jar_build_image_jar_size
+springboot_simple_api_native[building_time]=$package_jar_build_image_building_time
+springboot_simple_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
 echo
 echo "========"
@@ -231,6 +251,7 @@ printf "%30s | %14s | %16s | %17s | %17s |\n" "Application" "Packaging Time" "Ja
 printf "%30s + %14s + %16s + %17s + %17s |\n" "------------------------------" "--------------" "----------------" "-----------------" "-----------------"
 printf "%30s | %14s | %16s | %17s | %17s |\n" "quarkus-simple-api-native" ${quarkus_simple_api_native[packaging_time]} ${quarkus_simple_api_native[jar_size]} ${quarkus_simple_api_native[building_time]} ${quarkus_simple_api_native[docker_image_size]}
 printf "%30s | %14s | %16s | %17s | %17s |\n" "micronaut-simple-api-native" ${micronaut_simple_api_native[packaging_time]} ${micronaut_simple_api_native[jar_size]} ${micronaut_simple_api_native[building_time]} ${micronaut_simple_api_native[docker_image_size]}
+printf "%30s | %14s | %16s | %17s | %17s |\n" "springboot-simple-api-native" ${springboot_simple_api_native[packaging_time]} ${springboot_simple_api_native[jar_size]} ${springboot_simple_api_native[building_time]} ${springboot_simple_api_native[docker_image_size]}
 printf "%30s + %14s + %16s + %17s + %17s |\n" ".............................." ".............." "................" "................." "................."
 printf "%30s | %14s | %16s | %17s | %17s |\n" "quarkus-book-api-native" ${quarkus_book_api_native[packaging_time]} ${quarkus_book_api_native[jar_size]} ${quarkus_book_api_native[building_time]} ${quarkus_book_api_native[docker_image_size]}
 printf "%30s | %14s | %16s | %17s | %17s |\n" "micronaut-book-api-native" ${micronaut_book_api_native[packaging_time]} ${micronaut_book_api_native[jar_size]} ${micronaut_book_api_native[building_time]} ${micronaut_book_api_native[docker_image_size]}

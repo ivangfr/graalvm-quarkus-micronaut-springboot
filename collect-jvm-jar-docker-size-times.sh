@@ -82,9 +82,9 @@ micronaut_simple_api_jvm[building_time]=$package_jar_build_image_building_time
 micronaut_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
 echo
-echo "---------------------"
-echo "SPRINGBOOT-SIMPLE-API"
-echo "---------------------"
+echo "-------------------------"
+echo "SPRINGBOOT-SIMPLE-API-JVM"
+echo "-------------------------"
 
 cd ../springboot-simple-api
 
@@ -141,9 +141,9 @@ micronaut_book_api_jvm[building_time]=$package_jar_build_image_building_time
 micronaut_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
 echo
-echo "-------------------"
-echo "SPRINGBOOT-BOOK-API"
-echo "-------------------"
+echo "-----------------------"
+echo "SPRINGBOOT-BOOK-API-JVM"
+echo "-----------------------"
 
 cd ../springboot-book-api
 
@@ -307,9 +307,9 @@ micronaut_elasticsearch_jvm[building_time]=$package_jar_build_image_building_tim
 micronaut_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
 echo
-echo "------------------------"
-echo "SPRINGBOOT-ELASTICSEARCH"
-echo "------------------------"
+echo "----------------------------"
+echo "SPRINGBOOT-ELASTICSEARCH-JVM"
+echo "----------------------------"
 
 cd ../springboot-elasticsearch
 

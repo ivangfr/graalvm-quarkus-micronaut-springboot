@@ -7,6 +7,7 @@ declare -A quarkus_simple_api_native
 declare -A micronaut_simple_api_jvm
 declare -A micronaut_simple_api_native
 declare -A springboot_simple_api_jvm
+declare -A springboot_simple_api_native
 
 declare -A quarkus_book_api_jvm
 declare -A quarkus_book_api_native
@@ -137,9 +138,9 @@ run_command "docker stop micronaut-simple-api-native"
 micronaut_simple_api_native[shutdown_time]=$run_command_exec_time
 
 echo
-echo "---------------------"
-echo "SPRINGBOOT-SIMPLE-API"
-echo "---------------------"
+echo "-------------------------"
+echo "SPRINGBOOT-SIMPLE-API-JVM"
+echo "-------------------------"
 
 docker run -d --rm --name springboot-simple-api-jvm -p 9084:8080 \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
@@ -158,6 +159,29 @@ springboot_simple_api_jvm[final_memory_usage]=$(get_container_memory_usage "spri
 
 run_command "docker stop springboot-simple-api-jvm"
 springboot_simple_api_jvm[shutdown_time]=$run_command_exec_time
+
+echo
+echo "----------------------------"
+echo "SPRINGBOOT-SIMPLE-API-NATIVE"
+echo "----------------------------"
+
+docker run -d --rm --name springboot-simple-api-native -p 9085:8080 \
+  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+  docker.mycompany.com/springboot-simple-api-native:1.0.0
+
+wait_for_container_log "springboot-simple-api-native" "Started"
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+springboot_simple_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+
+springboot_simple_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-simple-api-native")
+
+run_command "ab $AB_PARAMS_SIMPLE_API http://localhost:9085/api/greeting?name=Ivan"
+springboot_simple_api_native[ab_testing_time]=$run_command_exec_time
+
+springboot_simple_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-simple-api-native")
+
+run_command "docker stop springboot-simple-api-native"
+springboot_simple_api_native[shutdown_time]=$run_command_exec_time
 
 echo
 echo "========"
@@ -271,9 +295,9 @@ run_command "docker stop micronaut-book-api-native"
 micronaut_book_api_native[shutdown_time]=$run_command_exec_time
 
 echo
-echo "-------------------"
-echo "SPRINGBOOT-BOOK-API"
-echo "-------------------"
+echo "-----------------------"
+echo "SPRINGBOOT-BOOK-API-JVM"
+echo "-----------------------"
 
 docker run -d --rm --name springboot-book-api-jvm -p 9089:8080 -e MYSQL_HOST=mysql \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
@@ -682,9 +706,9 @@ run_command "docker stop micronaut-elasticsearch-native"
 micronaut_elasticsearch_native[shutdown_time]=$run_command_exec_time
 
 echo
-echo "------------------------"
-echo "SPRINGBOOT-ELASTICSEARCH"
-echo "------------------------"
+echo "----------------------------"
+echo "SPRINGBOOT-ELASTICSEARCH-JVM"
+echo "----------------------------"
 
 docker run -d --rm --name springboot-elasticsearch-jvm -p 9109:8080 -e ELASTICSEARCH_HOST=elasticsearch \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
@@ -713,37 +737,38 @@ echo "=============="
 docker-compose down -v
 
 printf "\n"
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "Application" "Startup Time" "Initial Memory Usage" "Ab Testing Time" "Final Memory Usage" "Shutdown Time"
-printf "%30s + %12s + %24s + %15s + %24s + %13s |\n" "------------------------------" "------------" "------------------------" "---------------" "------------------------" "-------------"
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-simple-api-jvm" ${quarkus_simple_api_jvm[startup_time]} ${quarkus_simple_api_jvm[initial_memory_usage]} ${quarkus_simple_api_jvm[ab_testing_time]} ${quarkus_simple_api_jvm[final_memory_usage]} ${quarkus_simple_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-simple-api-jvm" ${micronaut_simple_api_jvm[startup_time]} ${micronaut_simple_api_jvm[initial_memory_usage]} ${micronaut_simple_api_jvm[ab_testing_time]} ${micronaut_simple_api_jvm[final_memory_usage]} ${micronaut_simple_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-simple-api-jvm" ${springboot_simple_api_jvm[startup_time]} ${springboot_simple_api_jvm[initial_memory_usage]} ${springboot_simple_api_jvm[ab_testing_time]} ${springboot_simple_api_jvm[final_memory_usage]} ${springboot_simple_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-simple-api-native" ${quarkus_simple_api_native[startup_time]} ${quarkus_simple_api_native[initial_memory_usage]} ${quarkus_simple_api_native[ab_testing_time]} ${quarkus_simple_api_native[final_memory_usage]} ${quarkus_simple_api_native[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-simple-api-native" ${micronaut_simple_api_native[startup_time]} ${micronaut_simple_api_native[initial_memory_usage]} ${micronaut_simple_api_native[ab_testing_time]} ${micronaut_simple_api_native[final_memory_usage]} ${micronaut_simple_api_native[shutdown_time]}
-printf "%30s + %12s + %24s + %15s + %24s + %13s |\n" ".............................." "............" "........................" "..............." "........................" "............"
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-book-api-jvm" ${quarkus_book_api_jvm[startup_time]} ${quarkus_book_api_jvm[initial_memory_usage]} ${quarkus_book_api_jvm[ab_testing_time]} ${quarkus_book_api_jvm[final_memory_usage]} ${quarkus_book_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-book-api-jvm" ${micronaut_book_api_jvm[startup_time]} ${micronaut_book_api_jvm[initial_memory_usage]} ${micronaut_book_api_jvm[ab_testing_time]} ${micronaut_book_api_jvm[final_memory_usage]} ${micronaut_book_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-book-api-jvm" ${springboot_book_api_jvm[startup_time]} ${springboot_book_api_jvm[initial_memory_usage]} ${springboot_book_api_jvm[ab_testing_time]} ${springboot_book_api_jvm[final_memory_usage]} ${springboot_book_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-book-api-native" ${quarkus_book_api_native[startup_time]} ${quarkus_book_api_native[initial_memory_usage]} ${quarkus_book_api_native[ab_testing_time]} ${quarkus_book_api_native[final_memory_usage]} ${quarkus_book_api_native[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-book-api-native" ${micronaut_book_api_native[startup_time]} ${micronaut_book_api_native[initial_memory_usage]} ${micronaut_book_api_native[ab_testing_time]} ${micronaut_book_api_native[final_memory_usage]} ${micronaut_book_api_native[shutdown_time]}
-printf "%30s + %12s + %24s + %15s + %24s + %13s |\n" ".............................." "............" "........................" "..............." "........................" "............"
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-producer-api-jvm" ${quarkus_producer_api_jvm[startup_time]} ${quarkus_producer_api_jvm[initial_memory_usage]} ${quarkus_producer_api_jvm[ab_testing_time]} ${quarkus_producer_api_jvm[final_memory_usage]} ${quarkus_producer_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-producer-api-jvm" ${micronaut_producer_api_jvm[startup_time]} ${micronaut_producer_api_jvm[initial_memory_usage]} ${micronaut_producer_api_jvm[ab_testing_time]} ${micronaut_producer_api_jvm[final_memory_usage]} ${micronaut_producer_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-producer-api-jvm" ${springboot_producer_api_jvm[startup_time]} ${springboot_producer_api_jvm[initial_memory_usage]} ${springboot_producer_api_jvm[ab_testing_time]} ${springboot_producer_api_jvm[final_memory_usage]} ${springboot_producer_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-producer-api-native" ${quarkus_producer_api_native[startup_time]} ${quarkus_producer_api_native[initial_memory_usage]} ${quarkus_producer_api_native[ab_testing_time]} ${quarkus_producer_api_native[final_memory_usage]} ${quarkus_producer_api_native[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-producer-api-native" ${micronaut_producer_api_native[startup_time]} ${micronaut_producer_api_native[initial_memory_usage]} ${micronaut_producer_api_native[ab_testing_time]} ${micronaut_producer_api_native[final_memory_usage]} ${micronaut_producer_api_native[shutdown_time]}
-printf "%30s + %12s + %24s + %15s + %24s + %13s |\n" ".............................." "............" "........................" "..............." "........................" "............"
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-consumer-api-jvm" ${quarkus_consumer_api_jvm[startup_time]} ${quarkus_consumer_api_jvm[initial_memory_usage]} ${quarkus_consumer_api_jvm[ab_testing_time]} ${quarkus_consumer_api_jvm[final_memory_usage]} ${quarkus_consumer_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-consumer-api-jvm" ${micronaut_consumer_api_jvm[startup_time]} ${micronaut_consumer_api_jvm[initial_memory_usage]} ${micronaut_consumer_api_jvm[ab_testing_time]} ${micronaut_consumer_api_jvm[final_memory_usage]} ${micronaut_consumer_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-consumer-api-jvm" ${springboot_consumer_api_jvm[startup_time]} ${springboot_consumer_api_jvm[initial_memory_usage]} ${springboot_consumer_api_jvm[ab_testing_time]} ${springboot_consumer_api_jvm[final_memory_usage]} ${springboot_consumer_api_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-consumer-api-native" ${quarkus_consumer_api_native[startup_time]} ${quarkus_consumer_api_native[initial_memory_usage]} ${quarkus_consumer_api_native[ab_testing_time]} ${quarkus_consumer_api_native[final_memory_usage]} ${quarkus_consumer_api_native[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-consumer-api-native" ${micronaut_consumer_api_native[startup_time]} ${micronaut_consumer_api_native[initial_memory_usage]} ${micronaut_consumer_api_native[ab_testing_time]} ${micronaut_consumer_api_native[final_memory_usage]} ${micronaut_consumer_api_native[shutdown_time]}
-printf "%30s + %12s + %24s + %15s + %24s + %13s |\n" ".............................." "............" "........................" "..............." "........................" "............"
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-elasticsearch-jvm" ${quarkus_elasticsearch_jvm[startup_time]} ${quarkus_elasticsearch_jvm[initial_memory_usage]} ${quarkus_elasticsearch_jvm[ab_testing_time]} ${quarkus_elasticsearch_jvm[final_memory_usage]} ${quarkus_elasticsearch_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-elasticsearch-jvm" ${micronaut_elasticsearch_jvm[startup_time]} ${micronaut_elasticsearch_jvm[initial_memory_usage]} ${micronaut_elasticsearch_jvm[ab_testing_time]} ${micronaut_elasticsearch_jvm[final_memory_usage]} ${micronaut_elasticsearch_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-elasticsearch-jvm" ${springboot_elasticsearch_jvm[startup_time]} ${springboot_elasticsearch_jvm[initial_memory_usage]} ${springboot_elasticsearch_jvm[ab_testing_time]} ${springboot_elasticsearch_jvm[final_memory_usage]} ${springboot_elasticsearch_jvm[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-elasticsearch-native" ${quarkus_elasticsearch_native[startup_time]} ${quarkus_elasticsearch_native[initial_memory_usage]} ${quarkus_elasticsearch_native[ab_testing_time]} ${quarkus_elasticsearch_native[final_memory_usage]} ${quarkus_elasticsearch_native[shutdown_time]}
-printf "%30s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[startup_time]} ${micronaut_elasticsearch_native[initial_memory_usage]} ${micronaut_elasticsearch_native[ab_testing_time]} ${micronaut_elasticsearch_native[final_memory_usage]} ${micronaut_elasticsearch_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "Application" "Startup Time" "Initial Memory Usage" "Ab Testing Time" "Final Memory Usage" "Shutdown Time"
+printf "%31s + %12s + %24s + %15s + %24s + %13s |\n" "------------------------------" "------------" "------------------------" "---------------" "------------------------" "-------------"
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-simple-api-jvm" ${quarkus_simple_api_jvm[startup_time]} ${quarkus_simple_api_jvm[initial_memory_usage]} ${quarkus_simple_api_jvm[ab_testing_time]} ${quarkus_simple_api_jvm[final_memory_usage]} ${quarkus_simple_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-simple-api-jvm" ${micronaut_simple_api_jvm[startup_time]} ${micronaut_simple_api_jvm[initial_memory_usage]} ${micronaut_simple_api_jvm[ab_testing_time]} ${micronaut_simple_api_jvm[final_memory_usage]} ${micronaut_simple_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-simple-api-jvm" ${springboot_simple_api_jvm[startup_time]} ${springboot_simple_api_jvm[initial_memory_usage]} ${springboot_simple_api_jvm[ab_testing_time]} ${springboot_simple_api_jvm[final_memory_usage]} ${springboot_simple_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-simple-api-native" ${quarkus_simple_api_native[startup_time]} ${quarkus_simple_api_native[initial_memory_usage]} ${quarkus_simple_api_native[ab_testing_time]} ${quarkus_simple_api_native[final_memory_usage]} ${quarkus_simple_api_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-simple-api-native" ${micronaut_simple_api_native[startup_time]} ${micronaut_simple_api_native[initial_memory_usage]} ${micronaut_simple_api_native[ab_testing_time]} ${micronaut_simple_api_native[final_memory_usage]} ${micronaut_simple_api_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-simple-api-native" ${springboot_simple_api_native[startup_time]} ${springboot_simple_api_native[initial_memory_usage]} ${springboot_simple_api_native[ab_testing_time]} ${springboot_simple_api_native[final_memory_usage]} ${springboot_simple_api_native[shutdown_time]}
+printf "%31s + %12s + %24s + %15s + %24s + %13s |\n" ".............................." "............" "........................" "..............." "........................" "............"
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-book-api-jvm" ${quarkus_book_api_jvm[startup_time]} ${quarkus_book_api_jvm[initial_memory_usage]} ${quarkus_book_api_jvm[ab_testing_time]} ${quarkus_book_api_jvm[final_memory_usage]} ${quarkus_book_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-book-api-jvm" ${micronaut_book_api_jvm[startup_time]} ${micronaut_book_api_jvm[initial_memory_usage]} ${micronaut_book_api_jvm[ab_testing_time]} ${micronaut_book_api_jvm[final_memory_usage]} ${micronaut_book_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-book-api-jvm" ${springboot_book_api_jvm[startup_time]} ${springboot_book_api_jvm[initial_memory_usage]} ${springboot_book_api_jvm[ab_testing_time]} ${springboot_book_api_jvm[final_memory_usage]} ${springboot_book_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-book-api-native" ${quarkus_book_api_native[startup_time]} ${quarkus_book_api_native[initial_memory_usage]} ${quarkus_book_api_native[ab_testing_time]} ${quarkus_book_api_native[final_memory_usage]} ${quarkus_book_api_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-book-api-native" ${micronaut_book_api_native[startup_time]} ${micronaut_book_api_native[initial_memory_usage]} ${micronaut_book_api_native[ab_testing_time]} ${micronaut_book_api_native[final_memory_usage]} ${micronaut_book_api_native[shutdown_time]}
+printf "%31s + %12s + %24s + %15s + %24s + %13s |\n" ".............................." "............" "........................" "..............." "........................" "............"
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-producer-api-jvm" ${quarkus_producer_api_jvm[startup_time]} ${quarkus_producer_api_jvm[initial_memory_usage]} ${quarkus_producer_api_jvm[ab_testing_time]} ${quarkus_producer_api_jvm[final_memory_usage]} ${quarkus_producer_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-producer-api-jvm" ${micronaut_producer_api_jvm[startup_time]} ${micronaut_producer_api_jvm[initial_memory_usage]} ${micronaut_producer_api_jvm[ab_testing_time]} ${micronaut_producer_api_jvm[final_memory_usage]} ${micronaut_producer_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-producer-api-jvm" ${springboot_producer_api_jvm[startup_time]} ${springboot_producer_api_jvm[initial_memory_usage]} ${springboot_producer_api_jvm[ab_testing_time]} ${springboot_producer_api_jvm[final_memory_usage]} ${springboot_producer_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-producer-api-native" ${quarkus_producer_api_native[startup_time]} ${quarkus_producer_api_native[initial_memory_usage]} ${quarkus_producer_api_native[ab_testing_time]} ${quarkus_producer_api_native[final_memory_usage]} ${quarkus_producer_api_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-producer-api-native" ${micronaut_producer_api_native[startup_time]} ${micronaut_producer_api_native[initial_memory_usage]} ${micronaut_producer_api_native[ab_testing_time]} ${micronaut_producer_api_native[final_memory_usage]} ${micronaut_producer_api_native[shutdown_time]}
+printf "%31s + %12s + %24s + %15s + %24s + %13s |\n" ".............................." "............" "........................" "..............." "........................" "............"
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-consumer-api-jvm" ${quarkus_consumer_api_jvm[startup_time]} ${quarkus_consumer_api_jvm[initial_memory_usage]} ${quarkus_consumer_api_jvm[ab_testing_time]} ${quarkus_consumer_api_jvm[final_memory_usage]} ${quarkus_consumer_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-consumer-api-jvm" ${micronaut_consumer_api_jvm[startup_time]} ${micronaut_consumer_api_jvm[initial_memory_usage]} ${micronaut_consumer_api_jvm[ab_testing_time]} ${micronaut_consumer_api_jvm[final_memory_usage]} ${micronaut_consumer_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-consumer-api-jvm" ${springboot_consumer_api_jvm[startup_time]} ${springboot_consumer_api_jvm[initial_memory_usage]} ${springboot_consumer_api_jvm[ab_testing_time]} ${springboot_consumer_api_jvm[final_memory_usage]} ${springboot_consumer_api_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-consumer-api-native" ${quarkus_consumer_api_native[startup_time]} ${quarkus_consumer_api_native[initial_memory_usage]} ${quarkus_consumer_api_native[ab_testing_time]} ${quarkus_consumer_api_native[final_memory_usage]} ${quarkus_consumer_api_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-consumer-api-native" ${micronaut_consumer_api_native[startup_time]} ${micronaut_consumer_api_native[initial_memory_usage]} ${micronaut_consumer_api_native[ab_testing_time]} ${micronaut_consumer_api_native[final_memory_usage]} ${micronaut_consumer_api_native[shutdown_time]}
+printf "%31s + %12s + %24s + %15s + %24s + %13s |\n" ".............................." "............" "........................" "..............." "........................" "............"
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-elasticsearch-jvm" ${quarkus_elasticsearch_jvm[startup_time]} ${quarkus_elasticsearch_jvm[initial_memory_usage]} ${quarkus_elasticsearch_jvm[ab_testing_time]} ${quarkus_elasticsearch_jvm[final_memory_usage]} ${quarkus_elasticsearch_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-elasticsearch-jvm" ${micronaut_elasticsearch_jvm[startup_time]} ${micronaut_elasticsearch_jvm[initial_memory_usage]} ${micronaut_elasticsearch_jvm[ab_testing_time]} ${micronaut_elasticsearch_jvm[final_memory_usage]} ${micronaut_elasticsearch_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "springboot-elasticsearch-jvm" ${springboot_elasticsearch_jvm[startup_time]} ${springboot_elasticsearch_jvm[initial_memory_usage]} ${springboot_elasticsearch_jvm[ab_testing_time]} ${springboot_elasticsearch_jvm[final_memory_usage]} ${springboot_elasticsearch_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "quarkus-elasticsearch-native" ${quarkus_elasticsearch_native[startup_time]} ${quarkus_elasticsearch_native[initial_memory_usage]} ${quarkus_elasticsearch_native[ab_testing_time]} ${quarkus_elasticsearch_native[final_memory_usage]} ${quarkus_elasticsearch_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %24s | %13s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[startup_time]} ${micronaut_elasticsearch_native[initial_memory_usage]} ${micronaut_elasticsearch_native[ab_testing_time]} ${micronaut_elasticsearch_native[final_memory_usage]} ${micronaut_elasticsearch_native[shutdown_time]}
 
 echo
 echo "==>  START AT: ${start_time}"

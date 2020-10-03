@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id 'org.springframework.boot' version '2.4.0-M3'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'com.google.cloud.tools.jib' version '2.5.1'
 	id 'java'
@@ -11,11 +11,18 @@ sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+}
+
+ext {
+	set('springGraalvmNativeVersion', '0.8.1')
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'	
+	implementation "org.springframework.experimental:spring-graalvm-native:${springGraalvmNativeVersion}"
+	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -26,5 +33,15 @@ test {
 	useJUnitPlatform()
 }
 
-// This value is overwritten in docker-build.sh
-jib.to.image = "docker.mycompany.com/springboot-simple-api:${project.version}"
+// It's used to build Docker native image
+bootBuildImage {
+	builder = "paketobuildpacks/builder:tiny"
+	imageName = "docker.mycompany.com/springboot-simple-api-native:${project.version}"
+	environment = [
+		"BP_BOOT_NATIVE_IMAGE" : "1",
+		"BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS": "-Dspring.native.remove-xml-support=true -Dspring.spel.ignore=true --enable-all-security-services"
+	]
+}
+
+// It's used to build Docker jvm image
+jib.to.image = "docker.mycompany.com/springboot-simple-api-jvm:${project.version}"
