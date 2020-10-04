@@ -39,7 +39,7 @@ bootBuildImage {
 	imageName = "docker.mycompany.com/springboot-simple-api-native:${project.version}"
 	environment = [
 		"BP_BOOT_NATIVE_IMAGE" : "1",
-		"BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS": "-Dspring.native.remove-xml-support=true -Dspring.spel.ignore=true --enable-all-security-services"
+		"BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS": "-Dspring.spel.ignore=true"
 	]
 }
 

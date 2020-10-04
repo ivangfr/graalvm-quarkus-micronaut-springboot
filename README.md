@@ -80,6 +80,7 @@ Table below shows the results after running the script `collect-native-jar-docke
 .............................. + .............. + ................ + ................. + ................. |
        quarkus-book-api-native |           462s |         75467096 |               12s |             182MB |
      micronaut-book-api-native |            22s |         34006180 |              558s |             156MB |
+    springboot-book-api-native |             8s |         44564217 |             1225s |             187MB |
 .............................. + .............. + ................ + ................. + ................. |
    quarkus-producer-api-native |           433s |         60114088 |               11s |             167MB |
  micronaut-producer-api-native |            18s |         26495721 |              399s |             124MB |
@@ -107,6 +108,7 @@ Finally, the following table shows the results after running the script `collect
         springboot-book-api-jvm |      13136ms |  202.4MiB/256MiB(79.08%) |             24s |  239.5MiB/256MiB(93.54%) |            3s |
         quarkus-book-api-native |        288ms |    7.48MiB/256MiB(2.92%) |             14s |  45.11MiB/256MiB(17.62%) |            1s |
       micronaut-book-api-native |        784ms |  29.97MiB/256MiB(11.71%) |             14s |  166.2MiB/256MiB(64.94%) |           11s |
+     springboot-book-api-native |            - |                        - |               - |                        - |             - |
  .............................. + ............ + ........................ + ............... + ........................ +  ............ |
        quarkus-producer-api-jvm |       6099ms |  109.5MiB/256MiB(42.78%) |             23s |  136.1MiB/256MiB(53.16%) |            1s |
      micronaut-producer-api-jvm |       4067ms |  109.8MiB/256MiB(42.91%) |             31s |  150.1MiB/256MiB(58.65%) |            1s |
@@ -129,6 +131,8 @@ Finally, the following table shows the results after running the script `collect
 
 Comments:
 
+- There is no values for `springboot-book-api-native` because, in spite of the fact that the native Docker image builds successfully, an exception is thrown at runtime. See [issue](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api/springboot-book-api#issues)
+
 - The shutdown of `Micronaut` native apps are taking around **11 seconds**;
 
 - Checking the Final Memory Usage column, `Quarkus` native apps have better memory utilization (after load tests) than `Micronaut` ones; In this experiment, I set **256MiB** the container limit memory. If I reduce the container limit memmory to **128MiB**, all `Micronaut` native apps will have memory issues. For `Quarkus` native apps, I was able to reduce the container limit memmory to even **64MiB**. Below it, the apps performance will degrade.
@@ -149,6 +153,7 @@ Comments:
          springboot-book-api-jvm | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9089/api/books    |
          quarkus-book-api-native | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9086/api/books    |
        micronaut-book-api-native | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9088/api/books    |
+      springboot-book-api-native | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9090/api/books    |       
   .............................. + ............................................................................................ |
         quarkus-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 4000 http://localhost:9100/api/news      |
       micronaut-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 4000 http://localhost:9102/api/news      |

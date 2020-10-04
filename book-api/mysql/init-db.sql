@@ -1,3 +1,7 @@
+CREATE DATABASE `bookdb`;
+
+USE `bookdb`;
+
 DROP TABLE IF EXISTS `micronaut_books`;
 DROP TABLE IF EXISTS `springboot_books`;
 DROP TABLE IF EXISTS `quarkus_books`;
