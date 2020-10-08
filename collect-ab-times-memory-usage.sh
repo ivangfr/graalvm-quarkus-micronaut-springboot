@@ -324,30 +324,24 @@ echo "--------------------------"
 echo "SPRINGBOOT-BOOK-API-NATIVE"
 echo "--------------------------"
 
-# docker run -d --rm --name springboot-book-api-native -p 9090:8080 -e MYSQL_HOST=mysql \
-#   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-#   --network book-api_default \
-#   docker.mycompany.com/springboot-book-api-native:1.0.0
+docker run -d --rm --name springboot-book-api-native -p 9090:8080 -e MYSQL_HOST=mysql \
+  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+  --network book-api_default \
+  docker.mycompany.com/springboot-book-api-native:1.0.0
 
-# wait_for_container_log "springboot-book-api-native" "Started"
-# startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-# springboot_book_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+wait_for_container_log "springboot-book-api-native" "Started"
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+springboot_book_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-# springboot_book_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-book-api-native")
+springboot_book_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-book-api-native")
 
-# run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9090/api/books"
-# springboot_book_api_native[ab_testing_time]=$run_command_exec_time
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9090/api/books"
+springboot_book_api_native[ab_testing_time]=$run_command_exec_time
 
-# springboot_book_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-book-api-native")
+springboot_book_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-book-api-native")
 
-# run_command "docker stop springboot-book-api-native"
-# springboot_book_api_native[shutdown_time]=$run_command_exec_time
-# ---
-springboot_book_api_native[startup_time]="-"
-springboot_book_api_native[initial_memory_usage]="-"
-springboot_book_api_native[ab_testing_time]="-"
-springboot_book_api_native[final_memory_usage]="-"
-springboot_book_api_native[shutdown_time]="-"
+run_command "docker stop springboot-book-api-native"
+springboot_book_api_native[shutdown_time]=$run_command_exec_time
 
 echo
 echo "=============="
