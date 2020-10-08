@@ -17,7 +17,7 @@ We are using the following Framework versions
 | ----------- | ------------- |
 | Quarkus     | 1.8.1.Final   |
 | Micronaut   | 2.0.3         |
-| Spring Boot | 2.3.4.RELEASE (`simple-api` is using 2.4.0-M3) |
+| Spring Boot | 2.3.4.RELEASE (`simple-api` and `book-api` are using 2.4.0-M3) |
 
 ## Prerequisites
 
