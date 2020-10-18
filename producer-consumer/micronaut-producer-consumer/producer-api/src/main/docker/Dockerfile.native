@@ -1,10 +1,10 @@
 FROM oracle/graalvm-ce:20.2.0-java11 as graalvm
 RUN gu install native-image
 
-COPY build/libs/producer-api-*-all.jar /home/app/producer-api/build/libs/producer-api.jar
+COPY target/producer-api-*.jar /home/app/producer-api/target/producer-api.jar
 WORKDIR /home/app/producer-api
 
-RUN native-image --no-server -cp build/libs/producer-api.jar
+RUN native-image -cp target/producer-api.jar
 
 FROM frolvlad/alpine-glibc
 RUN apk update && apk add libstdc++

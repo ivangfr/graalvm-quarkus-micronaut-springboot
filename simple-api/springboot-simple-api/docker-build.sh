@@ -4,9 +4,9 @@ SECONDS=0
 
 if [ "$1" = "native" ];
 then
-  ./gradlew -Pnative bootBuildImage
+  ./mvnw spring-boot:build-image
 else
-  ./gradlew jibDockerBuild
+  ./mvnw compile jib:dockerBuild
 fi
 
 duration=$SECONDS

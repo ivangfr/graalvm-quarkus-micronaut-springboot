@@ -1,10 +1,10 @@
 FROM oracle/graalvm-ce:20.2.0-java11 as graalvm
 RUN gu install native-image
 
-COPY build/libs/consumer-api-*-all.jar /home/app/consumer-api/build/libs/consumer-api.jar
+COPY target/consumer-api-*.jar /home/app/consumer-api/target/consumer-api.jar
 WORKDIR /home/app/consumer-api
 
-RUN native-image --no-server -cp build/libs/consumer-api.jar
+RUN native-image -cp target/consumer-api.jar
 
 FROM frolvlad/alpine-glibc
 RUN apk update && apk add libstdc++

@@ -1,6 +1,6 @@
 applicationType: default
-defaultPackage: com.mycompany
+defaultPackage: com.mycompany.micronautelasticsearch
 testFramework: junit
 sourceLanguage: java
-buildTool: gradle
-features: [app-name, docker, elasticsearch, graalvm, gradle, http-client, java, java-application, junit, logback, management, micrometer, micrometer-prometheus, netty-server, readme, shade, yaml]
+buildTool: maven
+features: [annotation-api, app-name, docker, elasticsearch, graalvm, http-client, java, java-application, junit, logback, management, maven, micrometer, micrometer-prometheus, netty-server, readme, shade, yaml]

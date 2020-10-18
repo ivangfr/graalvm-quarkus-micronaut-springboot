@@ -199,8 +199,6 @@ echo "=============="
 docker-compose up -d
 wait_for_container_log "mysql" "port: 33060"
 
-./init-db.sh
-
 echo
 echo "--------------------"
 echo "QUARKUS-BOOK-API-JVM"

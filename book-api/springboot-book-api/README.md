@@ -24,7 +24,7 @@
 
 - Run the command below to start the application
   ```
-  ./gradlew clean bootRun
+  ./mvnw clean spring-boot:run
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -43,7 +43,7 @@
 
 - Package the application `jar` file
   ```
-  ./gradlew clean assemble
+  ./mvnw clean package
   ```
 
 - Run the script below to build the Docker image
@@ -74,7 +74,7 @@
 
 - Package the application `jar` file
   ```
-  ./gradlew clean assemble
+  ./mvnw clean package
   ```
 
 - Run the script below to build the Docker image

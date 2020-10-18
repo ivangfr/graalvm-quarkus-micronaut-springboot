@@ -1,5 +1,6 @@
-profile: service
+applicationType: default
 defaultPackage: com.mycompany.producerapi
----
 testFramework: junit
 sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, docker, graalvm, http-client, java, java-application, junit, kafka, logback, management, maven, micrometer, micrometer-prometheus, netty-server, readme, shade, yaml]

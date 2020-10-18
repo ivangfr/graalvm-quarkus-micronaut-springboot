@@ -6,6 +6,8 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
 
+import javax.validation.constraints.NotBlank;
+
 @Controller("/api/greeting")
 public class SimpleApiController {
 
@@ -16,8 +18,7 @@ public class SimpleApiController {
     }
 
     @Get
-    public Greeting greetName(@QueryValue(defaultValue = "World") String name) {
+    public Greeting greetName(@QueryValue(defaultValue = "World") @NotBlank String name) {
         return greetingService.greet(name);
     }
-
 }

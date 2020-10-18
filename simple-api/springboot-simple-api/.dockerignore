@@ -1,5 +1,0 @@
-# -- Exclude everything
-*
-
-# -- Except
-!build/libs

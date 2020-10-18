@@ -1,10 +1,10 @@
 FROM oracle/graalvm-ce:20.2.0-java11 as graalvm
 RUN gu install native-image
 
-COPY build/libs/micronaut-book-api-*-all.jar /home/app/micronaut-book-api/build/libs/micronaut-book-api.jar
+COPY target/micronaut-book-api-*.jar /home/app/micronaut-book-api/target/micronaut-book-api.jar
 WORKDIR /home/app/micronaut-book-api
 
-RUN native-image --no-server --no-fallback -cp build/libs/micronaut-book-api.jar
+RUN native-image -cp target/micronaut-book-api.jar
 
 FROM frolvlad/alpine-glibc
 RUN apk update && apk add libstdc++

@@ -24,7 +24,7 @@
 
 - Run the command below to start the application
   ```
-  ./gradlew clean run
+  ./mvnw clean mn:run
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -43,7 +43,7 @@
 
 - Package the application `jar` file
   ```
-  ./gradlew clean assemble
+  ./mvnw clean package
   ```
 
 - Run the script below to build the Docker image
@@ -74,7 +74,7 @@
 
 - Package the application `jar` file
   ```
-  ./gradlew clean assemble
+  ./mvnw clean package
   ```
 
 - Run the script below to build the Docker image
@@ -101,7 +101,7 @@
 
 ## Issues
 
-- When uncommenting the dependencies `micronaut-micrometer-core` and `micronaut-micrometer-registry-prometheus` in `build.gradle`, building the native docker image of the app and running it, I am getting the following exception during the startup
+- [Micronout Issue](https://github.com/micronaut-projects/micronaut-core/issues/4155) When uncommenting the dependencies `micronaut-micrometer-core` and `micronaut-micrometer-registry-prometheus` in `pom.xml`, building the native docker image of the app and running it, I am getting the following exception during the startup
   ```
   [main] ERROR io.micronaut.runtime.Micronaut - Error starting Micronaut server: Bean definition [org.hibernate.SessionFactory] could not be   loaded: Error instantiating bean of type  [org.hibernate.boot.registry.StandardServiceRegistry]
   

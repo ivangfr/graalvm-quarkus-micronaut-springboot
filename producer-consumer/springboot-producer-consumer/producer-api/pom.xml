@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <jib.maven-plugin.version>2.5.2</jib.maven-plugin.version>
+        <jib.maven-plugin.version>2.6.0</jib.maven-plugin.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
 
@@ -77,9 +77,8 @@
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>${jib.maven-plugin.version}</version>
                 <configuration>
-                    <!-- This value is overwritten in docker-build.sh -->
                     <to>
-                        <image>${docker.image.prefix}/${project.artifactId}:${project.version}</image>
+                        <image>${docker.image.prefix}/springboot-${project.artifactId}-jvm:${project.version}</image>
                     </to>
                 </configuration>
             </plugin>

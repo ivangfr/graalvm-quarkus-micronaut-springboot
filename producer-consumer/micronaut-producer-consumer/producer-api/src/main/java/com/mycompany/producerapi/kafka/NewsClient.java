@@ -8,7 +8,7 @@ import io.micronaut.configuration.kafka.annotation.Topic;
 @KafkaClient
 public interface NewsClient {
 
-    @Topic("${app.kafka.output.topic}")
+    @Topic("${app.kafka.output.topics}")
     void send(@KafkaKey String id, News newsMessage);
 
 }

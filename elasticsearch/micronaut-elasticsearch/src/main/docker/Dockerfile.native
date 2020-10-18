@@ -1,10 +1,10 @@
 FROM oracle/graalvm-ce:20.2.0-java11 as graalvm
 RUN gu install native-image
 
-COPY build/libs/micronaut-elasticsearch-*-all.jar /home/app/micronaut-elasticsearch/build/libs/micronaut-elasticsearch.jar
+COPY target/micronaut-elasticsearch-*.jar /home/app/micronaut-elasticsearch/target/micronaut-elasticsearch.jar
 WORKDIR /home/app/micronaut-elasticsearch
 
-RUN native-image --no-server --no-fallback -cp build/libs/micronaut-elasticsearch.jar
+RUN native-image -cp target/micronaut-elasticsearch.jar
 
 FROM frolvlad/alpine-glibc
 RUN apk update && apk add libstdc++

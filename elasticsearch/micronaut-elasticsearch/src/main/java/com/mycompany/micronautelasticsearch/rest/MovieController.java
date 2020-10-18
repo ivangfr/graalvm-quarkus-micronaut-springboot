@@ -14,6 +14,7 @@ import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.annotation.Status;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 @Controller("/api/movies")
 public class MovieController {
@@ -34,8 +35,7 @@ public class MovieController {
     }
 
     @Get
-    public SearchMovieResponse searchMovies(@QueryValue("title") String title) {
+    public SearchMovieResponse searchMovies(@QueryValue("title") @NotBlank String title) {
         return movieService.searchMovies(title);
     }
-
 }

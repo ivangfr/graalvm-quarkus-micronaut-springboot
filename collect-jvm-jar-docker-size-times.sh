@@ -71,9 +71,9 @@ echo "------------------------"
 cd ../micronaut-simple-api
 
 package_jar_build_image \
-  "./gradlew clean" \
-  "./gradlew assemble" \
-  "build/libs/micronaut-simple-api-1.0.0-all.jar" \
+  "./mvnw clean" \
+  "./mvnw package" \
+  "target/micronaut-simple-api-1.0.0.jar" \
   "./docker-build.sh" \
   "docker.mycompany.com/micronaut-simple-api-jvm:1.0.0"
 micronaut_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
@@ -89,9 +89,9 @@ echo "-------------------------"
 cd ../springboot-simple-api
 
 package_jar_build_image \
-  "./gradlew clean" \
-  "./gradlew assemble" \
-  "build/libs/springboot-simple-api-1.0.0.jar" \
+  "./mvnw clean" \
+  "./mvnw package" \
+  "target/springboot-simple-api-1.0.0.jar" \
   "./docker-build.sh" \
   "docker.mycompany.com/springboot-simple-api-jvm:1.0.0"
 springboot_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
@@ -130,9 +130,9 @@ echo "----------------------"
 cd ../micronaut-book-api
 
 package_jar_build_image \
-  "./gradlew clean" \
-  "./gradlew assemble" \
-  "build/libs/micronaut-book-api-1.0.0-all.jar" \
+  "./mvnw clean" \
+  "./mvnw package" \
+  "target/micronaut-book-api-1.0.0.jar" \
   "./docker-build.sh" \
   "docker.mycompany.com/micronaut-book-api-jvm:1.0.0"
 micronaut_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
@@ -148,9 +148,9 @@ echo "-----------------------"
 cd ../springboot-book-api
 
 package_jar_build_image \
-  "./gradlew clean" \
-  "./gradlew assemble" \
-  "build/libs/springboot-book-api-1.0.0.jar" \
+  "./mvnw clean" \
+  "./mvnw package" \
+  "target/springboot-book-api-1.0.0.jar" \
   "./docker-build.sh" \
   "docker.mycompany.com/springboot-book-api-jvm:1.0.0"
 springboot_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
@@ -205,9 +205,9 @@ echo "----------------------------------------------"
 cd ../micronaut-producer-consumer
 
 package_jar_build_image \
-  "./gradlew producer-api:clean" \
-  "./gradlew producer-api:assemble" \
-  "producer-api/build/libs/producer-api-1.0.0-all.jar" \
+  "./mvnw clean --projects producer-api" \
+  "./mvnw package --projects producer-api" \
+  "producer-api/target/producer-api-1.0.0.jar" \
   "cd producer-api && ./docker-build.sh && cd .." \
   "docker.mycompany.com/micronaut-producer-api-jvm:1.0.0"
 micronaut_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
@@ -221,9 +221,9 @@ echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
 echo "----------------------------------------------"
 
 package_jar_build_image \
-  "./gradlew consumer-api:clean" \
-  "./gradlew consumer-api:assemble" \
-  "consumer-api/build/libs/consumer-api-1.0.0-all.jar" \
+  "./mvnw clean --projects consumer-api" \
+  "./mvnw package --projects consumer-api" \
+  "consumer-api/target/consumer-api-1.0.0.jar" \
   "cd consumer-api && ./docker-build.sh && cd .." \
   "docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0"
 micronaut_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
@@ -296,9 +296,9 @@ echo "---------------------------"
 cd ../micronaut-elasticsearch
 
 package_jar_build_image \
-  "./gradlew clean" \
-  "./gradlew assemble" \
-  "build/libs/micronaut-elasticsearch-1.0.0-all.jar" \
+  "./mvnw clean" \
+  "./mvnw package" \
+  "target/micronaut-elasticsearch-1.0.0.jar" \
   "./docker-build.sh" \
   "docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0"
 micronaut_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time

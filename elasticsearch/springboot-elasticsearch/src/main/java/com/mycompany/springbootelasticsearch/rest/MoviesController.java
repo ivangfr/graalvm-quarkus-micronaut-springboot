@@ -6,6 +6,7 @@ import com.mycompany.springbootelasticsearch.rest.dto.CreateMovieRequest;
 import com.mycompany.springbootelasticsearch.rest.dto.SearchMovieResponse;
 import com.mycompany.springbootelasticsearch.service.MovieService;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
+@Validated
 @RestController
 @RequestMapping("/api/movies")
 public class MoviesController {
@@ -36,8 +39,7 @@ public class MoviesController {
     }
 
     @GetMapping
-    public SearchMovieResponse searchMovies(@RequestParam(value = "title") String title) {
+    public SearchMovieResponse searchMovies(@RequestParam(value = "title") @NotBlank String title) {
         return movieService.searchMovies(title);
     }
-
 }

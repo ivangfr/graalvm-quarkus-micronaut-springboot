@@ -1,10 +1,10 @@
 FROM oracle/graalvm-ce:20.2.0-java11 as graalvm
 RUN gu install native-image
 
-COPY build/libs/micronaut-simple-api-*-all.jar /home/app/micronaut-simple-api/build/libs/micronaut-simple-api.jar
+COPY target/micronaut-simple-api-*.jar /home/app/micronaut-simple-api/target/micronaut-simple-api.jar
 WORKDIR /home/app/micronaut-simple-api
 
-RUN native-image --no-server -cp build/libs/micronaut-simple-api.jar
+RUN native-image -cp target/micronaut-simple-api.jar
 
 FROM frolvlad/alpine-glibc
 RUN apk update && apk add libstdc++

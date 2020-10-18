@@ -32,7 +32,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the command below
       ```
-      ./gradlew producer-api:clean producer-api:run
+      ./mvnw clean mn:run --projects producer-api
       ```
 
   - **consumer-api**
@@ -41,7 +41,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the command below
       ```
-      export MICRONAUT_SERVER_PORT=8081 && ./gradlew consumer-api:clean consumer-api:run
+      export MICRONAUT_SERVER_PORT=8081 && ./mvnw clean mn:run --projects consumer-api
       ```
 
 - **Simple Test**
@@ -68,7 +68,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Package the application `jar` file
       ```
-      ./gradlew producer-api:clean producer-api:assemble 
+      ./mvnw clean package --projects producer-api
       ```
 
     - Run the script below to build the Docker image
@@ -90,7 +90,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Package the application `jar` file
       ```
-      ./gradlew consumer-api:clean consumer-api:assemble 
+      ./mvnw clean package --projects consumer-api
       ```
 
     - Run the script below to build the Docker image
@@ -130,7 +130,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Package the application `jar` file
       ```
-      ./gradlew producer-api:clean producer-api:assemble
+      ./mvnw clean package --projects producer-api
       ```
 
     - Run the script below to build the Docker image
@@ -152,7 +152,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Package the application `jar` file
       ```
-      ./gradlew consumer-api:clean consumer-api:assemble 
+      ./mvnw clean package --projects consumer-api
       ```
 
     - Run the script below to build the Docker image
