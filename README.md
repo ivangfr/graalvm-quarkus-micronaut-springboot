@@ -135,7 +135,7 @@ Comments:
 
 - Checking the Final Memory Usage column, `Quarkus` native apps have better memory utilization (after load tests) than `Micronaut` ones; In this experiment, I set **256MiB** the container limit memory. If I reduce the container limit memmory to **128MiB**, all `Micronaut` native apps will have memory issues. For `Quarkus` native apps, I was able to reduce the container limit memmory to even **64MiB**. Below it, the apps performance will degrade.
 
-- Comparing `Ab Testing Time` with `Ab Testing Time 2` collumns, we can see that JVM was able to perform some runtime optimizations, making the application to perform faster on the second run of the ab test.
+- Comparing `Ab Testing Time` with `Ab Testing Time 2` columns, we can see that JVM was able to perform some runtime optimizations, making the JVM applications to perform faster on the second ab test run.
 
 - `ab` tests used
   ```
