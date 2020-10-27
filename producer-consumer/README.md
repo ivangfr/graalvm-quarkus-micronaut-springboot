@@ -45,7 +45,7 @@ In this example, we will implement three versions of `producer - consumer` appli
   *Configuration*
 
   - First, you must create a new cluster. Click on `Cluster` (dropdown on the header) and then on `Add Cluster`
-  - Type the name of your cluster in `Cluster Name` field, for example: `MyZooCluster`
+  - Type the name of your cluster in `Cluster Name` field, for example: `MyCluster`
   - Type `zookeeper:2181` in `Cluster Zookeeper Hosts` field
   - Enable checkbox `Poll consumer information (Not recommended for large # of consumers)`
   - Click on `Save` button at the bottom of the page.

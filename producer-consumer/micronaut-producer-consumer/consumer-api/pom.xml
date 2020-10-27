@@ -14,7 +14,7 @@
     <properties>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.1.1</micronaut.version>
+        <micronaut.version>2.1.2</micronaut.version>
         <exec.mainClass>com.mycompany.consumerapi.Application</exec.mainClass>
         <lombok.version>1.18.12</lombok.version>
         <jib.maven-plugin.version>2.6.0</jib.maven-plugin.version>

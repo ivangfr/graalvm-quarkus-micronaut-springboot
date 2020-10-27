@@ -107,3 +107,18 @@ function package_jar_build_image() {
   package_jar_build_image_building_time=$run_command_exec_time
   package_jar_build_image_docker_image_size=$(get_docker_size $5)
 }
+
+# -- warm_up --
+# $1: number of times
+# $2: command to run
+function warm_up() {
+  echo
+  echo "-- Begin: ab test warm-up"
+  x=$1 
+  while [ $x -gt 0 ]; do 
+    eval $2
+    x=$(($x-1))
+  done
+  echo "-- End: ab test warm-up"
+  echo
+}
