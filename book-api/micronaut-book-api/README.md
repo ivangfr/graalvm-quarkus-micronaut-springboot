@@ -91,7 +91,7 @@
 
 ## Issues
 
-While shutting down the native application, it's throwning the following exception
+[Issue #4584](https://github.com/micronaut-projects/micronaut-core/issues/4584): While shutting down the native application, it's throwning the following exception.
 ```
 ERROR i.m.context.DefaultBeanContext - Error disposing of bean registration [io.micronaut.configuration.jdbc.hikari.DatasourceFactory]: java.lang.IllegalAccessException: Cannot set final field: java.util.concurrent.CopyOnWriteArrayList.lock. Enable by specifying "allowWrite" for this field in the reflection configuration.
 java.lang.Error: java.lang.IllegalAccessException: Cannot set final field: java.util.concurrent.CopyOnWriteArrayList.lock. Enable by specifying "allowWrite" for this field in the reflection configuration.

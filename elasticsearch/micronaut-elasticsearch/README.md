@@ -93,7 +93,7 @@
 
 ## Issues
 
-Error while building docker native image
+[Issue #4585](https://github.com/micronaut-projects/micronaut-core/issues/4585): Error while building docker native image
 ```
 [INFO] Fatal error:
 [INFO] com.oracle.graal.pointsto.util.AnalysisError$ParsingError: Error encountered while parsing org.graalvm.home.HomeFinder.getInstance()
