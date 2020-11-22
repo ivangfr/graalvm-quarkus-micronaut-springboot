@@ -3,4 +3,4 @@ defaultPackage: com.mycompany.micronautsimpleapi
 testFramework: junit
 sourceLanguage: java
 buildTool: maven
-features: [annotation-api, app-name, docker, graalvm, http-client, java, java-application, junit, logback, management, maven, micrometer, micrometer-prometheus, netty-server, readme, yaml]
+features: [annotation-api, app-name, graalvm, http-client, java, java-application, junit, logback, management, maven, micrometer, micrometer-prometheus, netty-server, readme, yaml]

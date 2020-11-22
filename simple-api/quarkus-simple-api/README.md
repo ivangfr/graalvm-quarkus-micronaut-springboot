@@ -26,7 +26,7 @@
   curl -i "localhost:8080/api/greeting?name=Ivan"
   ```
 
-- To stop the application, press `Ctrl+C` in its terminals
+- To stop the application, press `Ctrl+C` in its terminal
 
 ### Docker in JVM Mode
 
@@ -53,7 +53,7 @@
   curl -i "localhost:9080/api/greeting?name=Ivan"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminals
+- To stop and remove application Docker container, press `Ctrl+C` in its terminal
 
 ### Docker in Native Mode
 
@@ -80,4 +80,4 @@
   curl -i "localhost:9081/api/greeting?name=Ivan"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminals
+- To stop and remove application Docker container, press `Ctrl+C` in its terminal

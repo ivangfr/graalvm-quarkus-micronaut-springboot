@@ -4,9 +4,9 @@ SECONDS=0
 
 if [ "$1" = "native" ];
 then
-  docker build -f src/main/docker/Dockerfile.native -t docker.mycompany.com/micronaut-consumer-api-native:1.0.0 .
+  ../mvnw package -Dpackaging=docker-native
 else
-  ../mvnw compile jib:dockerBuild
+  ../mvnw package -Dpackaging=docker -Djib.to.image=docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0
 fi
 
 duration=$SECONDS

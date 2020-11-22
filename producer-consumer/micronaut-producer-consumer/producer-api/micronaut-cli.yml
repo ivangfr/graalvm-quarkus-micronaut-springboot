@@ -3,4 +3,4 @@ defaultPackage: com.mycompany.producerapi
 testFramework: junit
 sourceLanguage: java
 buildTool: maven
-features: [annotation-api, app-name, docker, graalvm, http-client, java, java-application, junit, kafka, logback, management, maven, micrometer, micrometer-prometheus, netty-server, readme, shade, yaml]
+features: [annotation-api, app-name, graalvm, http-client, java, java-application, jib, junit, kafka, logback, lombok, management, maven, micrometer, micrometer-prometheus, netty-server, readme, yaml]

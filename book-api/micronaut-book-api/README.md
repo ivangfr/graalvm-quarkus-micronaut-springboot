@@ -35,16 +35,11 @@
   curl -i localhost:8080/api/books
   ```
 
-- To stop the application, press `Ctrl+C` in its terminals
+- To stop the application, press `Ctrl+C` in its terminal
 
 ### Docker in JVM Mode
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
-
-- Package the application `jar` file
-  ```
-  ./mvnw clean package
-  ```
 
 - Run the script below to build the Docker image
   ```
@@ -66,16 +61,11 @@
   curl -i localhost:9087/api/books
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminals
+- To stop and remove application Docker container, press `Ctrl+C` in its terminal
 
 ### Docker in Native Mode
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
-
-- Package the application `jar` file
-  ```
-  ./mvnw clean package
-  ```
 
 - Run the script below to build the Docker image
   ```
@@ -97,84 +87,34 @@
   curl -i localhost:9088/api/books
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminals
+- To stop and remove application Docker container, press `Ctrl+C` in its terminal
 
 ## Issues
 
-- [Micronout Issue](https://github.com/micronaut-projects/micronaut-core/issues/4155) When uncommenting the dependencies `micronaut-micrometer-core` and `micronaut-micrometer-registry-prometheus` in `pom.xml`, building the native docker image of the app and running it, I am getting the following exception during the startup
-  ```
-  [main] ERROR io.micronaut.runtime.Micronaut - Error starting Micronaut server: Bean definition [org.hibernate.SessionFactory] could not be   loaded: Error instantiating bean of type  [org.hibernate.boot.registry.StandardServiceRegistry]
-  
-  Message: Class must be instance of com.codahale.metrics.MetricRegistry or io.micrometer.core.instrument.MeterRegistry
-  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]) --> SessionFactoryBuilder.  hibernateSessionFactoryBuilder([MetadataSources metadataSources],ValidatorFactory validatorFactory) --> MetadataSources.  hibernateMetadataSources(JpaConfiguration jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
-  io.micronaut.context.exceptions.BeanInstantiationException: Bean definition [org.hibernate.SessionFactory] could not be loaded: Error   instantiating bean of type  [org.hibernate.boot.registry.StandardServiceRegistry]
-  
-  Message: Class must be instance of com.codahale.metrics.MetricRegistry or io.micrometer.core.instrument.MeterRegistry
-  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]) --> SessionFactoryBuilder.  hibernateSessionFactoryBuilder([MetadataSources metadataSources],ValidatorFactory validatorFactory) --> MetadataSources.  hibernateMetadataSources(JpaConfiguration jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
-  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1540)
-  	at io.micronaut.context.DefaultApplicationContext.initializeContext(DefaultApplicationContext.java:220)
-  	at io.micronaut.context.DefaultBeanContext.readAllBeanDefinitionClasses(DefaultBeanContext.java:2771)
-  	at io.micronaut.context.DefaultBeanContext.start(DefaultBeanContext.java:228)
-  	at io.micronaut.context.DefaultApplicationContext.start(DefaultApplicationContext.java:166)
-  	at io.micronaut.runtime.Micronaut.start(Micronaut.java:64)
-  	at io.micronaut.runtime.Micronaut.run(Micronaut.java:294)
-  	at io.micronaut.runtime.Micronaut.run(Micronaut.java:280)
-  	at com.mycompany.micronautbookapi.Application.main(Application.java:18)
-  Caused by: io.micronaut.context.exceptions.BeanInstantiationException: Error instantiating bean of type  [org.hibernate.boot.registry.  StandardServiceRegistry]
-  
-  Message: Class must be instance of com.codahale.metrics.MetricRegistry or io.micrometer.core.instrument.MeterRegistry
-  Path Taken: SessionFactory.hibernateSessionFactory([SessionFactoryBuilder sessionFactoryBuilder]) --> SessionFactoryBuilder.  hibernateSessionFactoryBuilder([MetadataSources metadataSources],ValidatorFactory validatorFactory) --> MetadataSources.  hibernateMetadataSources(JpaConfiguration jpaConfiguration,[StandardServiceRegistry standardServiceRegistry]) --> StandardServiceRegistry.  hibernateStandardServiceRegistry(String dataSourceName,[DataSource dataSource])
-  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1916)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
-  	at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:2296)
-  	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2270)
-  	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1240)
-  	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1013)
-  	at io.micronaut.data.hibernate.runtime.$DataEntityManagerFactoryBean$HibernateStandardServiceRegistry0Definition.doBuild(Unknown Source)
-  	at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:118)
-  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:139)
-  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
-  	at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:2296)
-  	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2270)
-  	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1240)
-  	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1013)
-  	at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateMetadataSources1Definition.doBuild(Unknown Source)
-  	at io.micronaut.context.AbstractParametrizedBeanDefinition.build(AbstractParametrizedBeanDefinition.java:118)
-  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:139)
-  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
-  	at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:2296)
-  	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2270)
-  	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1240)
-  	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1013)
-  	at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactoryBuilder2Definition.build(Unknown Source)
-  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:143)
-  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
-  	at io.micronaut.context.DefaultBeanContext.getBeanForDefinition(DefaultBeanContext.java:2296)
-  	at io.micronaut.context.DefaultBeanContext.getBeanInternal(DefaultBeanContext.java:2270)
-  	at io.micronaut.context.DefaultBeanContext.getBean(DefaultBeanContext.java:1240)
-  	at io.micronaut.context.AbstractBeanDefinition.getBeanForConstructorArgument(AbstractBeanDefinition.java:1013)
-  	at io.micronaut.configuration.hibernate.jpa.$EntityManagerFactoryBean$HibernateSessionFactory3Definition.build(Unknown Source)
-  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:143)
-  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingletonInternal(DefaultBeanContext.java:2638)
-  	at io.micronaut.context.DefaultBeanContext.createAndRegisterSingleton(DefaultBeanContext.java:2624)
-  	at io.micronaut.context.DefaultBeanContext.loadContextScopeBean(DefaultBeanContext.java:2163)
-  	at io.micronaut.context.DefaultBeanContext.initializeContext(DefaultBeanContext.java:1538)
-  	... 8 common frames omitted
-  Caused by: java.lang.IllegalArgumentException: Class must be instance of com.codahale.metrics.MetricRegistry or io.micrometer.core.instrument.  MeterRegistry
-  	at com.zaxxer.hikari.HikariConfig.setMetricRegistry(HikariConfig.java:667)
-  	at com.zaxxer.hikari.HikariDataSource.setMetricRegistry(HikariDataSource.java:237)
-  	at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.addMeterRegistry(DatasourceFactory.java:79)
-  	at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.dataSource(DatasourceFactory.java:67)
-  	at io.micronaut.configuration.jdbc.hikari.$DatasourceFactory$DataSource0Definition.build(Unknown Source)
-  	at io.micronaut.context.BeanDefinitionDelegate.build(BeanDefinitionDelegate.java:143)
-  	at io.micronaut.context.DefaultBeanContext.doCreateBean(DefaultBeanContext.java:1889)
-  	... 50 common frames omitted
-  ```
+While shutting down the native application, it's throwning the following exception
+```
+ERROR i.m.context.DefaultBeanContext - Error disposing of bean registration [io.micronaut.configuration.jdbc.hikari.DatasourceFactory]: java.lang.IllegalAccessException: Cannot set final field: java.util.concurrent.CopyOnWriteArrayList.lock. Enable by specifying "allowWrite" for this field in the reflection configuration.
+java.lang.Error: java.lang.IllegalAccessException: Cannot set final field: java.util.concurrent.CopyOnWriteArrayList.lock. Enable by specifying "allowWrite" for this field in the reflection configuration.
+	at java.util.concurrent.CopyOnWriteArrayList.resetLock(CopyOnWriteArrayList.java:1607)
+	at java.util.concurrent.CopyOnWriteArrayList.clone(CopyOnWriteArrayList.java:301)
+	at com.zaxxer.hikari.util.ConcurrentBag.values(ConcurrentBag.java:279)
+	at com.zaxxer.hikari.pool.HikariPool.softEvictConnections(HikariPool.java:382)
+	at com.zaxxer.hikari.pool.HikariPool.shutdown(HikariPool.java:230)
+	at com.zaxxer.hikari.HikariDataSource.close(HikariDataSource.java:351)
+	at io.micronaut.configuration.jdbc.hikari.DatasourceFactory.close(DatasourceFactory.java:96)
+	at io.micronaut.configuration.jdbc.hikari.$DatasourceFactoryDefinition.dispose(Unknown Source)
+	at io.micronaut.inject.DisposableBeanDefinition.dispose(DisposableBeanDefinition.java:41)
+	at io.micronaut.context.DefaultBeanContext.stop(DefaultBeanContext.java:290)
+	at io.micronaut.context.DefaultApplicationContext.stop(DefaultApplicationContext.java:171)
+	at io.micronaut.http.server.netty.NettyHttpServer.stopInternal(NettyHttpServer.java:530)
+	at io.micronaut.http.server.netty.NettyHttpServer.stop(NettyHttpServer.java:365)
+	at io.micronaut.http.server.netty.NettyHttpServer.stop(NettyHttpServer.java:110)
+	at io.micronaut.runtime.Micronaut.lambda$null$0(Micronaut.java:110)
+	at java.lang.Thread.run(Thread.java:834)
+	at com.oracle.svm.core.thread.JavaThreads.threadStartRoutine(JavaThreads.java:519)
+	at com.oracle.svm.core.posix.thread.PosixJavaThreads.pthreadStartRoutine(PosixJavaThreads.java:192)
+Caused by: java.lang.IllegalAccessException: Cannot set final field: java.util.concurrent.CopyOnWriteArrayList.lock. Enable by specifying "allowWrite" for this field in the reflection configuration.
+	at java.lang.reflect.Field.set(Field.java:780)
+	at java.util.concurrent.CopyOnWriteArrayList.resetLock(CopyOnWriteArrayList.java:1605)
+	... 17 common frames omitted
+```

@@ -3,4 +3,4 @@ defaultPackage: com.mycompany.micronautelasticsearch
 testFramework: junit
 sourceLanguage: java
 buildTool: maven
-features: [annotation-api, app-name, docker, elasticsearch, graalvm, http-client, java, java-application, junit, logback, management, maven, micrometer, micrometer-prometheus, netty-server, readme, shade, yaml]
+features: [annotation-api, app-name, elasticsearch, graalvm, http-client, java, java-application, jib, junit, logback, lombok, management, maven, micrometer, micrometer-prometheus, netty-server, readme, yaml]

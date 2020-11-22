@@ -239,18 +239,18 @@ echo "------------------------------"
 echo "MICRONAUT-ELASTICSEARCH-NATIVE"
 echo "------------------------------"
 
-cd ../micronaut-elasticsearch
+# cd ../micronaut-elasticsearch
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/micronaut-elasticsearch-1.0.0.jar" \
-  "./docker-build.sh native" \
-  "docker.mycompany.com/micronaut-elasticsearch-native:1.0.0"
-micronaut_elasticsearch_native[packaging_time]=$package_jar_build_image_packaging_time
-micronaut_elasticsearch_native[jar_size]=$package_jar_build_image_jar_size
-micronaut_elasticsearch_native[building_time]=$package_jar_build_image_building_time
-micronaut_elasticsearch_native[docker_image_size]=$package_jar_build_image_docker_image_size
+# package_jar_build_image \
+#   "./mvnw clean" \
+#   "./mvnw package" \
+#   "target/micronaut-elasticsearch-1.0.0.jar" \
+#   "./docker-build.sh native" \
+#   "docker.mycompany.com/micronaut-elasticsearch-native:1.0.0"
+# micronaut_elasticsearch_native[packaging_time]=$package_jar_build_image_packaging_time
+# micronaut_elasticsearch_native[jar_size]=$package_jar_build_image_jar_size
+# micronaut_elasticsearch_native[building_time]=$package_jar_build_image_building_time
+# micronaut_elasticsearch_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
 printf "\n"
 printf "%30s | %14s | %16s | %17s | %17s |\n" "Application" "Packaging Time" "Jar Size (bytes)" "Docker Build Time" "Docker Image Size"

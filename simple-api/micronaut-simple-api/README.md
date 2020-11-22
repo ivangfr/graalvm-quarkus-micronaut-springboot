@@ -26,16 +26,11 @@
   curl -i "localhost:8080/api/greeting?name=Ivan"
   ```
 
-- To stop the application, press `Ctrl+C` in its terminals
+- To stop the application, press `Ctrl+C` in its terminal
 
 ### Docker in JVM Mode
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder
-
-- Package the application `jar` file
-  ```
-  ./mvnw clean package
-  ```
 
 - Run the script below to build the Docker image
   ```
@@ -53,16 +48,11 @@
   curl -i "localhost:9082/api/greeting?name=Ivan"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminals
+- To stop and remove application Docker container, press `Ctrl+C` in its terminal
 
 ### Docker in Native Mode
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/simple-api/micronaut-simple-api` folder
-
-- Package the application `jar` file
-  ```
-  ./mvnw clean package
-  ```
 
 - Run the script below to build the Docker image
   ```
@@ -80,7 +70,4 @@
   curl -i "localhost:9083/api/greeting?name=Ivan"
   ```
 
-- To stop and remove application Docker container, run in a terminal
-  ```
-  docker stop micronaut-simple-api-native
-  ```
+- To stop and remove application Docker container, press `Ctrl+C` in its terminal

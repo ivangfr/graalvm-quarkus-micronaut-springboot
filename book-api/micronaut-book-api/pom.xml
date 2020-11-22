@@ -5,22 +5,23 @@
     <groupId>com.mycompany.micronautbookapi</groupId>
     <artifactId>micronaut-book-api</artifactId>
     <version>1.0.0</version>
+    <packaging>${packaging}</packaging>
 
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>2.1.2</version>
+        <version>2.2.0</version>
     </parent>
 
     <properties>
+        <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.1.2</micronaut.version>
-        <micronaut.data.version>2.1.0</micronaut.data.version>
+        <micronaut.version>2.2.0</micronaut.version>
+        <micronaut.data.version>2.2.0</micronaut.data.version>
         <exec.mainClass>com.mycompany.micronautbookapi.Application</exec.mainClass>
-        <lombok.version>1.18.12</lombok.version>
+        <micronaut.runtime>netty</micronaut.runtime>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
-        <jib.maven-plugin.version>2.6.0</jib.maven-plugin.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
 
@@ -34,10 +35,6 @@
             <url>https://jcenter.bintray.com</url>
         </repository>
     </repositories>
-
-    <dependencyManagement>
-        <dependencies></dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -66,6 +63,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-runtime</artifactId>
             <scope>compile</scope>
@@ -76,12 +78,15 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
           <groupId>io.micronaut</groupId>
           <artifactId>micronaut-management</artifactId>
           <scope>compile</scope>
         </dependency>
-        <!-- https://github.com/micronaut-projects/micronaut-core/issues/4155 -->
-        <!--
         <dependency>
           <groupId>io.micronaut.micrometer</groupId>
           <artifactId>micronaut-micrometer-core</artifactId>
@@ -92,7 +97,6 @@
           <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
           <scope>compile</scope>
         </dependency>
-        -->
         <dependency>
             <groupId>io.micronaut.sql</groupId>
             <artifactId>micronaut-jdbc-hikari</artifactId>
@@ -107,15 +111,6 @@
             <groupId>io.micronaut.sql</groupId>
             <artifactId>micronaut-hibernate-jpa</artifactId>
             <scope>compile</scope>
-        </dependency>
-
-        <!-- Lombok: https://projectlombok.org/setup/maven -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <optional>true</optional>
-            <scope>provided</scope>
         </dependency>
 
         <!-- MapStruct: https://mapstruct.org/documentation/installation/ -->
@@ -160,21 +155,13 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <!-- Uncomment to enable incremental compilation -->
                     <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
-                    <annotationProcessorPaths>
-                        <!-- Lombok: https://projectlombok.org/setup/maven -->
+                    <annotationProcessorPaths combine.self="override">
                         <path>
+                            <!-- must precede micronaut-inject-java -->
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
@@ -211,46 +198,13 @@
                         <arg>-Amicronaut.processing.module=micronaut-book-api</arg>
                     </compilerArgs>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>test-compile</id>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <configuration>
-                            <annotationProcessorPaths>
-                                <path>
-                                    <groupId>io.micronaut</groupId>
-                                    <artifactId>micronaut-inject-java</artifactId>
-                                    <version>${micronaut.version}</version>
-                                </path>
-                                <path>
-                                    <groupId>io.micronaut</groupId>
-                                    <artifactId>micronaut-validation</artifactId>
-                                    <version>${micronaut.version}</version>
-                                </path>
-                                <path>
-                                    <groupId>io.micronaut</groupId>
-                                    <artifactId>micronaut-graal</artifactId>
-                                    <version>${micronaut.version}</version>
-                                </path>
-                                <path>
-                                    <groupId>io.micronaut.data</groupId>
-                                    <artifactId>micronaut-data-processor</artifactId>
-                                    <version>${micronaut.data.version}</version>
-                                </path>
-                            </annotationProcessorPaths>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib.maven-plugin.version}</version>
                 <configuration>
                     <to>
-                        <image>${docker.image.prefix}/${project.artifactId}-jvm:${project.version}</image>
+                        <image>${docker.image.prefix}/${project.artifactId}-native:${project.version}</image>
                     </to>
                 </configuration>
             </plugin>

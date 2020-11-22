@@ -34,7 +34,7 @@
   curl -i "localhost:8080/api/movies?title=tonya"
   ```
 
-- To stop the application, press `Ctrl+C` in its terminals
+- To stop the application, press `Ctrl+C` in its terminal
 
 ### Docker in JVM Mode
 
@@ -65,7 +65,7 @@
   curl -i "localhost:9105/api/movies?title=american"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminals
+- To stop and remove application Docker container, press `Ctrl+C` in its terminal
 
 ### Docker in Native Mode
 
@@ -96,4 +96,4 @@
   curl -i "localhost:9106/api/movies?title=evil"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminals
+- To stop and remove application Docker container, press `Ctrl+C` in its terminal
