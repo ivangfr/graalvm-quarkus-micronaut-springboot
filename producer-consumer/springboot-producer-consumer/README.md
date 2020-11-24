@@ -66,6 +66,11 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
 
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects producer-api
+      ```
+
     - Run the script below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh && cd ..
@@ -81,6 +86,11 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
   - **consumer-api**
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects consumer-api
+      ```
 
     - Run the script below to build the Docker image
       ```

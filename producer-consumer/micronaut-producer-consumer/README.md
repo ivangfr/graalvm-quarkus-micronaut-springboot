@@ -66,6 +66,11 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects producer-api
+      ```    
+
     - Run the script below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh && cd ..
@@ -82,6 +87,11 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
   - **consumer-api**
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects consumer-api
+      ```
 
     - Run the script below to build the Docker image
       ```
@@ -118,6 +128,11 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects producer-api
+      ```
+
     - Run the script below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh native && cd ..
@@ -134,6 +149,11 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
   - **consumer-api**
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
+
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects consumer-api
+      ```
 
     - Run the script below to build the Docker image
       ```

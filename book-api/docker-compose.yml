@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   mysql:
-    image: mysql:8.0.21
+    image: mysql:5.7.32
     container_name: mysql
     restart: unless-stopped
     ports:
@@ -11,9 +11,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=secret
       - MYSQL_DATABASE=bookdb
-    command: --init-file /data/init-db.sql
-    volumes:
-      - ./mysql/init-db.sql:/data/init-db.sql
     healthcheck:
       test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
       start_period: 10s

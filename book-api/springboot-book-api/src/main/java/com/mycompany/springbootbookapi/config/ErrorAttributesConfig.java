@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 
 import java.util.Map;
 
-@Configuration(proxyBeanMethods = false)
+@Configuration
 public class ErrorAttributesConfig {
 
     @Bean

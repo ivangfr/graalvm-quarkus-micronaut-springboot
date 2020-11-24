@@ -23,6 +23,11 @@ In this example, we will implement three versions of a Restful API for handling 
   docker-compose ps
   ```
 
+- Finally, run the script below to initialize the database
+  ```
+  ./init-db.sh
+  ```
+
 ## Useful Commands
 
 - **MySQL**

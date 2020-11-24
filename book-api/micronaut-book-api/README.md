@@ -41,6 +41,11 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
 
+- Package the application `jar` file
+  ```
+  ./mvnw clean package
+  ```
+
 - Run the script below to build the Docker image
   ```
   ./docker-build.sh
@@ -56,7 +61,7 @@
 - A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST localhost:9087/api/books -H "Content-Type: application/json" \
-    -d '{"isbn": "123", "title": "Learn Docker"}'
+    -d '{"isbn": "456", "title": "Learn Docker"}'
   
   curl -i localhost:9087/api/books
   ```
@@ -66,6 +71,11 @@
 ### Docker in Native Mode
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
+
+- Package the application `jar` file
+  ```
+  ./mvnw clean package
+  ```
 
 - Run the script below to build the Docker image
   ```
@@ -82,7 +92,7 @@
 - A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST localhost:9088/api/books -H "Content-Type: application/json" \
-    -d '{"isbn": "123", "title": "Learn GraalVM"}'
+    -d '{"isbn": "789", "title": "Learn GraalVM"}'
   
   curl -i localhost:9088/api/books
   ```
@@ -91,7 +101,7 @@
 
 ## Issues
 
-[Issue #4584](https://github.com/micronaut-projects/micronaut-core/issues/4584): While shutting down the native application, it's throwning the following exception.
+[Issue #380](https://github.com/micronaut-projects/micronaut-sql/issues/380): While shutting down the native application, it's throwning the following exception.
 ```
 ERROR i.m.context.DefaultBeanContext - Error disposing of bean registration [io.micronaut.configuration.jdbc.hikari.DatasourceFactory]: java.lang.IllegalAccessException: Cannot set final field: java.util.concurrent.CopyOnWriteArrayList.lock. Enable by specifying "allowWrite" for this field in the reflection configuration.
 java.lang.Error: java.lang.IllegalAccessException: Cannot set final field: java.util.concurrent.CopyOnWriteArrayList.lock. Enable by specifying "allowWrite" for this field in the reflection configuration.

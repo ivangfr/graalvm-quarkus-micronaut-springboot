@@ -40,6 +40,11 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/micronaut-elasticsearch` folder
 
+- Package the application `jar` file
+  ```
+  ./mvnw clean package
+  ```
+
 - Run the script below to build the Docker image
   ```
   ./docker-build.sh
@@ -65,6 +70,11 @@
 ### Docker in Native Mode
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/micronaut-elasticsearch` folder
+
+- Package the application `jar` file
+  ```
+  ./mvnw clean package
+  ```
 
 - Run the script below to build the Docker image
   ```
