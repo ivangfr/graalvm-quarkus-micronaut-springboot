@@ -69,7 +69,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
     - Package the application `jar` file
       ```
       ./mvnw clean package --projects producer-api
-      ```    
+      ```
 
     - Run the script below to build the Docker image
       ```

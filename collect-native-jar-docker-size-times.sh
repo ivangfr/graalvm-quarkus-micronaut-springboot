@@ -14,9 +14,12 @@ declare -A quarkus_producer_api_native
 declare -A quarkus_consumer_api_native
 declare -A micronaut_producer_api_native
 declare -A micronaut_consumer_api_native
+declare -A springboot_producer_api_native
+declare -A springboot_consumer_api_native
 
 declare -A quarkus_elasticsearch_native
 declare -A micronaut_elasticsearch_native
+declare -A springboot_elasticsearch_native
 
 start_time=$(date)
 
@@ -212,6 +215,40 @@ micronaut_consumer_api_native[building_time]=$package_jar_build_image_building_t
 micronaut_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
 echo
+echo "--------------------------------------------------"
+echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
+echo "--------------------------------------------------"
+
+cd ../springboot-producer-consumer
+
+package_jar_build_image \
+  "./mvnw clean --projects producer-api" \
+  "./mvnw package --projects producer-api" \
+  "producer-api/target/producer-api-1.0.0.jar" \
+  "cd producer-api && ./docker-build.sh native && cd .." \
+  "docker.mycompany.com/springboot-producer-api-native:1.0.0"
+springboot_producer_api_native[packaging_time]=$package_jar_build_image_packaging_time
+springboot_producer_api_native[jar_size]=$package_jar_build_image_jar_size
+springboot_producer_api_native[building_time]=$package_jar_build_image_building_time
+springboot_producer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+
+echo
+echo "--------------------------------------------------"
+echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
+echo "--------------------------------------------------"
+
+package_jar_build_image \
+  "./mvnw clean --projects consumer-api" \
+  "./mvnw package --projects consumer-api" \
+  "consumer-api/target/consumer-api-1.0.0.jar" \
+  "cd consumer-api && ./docker-build.sh native && cd .." \
+  "docker.mycompany.com/springboot-consumer-api-native:1.0.0"
+springboot_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_time
+springboot_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
+springboot_consumer_api_native[building_time]=$package_jar_build_image_building_time
+springboot_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+
+echo
 echo "============="
 echo "ELASTICSEARCH"
 echo "============="
@@ -283,9 +320,11 @@ printf "%31s | %14s | %16s | %17s | %17s |\n" "springboot-book-api-native" ${spr
 printf "%31s + %14s + %16s + %17s + %17s |\n" "..............................." ".............." "................" "................." "................."
 printf "%31s | %14s | %16s | %17s | %17s |\n" "quarkus-producer-api-native" ${quarkus_producer_api_native[packaging_time]} ${quarkus_producer_api_native[jar_size]} ${quarkus_producer_api_native[building_time]} ${quarkus_producer_api_native[docker_image_size]}
 printf "%31s | %14s | %16s | %17s | %17s |\n" "micronaut-producer-api-native" ${micronaut_producer_api_native[packaging_time]} ${micronaut_producer_api_native[jar_size]} ${micronaut_producer_api_native[building_time]} ${micronaut_producer_api_native[docker_image_size]}
+printf "%31s | %14s | %16s | %17s | %17s |\n" "springboot-producer-api-native" ${springboot_producer_api_native[packaging_time]} ${springboot_producer_api_native[jar_size]} ${springboot_producer_api_native[building_time]} ${springboot_producer_api_native[docker_image_size]}
 printf "%31s + %14s + %16s + %17s + %17s |\n" "..............................." ".............." "................" "................." "................."
 printf "%31s | %14s | %16s | %17s | %17s |\n" "quarkus-consumer-api-native" ${quarkus_consumer_api_native[packaging_time]} ${quarkus_consumer_api_native[jar_size]} ${quarkus_consumer_api_native[building_time]} ${quarkus_consumer_api_native[docker_image_size]}
 printf "%31s | %14s | %16s | %17s | %17s |\n" "micronaut-consumer-api-native" ${micronaut_consumer_api_native[packaging_time]} ${micronaut_consumer_api_native[jar_size]} ${micronaut_consumer_api_native[building_time]} ${micronaut_consumer_api_native[docker_image_size]}
+printf "%31s | %14s | %16s | %17s | %17s |\n" "springboot-consumer-api-native" ${springboot_consumer_api_native[packaging_time]} ${springboot_consumer_api_native[jar_size]} ${springboot_consumer_api_native[building_time]} ${springboot_consumer_api_native[docker_image_size]}
 printf "%31s + %14s + %16s + %17s + %17s |\n" "..............................." ".............." "................" "................." "................."
 printf "%31s | %14s | %16s | %17s | %17s |\n" "quarkus-elasticsearch-native" ${quarkus_elasticsearch_native[packaging_time]} ${quarkus_elasticsearch_native[jar_size]} ${quarkus_elasticsearch_native[building_time]} ${quarkus_elasticsearch_native[docker_image_size]}
 printf "%31s | %14s | %16s | %17s | %17s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[packaging_time]} ${micronaut_elasticsearch_native[jar_size]} ${micronaut_elasticsearch_native[building_time]} ${micronaut_elasticsearch_native[docker_image_size]}

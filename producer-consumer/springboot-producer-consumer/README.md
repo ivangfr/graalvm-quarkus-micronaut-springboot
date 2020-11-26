@@ -109,7 +109,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
   - In a new terminal, post a news
     ```
     curl -i -X POST localhost:9104/api/news -H 'Content-Type: application/json' \
-      -d '{ "source":"Spring Boot Blog", "title":"Dev Spring Boot Framework" }'
+      -d '{ "source":"Spring Boot Blog", "title":"Spring Boot Framework" }'
     ```
 
   - See `producer-api` and `consumer-api` logs
@@ -120,4 +120,60 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
 ### Docker in Native Mode
 
-Spring team is working on supporting for `GraalVM` native images, https://github.com/spring-projects/spring-framework/wiki/GraalVM-native-image-support
+- **Startup**
+
+  - **producer-api**
+
+    - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects producer-api
+      ```
+
+    - Run the script below to build the Docker image
+      ```
+      cd producer-api && ./docker-build.sh native && cd ..
+      ```
+
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name springboot-producer-api-native -p 9105:8080 \
+        -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network producer-consumer_default \
+        docker.mycompany.com/springboot-producer-api-native:1.0.0
+      ```
+
+  - **consumer-api**
+
+    - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
+
+    - Package the application `jar` file
+      ```
+      ./mvnw clean package --projects consumer-api
+      ```
+
+    - Run the script below to build the Docker image
+      ```
+      cd consumer-api && ./docker-build.sh native && cd ..
+      ```
+
+    - Run the following command to start the Docker container
+      ```
+      docker run --rm --name springboot-consumer-api-jvm -p 9110:8080 \
+        -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network producer-consumer_default \
+        docker.mycompany.com/springboot-consumer-api-native:1.0.0
+      ```
+
+- **Simple Test**
+
+  - In a new terminal, post a news
+    ```
+    curl -i -X POST localhost:9105/api/news -H 'Content-Type: application/json' \
+      -d '{ "source":"Spring Boot Blog", "title":"Spring Boot Framework & GraalVM" }'
+    ```
+
+  - See `producer-api` and `consumer-api` logs
+
+- **Shutdown**
+
+  Press `Ctrl+C` in `producer-api` and `consumer-api` terminals

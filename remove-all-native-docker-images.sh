@@ -9,8 +9,10 @@ docker rmi \
   docker.mycompany.com/springboot-book-api-native:1.0.0 \
   docker.mycompany.com/quarkus-producer-api-native:1.0.0 \
   docker.mycompany.com/micronaut-producer-api-native:1.0.0 \
+  docker.mycompany.com/springboot-producer-api-native:1.0.0 \
   docker.mycompany.com/quarkus-consumer-api-native:1.0.0 \
   docker.mycompany.com/micronaut-consumer-api-native:1.0.0 \
+  docker.mycompany.com/springboot-consumer-api-native:1.0.0 \
   docker.mycompany.com/quarkus-elasticsearch-native:1.0.0 \
   docker.mycompany.com/micronaut-elasticsearch-native:1.0.0 \
   docker.mycompany.com/springboot-elasticsearch-native:1.0.0

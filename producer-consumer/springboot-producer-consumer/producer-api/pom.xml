@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>11</java.version>
+        <spring.graalvm.native.version>0.8.3</spring.graalvm.native.version>
         <jib.maven-plugin.version>2.6.0</jib.maven-plugin.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
@@ -36,6 +37,11 @@
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.experimental</groupId>
+            <artifactId>spring-graalvm-native</artifactId>
+            <version>${spring.graalvm.native.version}</version>
         </dependency>
 
         <dependency>
@@ -65,6 +71,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <builder>paketobuildpacks/builder:tiny</builder>
+                        <name>${docker.image.prefix}/springboot-${project.artifactId}-native:${project.version}</name>
+                        <env>
+                            <BP_BOOT_NATIVE_IMAGE>1</BP_BOOT_NATIVE_IMAGE>
+                            <BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
+                                -Dspring.native.remove-yaml-support=true
+                                -Dspring.spel.ignore=true
+                            </BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
+                        </env>
+                    </image>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
@@ -78,5 +97,20 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
