@@ -177,3 +177,91 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 - **Shutdown**
 
   Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
+
+## Issues
+
+- Unable to build `springboot-producer-api-native`. `NewsProducerConfig` needs to be refactored.
+  ```
+  [INFO]     [creator]     Fatal error:java.lang.IllegalStateException: java.lang.IllegalStateException: ERROR: in 'com.mycompany.producerapi.kafka.  NewsProducerConfig' these methods are directly invoking methods marked @Bean: [producerFactory, kafkaTemplate] - due to the enforced proxyBeanMethods=false for   components in a native-image, please consider refactoring to use instance injection. If you are confident this is not going to affect your application, you may   turn this check off using -Dspring.native.verify=false.
+  [INFO]     [creator]     	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+  [INFO]     [creator]     	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+  [INFO]     [creator]     	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+  [INFO]     [creator]     	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinTask.getThrowableException(ForkJoinTask.java:600)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinTask.get(ForkJoinTask.java:1006)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.run(NativeImageGenerator.java:483)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGeneratorRunner.buildImage(NativeImageGeneratorRunner.java:350)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGeneratorRunner.build(NativeImageGeneratorRunner.java:509)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGeneratorRunner.main(NativeImageGeneratorRunner.java:115)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGeneratorRunner$JDK9Plus.main(NativeImageGeneratorRunner.java:541)
+  [INFO]     [creator]     Caused by: java.lang.IllegalStateException: ERROR: in 'com.mycompany.producerapi.kafka.NewsProducerConfig' these methods are directly   invoking methods marked @Bean: [producerFactory, kafkaTemplate] - due to the enforced proxyBeanMethods=false for components in a native-image, please consider   refactoring to use instance injection. If you are confident this is not going to affect your application, you may turn this check off using -Dspring.native.  verify=false.
+  [INFO]     [creator]     	at org.springframework.graalvm.type.Type.verifyComponent(Type.java:2273)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.processType(ResourcesHandler.java:1282)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.processType(ResourcesHandler.java:960)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.checkAndRegisterConfigurationType(ResourcesHandler.java:950)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.processSpringComponent(ResourcesHandler.java:409)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.processSpringComponents(ResourcesHandler.java:371)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.handleSpringComponents(ResourcesHandler.java:261)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.register(ResourcesHandler.java:139)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.SpringFeature.beforeAnalysis(SpringFeature.java:107)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.lambda$runPointsToAnalysis$7(NativeImageGenerator.java:696)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.FeatureHandler.forEachFeature(FeatureHandler.java:70)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.runPointsToAnalysis(NativeImageGenerator.java:696)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.doRun(NativeImageGenerator.java:558)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.lambda$run$0(NativeImageGenerator.java:471)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1407)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+  [INFO]     [creator]     Error: Image build request failed with exit status 1
+  [INFO]     [creator]     unable to invoke layer creator
+  [INFO]     [creator]     unable to contribute native-image layer
+  [INFO]     [creator]     error running build
+  [INFO]     [creator]     exit status 1
+  [INFO]     [creator]     ERROR: failed to build: exit status 1
+  ```
+
+- Unable to build `springboot-consumer-api-native`. `NewsConsumerConfig` needs to be refactored.
+  ```
+  [INFO]     [creator]     Fatal error:java.lang.IllegalStateException: java.lang.IllegalStateException: ERROR: in 'com.mycompany.consumerapi.kafka.  NewsConsumerConfig' these methods are directly invoking methods marked @Bean: [kafkaListenerContainerFactory, consumerFactory] - due to the enforced   proxyBeanMethods=false for components in a native-image, please consider refactoring to use instance injection. If you are confident this is not going to affect   your application, you may turn this check off using -Dspring.native.verify=false.
+  [INFO]     [creator]     	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+  [INFO]     [creator]     	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+  [INFO]     [creator]     	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+  [INFO]     [creator]     	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinTask.getThrowableException(ForkJoinTask.java:600)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinTask.get(ForkJoinTask.java:1006)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.run(NativeImageGenerator.java:483)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGeneratorRunner.buildImage(NativeImageGeneratorRunner.java:350)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGeneratorRunner.build(NativeImageGeneratorRunner.java:509)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGeneratorRunner.main(NativeImageGeneratorRunner.java:115)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGeneratorRunner$JDK9Plus.main(NativeImageGeneratorRunner.java:541)
+  [INFO]     [creator]     Caused by: java.lang.IllegalStateException: ERROR: in 'com.mycompany.consumerapi.kafka.NewsConsumerConfig' these methods are directly   invoking methods marked @Bean: [kafkaListenerContainerFactory, consumerFactory] - due to the enforced proxyBeanMethods=false for components in a native-image,   please consider refactoring to use instance injection. If you are confident this is not going to affect your application, you may turn this check off using   -Dspring.native.verify=false.
+  [INFO]     [creator]     	at org.springframework.graalvm.type.Type.verifyComponent(Type.java:2273)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.processType(ResourcesHandler.java:1282)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.processType(ResourcesHandler.java:960)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.checkAndRegisterConfigurationType(ResourcesHandler.java:950)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.processSpringComponent(ResourcesHandler.java:409)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.processSpringComponents(ResourcesHandler.java:371)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.handleSpringComponents(ResourcesHandler.java:261)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.ResourcesHandler.register(ResourcesHandler.java:139)
+  [INFO]     [creator]     	at org.springframework.graalvm.support.SpringFeature.beforeAnalysis(SpringFeature.java:107)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.lambda$runPointsToAnalysis$7(NativeImageGenerator.java:696)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.FeatureHandler.forEachFeature(FeatureHandler.java:70)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.runPointsToAnalysis(NativeImageGenerator.java:696)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.doRun(NativeImageGenerator.java:558)
+  [INFO]     [creator]     	at com.oracle.svm.hosted.NativeImageGenerator.lambda$run$0(NativeImageGenerator.java:471)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1407)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:290)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1020)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1656)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1594)
+  [INFO]     [creator]     	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+  [INFO]     [creator]     Error: Image build request failed with exit status 1
+  [INFO]     [creator]     unable to invoke layer creator
+  [INFO]     [creator]     unable to contribute native-image layer
+  [INFO]     [creator]     error running build
+  [INFO]     [creator]     exit status 1
+  [INFO]     [creator]     ERROR: failed to build: exit status 1
+  ```
