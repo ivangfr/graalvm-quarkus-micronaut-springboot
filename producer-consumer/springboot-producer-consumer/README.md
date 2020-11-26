@@ -99,7 +99,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name springboot-consumer-api-jvm -p 9109:8080 \
+      docker run --rm --name springboot-consumer-api-jvm -p 9110:8080 \
         -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network producer-consumer_default \
         docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
       ```
@@ -159,7 +159,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name springboot-consumer-api-jvm -p 9110:8080 \
+      docker run --rm --name springboot-consumer-api-native -p 9111:8080 \
         -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network producer-consumer_default \
         docker.mycompany.com/springboot-consumer-api-native:1.0.0
       ```

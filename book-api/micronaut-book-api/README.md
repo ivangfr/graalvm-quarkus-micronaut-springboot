@@ -54,16 +54,16 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name micronaut-book-api-jvm \
-    -p 9087:8080 -e MYSQL_HOST=mysql --network book-api_default \
+    -p 9088:8080 -e MYSQL_HOST=mysql --network book-api_default \
     docker.mycompany.com/micronaut-book-api-jvm:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST localhost:9087/api/books -H "Content-Type: application/json" \
+  curl -i -X POST localhost:9088/api/books -H "Content-Type: application/json" \
     -d '{"isbn": "456", "title": "Learn Docker"}'
   
-  curl -i localhost:9087/api/books
+  curl -i localhost:9088/api/books
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminal
@@ -85,16 +85,16 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name micronaut-book-api-native \
-    -p 9088:8080 -e MYSQL_HOST=mysql --network book-api_default \
+    -p 9089:8080 -e MYSQL_HOST=mysql --network book-api_default \
     docker.mycompany.com/micronaut-book-api-native:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST localhost:9088/api/books -H "Content-Type: application/json" \
+  curl -i -X POST localhost:9089/api/books -H "Content-Type: application/json" \
     -d '{"isbn": "789", "title": "Learn GraalVM"}'
   
-  curl -i localhost:9088/api/books
+  curl -i localhost:9089/api/books
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminal

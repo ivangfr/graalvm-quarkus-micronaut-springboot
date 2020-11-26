@@ -53,16 +53,16 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name micronaut-elasticsearch-jvm \
-    -p 9107:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+    -p 9114:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
     docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST "localhost:9107/api/movies" -H "Content-type: application/json" \
+  curl -i -X POST "localhost:9114/api/movies" -H "Content-type: application/json" \
     -d '{"imdb": "456", "title": "American Pie"}'
   
-  curl -i "localhost:9107/api/movies?title=american"
+  curl -i "localhost:9114/api/movies?title=american"
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminal
@@ -84,16 +84,16 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name micronaut-elasticsearch-native \
-    -p 9108:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+    -p 9115:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
     docker.mycompany.com/micronaut-elasticsearch-native:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running
   ```
-  curl -i -X POST "localhost:9108/api/movies" -H "Content-type: application/json" \
+  curl -i -X POST "localhost:9115/api/movies" -H "Content-type: application/json" \
     -d '{"imdb": "789", "title": "Resident Evil"}'
   
-  curl -i "localhost:9108/api/movies?title=evil"
+  curl -i "localhost:9115/api/movies?title=evil"
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminal

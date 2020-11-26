@@ -98,7 +98,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name quarkus-consumer-api-jvm -p 9105:8080 \
+      docker run --rm --name quarkus-consumer-api-jvm -p 9106:8080 \
         --network producer-consumer_default \
         docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0
       ```
@@ -158,7 +158,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name quarkus-consumer-api-native -p 9106:8080 \
+      docker run --rm --name quarkus-consumer-api-native -p 9107:8080 \
         --network producer-consumer_default \
         docker.mycompany.com/quarkus-consumer-api-native:1.0.0
       ```

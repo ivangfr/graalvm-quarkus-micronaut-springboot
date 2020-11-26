@@ -100,9 +100,8 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name micronaut-consumer-api-jvm \
-        -p 9107:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-        --network producer-consumer_default \
+      docker run --rm --name micronaut-consumer-api-jvm -p 9108:8080 \
+        -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network producer-consumer_default \
         docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0
       ```
 
@@ -140,9 +139,8 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name micronaut-producer-api-native \
-        -p 9103:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-        --network producer-consumer_default \
+      docker run --rm --name micronaut-producer-api-native -p 9103:8080 \
+        -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network producer-consumer_default \
         docker.mycompany.com/micronaut-producer-api-native:1.0.0
       ```
 
@@ -163,7 +161,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
     - Run the following command to start the Docker container
       ```
       docker run --rm --name micronaut-consumer-api-native \
-        -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+        -p 9109:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network producer-consumer_default \
         docker.mycompany.com/micronaut-consumer-api-native:1.0.0
       ```

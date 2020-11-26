@@ -246,7 +246,7 @@ echo "--------------------"
 echo "QUARKUS-BOOK-API-JVM"
 echo "--------------------"
 
-docker run -d --rm --name quarkus-book-api-jvm -p 9085:8080 -e MYSQL_HOST=mysql \
+docker run -d --rm --name quarkus-book-api-jvm -p 9086:8080 -e MYSQL_HOST=mysql \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network book-api_default \
   docker.mycompany.com/quarkus-book-api-jvm:1.0.0
@@ -257,12 +257,12 @@ quarkus_book_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_se
 
 quarkus_book_api_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-book-api-jvm")
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9085/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9086/api/books"
 quarkus_book_api_jvm[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9085/api/books"
+warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9086/api/books"
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9085/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9086/api/books"
 quarkus_book_api_jvm[ab_testing_time_2]=$run_command_exec_time
 
 quarkus_book_api_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-book-api-jvm")
@@ -275,7 +275,7 @@ echo "-----------------------"
 echo "QUARKUS-BOOK-API-NATIVE"
 echo "-----------------------"
 
-docker run -d --rm --name quarkus-book-api-native -p 9086:8080 -e MYSQL_HOST=mysql \
+docker run -d --rm --name quarkus-book-api-native -p 9087:8080 -e MYSQL_HOST=mysql \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network book-api_default \
   docker.mycompany.com/quarkus-book-api-native:1.0.0
@@ -286,12 +286,12 @@ quarkus_book_api_native[startup_time]="$(convert_seconds_to_millis $startup_time
 
 quarkus_book_api_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-book-api-native")
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9086/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9087/api/books"
 quarkus_book_api_native[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9086/api/books"
+warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9087/api/books"
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9086/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9087/api/books"
 quarkus_book_api_native[ab_testing_time_2]=$run_command_exec_time
 
 quarkus_book_api_native[final_memory_usage]=$(get_container_memory_usage "quarkus-book-api-native")
@@ -304,7 +304,7 @@ echo "----------------------"
 echo "MICRONAUT-BOOK-API-JVM"
 echo "----------------------"
 
-docker run -d --rm --name micronaut-book-api-jvm -p 9087:8080 -e MYSQL_HOST=mysql \
+docker run -d --rm --name micronaut-book-api-jvm -p 9088:8080 -e MYSQL_HOST=mysql \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network book-api_default \
   docker.mycompany.com/micronaut-book-api-jvm:1.0.0
@@ -314,12 +314,12 @@ micronaut_book_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_
 
 micronaut_book_api_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-book-api-jvm")
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9087/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9088/api/books"
 micronaut_book_api_jvm[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9087/api/books"
+warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9088/api/books"
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9087/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9088/api/books"
 micronaut_book_api_jvm[ab_testing_time_2]=$run_command_exec_time
 
 micronaut_book_api_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-book-api-jvm")
@@ -332,7 +332,7 @@ echo "-------------------------"
 echo "MICRONAUT-BOOK-API-NATIVE"
 echo "-------------------------"
 
-docker run -d --rm --name micronaut-book-api-native -p 9088:8080 -e MYSQL_HOST=mysql \
+docker run -d --rm --name micronaut-book-api-native -p 9089:8080 -e MYSQL_HOST=mysql \
  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
  --network book-api_default \
  docker.mycompany.com/micronaut-book-api-native:1.0.0
@@ -342,12 +342,12 @@ micronaut_book_api_native[startup_time]=$(extract_startup_time_from_log "$wait_f
 
 micronaut_book_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-book-api-native")
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9088/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9089/api/books"
 micronaut_book_api_native[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9088/api/books"
+warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9089/api/books"
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9088/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9089/api/books"
 micronaut_book_api_native[ab_testing_time_2]=$run_command_exec_time
 
 micronaut_book_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-book-api-native")
@@ -360,7 +360,7 @@ echo "-----------------------"
 echo "SPRINGBOOT-BOOK-API-JVM"
 echo "-----------------------"
 
-docker run -d --rm --name springboot-book-api-jvm -p 9089:8080 -e MYSQL_HOST=mysql \
+docker run -d --rm --name springboot-book-api-jvm -p 9090:8080 -e MYSQL_HOST=mysql \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network book-api_default \
   docker.mycompany.com/springboot-book-api-jvm:1.0.0
@@ -371,12 +371,12 @@ springboot_book_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time
 
 springboot_book_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-book-api-jvm")
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9089/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9090/api/books"
 springboot_book_api_jvm[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9089/api/books"
+warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9090/api/books"
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9089/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9090/api/books"
 springboot_book_api_jvm[ab_testing_time_2]=$run_command_exec_time
 
 springboot_book_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-book-api-jvm")
@@ -389,7 +389,7 @@ echo "--------------------------"
 echo "SPRINGBOOT-BOOK-API-NATIVE"
 echo "--------------------------"
 
-docker run -d --rm --name springboot-book-api-native -p 9090:8080 -e MYSQL_HOST=mysql \
+docker run -d --rm --name springboot-book-api-native -p 9091:8080 -e MYSQL_HOST=mysql \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network book-api_default \
   docker.mycompany.com/springboot-book-api-native:1.0.0
@@ -400,12 +400,12 @@ springboot_book_api_native[startup_time]="$(convert_seconds_to_millis $startup_t
 
 springboot_book_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-book-api-native")
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9090/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9091/api/books"
 springboot_book_api_native[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9090/api/books"
+warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9091/api/books"
 
-run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9090/api/books"
+run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9091/api/books"
 springboot_book_api_native[ab_testing_time_2]=$run_command_exec_time
 
 springboot_book_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-book-api-native")
@@ -466,7 +466,7 @@ echo "--------------------------------------------"
 echo "QUARKUS-PRODUCER-CONSUMER / CONSUMER-API-JVM"
 echo "--------------------------------------------"
 
-docker run -d --rm --name quarkus-consumer-api-jvm -p 9105:8080 \
+docker run -d --rm --name quarkus-consumer-api-jvm -p 9106:8080 \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network producer-consumer_default \
   docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0
@@ -521,7 +521,7 @@ echo "-----------------------------------------------"
 echo "QUARKUS-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
 echo "-----------------------------------------------"
 
-docker run -d --rm --name quarkus-consumer-api-native -p 9106:8080 \
+docker run -d --rm --name quarkus-consumer-api-native -p 9107:8080 \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network producer-consumer_default \
   docker.mycompany.com/quarkus-consumer-api-native:1.0.0
@@ -575,7 +575,7 @@ echo "----------------------------------------------"
 echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
 echo "----------------------------------------------"
 
-docker run -d --rm --name micronaut-consumer-api-jvm -p 9107:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+docker run -d --rm --name micronaut-consumer-api-jvm -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network producer-consumer_default \
   docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0
@@ -628,7 +628,7 @@ echo "-------------------------------------------------"
 echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
 echo "-------------------------------------------------"
 
-docker run -d --rm --name micronaut-consumer-api-native -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+docker run -d --rm --name micronaut-consumer-api-native -p 9109:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network producer-consumer_default \
   docker.mycompany.com/micronaut-consumer-api-native:1.0.0
@@ -682,7 +682,7 @@ echo "-----------------------------------------------"
 echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
 echo "-----------------------------------------------"
 
-docker run -d --rm --name springboot-consumer-api-jvm -p 9109:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+docker run -d --rm --name springboot-consumer-api-jvm -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network producer-consumer_default \
   docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
@@ -711,55 +711,55 @@ echo "--------------------------------------------------"
 echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
 echo "--------------------------------------------------"
 
-docker run -d --rm --name springboot-producer-api-native -p 9105:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-  --network producer-consumer_default \
-  docker.mycompany.com/springboot-producer-api-native:1.0.0
+# docker run -d --rm --name springboot-producer-api-native -p 9105:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+#   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+#   --network producer-consumer_default \
+#   docker.mycompany.com/springboot-producer-api-native:1.0.0
 
-wait_for_container_log "springboot-producer-api-native" "Started"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-springboot_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+# wait_for_container_log "springboot-producer-api-native" "Started"
+# startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+# springboot_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-springboot_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+# springboot_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
 
-run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-springboot_producer_api_native[ab_testing_time]=$run_command_exec_time
+# run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
+# springboot_producer_api_native[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9105/api/news"
+# warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9105/api/news"
 
-run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-springboot_producer_api_native[ab_testing_time_2]=$run_command_exec_time
+# run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
+# springboot_producer_api_native[ab_testing_time_2]=$run_command_exec_time
 
-springboot_producer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+# springboot_producer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
 
 echo
 echo "--------------------------------------------------"
 echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
 echo "--------------------------------------------------"
 
-docker run -d --rm --name springboot-consumer-api-native -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-  --network producer-consumer_default \
-  docker.mycompany.com/springboot-consumer-api-native:1.0.0
+# docker run -d --rm --name springboot-consumer-api-native -p 9111:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+#   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+#   --network producer-consumer_default \
+#   docker.mycompany.com/springboot-consumer-api-native:1.0.0
 
-wait_for_container_log "springboot-consumer-api-native" "Started"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-springboot_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+# wait_for_container_log "springboot-consumer-api-native" "Started"
+# startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+# springboot_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-springboot_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
+# springboot_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
 
-wait_for_container_log "springboot-consumer-api-native" "OFFSET: 27999"
-springboot_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
+# wait_for_container_log "springboot-consumer-api-native" "OFFSET: 27999"
+# springboot_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
-springboot_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
+# springboot_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
 
-echo "== Stopping producer-consuner docker containers"
+# echo "== Stopping producer-consuner docker containers"
 
-run_command "docker stop springboot-producer-api-native"
-springboot_producer_api_native[shutdown_time]=$run_command_exec_time
+# run_command "docker stop springboot-producer-api-native"
+# springboot_producer_api_native[shutdown_time]=$run_command_exec_time
 
-run_command "docker stop springboot-consumer-api-native"
-springboot_consumer_api_native[shutdown_time]=$run_command_exec_time
+# run_command "docker stop springboot-consumer-api-native"
+# springboot_consumer_api_native[shutdown_time]=$run_command_exec_time
 
 echo
 echo "=============="
@@ -791,7 +791,7 @@ echo "-------------------------"
 echo "QUARKUS-ELASTICSEARCH-JVM"
 echo "-------------------------"
 
-docker run -d --rm --name quarkus-elasticsearch-jvm -p 9105:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+docker run -d --rm --name quarkus-elasticsearch-jvm -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network elasticsearch_default \
   docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0
@@ -802,12 +802,12 @@ quarkus_elasticsearch_jvm[startup_time]="$(convert_seconds_to_millis $startup_ti
 
 quarkus_elasticsearch_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-elasticsearch-jvm")
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9105/api/movies"
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9112/api/movies"
 quarkus_elasticsearch_jvm[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9105/api/movies"
+warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9112/api/movies"
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9105/api/movies"
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9112/api/movies"
 quarkus_elasticsearch_jvm[ab_testing_time_2]=$run_command_exec_time
 
 quarkus_elasticsearch_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-elasticsearch-jvm")
@@ -820,7 +820,7 @@ echo "----------------------------"
 echo "QUARKUS-ELASTICSEARCH-NATIVE"
 echo "----------------------------"
 
-docker run -d --rm --name quarkus-elasticsearch-native -p 9106:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+docker run -d --rm --name quarkus-elasticsearch-native -p 9113:8080 -e ELASTICSEARCH_HOST=elasticsearch \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network elasticsearch_default \
   docker.mycompany.com/quarkus-elasticsearch-native:1.0.0
@@ -831,12 +831,12 @@ quarkus_elasticsearch_native[startup_time]="$(convert_seconds_to_millis $startup
 
 quarkus_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-elasticsearch-native")
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9106/api/movies"
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9113/api/movies"
 quarkus_elasticsearch_native[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9106/api/movies"
+warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9113/api/movies"
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9106/api/movies"
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9113/api/movies"
 quarkus_elasticsearch_native[ab_testing_time_2]=$run_command_exec_time
 
 quarkus_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "quarkus-elasticsearch-native")
@@ -849,7 +849,7 @@ echo "---------------------------"
 echo "MICRONAUT-ELASTICSEARCH-JVM"
 echo "---------------------------"
 
-docker run -d --rm --name micronaut-elasticsearch-jvm -p 9107:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+docker run -d --rm --name micronaut-elasticsearch-jvm -p 9114:8080 -e ELASTICSEARCH_HOST=elasticsearch \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network elasticsearch_default \
   docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0
@@ -859,12 +859,12 @@ micronaut_elasticsearch_jvm[startup_time]=$(extract_startup_time_from_log "$wait
 
 micronaut_elasticsearch_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-elasticsearch-jvm")
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9107/api/movies"
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9114/api/movies"
 micronaut_elasticsearch_jvm[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9107/api/movies"
+warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9114/api/movies"
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9107/api/movies"
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9114/api/movies"
 micronaut_elasticsearch_jvm[ab_testing_time_2]=$run_command_exec_time
 
 micronaut_elasticsearch_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-elasticsearch-jvm")
@@ -877,7 +877,7 @@ echo "------------------------------"
 echo "MICRONAUT-ELASTICSEARCH-NATIVE"
 echo "------------------------------"
 
-# docker run -d --rm --name micronaut-elasticsearch-native -p 9108:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+# docker run -d --rm --name micronaut-elasticsearch-native -p 9115:8080 -e ELASTICSEARCH_HOST=elasticsearch \
 #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
 #   --network elasticsearch_default \
 #   docker.mycompany.com/micronaut-elasticsearch-native:1.0.0
@@ -887,12 +887,12 @@ echo "------------------------------"
 
 # micronaut_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-elasticsearch-native")
 
-# run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9108/api/movies"
+# run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9115/api/movies"
 # micronaut_elasticsearch_native[ab_testing_time]=$run_command_exec_time
 
-# warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9108/api/movies"
+# warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9115/api/movies"
 
-# run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9108/api/movies"
+# run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9115/api/movies"
 # micronaut_elasticsearch_native[ab_testing_time_2]=$run_command_exec_time
 
 # micronaut_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "micronaut-elasticsearch-native")
@@ -905,7 +905,7 @@ echo "----------------------------"
 echo "SPRINGBOOT-ELASTICSEARCH-JVM"
 echo "----------------------------"
 
-docker run -d --rm --name springboot-elasticsearch-jvm -p 9109:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+docker run -d --rm --name springboot-elasticsearch-jvm -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   --network elasticsearch_default \
   docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0
@@ -916,12 +916,12 @@ springboot_elasticsearch_jvm[startup_time]="$(convert_seconds_to_millis $startup
 
 springboot_elasticsearch_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-jvm")
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9109/api/movies"
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9116/api/movies"
 springboot_elasticsearch_jvm[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9109/api/movies"
+warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9116/api/movies"
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9109/api/movies"
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9116/api/movies"
 springboot_elasticsearch_jvm[ab_testing_time_2]=$run_command_exec_time
 
 springboot_elasticsearch_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-jvm")
@@ -934,29 +934,29 @@ echo "-------------------------------"
 echo "SPRINGBOOT-ELASTICSEARCH-NATIVE"
 echo "-------------------------------"
 
-docker run -d --rm --name springboot-elasticsearch-native -p 9110:8080 -e ELASTICSEARCH_HOST=elasticsearch \
-  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-  --network elasticsearch_default \
-  docker.mycompany.com/springboot-elasticsearch-native:1.0.0
+# docker run -d --rm --name springboot-elasticsearch-native -p 9117:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+#   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+#   --network elasticsearch_default \
+#   docker.mycompany.com/springboot-elasticsearch-native:1.0.0
 
-wait_for_container_log "springboot-elasticsearch-native" "Started"
-startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-springboot_elasticsearch_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+# wait_for_container_log "springboot-elasticsearch-native" "Started"
+# startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+# springboot_elasticsearch_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-springboot_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
+# springboot_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9110/api/movies"
-springboot_elasticsearch_native[ab_testing_time]=$run_command_exec_time
+# run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
+# springboot_elasticsearch_native[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9110/api/movies"
+# warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9117/api/movies"
 
-run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9110/api/movies"
-springboot_elasticsearch_native[ab_testing_time_2]=$run_command_exec_time
+# run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
+# springboot_elasticsearch_native[ab_testing_time_2]=$run_command_exec_time
 
-springboot_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
+# springboot_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
 
-run_command "docker stop springboot-elasticsearch-native"
-springboot_elasticsearch_native[shutdown_time]=$run_command_exec_time
+# run_command "docker stop springboot-elasticsearch-native"
+# springboot_elasticsearch_native[shutdown_time]=$run_command_exec_time
 
 echo
 echo "=============="
