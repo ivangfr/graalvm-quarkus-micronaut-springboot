@@ -5,7 +5,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
 ## Applications
 
-- **producer-api**
+- ### producer-api
 
   `Quarkus` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `producer-api` pushes a message about the `news` to `Kafka`.
 
@@ -14,7 +14,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
   POST /api/news {"source": "...", "title": "..."}
   ```
 
-- **consumer-api**
+- ### consumer-api
 
   `Quarkus` Web Java application that listens to messages (published by the `producer-api`) and logs it.
 

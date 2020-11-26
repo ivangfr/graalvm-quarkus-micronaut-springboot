@@ -5,7 +5,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
 ## Applications
 
-- **producer-api**
+- ### producer-api
 
   `Micronaut` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `producer-api` pushes a message about the `news` to `Kafka`.
 
@@ -14,7 +14,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
   POST /api/news {"source": "...", "title": "..."}
   ```
 
-- **consumer-api**
+- ### consumer-api
 
   `Micronaut` Web Java application that listens to messages (published by the `producer-api`) and logs it.
 
@@ -180,7 +180,4 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
 - **Shutdown**
 
-  To stop and remove `producer-api` and `consumer-api` Docker containers, run in a terminal
-  ```
-  docker stop micronaut-producer-api-native micronaut-consumer-api-native
-  ```
+  Press `Ctrl+C` in `producer-api` and `consumer-api` terminals

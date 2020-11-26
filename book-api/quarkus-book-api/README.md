@@ -3,7 +3,7 @@
 
 ## Application
 
-- **quarkus-book-api**
+- ### quarkus-book-api
 
   [`Quarkus`](https://quarkus.io/) Java Web application that exposes a REST API for managing books.
                                  

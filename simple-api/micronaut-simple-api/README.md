@@ -3,7 +3,7 @@
 
 ## Application
 
-- **micronaut-simple-api**
+- ### micronaut-simple-api
 
   [`Micronaut`](https://micronaut.io/) Java Web application that expose a simple REST API for greetings. It has the following endpoint
   ```

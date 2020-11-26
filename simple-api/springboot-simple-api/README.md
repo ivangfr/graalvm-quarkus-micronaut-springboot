@@ -3,7 +3,7 @@
 
 ## Application
 
-- **springboot-simple-api**
+- ### springboot-simple-api
 
   [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that expose a simple REST API for greetings. It has the following endpoint
   ```

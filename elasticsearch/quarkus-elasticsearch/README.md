@@ -3,7 +3,7 @@
 
 ## Application
 
-- **quarkus-elasticsearch**
+- ### quarkus-elasticsearch
 
   [`Quarkus`](https://quarkus.io/) Java Web application that expose a simple REST API for indexing and searching movies in `Elasticsearch`.
   

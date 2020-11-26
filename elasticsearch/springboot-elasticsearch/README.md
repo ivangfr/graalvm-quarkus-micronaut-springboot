@@ -3,7 +3,7 @@
 
 ## Application
 
-- **springboot-elasticsearch**
+- ### springboot-elasticsearch
 
   [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that expose a simple REST API for indexing and searching movies in `Elasticsearch`.
   
@@ -100,7 +100,7 @@
 
 ## Issues
 
-After building successfully the docker native image, the following exception is thrown during the application startup
+[Issue #387](https://github.com/spring-projects-experimental/spring-graalvm-native/issues/387) After building successfully the docker native image, the following exception is thrown during the application startup
 ```
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \

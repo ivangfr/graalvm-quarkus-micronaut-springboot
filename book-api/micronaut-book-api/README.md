@@ -3,7 +3,7 @@
 
 ## Application
 
-- **micronaut-book-api**
+- ### micronaut-book-api
 
   [`Micronaut`](https://micronaut.io/) Java Web application that exposes a REST API for managing books.
 

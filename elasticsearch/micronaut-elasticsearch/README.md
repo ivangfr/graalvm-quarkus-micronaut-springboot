@@ -3,7 +3,7 @@
 
 ## Application
 
-- **micronaut-elasticsearch**
+- ### micronaut-elasticsearch
 
   [`Micronaut`](https://micronaut.io/) Java Web application that expose a simple REST API for indexing and searching movies in `Elasticsearch`.
   
@@ -96,10 +96,7 @@
   curl -i "localhost:9108/api/movies?title=evil"
   ```
 
-- To stop and remove application Docker container, run in a terminal
-  ```
-  docker stop micronaut-elasticsearch-native
-  ```
+- To stop and remove application Docker container, press `Ctrl+C` in its terminal
 
 ## Issues
 

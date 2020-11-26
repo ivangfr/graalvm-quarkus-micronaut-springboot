@@ -3,7 +3,7 @@
 
 ## Application
 
-- **springboot-book-api**
+- ### springboot-book-api
 
   [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a REST API for managing books.
 

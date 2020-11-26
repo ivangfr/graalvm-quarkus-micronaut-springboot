@@ -5,7 +5,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
 ## Applications
 
-- **producer-api**
+- ### producer-api
 
   `Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `producer-api` pushes a message about the `news` to `Kafka`.
 
@@ -14,7 +14,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
   POST /api/news {"source": "...", "title": "..."}
   ```
 
-- **consumer-api**
+- ### consumer-api
 
   `Spring Boot` Web Java application that listens to messages (published by the `producer-api`) and logs it.
 
