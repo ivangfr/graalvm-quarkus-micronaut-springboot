@@ -934,29 +934,29 @@ echo "-------------------------------"
 echo "SPRINGBOOT-ELASTICSEARCH-NATIVE"
 echo "-------------------------------"
 
-# docker run -d --rm --name springboot-elasticsearch-native -p 9117:8080 -e ELASTICSEARCH_HOST=elasticsearch \
-#   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-#   --network elasticsearch_default \
-#   docker.mycompany.com/springboot-elasticsearch-native:1.0.0
+docker run -d --rm --name springboot-elasticsearch-native -p 9117:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+  --network elasticsearch_default \
+  docker.mycompany.com/springboot-elasticsearch-native:1.0.0
 
-# wait_for_container_log "springboot-elasticsearch-native" "Started"
-# startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-# springboot_elasticsearch_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+wait_for_container_log "springboot-elasticsearch-native" "Started"
+startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+springboot_elasticsearch_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-# springboot_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
+springboot_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
 
-# run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
-# springboot_elasticsearch_native[ab_testing_time]=$run_command_exec_time
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
+springboot_elasticsearch_native[ab_testing_time]=$run_command_exec_time
 
-# warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9117/api/movies"
+warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9117/api/movies"
 
-# run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
-# springboot_elasticsearch_native[ab_testing_time_2]=$run_command_exec_time
+run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
+springboot_elasticsearch_native[ab_testing_time_2]=$run_command_exec_time
 
-# springboot_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
+springboot_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
 
-# run_command "docker stop springboot-elasticsearch-native"
-# springboot_elasticsearch_native[shutdown_time]=$run_command_exec_time
+run_command "docker stop springboot-elasticsearch-native"
+springboot_elasticsearch_native[shutdown_time]=$run_command_exec_time
 
 echo
 echo "=============="

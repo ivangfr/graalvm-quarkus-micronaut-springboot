@@ -67,7 +67,7 @@ The following table shows the results after running the script `collect-jvm-jar-
 .............................. + .............. + ................ + ................. + ................. |
      quarkus-elasticsearch-jvm |             8s |           440567 |                2s |             563MB |
    micronaut-elasticsearch-jvm |             9s |         44829923 |               16s |             388MB |
-  springboot-elasticsearch-jvm |             5s |         54639346 |               10s |             252MB |
+  springboot-elasticsearch-jvm |             9s |         55297410 |               16s |             253MB |
 ```
 
 Table below shows the results after running the script `collect-native-jar-docker-size-times.sh`
@@ -92,7 +92,7 @@ Table below shows the results after running the script `collect-native-jar-docke
 ............................... + .............. + ................ + ................. + ................. |
    quarkus-elasticsearch-native |           262s |         55789448 |                2s |             163MB |
  micronaut-elasticsearch-native |              - |                - |                 - |                 - |
-springboot-elasticsearch-native |             4s |         55297328 |              805s |             135MB |
+springboot-elasticsearch-native |             9s |         55297410 |              696s |             149MB |
 ```
 
 Finally, the following table shows the results after running the script `collect-ab-times-memory-usage.sh`
@@ -132,7 +132,7 @@ Finally, the following table shows the results after running the script `collect
    springboot-elasticsearch-jvm |       5666ms |  187.5MiB/256MiB(73.25%) |             12s |                9s |    222MiB/256MiB(86.71%) |            3s |
    quarkus-elasticsearch-native |         28ms |   5.047MiB/256MiB(1.97%) |              9s |                9s |  44.61MiB/256MiB(17.43%) |            0s |
  micronaut-elasticsearch-native |            - |                        - |               - |                 - |                        - |             - |
-springboot-elasticsearch-native |            - |                        - |               - |                 - |                        - |             - |
+springboot-elasticsearch-native |        287ms |  88.12MiB/256MiB(34.42%) |             10s |                9s |  122.3MiB/256MiB(47.76%) |            3s |
 ```
 
 Comments:
@@ -140,8 +140,6 @@ Comments:
 - Unable to build `springboot-producer-api-native` and `springboot-consumer-api-native`. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot-producer-consumer#issues)
 
 - Unable to build `micronaut-elasticsearch-native`. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/micronaut-elasticsearch#issues)
-
-- It's possible to build `springboot-elasticsearch-native`, however an exception is thrown at runtime. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/springboot-elasticsearch#issues)
 
 - Checking the Final Memory Usage column, `Quarkus` native apps have better memory utilization (after load tests) than `Micronaut` and `Spring Boot` ones; In this experiment, I set **256MiB** the container limit memory. If I reduce the container limit memmory to **128MiB**, all `Micronaut` native apps will have memory issues. For `Quarkus` native apps, I was able to reduce the container limit memmory to even **64MiB**. Below it, the apps performance will degrade.
 
