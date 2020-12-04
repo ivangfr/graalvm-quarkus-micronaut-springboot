@@ -237,7 +237,7 @@ echo "DOCKER-COMPOSE"
 echo "=============="
 
 docker-compose up -d
-wait_for_container_log "mysql" "port: 33060"
+wait_for_container_log "mysql" "port: 3306"
 
 ./init-db.sh
 
