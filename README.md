@@ -59,11 +59,11 @@ The following table shows the results after running the script `collect-jvm-jar-
 .............................. + .............. + ................ + ................. + ................. |
       quarkus-producer-api-jvm |            12s |           542086 |               11s |             350MB |
     micronaut-producer-api-jvm |            10s |         26122066 |               20s |             369MB |
-   springboot-producer-api-jvm |             7s |         37553717 |               13s |             235MB |
+   springboot-producer-api-jvm |             7s |         35793868 |               13s |             233MB |
 .............................. + .............. + ................ + ................. + ................. |
       quarkus-consumer-api-jvm |            11s |           518653 |               10s |             350MB |
     micronaut-consumer-api-jvm |            10s |         26104021 |               20s |             369MB |
-   springboot-consumer-api-jvm |             7s |         37551005 |               12s |             235MB |
+   springboot-consumer-api-jvm |             8s |         35791204 |               11s |             233MB |
 .............................. + .............. + ................ + ................. + ................. |
      quarkus-elasticsearch-jvm |            12s |           438923 |               16s |             358MB |
    micronaut-elasticsearch-jvm |            14s |         44830040 |               22s |             388MB |
@@ -84,11 +84,11 @@ Table below shows the results after running the script `collect-native-jar-docke
 ............................... + .............. + ................ + ................. + ................. |
     quarkus-producer-api-native |           278s |         51356552 |                6s |             154MB |
   micronaut-producer-api-native |            10s |         26122066 |              350s |            97.9MB |
- springboot-producer-api-native |              - |                - |                 - |                 - |
+ springboot-producer-api-native |             7s |         35793868 |              697s |             112MB |
 ............................... + .............. + ................ + ................. + ................. |
     quarkus-consumer-api-native |           251s |         49271688 |                5s |             152MB |
   micronaut-consumer-api-native |            11s |         26104020 |              333s |            97.8MB |
- springboot-consumer-api-native |              - |                - |                 - |                 - |
+ springboot-consumer-api-native |             8s |         35791204 |              715s |             113MB |
 ............................... + .............. + ................ + ................. + ................. |
    quarkus-elasticsearch-native |           322s |         55801736 |                6s |             159MB |
  micronaut-elasticsearch-native |              - |                - |                 - |                 - |
@@ -137,7 +137,7 @@ springboot-elasticsearch-native |        290ms |  87.62MiB/256MiB(34.23%) |     
 
 Comments:
 
-- Unable to build `springboot-producer-api-native` and `springboot-consumer-api-native`. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot-producer-consumer#issues)
+- Unable to run `springboot-producer-api-native` and `springboot-consumer-api-native`. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot-producer-consumer#issues)
 
 - Unable to build `micronaut-elasticsearch-native`. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/micronaut-elasticsearch#issues)
 

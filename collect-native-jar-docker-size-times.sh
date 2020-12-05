@@ -46,12 +46,14 @@ quarkus_simple_api_native[jar_size]=$package_jar_build_image_jar_size
 quarkus_simple_api_native[building_time]=$package_jar_build_image_building_time
 quarkus_simple_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "---------------------------"
 echo "MICRONAUT-SIMPLE-API-NATIVE"
 echo "---------------------------"
 
-cd ../micronaut-simple-api
+cd simple-api/micronaut-simple-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -64,12 +66,14 @@ micronaut_simple_api_native[jar_size]=$package_jar_build_image_jar_size
 micronaut_simple_api_native[building_time]=$package_jar_build_image_building_time
 micronaut_simple_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "----------------------------"
 echo "SPRINGBOOT-SIMPLE-API-NATIVE"
 echo "----------------------------"
 
-cd ../springboot-simple-api
+cd simple-api/springboot-simple-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -82,6 +86,8 @@ springboot_simple_api_native[jar_size]=$package_jar_build_image_jar_size
 springboot_simple_api_native[building_time]=$package_jar_build_image_building_time
 springboot_simple_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "========"
 echo "BOOK-API"
@@ -92,7 +98,7 @@ echo "-----------------------"
 echo "QUARKUS-BOOK-API-NATIVE"
 echo "-----------------------"
 
-cd ../../book-api/quarkus-book-api
+cd book-api/quarkus-book-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -105,12 +111,14 @@ quarkus_book_api_native[jar_size]=$package_jar_build_image_jar_size
 quarkus_book_api_native[building_time]=$package_jar_build_image_building_time
 quarkus_book_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "-------------------------"
 echo "MICRONAUT-BOOK-API-NATIVE"
 echo "-------------------------"
 
-cd ../micronaut-book-api
+cd book-api/micronaut-book-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -123,12 +131,14 @@ micronaut_book_api_native[jar_size]=$package_jar_build_image_jar_size
 micronaut_book_api_native[building_time]=$package_jar_build_image_building_time
 micronaut_book_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "--------------------------"
 echo "SPRINGBOOT-BOOK-API-NATIVE"
 echo "--------------------------"
 
-cd ../springboot-book-api
+cd book-api/springboot-book-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -141,6 +151,8 @@ springboot_book_api_native[jar_size]=$package_jar_build_image_jar_size
 springboot_book_api_native[building_time]=$package_jar_build_image_building_time
 springboot_book_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "================="
 echo "PRODUCER-CONSUMER"
@@ -151,7 +163,7 @@ echo "-----------------------------------------------"
 echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
 echo "-----------------------------------------------"
 
-cd ../../producer-consumer/quarkus-producer-consumer
+cd producer-consumer/quarkus-producer-consumer
 
 package_jar_build_image \
   "./mvnw clean --projects producer-api" \
@@ -180,12 +192,14 @@ quarkus_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
 quarkus_consumer_api_native[building_time]=$package_jar_build_image_building_time
 quarkus_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "-------------------------------------------------"
 echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
 echo "-------------------------------------------------"
 
-cd ../micronaut-producer-consumer
+cd producer-consumer/micronaut-producer-consumer
 
 package_jar_build_image \
   "./mvnw clean --projects producer-api" \
@@ -214,39 +228,43 @@ micronaut_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
 micronaut_consumer_api_native[building_time]=$package_jar_build_image_building_time
 micronaut_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "--------------------------------------------------"
 echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
 echo "--------------------------------------------------"
 
-# cd ../springboot-producer-consumer
+cd producer-consumer/springboot-producer-consumer
 
-# package_jar_build_image \
-#   "./mvnw clean --projects producer-api" \
-#   "./mvnw package --projects producer-api" \
-#   "producer-api/target/producer-api-1.0.0.jar" \
-#   "cd producer-api && ./docker-build.sh native && cd .." \
-#   "docker.mycompany.com/springboot-producer-api-native:1.0.0"
-# springboot_producer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-# springboot_producer_api_native[jar_size]=$package_jar_build_image_jar_size
-# springboot_producer_api_native[building_time]=$package_jar_build_image_building_time
-# springboot_producer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+package_jar_build_image \
+  "./mvnw clean --projects producer-api" \
+  "./mvnw package --projects producer-api" \
+  "producer-api/target/producer-api-1.0.0.jar" \
+  "cd producer-api && ./docker-build.sh native && cd .." \
+  "docker.mycompany.com/springboot-producer-api-native:1.0.0"
+springboot_producer_api_native[packaging_time]=$package_jar_build_image_packaging_time
+springboot_producer_api_native[jar_size]=$package_jar_build_image_jar_size
+springboot_producer_api_native[building_time]=$package_jar_build_image_building_time
+springboot_producer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
 echo
 echo "--------------------------------------------------"
 echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
 echo "--------------------------------------------------"
 
-# package_jar_build_image \
-#   "./mvnw clean --projects consumer-api" \
-#   "./mvnw package --projects consumer-api" \
-#   "consumer-api/target/consumer-api-1.0.0.jar" \
-#   "cd consumer-api && ./docker-build.sh native && cd .." \
-#   "docker.mycompany.com/springboot-consumer-api-native:1.0.0"
-# springboot_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-# springboot_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
-# springboot_consumer_api_native[building_time]=$package_jar_build_image_building_time
-# springboot_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+package_jar_build_image \
+  "./mvnw clean --projects consumer-api" \
+  "./mvnw package --projects consumer-api" \
+  "consumer-api/target/consumer-api-1.0.0.jar" \
+  "cd consumer-api && ./docker-build.sh native && cd .." \
+  "docker.mycompany.com/springboot-consumer-api-native:1.0.0"
+springboot_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_time
+springboot_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
+springboot_consumer_api_native[building_time]=$package_jar_build_image_building_time
+springboot_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+
+cd ../..
 
 echo
 echo "============="
@@ -258,7 +276,7 @@ echo "----------------------------"
 echo "QUARKUS-ELASTICSEARCH-NATIVE"
 echo "----------------------------"
 
-cd ../../elasticsearch/quarkus-elasticsearch
+cd elasticsearch/quarkus-elasticsearch
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -271,30 +289,34 @@ quarkus_elasticsearch_native[jar_size]=$package_jar_build_image_jar_size
 quarkus_elasticsearch_native[building_time]=$package_jar_build_image_building_time
 quarkus_elasticsearch_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "------------------------------"
 echo "MICRONAUT-ELASTICSEARCH-NATIVE"
 echo "------------------------------"
 
-# cd ../micronaut-elasticsearch
+cd elasticsearch/micronaut-elasticsearch
 
-# package_jar_build_image \
-#   "./mvnw clean" \
-#   "./mvnw package" \
-#   "target/micronaut-elasticsearch-1.0.0.jar" \
-#   "./docker-build.sh native" \
-#   "docker.mycompany.com/micronaut-elasticsearch-native:1.0.0"
-# micronaut_elasticsearch_native[packaging_time]=$package_jar_build_image_packaging_time
-# micronaut_elasticsearch_native[jar_size]=$package_jar_build_image_jar_size
-# micronaut_elasticsearch_native[building_time]=$package_jar_build_image_building_time
-# micronaut_elasticsearch_native[docker_image_size]=$package_jar_build_image_docker_image_size
+package_jar_build_image \
+  "./mvnw clean" \
+  "./mvnw package" \
+  "target/micronaut-elasticsearch-1.0.0.jar" \
+  "./docker-build.sh native" \
+  "docker.mycompany.com/micronaut-elasticsearch-native:1.0.0"
+micronaut_elasticsearch_native[packaging_time]=$package_jar_build_image_packaging_time
+micronaut_elasticsearch_native[jar_size]=$package_jar_build_image_jar_size
+micronaut_elasticsearch_native[building_time]=$package_jar_build_image_building_time
+micronaut_elasticsearch_native[docker_image_size]=$package_jar_build_image_docker_image_size
+
+cd ../..
 
 echo
 echo "-------------------------------"
 echo "SPRINGBOOT-ELASTICSEARCH-NATIVE"
 echo "-------------------------------"
 
-cd ../springboot-elasticsearch
+cd elasticsearch/springboot-elasticsearch
 
 package_jar_build_image \
   "./mvnw clean" \

@@ -46,12 +46,14 @@ quarkus_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
 quarkus_simple_api_jvm[building_time]=$package_jar_build_image_building_time
 quarkus_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "------------------------"
 echo "MICRONAUT-SIMPLE-API-JVM"
 echo "------------------------"
 
-cd ../micronaut-simple-api
+cd simple-api/micronaut-simple-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -64,12 +66,14 @@ micronaut_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
 micronaut_simple_api_jvm[building_time]=$package_jar_build_image_building_time
 micronaut_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "-------------------------"
 echo "SPRINGBOOT-SIMPLE-API-JVM"
 echo "-------------------------"
 
-cd ../springboot-simple-api
+cd simple-api/springboot-simple-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -82,6 +86,8 @@ springboot_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
 springboot_simple_api_jvm[building_time]=$package_jar_build_image_building_time
 springboot_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "========"
 echo "BOOK-API"
@@ -92,7 +98,7 @@ echo "--------------------"
 echo "QUARKUS-BOOK-API-JVM"
 echo "--------------------"
 
-cd ../../book-api/quarkus-book-api
+cd book-api/quarkus-book-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -105,12 +111,14 @@ quarkus_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
 quarkus_book_api_jvm[building_time]=$package_jar_build_image_building_time
 quarkus_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "----------------------"
 echo "MICRONAUT-BOOK-API-JVM"
 echo "----------------------"
 
-cd ../micronaut-book-api
+cd book-api/micronaut-book-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -123,12 +131,14 @@ micronaut_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
 micronaut_book_api_jvm[building_time]=$package_jar_build_image_building_time
 micronaut_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "-----------------------"
 echo "SPRINGBOOT-BOOK-API-JVM"
 echo "-----------------------"
 
-cd ../springboot-book-api
+cd book-api/springboot-book-api
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -141,6 +151,8 @@ springboot_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
 springboot_book_api_jvm[building_time]=$package_jar_build_image_building_time
 springboot_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "================="
 echo "PRODUCER-CONSUMER"
@@ -151,7 +163,7 @@ echo "--------------------------------------------"
 echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-JVM"
 echo "--------------------------------------------"
 
-cd ../../producer-consumer/quarkus-producer-consumer
+cd producer-consumer/quarkus-producer-consumer
 
 package_jar_build_image \
   "./mvnw clean --projects producer-api" \
@@ -180,12 +192,14 @@ quarkus_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
 quarkus_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
 quarkus_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "----------------------------------------------"
 echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
 echo "----------------------------------------------"
 
-cd ../micronaut-producer-consumer
+cd producer-consumer/micronaut-producer-consumer
 
 package_jar_build_image \
   "./mvnw clean --projects producer-api" \
@@ -214,12 +228,14 @@ micronaut_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
 micronaut_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
 micronaut_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "-----------------------------------------------"
 echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
 echo "-----------------------------------------------"
 
-cd ../springboot-producer-consumer
+cd producer-consumer/springboot-producer-consumer
 
 package_jar_build_image \
   "./mvnw clean --projects producer-api" \
@@ -248,6 +264,8 @@ springboot_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
 springboot_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
 springboot_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "============="
 echo "ELASTICSEARCH"
@@ -258,7 +276,7 @@ echo "-------------------------"
 echo "QUARKUS-ELASTICSEARCH-JVM"
 echo "-------------------------"
 
-cd ../../elasticsearch/quarkus-elasticsearch
+cd elasticsearch/quarkus-elasticsearch
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -271,12 +289,14 @@ quarkus_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
 quarkus_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
 quarkus_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "---------------------------"
 echo "MICRONAUT-ELASTICSEARCH-JVM"
 echo "---------------------------"
 
-cd ../micronaut-elasticsearch
+cd elasticsearch/micronaut-elasticsearch
 
 package_jar_build_image \
   "./mvnw clean" \
@@ -289,12 +309,14 @@ micronaut_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
 micronaut_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
 micronaut_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
+cd ../..
+
 echo
 echo "----------------------------"
 echo "SPRINGBOOT-ELASTICSEARCH-JVM"
 echo "----------------------------"
 
-cd ../springboot-elasticsearch
+cd elasticsearch/springboot-elasticsearch
 
 package_jar_build_image \
   "./mvnw clean" \

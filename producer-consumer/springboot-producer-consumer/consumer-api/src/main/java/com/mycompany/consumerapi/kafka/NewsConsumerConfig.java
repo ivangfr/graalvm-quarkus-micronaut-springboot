@@ -19,32 +19,22 @@ import java.util.Map;
 @Configuration
 public class NewsConsumerConfig {
 
-    @Value("${kafka.bootstrap-servers}")
-    private String bootstrapServers;
-
-    @Value("${kafka.consumer.auto-offset-reset}")
-    private String autoOffsetReset;
-
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, News> kafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, News> kafkaListenerContainerFactory(ConsumerFactory<String, News> consumerFactory) {
         ConcurrentKafkaListenerContainerFactory<String, News> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
+        factory.setConsumerFactory(consumerFactory);
         return factory;
     }
 
     @Bean
-    ConsumerFactory<String, News> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(consumerConfigs(), new StringDeserializer(), new JsonDeserializer<>(News.class));
-    }
-
-    @Bean
-    Map<String, Object> consumerConfigs() {
+    ConsumerFactory<String, News> consumerFactory(@Value("${kafka.bootstrap-servers}") String bootstrapServers,
+                                                  @Value("${kafka.consumer.auto-offset-reset}") String autoOffsetReset) {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetReset);
-        return props;
+        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(News.class));
     }
 
 }

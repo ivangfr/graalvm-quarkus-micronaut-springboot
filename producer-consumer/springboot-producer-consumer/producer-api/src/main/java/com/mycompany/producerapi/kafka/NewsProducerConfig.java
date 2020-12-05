@@ -20,44 +20,31 @@ import java.util.Map;
 @Configuration
 public class NewsProducerConfig {
 
-    @Value("${kafka.bootstrap-servers}")
-    private String bootstrapServers;
-
-    @Value("${kafka.producer.topic}")
-    private String topic;
-
-    @Value("${kafka.producer.num-partitions}")
-    private Integer numPartitions;
-
     @Bean
-    ProducerFactory<String, News> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfigs());
-    }
-
-    @Bean
-    Map<String, Object> producerConfigs() {
+    ProducerFactory<String, News> producerFactory(@Value("${kafka.bootstrap-servers}") String bootstrapServers) {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         props.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
-        return props;
+        return new DefaultKafkaProducerFactory<>(props);
     }
 
     @Bean
-    public KafkaTemplate<String, News> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+    public KafkaTemplate<String, News> kafkaTemplate(ProducerFactory<String, News> producerFactory) {
+        return new KafkaTemplate<>(producerFactory);
     }
 
     @Bean
-    public KafkaAdmin kafkaAdmin() {
+    public KafkaAdmin kafkaAdmin(@Value("${kafka.bootstrap-servers}") String bootstrapServers) {
         Map<String, Object> configs = new HashMap<>();
         configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         return new KafkaAdmin(configs);
     }
 
     @Bean
-    public NewTopic newTopic() {
+    public NewTopic newTopic(@Value("${kafka.producer.topic}") String topic,
+                             @Value("${kafka.producer.num-partitions}") Integer numPartitions) {
         return new NewTopic(topic, numPartitions, (short) 1);
     }
 
