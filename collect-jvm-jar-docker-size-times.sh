@@ -2,6 +2,8 @@
 
 source my-functions.sh
 
+check_builder_script_input_parameter $1
+
 declare -A quarkus_simple_api_jvm
 declare -A micronaut_simple_api_jvm
 declare -A springboot_simple_api_jvm
@@ -23,311 +25,431 @@ declare -A springboot_elasticsearch_jvm
 
 start_time=$(date)
 
-echo
-echo "=========="
-echo "SIMPLE_API"
-echo "=========="
+if [ "$1" = "quarkus-simple-api" ] ||
+   [ "$1" = "quarkus" ] ||
+   [ "$1" = "simple-api" ] ||
+   [ "$1" = "all" ];
+then
 
-echo
-echo "----------------------"
-echo "QUARKUS-SIMPLE-API-JVM"
-echo "----------------------"
+  echo
+  echo "----------------------"
+  echo "QUARKUS-SIMPLE-API-JVM"
+  echo "----------------------"
 
-cd simple-api/quarkus-simple-api
+  cd simple-api/quarkus-simple-api
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/quarkus-simple-api-1.0.0-runner.jar" \
-  "./docker-build.sh" \
-  "docker.mycompany.com/quarkus-simple-api-jvm:1.0.0"
-quarkus_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-quarkus_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
-quarkus_simple_api_jvm[building_time]=$package_jar_build_image_building_time
-quarkus_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+  package_jar_build_image \
+    "./mvnw clean" \
+    "./mvnw package" \
+    "target/quarkus-simple-api-1.0.0-runner.jar" \
+    "./docker-build.sh" \
+    "docker.mycompany.com/quarkus-simple-api-jvm:1.0.0"
+  quarkus_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  quarkus_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  quarkus_simple_api_jvm[building_time]=$package_jar_build_image_building_time
+  quarkus_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
-cd ../..
+  cd ../..
 
-echo
-echo "------------------------"
-echo "MICRONAUT-SIMPLE-API-JVM"
-echo "------------------------"
+fi
 
-cd simple-api/micronaut-simple-api
+if [ "$1" = "micronaut-simple-api" ] ||
+   [ "$1" = "micronaut" ] ||
+   [ "$1" = "simple-api" ] ||
+   [ "$1" = "all" ];
+then
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/micronaut-simple-api-1.0.0.jar" \
-  "./docker-build.sh" \
-  "docker.mycompany.com/micronaut-simple-api-jvm:1.0.0"
-micronaut_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-micronaut_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
-micronaut_simple_api_jvm[building_time]=$package_jar_build_image_building_time
-micronaut_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+  echo
+  echo "------------------------"
+  echo "MICRONAUT-SIMPLE-API-JVM"
+  echo "------------------------"
 
-cd ../..
+  cd simple-api/micronaut-simple-api
 
-echo
-echo "-------------------------"
-echo "SPRINGBOOT-SIMPLE-API-JVM"
-echo "-------------------------"
+  package_jar_build_image \
+    "./mvnw clean" \
+    "./mvnw package" \
+    "target/micronaut-simple-api-1.0.0.jar" \
+    "./docker-build.sh" \
+    "docker.mycompany.com/micronaut-simple-api-jvm:1.0.0"
+  micronaut_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  micronaut_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  micronaut_simple_api_jvm[building_time]=$package_jar_build_image_building_time
+  micronaut_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
-cd simple-api/springboot-simple-api
+  cd ../..
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/springboot-simple-api-1.0.0.jar" \
-  "./docker-build.sh" \
-  "docker.mycompany.com/springboot-simple-api-jvm:1.0.0"
-springboot_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-springboot_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
-springboot_simple_api_jvm[building_time]=$package_jar_build_image_building_time
-springboot_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+fi
 
-cd ../..
+if [ "$1" = "springboot-simple-api" ] ||
+   [ "$1" = "springboot" ] ||
+   [ "$1" = "simple-api" ] ||
+   [ "$1" = "all" ];
+then
 
-echo
-echo "========"
-echo "BOOK-API"
-echo "========"
+  echo
+  echo "-------------------------"
+  echo "SPRINGBOOT-SIMPLE-API-JVM"
+  echo "-------------------------"
 
-echo
-echo "--------------------"
-echo "QUARKUS-BOOK-API-JVM"
-echo "--------------------"
+  cd simple-api/springboot-simple-api
 
-cd book-api/quarkus-book-api
+  package_jar_build_image \
+    "./mvnw clean" \
+    "./mvnw package" \
+    "target/springboot-simple-api-1.0.0.jar" \
+    "./docker-build.sh" \
+    "docker.mycompany.com/springboot-simple-api-jvm:1.0.0"
+  springboot_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  springboot_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  springboot_simple_api_jvm[building_time]=$package_jar_build_image_building_time
+  springboot_simple_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/quarkus-book-api-1.0.0-runner.jar" \
-  "./docker-build.sh" \
-  "docker.mycompany.com/quarkus-book-api-jvm:1.0.0"
-quarkus_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-quarkus_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
-quarkus_book_api_jvm[building_time]=$package_jar_build_image_building_time
-quarkus_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+  cd ../..
 
-cd ../..
+fi
 
-echo
-echo "----------------------"
-echo "MICRONAUT-BOOK-API-JVM"
-echo "----------------------"
+if [ "$1" = "quarkus-book-api" ] ||
+   [ "$1" = "quarkus" ] ||
+   [ "$1" = "book-api" ] ||
+   [ "$1" = "all" ];
+then
 
-cd book-api/micronaut-book-api
+  echo
+  echo "--------------------"
+  echo "QUARKUS-BOOK-API-JVM"
+  echo "--------------------"
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/micronaut-book-api-1.0.0.jar" \
-  "./docker-build.sh" \
-  "docker.mycompany.com/micronaut-book-api-jvm:1.0.0"
-micronaut_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-micronaut_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
-micronaut_book_api_jvm[building_time]=$package_jar_build_image_building_time
-micronaut_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+  cd book-api/quarkus-book-api
 
-cd ../..
+  package_jar_build_image \
+    "./mvnw clean" \
+    "./mvnw package" \
+    "target/quarkus-book-api-1.0.0-runner.jar" \
+    "./docker-build.sh" \
+    "docker.mycompany.com/quarkus-book-api-jvm:1.0.0"
+  quarkus_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  quarkus_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  quarkus_book_api_jvm[building_time]=$package_jar_build_image_building_time
+  quarkus_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
-echo
-echo "-----------------------"
-echo "SPRINGBOOT-BOOK-API-JVM"
-echo "-----------------------"
+  cd ../..
 
-cd book-api/springboot-book-api
+fi
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/springboot-book-api-1.0.0.jar" \
-  "./docker-build.sh" \
-  "docker.mycompany.com/springboot-book-api-jvm:1.0.0"
-springboot_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-springboot_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
-springboot_book_api_jvm[building_time]=$package_jar_build_image_building_time
-springboot_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+if [ "$1" = "micronaut-book-api" ] ||
+   [ "$1" = "micronaut" ] ||
+   [ "$1" = "book-api" ] ||
+   [ "$1" = "all" ];
+then
 
-cd ../..
+  echo
+  echo "----------------------"
+  echo "MICRONAUT-BOOK-API-JVM"
+  echo "----------------------"
 
-echo
-echo "================="
-echo "PRODUCER-CONSUMER"
-echo "================="
+  cd book-api/micronaut-book-api
 
-echo
-echo "--------------------------------------------"
-echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-JVM"
-echo "--------------------------------------------"
+  package_jar_build_image \
+    "./mvnw clean" \
+    "./mvnw package" \
+    "target/micronaut-book-api-1.0.0.jar" \
+    "./docker-build.sh" \
+    "docker.mycompany.com/micronaut-book-api-jvm:1.0.0"
+  micronaut_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  micronaut_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  micronaut_book_api_jvm[building_time]=$package_jar_build_image_building_time
+  micronaut_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
-cd producer-consumer/quarkus-producer-consumer
+  cd ../..
 
-package_jar_build_image \
-  "./mvnw clean --projects producer-api" \
-  "./mvnw package --projects producer-api" \
-  "producer-api/target/producer-api-1.0.0-runner.jar" \
-  "cd producer-api && ./docker-build.sh && cd .." \
-  "docker.mycompany.com/quarkus-producer-api-jvm:1.0.0"
-quarkus_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-quarkus_producer_api_jvm[jar_size]=$package_jar_build_image_jar_size
-quarkus_producer_api_jvm[building_time]=$package_jar_build_image_building_time
-quarkus_producer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+fi
 
-echo
-echo "--------------------------------------------"
-echo "QUARKUS-PRODUCER-CONSUMER / CONSUMER-API-JVM"
-echo "--------------------------------------------"
+if [ "$1" = "springboot-book-api" ] ||
+   [ "$1" = "springboot" ] ||
+   [ "$1" = "book-api" ] ||
+   [ "$1" = "all" ];
+then
 
-package_jar_build_image \
-  "./mvnw clean --projects consumer-api" \
-  "./mvnw package --projects consumer-api" \
-  "consumer-api/target/consumer-api-1.0.0-runner.jar" \
-  "cd consumer-api && ./docker-build.sh && cd .." \
-  "docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0"
-quarkus_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-quarkus_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
-quarkus_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
-quarkus_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+  echo
+  echo "-----------------------"
+  echo "SPRINGBOOT-BOOK-API-JVM"
+  echo "-----------------------"
 
-cd ../..
+  cd book-api/springboot-book-api
 
-echo
-echo "----------------------------------------------"
-echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
-echo "----------------------------------------------"
+  package_jar_build_image \
+    "./mvnw clean" \
+    "./mvnw package" \
+    "target/springboot-book-api-1.0.0.jar" \
+    "./docker-build.sh" \
+    "docker.mycompany.com/springboot-book-api-jvm:1.0.0"
+  springboot_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  springboot_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  springboot_book_api_jvm[building_time]=$package_jar_build_image_building_time
+  springboot_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
-cd producer-consumer/micronaut-producer-consumer
+  cd ../..
 
-package_jar_build_image \
-  "./mvnw clean --projects producer-api" \
-  "./mvnw package --projects producer-api" \
-  "producer-api/target/producer-api-1.0.0.jar" \
-  "cd producer-api && ./docker-build.sh && cd .." \
-  "docker.mycompany.com/micronaut-producer-api-jvm:1.0.0"
-micronaut_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-micronaut_producer_api_jvm[jar_size]=$package_jar_build_image_jar_size
-micronaut_producer_api_jvm[building_time]=$package_jar_build_image_building_time
-micronaut_producer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+fi
 
-echo
-echo "----------------------------------------------"
-echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
-echo "----------------------------------------------"
+if [ "$1" = "quarkus-producer-consumer_producer-api" ] ||
+   [ "$1" = "quarkus-producer-consumer" ] ||
+   [ "$1" = "quarkus" ] ||
+   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "all" ];
+then
 
-package_jar_build_image \
-  "./mvnw clean --projects consumer-api" \
-  "./mvnw package --projects consumer-api" \
-  "consumer-api/target/consumer-api-1.0.0.jar" \
-  "cd consumer-api && ./docker-build.sh && cd .." \
-  "docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0"
-micronaut_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-micronaut_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
-micronaut_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
-micronaut_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+  echo
+  echo "--------------------------------------------"
+  echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-JVM"
+  echo "--------------------------------------------"
 
-cd ../..
+  cd producer-consumer/quarkus-producer-consumer
 
-echo
-echo "-----------------------------------------------"
-echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
-echo "-----------------------------------------------"
+  package_jar_build_image \
+    "./mvnw clean --projects producer-api" \
+    "./mvnw package --projects producer-api" \
+    "producer-api/target/producer-api-1.0.0-runner.jar" \
+    "cd producer-api && ./docker-build.sh && cd .." \
+    "docker.mycompany.com/quarkus-producer-api-jvm:1.0.0"
+  quarkus_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  quarkus_producer_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  quarkus_producer_api_jvm[building_time]=$package_jar_build_image_building_time
+  quarkus_producer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
-cd producer-consumer/springboot-producer-consumer
+  cd ../..
 
-package_jar_build_image \
-  "./mvnw clean --projects producer-api" \
-  "./mvnw package --projects producer-api" \
-  "producer-api/target/producer-api-1.0.0.jar" \
-  "cd producer-api && ./docker-build.sh && cd .." \
-  "docker.mycompany.com/springboot-producer-api-jvm:1.0.0"
-springboot_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-springboot_producer_api_jvm[jar_size]=$package_jar_build_image_jar_size
-springboot_producer_api_jvm[building_time]=$package_jar_build_image_building_time
-springboot_producer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+fi
 
-echo
-echo "-----------------------------------------------"
-echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
-echo "-----------------------------------------------"
+if [ "$1" = "quarkus-producer-consumer_consumer-api" ] ||
+   [ "$1" = "quarkus-producer-consumer" ] ||
+   [ "$1" = "quarkus" ] ||
+   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "all" ];
+then
 
-package_jar_build_image \
-  "./mvnw clean --projects consumer-api" \
-  "./mvnw package --projects consumer-api" \
-  "consumer-api/target/consumer-api-1.0.0.jar" \
-  "cd consumer-api && ./docker-build.sh && cd .." \
-  "docker.mycompany.com/springboot-consumer-api-jvm:1.0.0"
-springboot_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-springboot_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
-springboot_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
-springboot_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+  echo
+  echo "--------------------------------------------"
+  echo "QUARKUS-PRODUCER-CONSUMER / CONSUMER-API-JVM"
+  echo "--------------------------------------------"
 
-cd ../..
+  cd producer-consumer/quarkus-producer-consumer
 
-echo
-echo "============="
-echo "ELASTICSEARCH"
-echo "============="
+  package_jar_build_image \
+    "./mvnw clean --projects consumer-api" \
+    "./mvnw package --projects consumer-api" \
+    "consumer-api/target/consumer-api-1.0.0-runner.jar" \
+    "cd consumer-api && ./docker-build.sh && cd .." \
+    "docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0"
+  quarkus_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  quarkus_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  quarkus_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
+  quarkus_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
-echo
-echo "-------------------------"
-echo "QUARKUS-ELASTICSEARCH-JVM"
-echo "-------------------------"
+  cd ../..
 
-cd elasticsearch/quarkus-elasticsearch
+fi
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/quarkus-elasticsearch-1.0.0-runner.jar" \
-  "./docker-build.sh" \
-  "docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0"
-quarkus_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
-quarkus_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
-quarkus_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
-quarkus_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+if [ "$1" = "micronaut-producer-consumer_producer-api" ] ||
+   [ "$1" = "micronaut-producer-consumer" ] ||
+   [ "$1" = "micronaut" ] ||
+   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "all" ];
+then
 
-cd ../..
+  echo
+  echo "----------------------------------------------"
+  echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
+  echo "----------------------------------------------"
 
-echo
-echo "---------------------------"
-echo "MICRONAUT-ELASTICSEARCH-JVM"
-echo "---------------------------"
+  cd producer-consumer/micronaut-producer-consumer
 
-cd elasticsearch/micronaut-elasticsearch
+  package_jar_build_image \
+    "./mvnw clean --projects producer-api" \
+    "./mvnw package --projects producer-api" \
+    "producer-api/target/producer-api-1.0.0.jar" \
+    "cd producer-api && ./docker-build.sh && cd .." \
+    "docker.mycompany.com/micronaut-producer-api-jvm:1.0.0"
+  micronaut_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  micronaut_producer_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  micronaut_producer_api_jvm[building_time]=$package_jar_build_image_building_time
+  micronaut_producer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/micronaut-elasticsearch-1.0.0.jar" \
-  "./docker-build.sh" \
-  "docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0"
-micronaut_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
-micronaut_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
-micronaut_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
-micronaut_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+  cd ../..
 
-cd ../..
+fi
 
-echo
-echo "----------------------------"
-echo "SPRINGBOOT-ELASTICSEARCH-JVM"
-echo "----------------------------"
+if [ "$1" = "micronaut-producer-consumer_consumer-api" ] ||
+   [ "$1" = "micronaut-producer-consumer" ] ||
+   [ "$1" = "micronaut" ] ||
+   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "all" ];
+then
 
-cd elasticsearch/springboot-elasticsearch
+  echo
+  echo "----------------------------------------------"
+  echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
+  echo "----------------------------------------------"
 
-package_jar_build_image \
-  "./mvnw clean" \
-  "./mvnw package" \
-  "target/springboot-elasticsearch-1.0.0.jar" \
-  "./docker-build.sh" \
-  "docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0"
-springboot_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
-springboot_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
-springboot_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
-springboot_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+  cd producer-consumer/micronaut-producer-consumer
+
+  package_jar_build_image \
+    "./mvnw clean --projects consumer-api" \
+    "./mvnw package --projects consumer-api" \
+    "consumer-api/target/consumer-api-1.0.0.jar" \
+    "cd consumer-api && ./docker-build.sh && cd .." \
+    "docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0"
+  micronaut_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  micronaut_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  micronaut_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
+  micronaut_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+
+  cd ../..
+
+fi
+
+if [ "$1" = "springboot-producer-consumer_producer-api" ] ||
+   [ "$1" = "springboot-producer-consumer" ] ||
+   [ "$1" = "springboot" ] ||
+   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "all" ];
+then
+
+  echo
+  echo "-----------------------------------------------"
+  echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
+  echo "-----------------------------------------------"
+
+  cd producer-consumer/springboot-producer-consumer
+
+  package_jar_build_image \
+    "./mvnw clean --projects producer-api" \
+    "./mvnw package --projects producer-api" \
+    "producer-api/target/producer-api-1.0.0.jar" \
+    "cd producer-api && ./docker-build.sh && cd .." \
+    "docker.mycompany.com/springboot-producer-api-jvm:1.0.0"
+  springboot_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  springboot_producer_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  springboot_producer_api_jvm[building_time]=$package_jar_build_image_building_time
+  springboot_producer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+
+  cd ../..
+
+fi
+
+if [ "$1" = "springboot-producer-consumer_consumer-api" ] ||
+   [ "$1" = "springboot-producer-consumer" ] ||
+   [ "$1" = "springboot" ] ||
+   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "all" ];
+then
+
+  echo
+  echo "-----------------------------------------------"
+  echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
+  echo "-----------------------------------------------"
+
+  cd producer-consumer/springboot-producer-consumer
+
+  package_jar_build_image \
+    "./mvnw clean --projects consumer-api" \
+    "./mvnw package --projects consumer-api" \
+    "consumer-api/target/consumer-api-1.0.0.jar" \
+    "cd consumer-api && ./docker-build.sh && cd .." \
+    "docker.mycompany.com/springboot-consumer-api-jvm:1.0.0"
+  springboot_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  springboot_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
+  springboot_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
+  springboot_consumer_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+
+  cd ../..
+
+fi
+
+if [ "$1" = "quarkus-elasticsearch-api" ] ||
+   [ "$1" = "quarkus" ] ||
+   [ "$1" = "elasticsearch" ] ||
+   [ "$1" = "all" ];
+then
+
+  echo
+  echo "-------------------------"
+  echo "QUARKUS-ELASTICSEARCH-JVM"
+  echo "-------------------------"
+
+  cd elasticsearch/quarkus-elasticsearch
+
+  package_jar_build_image \
+    "./mvnw clean" \
+    "./mvnw package" \
+    "target/quarkus-elasticsearch-1.0.0-runner.jar" \
+    "./docker-build.sh" \
+    "docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0"
+  quarkus_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  quarkus_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
+  quarkus_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
+  quarkus_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+
+  cd ../..
+
+fi
+
+if [ "$1" = "micronaut-elasticsearch-api" ] ||
+   [ "$1" = "micronaut" ] ||
+   [ "$1" = "elasticsearch" ] ||
+   [ "$1" = "all" ];
+then
+
+  echo
+  echo "---------------------------"
+  echo "MICRONAUT-ELASTICSEARCH-JVM"
+  echo "---------------------------"
+
+  cd elasticsearch/micronaut-elasticsearch
+
+  package_jar_build_image \
+    "./mvnw clean" \
+    "./mvnw package" \
+    "target/micronaut-elasticsearch-1.0.0.jar" \
+    "./docker-build.sh" \
+    "docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0"
+  micronaut_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  micronaut_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
+  micronaut_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
+  micronaut_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+
+  cd ../..
+
+fi
+
+if [ "$1" = "springboot-elasticsearch-api" ] ||
+   [ "$1" = "springboot" ] ||
+   [ "$1" = "elasticsearch" ] ||
+   [ "$1" = "all" ];
+then
+
+  echo
+  echo "----------------------------"
+  echo "SPRINGBOOT-ELASTICSEARCH-JVM"
+  echo "----------------------------"
+
+  cd elasticsearch/springboot-elasticsearch
+
+  package_jar_build_image \
+    "./mvnw clean" \
+    "./mvnw package" \
+    "target/springboot-elasticsearch-1.0.0.jar" \
+    "./docker-build.sh" \
+    "docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0"
+  springboot_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  springboot_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
+  springboot_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
+  springboot_elasticsearch_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+
+  cd ../..
+
+fi
 
 printf "\n"
 printf "%30s | %14s | %16s | %17s | %17s |\n" "Application" "Packaging Time" "Jar Size (bytes)" "Docker Build Time" "Docker Image Size"

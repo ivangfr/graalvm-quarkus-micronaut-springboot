@@ -57,7 +57,7 @@ The following table shows the results after running the script `collect-jvm-jar-
         micronaut-book-api-jvm |            13s |         34500773 |               20s |             378MB |
        springboot-book-api-jvm |             9s |         42534746 |               13s |             240MB |
 .............................. + .............. + ................ + ................. + ................. |
-      quarkus-producer-api-jvm |            12s |           542086 |               11s |             350MB |
+      quarkus-producer-api-jvm |            12s |           572210 |               11s |             352MB |
     micronaut-producer-api-jvm |            10s |         26122066 |               20s |             369MB |
    springboot-producer-api-jvm |             7s |         35793868 |               13s |             233MB |
 .............................. + .............. + ................ + ................. + ................. |
@@ -82,7 +82,7 @@ Table below shows the results after running the script `collect-native-jar-docke
       micronaut-book-api-native |            15s |         34500773 |              474s |             123MB |
      springboot-book-api-native |             9s |         42534746 |              802s |             167MB |
 ............................... + .............. + ................ + ................. + ................. |
-    quarkus-producer-api-native |           278s |         51356552 |                6s |             154MB |
+    quarkus-producer-api-native |           292s |         53576584 |                6s |             156MB |
   micronaut-producer-api-native |            10s |         26122066 |              350s |            97.9MB |
  springboot-producer-api-native |             7s |         35793868 |              697s |             112MB |
 ............................... + .............. + ................ + ................. + ................. |

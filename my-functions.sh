@@ -122,3 +122,160 @@ function warm_up() {
   echo "-- End: ab test warm-up"
   echo
 }
+
+# -- check_builder_script_input_parameter --
+# $1: input parameter
+function check_builder_script_input_parameter() {
+  if [ "$1" != "all" ] &&
+     [ "$1" != "quarkus" ] &&
+     [ "$1" != "micronaut" ] &&
+     [ "$1" != "springboot" ] &&
+     [ "$1" != "simple-api" ] &&
+     [ "$1" != "book-api" ] &&
+     [ "$1" != "producer-consumer" ] &&
+     [ "$1" != "elasticsearch" ] &&
+     [ "$1" != "quarkus-simple-api" ] &&
+     [ "$1" != "micronaut-simple-api" ] &&
+     [ "$1" != "springboot-simple-api" ] &&
+     [ "$1" != "quarkus-book-api" ] &&
+     [ "$1" != "micronaut-book-api" ] &&
+     [ "$1" != "springboot-book-api" ] &&
+     [ "$1" != "quarkus-producer-consumer" ] &&
+     [ "$1" != "micronaut-producer-consumer" ] &&
+     [ "$1" != "springboot-producer-consumer" ] &&
+     [ "$1" != "quarkus-producer-consumer_producer-api" ] &&
+     [ "$1" != "quarkus-producer-consumer_consumer-api" ] &&
+     [ "$1" != "micronaut-producer-consumer_producer-api" ] &&
+     [ "$1" != "micronaut-producer-consumer_consumer-api" ] &&
+     [ "$1" != "springboot-producer-consumer_producer-api" ] &&
+     [ "$1" != "springboot-producer-consumer_consumer-api" ] &&
+     [ "$1" != "quarkus-elasticsearch" ] &&
+     [ "$1" != "micronaut-elasticsearch" ] &&
+     [ "$1" != "springboot-elasticsearch" ];
+  then
+    printf "Invalid Java Framework, application name or type provided!"
+    printf "\nValid Parameters:"
+
+    printf "\n\tall"
+    printf "\n\tsimple-api\tbook-api\tproducer-consumer\telasticsearch"
+    
+    printf "\n\tquarkus"
+    printf "\n\t\tquarkus-simple-api"
+    printf "\n\t\tquarkus-book-api"
+    printf "\n\t\tquarkus-producer-consumer"
+    printf "\n\t\t\tquarkus-producer-consumer_producer-api"
+    printf "\n\t\t\tquarkus-producer-consumer_consumer-api"
+    printf "\n\t\tquarkus-elasticsearch"
+
+    printf "\n\tmicronaut"
+    printf "\n\t\tmicronaut-simple-api"
+    printf "\n\t\tmicronaut-book-api"
+    printf "\n\t\tmicronaut-producer-consumer"
+    printf "\n\t\t\tmicronaut-producer-consumer_producer-api"
+    printf "\n\t\t\tmicronaut-producer-consumer_consumer-api"
+    printf "\n\t\tmicronaut-elasticsearch"
+
+    printf "\n\tspringboot"
+    printf "\n\t\tspringboot-simple-api"
+    printf "\n\t\tspringboot-book-api"
+    printf "\n\t\tspringboot-producer-consumer"
+    printf "\n\t\t\tspringboot-producer-consumer_producer-api"
+    printf "\n\t\t\tspringboot-producer-consumer_consumer-api"
+    printf "\n\t\tspringboot-elasticsearch"
+
+    printf "\n"
+    exit 1
+  fi
+}
+
+# -- check_runner_script_input_parameter --
+# $1: input parameter
+function check_runner_script_input_parameter() {
+  if [ "$1" != "all" ] &&
+     [ "$1" != "jvm" ] &&
+     [ "$1" != "native" ] &&
+     [ "$1" != "quarkus" ] &&
+     [ "$1" != "micronaut" ] &&
+     [ "$1" != "springboot" ] &&
+     [ "$1" != "simple-api" ] &&
+     [ "$1" != "book-api" ] &&
+     [ "$1" != "producer-consumer" ] &&
+     [ "$1" != "elasticsearch" ] &&
+     [ "$1" != "quarkus-simple-api" ] && 
+     [ "$1" != "micronaut-simple-api" ] &&
+     [ "$1" != "springboot-simple-api" ] &&
+     [ "$1" != "quarkus-book-api" ] &&
+     [ "$1" != "micronaut-book-api" ] &&
+     [ "$1" != "springboot-book-api" ] &&
+     [ "$1" != "quarkus-producer-consumer" ] &&
+     [ "$1" != "micronaut-producer-consumer" ] &&
+     [ "$1" != "springboot-producer-consumer" ] &&
+     [ "$1" != "quarkus-elasticsearch" ] &&
+     [ "$1" != "micronaut-elasticsearch" ] &&
+     [ "$1" != "springboot-elasticsearch" ] &&
+     [ "$1" != "quarkus-simple-api-jvm" ] && [ "$1" != "quarkus-simple-api-native" ] &&
+     [ "$1" != "micronaut-simple-api-jvm" ] && [ "$1" != "micronaut-simple-api-native" ] &&
+     [ "$1" != "springboot-simple-api-jvm" ] && [ "$1" != "springboot-simple-api-native" ] &&
+     [ "$1" != "quarkus-book-api-jvm" ] && [ "$1" != "quarkus-book-api-native" ] &&
+     [ "$1" != "micronaut-book-api-jvm" ] && [ "$1" != "micronaut-book-api-native" ] &&
+     [ "$1" != "springboot-book-api-jvm" ] && [ "$1" != "springboot-book-api-native" ] &&
+     [ "$1" != "quarkus-producer-consumer-jvm" ] && [ "$1" != "quarkus-producer-consumer-native" ] &&
+     [ "$1" != "micronaut-producer-consumer-jvm" ] && [ "$1" != "micronaut-producer-consumer-native" ] &&
+     [ "$1" != "springboot-producer-consumer-jvm" ] && [ "$1" != "springboot-producer-consumer-native" ] &&
+     [ "$1" != "quarkus-elasticsearch-jvm" ] && [ "$1" != "quarkus-elasticsearch-native" ] &&
+     [ "$1" != "micronaut-elasticsearch-jvm" ] && [ "$1" != "micronaut-elasticsearch-native" ] &&
+     [ "$1" != "springboot-elasticsearch-jvm" ] && [ "$1" != "springboot-elasticsearch-native" ];
+  then
+    printf "Invalid Java Framework, application name or type provided!"
+    printf "\nValid Parameters:"
+
+    printf "\n\tall"
+    printf "\n\tjvm\tnative"
+    printf "\n\tsimple-api\tbook-api\tproducer-consumer\telasticsearch"
+    
+    printf "\n\tquarkus"
+    printf "\n\t\tquarkus-simple-api"
+    printf "\n\t\t\tquarkus-simple-api-jvm"
+    printf "\n\t\t\tquarkus-simple-api-native"
+    printf "\n\t\tquarkus-book-api"
+    printf "\n\t\t\tquarkus-book-api-jvm"
+    printf "\n\t\t\tquarkus-book-api-native"
+    printf "\n\t\tquarkus-producer-consumer"
+    printf "\n\t\t\tquarkus-producer-consumer-jvm"
+    printf "\n\t\t\tquarkus-producer-consumer-native"
+    printf "\n\t\tquarkus-elasticsearch"
+    printf "\n\t\t\tquarkus-elasticsearch-jvm"
+    printf "\n\t\t\tquarkus-elasticsearch-native"
+    
+    printf "\n\tmicronaut"
+    printf "\n\t\tmicronaut-simple-api"
+    printf "\n\t\t\tmicronaut-simple-api-jvm"
+    printf "\n\t\t\tmicronaut-simple-api-native"
+    printf "\n\t\tmicronaut-book-api"
+    printf "\n\t\t\tmicronaut-book-api-jvm"
+    printf "\n\t\t\tmicronaut-book-api-native"
+    printf "\n\t\tmicronaut-producer-consumer"
+    printf "\n\t\t\tmicronaut-producer-consumer-jvm"
+    printf "\n\t\t\tmicronaut-producer-consumer-native"
+    printf "\n\t\tmicronaut-elasticsearch"
+    printf "\n\t\t\tmicronaut-elasticsearch-jvm"
+    printf "\n\t\t\tmicronaut-elasticsearch-native"
+
+    printf "\n\tspringboot"
+    printf "\n\t\tspringboot-simple-api"
+    printf "\n\t\t\tspringboot-simple-api-jvm"
+    printf "\n\t\t\tspringboot-simple-api-native"
+    printf "\n\t\tspringboot-book-api"
+    printf "\n\t\t\tspringboot-book-api-jvm"
+    printf "\n\t\t\tspringboot-book-api-native"
+    printf "\n\t\tspringboot-producer-consumer"
+    printf "\n\t\t\tspringboot-producer-consumer-jvm"
+    printf "\n\t\t\tspringboot-producer-consumer-native"
+    printf "\n\t\tspringboot-elasticsearch"
+    printf "\n\t\t\tspringboot-elasticsearch-jvm"
+    printf "\n\t\t\tspringboot-elasticsearch-native"
+
+    printf "\n"
+    exit 1
+  fi
+}
