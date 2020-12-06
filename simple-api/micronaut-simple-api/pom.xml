@@ -10,14 +10,14 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>2.2.0</version>
+        <version>2.2.1</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.2.0</micronaut.version>
+        <micronaut.version>2.2.1</micronaut.version>
         <exec.mainClass>com.mycompany.micronautsimpleapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
@@ -142,7 +142,7 @@
                 <artifactId>jib-maven-plugin</artifactId>
                 <configuration>
                     <to>
-                        <image>${docker.image.prefix}/${project.artifactId}-native:${project.version}</image>
+                        <image>${docker.image.prefix}/${project.artifactId}-jvm:${project.version}</image>
                     </to>
                 </configuration>
             </plugin>

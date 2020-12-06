@@ -16,7 +16,7 @@
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.2.0</micronaut.version>
+        <micronaut.version>2.2.1</micronaut.version>
         <exec.mainClass>com.mycompany.consumerapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
@@ -167,7 +167,7 @@
                 <artifactId>jib-maven-plugin</artifactId>
                 <configuration>
                     <to>
-                        <image>${docker.image.prefix}/micronaut-${project.artifactId}-native:${project.version}</image>
+                        <image>${docker.image.prefix}/micronaut-${project.artifactId}-jvm:${project.version}</image>
                     </to>
                 </configuration>
             </plugin>
