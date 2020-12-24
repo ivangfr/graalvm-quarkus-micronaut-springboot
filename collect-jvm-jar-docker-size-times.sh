@@ -367,7 +367,7 @@ then
 
 fi
 
-if [ "$1" = "quarkus-elasticsearch-api" ] ||
+if [ "$1" = "quarkus-elasticsearch" ] ||
    [ "$1" = "quarkus" ] ||
    [ "$1" = "elasticsearch" ] ||
    [ "$1" = "all" ];
@@ -395,7 +395,7 @@ then
 
 fi
 
-if [ "$1" = "micronaut-elasticsearch-api" ] ||
+if [ "$1" = "micronaut-elasticsearch" ] ||
    [ "$1" = "micronaut" ] ||
    [ "$1" = "elasticsearch" ] ||
    [ "$1" = "all" ];
@@ -423,7 +423,7 @@ then
 
 fi
 
-if [ "$1" = "springboot-elasticsearch-api" ] ||
+if [ "$1" = "springboot-elasticsearch" ] ||
    [ "$1" = "springboot" ] ||
    [ "$1" = "elasticsearch" ] ||
    [ "$1" = "all" ];

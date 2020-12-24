@@ -16,7 +16,7 @@
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.2.1</micronaut.version>
+        <micronaut.version>2.2.2</micronaut.version>
         <exec.mainClass>com.mycompany.consumerapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>

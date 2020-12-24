@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.0</version>
+        <version>2.4.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.mycompany</groupId>
@@ -16,9 +16,9 @@
 
     <properties>
         <java.version>11</java.version>
-        <spring.graalvm.native.version>0.8.3</spring.graalvm.native.version>
+        <spring.graalvm.native.version>0.8.5</spring.graalvm.native.version>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
-        <jib.maven-plugin.version>2.6.0</jib.maven-plugin.version>
+        <jib.maven-plugin.version>2.7.0</jib.maven-plugin.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
 

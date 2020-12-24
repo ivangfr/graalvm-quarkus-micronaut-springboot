@@ -16,8 +16,8 @@
 
     <properties>
         <java.version>11</java.version>
-        <spring.graalvm.native.version>0.8.3</spring.graalvm.native.version>
-        <jib.maven-plugin.version>2.6.0</jib.maven-plugin.version>
+        <spring.graalvm.native.version>0.8.5</spring.graalvm.native.version>
+        <jib.maven-plugin.version>2.7.0</jib.maven-plugin.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
 
