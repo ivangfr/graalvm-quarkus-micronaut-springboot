@@ -13,14 +13,13 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus-plugin.version>1.11.1.Final</quarkus-plugin.version>
+        <quarkus-plugin.version>1.11.2.Final</quarkus-plugin.version>
         <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-        <quarkus.platform.version>1.11.1.Final</quarkus.platform.version>
-        <surefire-plugin.version>2.22.1</surefire-plugin.version>
+        <quarkus.platform.version>1.11.2.Final</quarkus.platform.version>
+        <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
         <lombok.version>1.18.16</lombok.version>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
-        <apache.log4j-to-slf4j.version>2.13.3</apache.log4j-to-slf4j.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -83,15 +82,6 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>${org.mapstruct.version}</version>
             <scope>provided</scope>
-        </dependency>
-
-        <!-- LOG4J-to-SLF4J -->
-        <!-- It removes an error messages that says: -->
-        <!-- ERROR StatusLogger Log4j2 could not find a logging implementation. Please add log4j-core to the classpath. Using SimpleLogger to log to the console...-->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-to-slf4j</artifactId>
-            <version>${apache.log4j-to-slf4j.version}</version>
         </dependency>
 
         <dependency>
