@@ -82,4 +82,3 @@ services:
     healthcheck:
       test: "curl -f http://localhost:9000 || exit 1"
       start_period: 30s
-

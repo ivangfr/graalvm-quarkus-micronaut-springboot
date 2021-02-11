@@ -3,7 +3,7 @@
 #
 # Before building the container image run:
 #
-# mvn package
+# ./mvnw package
 #
 # Then, build the image with:
 #
