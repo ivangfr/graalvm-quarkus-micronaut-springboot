@@ -10,17 +10,18 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>2.3.1</version>
+        <version>2.3.4</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.3.1</micronaut.version>
+        <micronaut.version>2.3.4</micronaut.version>
         <exec.mainClass>com.mycompany.micronautelasticsearch.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
+        <jib.maven-plugin.version>2.8.0</jib.maven-plugin.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
 
@@ -28,10 +29,6 @@
         <repository>
             <id>central</id>
             <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-        <repository>
-            <id>jcenter.bintray.com</id>
-            <url>https://jcenter.bintray.com</url>
         </repository>
     </repositories>
 
@@ -199,6 +196,7 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib.maven-plugin.version}</version>
                 <configuration>
                     <to>
                         <image>${docker.image.prefix}/${project.artifactId}-jvm:${project.version}</image>

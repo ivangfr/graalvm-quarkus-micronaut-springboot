@@ -84,10 +84,10 @@ function get_docker_size() {
     echo $(docker images $1 --format='{{println .Size}}')
 }
 
-# -- get_file_size --
+# -- get_folder_file_size --
 # $1: file path
-function get_file_size() {
-    echo $(stat -f%z "$1")
+function get_folder_file_size() {
+    echo $(du -hs "$1" | awk '{ print $1 }')
 }
 
 # -- package_jar_build_image --
@@ -101,7 +101,7 @@ function package_jar_build_image() {
 
   run_command "$2"
   package_jar_build_image_packaging_time=$run_command_exec_time
-  package_jar_build_image_jar_size=$(get_file_size "$3")
+  package_jar_build_image_jar_size=$(get_folder_file_size "$3")
 
   run_command "$4"
   package_jar_build_image_building_time=$run_command_exec_time
