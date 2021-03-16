@@ -65,12 +65,12 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean and package the application
       ```
       ./mvnw clean package --projects producer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh && cd ..
       ```
@@ -86,12 +86,12 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean and package the application
       ```
       ./mvnw clean package --projects consumer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd consumer-api && ./docker-build.sh && cd ..
       ```
@@ -125,12 +125,12 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean and package the application
       ```
       ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects producer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh native && cd ..
       ```
@@ -146,12 +146,12 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - Open another terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-    - Run the command below
+    - Clean and package the application
       ```
       ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects consumer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd consumer-api && ./docker-build.sh native && cd ..
       ```

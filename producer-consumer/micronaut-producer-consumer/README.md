@@ -66,12 +66,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean the application
       ```
-      ./mvnw clean package --projects producer-api
+      ./mvnw clean --projects producer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh && cd ..
       ```
@@ -88,12 +88,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean the application
       ```
-      ./mvnw clean package --projects consumer-api
+      ./mvnw clean --projects consumer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd consumer-api && ./docker-build.sh && cd ..
       ```
@@ -127,12 +127,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean the application
       ```
-      ./mvnw clean package --projects producer-api
+      ./mvnw clean --projects producer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh native && cd ..
       ```
@@ -148,12 +148,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean the application
       ```
-      ./mvnw clean package --projects consumer-api
+      ./mvnw clean --projects consumer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd consumer-api && ./docker-build.sh native && cd ..
       ```

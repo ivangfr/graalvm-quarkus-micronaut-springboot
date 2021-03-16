@@ -41,7 +41,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder
 
-- Package the application `jar` file
+- Clean and package the application
   ```
   ./mvnw clean package
   ```
@@ -72,7 +72,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder
 
-- Package the application `jar` file
+- Clean and package the application
   ```
   ./mvnw clean package -Pnative -Dquarkus.native.container-build=true
   ```

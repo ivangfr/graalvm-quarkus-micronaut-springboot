@@ -23,7 +23,7 @@
 
 - Run the command below to start the application
   ```
-  ./mvnw clean spring-boot:run
+  ./mvnw clean package spring-boot:run
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -40,9 +40,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/springboot-elasticsearch` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -71,9 +71,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/springboot-elasticsearch` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -89,6 +89,7 @@
   ```
 
 - A simple test can be done by opening a new terminal and running
+  > See [Issues](#issues)
   ```
   curl -i -X POST "localhost:9117/api/movies" -H "Content-type: application/json" \
     -d '{"imdb": "789", "title": "Resident Evil"}'
@@ -97,3 +98,43 @@
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminal
+
+## Issues
+
+- When running **Docker in Native Mode** and creating a movie, the movie payload is saved as empty in `Elasticsearch`
+  ```
+  ➜ curl -i -X POST "localhost:9117/api/movies" -H "Content-type: application/json" -d '{"imdb": "789", "title":   "Resident Evil"}'
+  HTTP/1.1 201 Created
+  Content-Type: text/plain;charset=UTF-8
+  Content-Length: 20
+  
+  7S3qOngBvTl0cjGNSIp3%
+  
+  ➜ curl "localhost:9200/springboot.movies/_search?pretty"
+  {
+    "took" : 3,
+    "timed_out" : false,
+    "_shards" : {
+      "total" : 1,
+      "successful" : 1,
+      "skipped" : 0,
+      "failed" : 0
+    },
+    "hits" : {
+      "total" : {
+        "value" : 1,
+        "relation" : "eq"
+      },
+      "max_score" : 1.0,
+      "hits" : [
+        {
+          "_index" : "springboot.movies",
+          "_type" : "_doc",
+          "_id" : "7S3qOngBvTl0cjGNSIp3",
+          "_score" : 1.0,
+          "_source" : { }
+        }
+      ]
+    }
+  }
+  ```

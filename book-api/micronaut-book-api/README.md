@@ -41,9 +41,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -72,9 +72,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
