@@ -19,7 +19,7 @@
     <properties>
         <java.version>11</java.version>
         <spring.graalvm.native.version>0.8.5</spring.graalvm.native.version>
-        <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <jib.maven-plugin.version>2.8.0</jib.maven-plugin.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
