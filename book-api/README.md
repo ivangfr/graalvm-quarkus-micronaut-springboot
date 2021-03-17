@@ -23,19 +23,24 @@ In this example, we will implement three versions of a Restful API for handling 
   docker-compose ps
   ```
 
-- Finally, run the script below to initialize the database
-  ```
-  ./init-db.sh
-  ```
-
 ## Useful Commands
+
+- Reset `MySQL` tables (make sure you are in `graalvm-quarkus-micronaut-springboot/book-api` folder)
+  ```
+  ./reset-tables.sh
+  ```
 
 - **MySQL**
 
   Docker exec into `mysql` contatiner
-  ```
-  docker exec -it mysql mysql -uroot -psecret --database bookdb
-  ```
+  - JVM
+    ```
+    docker exec -it mysql mysql -uroot -psecret --database bookdb_jvm
+    ```
+  - Native
+    ```
+    docker exec -it mysql mysql -uroot -psecret --database bookdb_native
+    ```
 
   Insite `MySQL monitor` terminal
   ```
