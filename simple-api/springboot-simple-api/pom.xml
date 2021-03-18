@@ -113,16 +113,16 @@
 
     <repositories>
         <repository>
-            <id>spring-release</id>
-            <name>Spring release</name>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
             <url>https://repo.spring.io/release</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
-            <id>spring-release</id>
-            <name>Spring release</name>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
             <url>https://repo.spring.io/release</url>
         </pluginRepository>
     </pluginRepositories>

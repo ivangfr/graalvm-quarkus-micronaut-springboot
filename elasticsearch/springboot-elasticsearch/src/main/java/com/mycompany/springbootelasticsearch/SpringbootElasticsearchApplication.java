@@ -12,8 +12,8 @@ import org.springframework.nativex.hint.TypeHint;
 @SpringBootApplication
 public class SpringbootElasticsearchApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringbootElasticsearchApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(SpringbootElasticsearchApplication.class, args);
+  }
 
 }

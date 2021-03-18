@@ -61,7 +61,7 @@
             <artifactId>quarkus-arc</artifactId>
         </dependency>
 
-        <!-- Lombok: https://projectlombok.org/setup/maven -->
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -39,8 +39,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Open another terminal and make sure your are in `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
 
-    - Run the command below to start the application
-		  > See [Issues](#springboot-consumer-api-issues)
+    - Run the command below to start the application (See [Issues](#springboot-consumer-api-issues))
       ```
       ./mvnw clean package spring-boot:run -Dspring-boot.run.jvmArguments="-Dserver.port=8081" --projects consumer-api
       ```
@@ -80,8 +79,8 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
     - Run the following command to start the Docker container
       ```
       docker run --rm --name springboot-producer-api-jvm \
-			  -p 9104:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-				--network producer-consumer_default \
+        -p 9104:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+        --network producer-consumer_default \
         docker.mycompany.com/springboot-producer-api-jvm:1.0.0
       ```
 
@@ -99,12 +98,11 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       cd consumer-api && ./docker-build.sh && cd ..
       ```
 
-    - Run the following command to start the Docker container
-		  > See [Issues](#springboot-consumer-api-issues)
+    - Run the following command to start the Docker container (See [Issues](#springboot-consumer-api-issues))
       ```
       docker run --rm --name springboot-consumer-api-jvm \
-			  -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-				--network producer-consumer_default \
+        -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+        --network producer-consumer_default \
         docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
       ```
 
@@ -140,12 +138,11 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       cd producer-api && ./docker-build.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container
-			> See [Issues](#springboot-producer-api-issues)
+    - Run the following command to start the Docker container (See [Issues](#springboot-producer-api-issues))
       ```
       docker run --rm --name springboot-producer-api-native \
-			  -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-				--network producer-consumer_default \
+        -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+        --network producer-consumer_default \
         docker.mycompany.com/springboot-producer-api-native:1.0.0
       ```
 
@@ -163,12 +160,11 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       cd consumer-api && ./docker-build.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container
-		  > See [Issues](#springboot-consumer-api-issues)
+    - Run the following command to start the Docker container (See [Issues](#springboot-consumer-api-issues))
       ```
       docker run --rm --name springboot-consumer-api-native \
-			  -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-				--network producer-consumer_default \
+        -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+        --network producer-consumer_default \
         docker.mycompany.com/springboot-consumer-api-native:1.0.0
       ```
 

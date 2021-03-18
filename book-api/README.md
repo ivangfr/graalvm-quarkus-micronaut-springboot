@@ -25,30 +25,30 @@ In this example, we will implement three versions of a Restful API for handling 
 
 ## Useful Commands
 
-- Reset `MySQL` tables (make sure you are in `graalvm-quarkus-micronaut-springboot/book-api` folder)
-  ```
-  ./reset-tables.sh
-  ```
-
 - **MySQL**
 
-  Docker exec into `mysql` contatiner
-  - JVM
+  - Reset tables script (make sure you are in `graalvm-quarkus-micronaut-springboot/book-api` folder)
     ```
-    docker exec -it mysql mysql -uroot -psecret --database bookdb_jvm
-    ```
-  - Native
-    ```
-    docker exec -it mysql mysql -uroot -psecret --database bookdb_native
+    ./reset-tables.sh
     ```
 
-  Insite `MySQL monitor` terminal
-  ```
-  show tables;
-  select * from quarkus_books;
-  select * from micronaut_books;
-  select * from springboot_books;
-  ```
+  - Connecting to `MySQL Monitor`
+    - JVM
+      ```
+      docker exec -it mysql mysql -uroot -psecret --database bookdb_jvm
+      ```
+    - Native
+      ```
+      docker exec -it mysql mysql -uroot -psecret --database bookdb_native
+      ```
+
+    Insite `MySQL Monitor` terminal
+    ```
+    show tables;
+    select * from quarkus_books;
+    select * from micronaut_books;
+    select * from springboot_books;
+    ```
 
 ## Shutdown
 

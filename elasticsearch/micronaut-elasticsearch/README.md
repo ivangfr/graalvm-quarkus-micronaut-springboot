@@ -54,7 +54,7 @@
   ```
   docker run --rm --name micronaut-elasticsearch-jvm \
     -p 9114:8080 -e ELASTICSEARCH_HOST=elasticsearch \
-		--network elasticsearch_default \
+    --network elasticsearch_default \
     docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0
   ```
 
@@ -77,8 +77,7 @@
   ./mvnw clean
   ```
 
-- Run the script below to build the Docker image
-  > See [Issues](#issues)
+- Run the script below to build the Docker image (See [Issues](#issues))
   ```
   ./docker-build.sh native
   ```
@@ -87,7 +86,7 @@
   ```
   docker run --rm --name micronaut-elasticsearch-native \
     -p 9115:8080 -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=elasticsearch \
-		--network elasticsearch_default \
+    --network elasticsearch_default \
     docker.mycompany.com/micronaut-elasticsearch-native:1.0.0
   ```
 

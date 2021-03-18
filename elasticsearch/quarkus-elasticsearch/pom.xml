@@ -62,7 +62,7 @@
             <artifactId>quarkus-arc</artifactId>
         </dependency>
 
-        <!-- Lombok: https://projectlombok.org/setup/maven -->
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -71,7 +71,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- MapStruct: https://mapstruct.org/documentation/installation/ -->
+        <!-- MapStruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>

@@ -105,7 +105,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- MapStruct: https://mapstruct.org/documentation/installation/ -->
+        <!-- MapStruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
