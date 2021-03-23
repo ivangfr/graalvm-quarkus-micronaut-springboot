@@ -186,7 +186,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
 ### springboot-producer-api issues
 
-- When **Docker in Native Mode**, it starts up fine. However, when a JSON message is published, an exception is thrown
+- When **Docker in Native Mode**, it starts up fine. However, when a JSON message is published, an exception is thrown. I've created this [issue #659](https://github.com/spring-projects-experimental/spring-native/issues/659)
   ```
     .   ____          _            __ _ _
    /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -357,7 +357,10 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
   	... 67 common frames omitted
   ```
 
-	I set `org.springframework.kafka.support.serializer.JsonSerializer` using `@TypeHint`. After building the native image, starting the container and posting a news, I get the following exception
+	I set `org.springframework.kafka.support.serializer.JsonSerializer` using `@TypeHint`. After building the native image, starting the container and posting a news, I get the following exception.
+	
+	Btw, if I do what the exception is suggesting _"to avoid exception,   disable SerializationFeature.FAIL_ON_EMPTY_BEANS"_, the payload of the message will be empty
+
 	```
   ERROR 1 --- [ctor-http-nio-2] a.w.r.e.AbstractErrorWebExceptionHandler : [d2eb64eb-1]  500 Server Error for HTTP   POST "/api/news"
   
@@ -443,7 +446,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
 ### springboot-consumer-api issues
 
-- Unable to run in **Development Mode**, **Docker in JVM Mode** and **Docker in Native Mode**
+- Unable to run in **Development Mode**, **Docker in JVM Mode** and **Docker in Native Mode**. It is related to this [issue #605](https://github.com/spring-projects-experimental/spring-native/issues/605)
   ```
   ERROR 24820 --- [           main] o.s.boot.SpringApplication               : Application run failed
   

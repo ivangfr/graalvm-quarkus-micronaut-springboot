@@ -102,7 +102,7 @@
 
 ## Issues
 
-- When running **Docker in Native Mode** and creating a movie, the movie payload is saved as empty in `Elasticsearch`
+- When running **Docker in Native Mode** and creating a movie, the movie payload is saved as empty in `Elasticsearch`. I have oppened this [issue #658](https://github.com/spring-projects-experimental/spring-native/issues/658)
   ```
   ➜ curl -i -X POST "localhost:9117/api/movies" -H "Content-type: application/json" -d '{"imdb": "789", "title":   "Resident Evil"}'
   HTTP/1.1 201 Created
@@ -129,7 +129,7 @@
       "max_score" : 1.0,
       "hits" : [
         {
-          "_index" : "springboot.movies",
+          "_index" : "springboot.movies.native",
           "_type" : "_doc",
           "_id" : "7S3qOngBvTl0cjGNSIp3",
           "_score" : 1.0,
