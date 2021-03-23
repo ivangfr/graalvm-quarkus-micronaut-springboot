@@ -111,7 +111,7 @@
   
   7S3qOngBvTl0cjGNSIp3%
   
-  ➜ curl "localhost:9200/springboot.movies/_search?pretty"
+  ➜ curl "localhost:9200/springboot.movies.native/_search?pretty"
   {
     "took" : 3,
     "timed_out" : false,

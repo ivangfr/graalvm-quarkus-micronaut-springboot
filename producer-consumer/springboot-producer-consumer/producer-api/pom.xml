@@ -14,7 +14,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <spring-native.version>0.9.0</spring-native.version>
+        <spring-native.version>0.9.1</spring-native.version>
         <jib.maven-plugin.version>2.8.0</jib.maven-plugin.version>
         <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
     </properties>
