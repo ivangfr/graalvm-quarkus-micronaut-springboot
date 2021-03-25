@@ -139,8 +139,6 @@ springboot-elasticsearch-native |        255ms |  89.34MiB/256MiB(34.90%) |     
 
 - Unable to run `springboot-consumer-api-jvm` and `springboot-consumer-api-native`. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot-producer-consumer#springboot-consumer-api-issues)
 
-- Unable to run `springboot-producer-api-native`. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot-producer-consumer#springboot-producer-api-issues)
-
 - `springboot-elasticsearch-native` is not working correctly. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/springboot-elasticsearch#issues)
 
 - Unable to build `micronaut-elasticsearch-native`. See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/micronaut-elasticsearch#issues)
