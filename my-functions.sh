@@ -201,6 +201,14 @@ function check_runner_script_input_parameter() {
      [ "$1" != "book-api" ] &&
      [ "$1" != "producer-consumer" ] &&
      [ "$1" != "elasticsearch" ] &&
+     [ "$1" != "simple-api-jvm" ] &&
+     [ "$1" != "book-api-jvm" ] &&
+     [ "$1" != "producer-consumer-jvm" ] &&
+     [ "$1" != "elasticsearch-jvm" ] &&
+     [ "$1" != "simple-api-native" ] &&
+     [ "$1" != "book-api-native" ] &&
+     [ "$1" != "producer-consumer-native" ] &&
+     [ "$1" != "elasticsearch-native" ] &&
      [ "$1" != "quarkus-simple-api" ] && 
      [ "$1" != "micronaut-simple-api" ] &&
      [ "$1" != "springboot-simple-api" ] &&
@@ -232,6 +240,9 @@ function check_runner_script_input_parameter() {
     printf "\n\tall"
     printf "\n\tjvm\tnative"
     printf "\n\tsimple-api\tbook-api\tproducer-consumer\telasticsearch"
+    
+    printf "\n\tsimple-api-jvm\tbook-api-jvm\tproducer-consumer-jvm\telasticsearch-jvm"
+    printf "\n\tsimple-api-native\tbook-api-native\tproducer-consumer-native\telasticsearch-native"
     
     printf "\n\tquarkus"
     printf "\n\t\tquarkus-simple-api"
