@@ -57,6 +57,7 @@ AB_PARAMS_WARM_UP_ELASTICSEARCH='-c 5 -n 1000'
 
 if [ "$1" = "quarkus-simple-api-jvm" ] ||
    [ "$1" = "quarkus-simple-api" ] ||
+   [ "$1" = "quarkus-jvm" ] ||
    [ "$1" = "quarkus" ] ||
    [ "$1" = "simple-api-jvm" ] ||
    [ "$1" = "simple-api" ] ||
@@ -97,6 +98,7 @@ fi
 
 if [ "$1" = "quarkus-simple-api-native" ] ||
    [ "$1" = "quarkus-simple-api" ] ||
+   [ "$1" = "quarkus-native" ] ||
    [ "$1" = "quarkus" ] ||
    [ "$1" = "simple-api-native" ] ||
    [ "$1" = "simple-api" ] ||
@@ -137,6 +139,7 @@ fi
 
 if [ "$1" = "micronaut-simple-api-jvm" ] ||
    [ "$1" = "micronaut-simple-api" ] ||
+   [ "$1" = "micronaut-jvm" ] ||
    [ "$1" = "micronaut" ] ||
    [ "$1" = "simple-api-jvm" ] ||
    [ "$1" = "simple-api" ] ||
@@ -176,6 +179,7 @@ fi
 
 if [ "$1" = "micronaut-simple-api-native" ] ||
    [ "$1" = "micronaut-simple-api" ] ||
+   [ "$1" = "micronaut-native" ] ||
    [ "$1" = "micronaut" ] ||
    [ "$1" = "simple-api-native" ] ||
    [ "$1" = "simple-api" ] ||
@@ -215,6 +219,7 @@ fi
 
 if [ "$1" = "springboot-simple-api-jvm" ] ||
    [ "$1" = "springboot-simple-api" ] ||
+   [ "$1" = "springboot-jvm" ] ||
    [ "$1" = "springboot" ] ||
    [ "$1" = "simple-api-jvm" ] ||
    [ "$1" = "simple-api" ] ||
@@ -255,6 +260,7 @@ fi
 
 if [ "$1" = "springboot-simple-api-native" ] ||
    [ "$1" = "springboot-simple-api" ] ||
+   [ "$1" = "springboot-native" ] ||
    [ "$1" = "springboot" ] ||
    [ "$1" = "simple-api-native" ] ||
    [ "$1" = "simple-api" ] ||
@@ -297,6 +303,8 @@ if [ "$1" = "quarkus-book-api-jvm" ] || [ "$1" = "quarkus-book-api-native" ] ||
    [ "$1" = "micronaut-book-api-jvm" ] || [ "$1" = "micronaut-book-api-native" ] ||
    [ "$1" = "springboot-book-api-jvm" ] || [ "$1" = "springboot-book-api-native" ] ||
    [ "$1" = "quarkus-book-api" ] || [ "$1" = "micronaut-book-api" ] || [ "$1" = "springboot-book-api" ] ||
+   [ "$1" = "quarkus-jvm" ] || [ "$1" = "micronaut-jvm" ] || [ "$1" = "springboot-jvm" ] ||
+   [ "$1" = "quarkus-native" ] || [ "$1" = "micronaut-native" ] || [ "$1" = "springboot-native" ] ||
    [ "$1" = "quarkus" ] || [ "$1" = "micronaut" ] || [ "$1" = "springboot" ] ||
    [ "$1" = "book-api-jvm" ] || [ "$1" = "book-api-native" ] ||
    [ "$1" = "book-api" ] ||
@@ -316,6 +324,7 @@ then
 
   if [ "$1" = "quarkus-book-api-jvm" ] ||
      [ "$1" = "quarkus-book-api" ] ||
+     [ "$1" = "quarkus-jvm" ] ||
      [ "$1" = "quarkus" ] ||
      [ "$1" = "book-api-jvm" ] ||
      [ "$1" = "book-api" ] ||
@@ -357,6 +366,7 @@ then
 
   if [ "$1" = "quarkus-book-api-native" ] ||
      [ "$1" = "quarkus-book-api" ] ||
+     [ "$1" = "quarkus-native" ] ||
      [ "$1" = "quarkus" ] ||
      [ "$1" = "book-api-native" ] ||
      [ "$1" = "book-api" ] ||
@@ -398,6 +408,7 @@ then
 
   if [ "$1" = "micronaut-book-api-jvm" ] ||
      [ "$1" = "micronaut-book-api" ] ||
+     [ "$1" = "micronaut-jvm" ] ||
      [ "$1" = "micronaut" ] ||
      [ "$1" = "book-api-jvm" ] ||
      [ "$1" = "book-api" ] ||
@@ -438,6 +449,7 @@ then
 
   if [ "$1" = "micronaut-book-api-native" ] ||
      [ "$1" = "micronaut-book-api" ] ||
+     [ "$1" = "micronaut-native" ] ||
      [ "$1" = "micronaut" ] ||
      [ "$1" = "book-api-native" ] ||
      [ "$1" = "book-api" ] ||
@@ -478,6 +490,7 @@ then
 
   if [ "$1" = "springboot-book-api-jvm" ] ||
      [ "$1" = "springboot-book-api" ] ||
+     [ "$1" = "springboot-jvm" ] ||
      [ "$1" = "springboot" ] ||
      [ "$1" = "book-api-jvm" ] ||
      [ "$1" = "book-api" ] ||
@@ -519,6 +532,7 @@ then
 
   if [ "$1" = "springboot-book-api-native" ] ||
      [ "$1" = "springboot-book-api" ] ||
+     [ "$1" = "springboot-native" ] ||
      [ "$1" = "springboot" ] ||
      [ "$1" = "book-api-native" ] ||
      [ "$1" = "book-api" ] ||
@@ -573,6 +587,8 @@ if [ "$1" = "quarkus-producer-consumer-jvm" ] || [ "$1" = "quarkus-producer-cons
    [ "$1" = "micronaut-producer-consumer-jvm" ] || [ "$1" = "micronaut-producer-consumer-native" ] ||
    [ "$1" = "springboot-producer-consumer-jvm" ] || [ "$1" = "springboot-producer-consumer-native" ] ||
    [ "$1" = "quarkus-producer-consumer" ] || [ "$1" = "micronaut-producer-consumer" ] || [ "$1" = "springboot-producer-consumer" ] ||
+   [ "$1" = "quarkus-jvm" ] || [ "$1" = "micronaut-jvm" ] || [ "$1" = "springboot-jvm" ] ||
+   [ "$1" = "quarkus-native" ] || [ "$1" = "micronaut-native" ] || [ "$1" = "springboot-native" ] ||
    [ "$1" = "quarkus" ] || [ "$1" = "micronaut" ] || [ "$1" = "springboot" ] ||
    [ "$1" = "producer-consumer-jvm" ] || [ "$1" = "producer-consumer-native" ] ||
    [ "$1" = "producer-consumer" ] ||
@@ -592,6 +608,7 @@ then
 
   if [ "$1" = "quarkus-producer-consumer-jvm" ] ||
      [ "$1" = "quarkus-producer-consumer" ] ||
+     [ "$1" = "quarkus-jvm" ] ||
      [ "$1" = "quarkus" ] ||
      [ "$1" = "producer-consumer-jvm" ] ||
      [ "$1" = "producer-consumer" ] ||
@@ -660,6 +677,7 @@ then
 
   if [ "$1" = "quarkus-producer-consumer-native" ] ||
      [ "$1" = "quarkus-producer-consumer" ] ||
+     [ "$1" = "quarkus-native" ] ||
      [ "$1" = "quarkus" ] ||
      [ "$1" = "producer-consumer-native" ] ||
      [ "$1" = "producer-consumer" ] ||
@@ -728,6 +746,7 @@ then
 
   if [ "$1" = "micronaut-producer-consumer-jvm" ] ||
      [ "$1" = "micronaut-producer-consumer" ] ||
+     [ "$1" = "micronaut-jvm" ] ||
      [ "$1" = "micronaut" ] ||
      [ "$1" = "producer-consumer-jvm" ] ||
      [ "$1" = "producer-consumer" ] ||
@@ -794,6 +813,7 @@ then
 
   if [ "$1" = "micronaut-producer-consumer-native" ] ||
      [ "$1" = "micronaut-producer-consumer" ] ||
+     [ "$1" = "micronaut-native" ] ||
      [ "$1" = "micronaut" ] ||
      [ "$1" = "producer-consumer-native" ] ||
      [ "$1" = "producer-consumer" ] ||
@@ -860,6 +880,7 @@ then
 
   if [ "$1" = "springboot-producer-consumer-jvm" ] ||
      [ "$1" = "springboot-producer-consumer" ] ||
+     [ "$1" = "springboot-jvm" ] ||
      [ "$1" = "springboot" ] ||
      [ "$1" = "producer-consumer-jvm" ] ||
      [ "$1" = "producer-consumer" ] ||
@@ -928,6 +949,7 @@ then
 
   if [ "$1" = "springboot-producer-consumer-native" ] ||
      [ "$1" = "springboot-producer-consumer" ] ||
+     [ "$1" = "springboot-native" ] ||
      [ "$1" = "springboot" ] ||
      [ "$1" = "producer-consumer-native" ] ||
      [ "$1" = "producer-consumer" ] ||
@@ -1009,6 +1031,8 @@ if [ "$1" = "quarkus-elasticsearch-jvm" ] || [ "$1" = "quarkus-elasticsearch-nat
    [ "$1" = "micronaut-elasticsearch-jvm" ] || [ "$1" = "micronaut-elasticsearch-native" ] ||
    [ "$1" = "springboot-elasticsearch-jvm" ] || [ "$1" = "springboot-elasticsearch-native" ] ||
    [ "$1" = "quarkus-elasticsearch" ] || [ "$1" = "micronaut-elasticsearch" ] || [ "$1" = "springboot-elasticsearch" ] ||
+   [ "$1" = "quarkus-jvm" ] || [ "$1" = "micronaut-jvm" ] || [ "$1" = "springboot-jvm" ] ||
+   [ "$1" = "quarkus-native" ] || [ "$1" = "micronaut-native" ] || [ "$1" = "springboot-native" ] ||
    [ "$1" = "quarkus" ] || [ "$1" = "micronaut" ] || [ "$1" = "springboot" ] ||
    [ "$1" = "elasticsearch-jvm" ] || [ "$1" = "elasticsearch-native" ] ||
    [ "$1" = "elasticsearch" ] ||
@@ -1031,6 +1055,7 @@ then
 
   if [ "$1" = "quarkus-elasticsearch-jvm" ] ||
      [ "$1" = "quarkus-elasticsearch" ] ||
+     [ "$1" = "quarkus-jvm" ] ||
      [ "$1" = "quarkus" ] ||
      [ "$1" = "elasticsearch-jvm" ] ||
      [ "$1" = "elasticsearch" ] ||
@@ -1072,6 +1097,7 @@ then
 
   if [ "$1" = "quarkus-elasticsearch-native" ] ||
      [ "$1" = "quarkus-elasticsearch" ] ||
+     [ "$1" = "quarkus-native" ] ||
      [ "$1" = "quarkus" ] ||
      [ "$1" = "elasticsearch-native" ] ||
      [ "$1" = "elasticsearch" ] ||
@@ -1113,6 +1139,7 @@ then
 
   if [ "$1" = "micronaut-elasticsearch-jvm" ] ||
      [ "$1" = "micronaut-elasticsearch" ] ||
+     [ "$1" = "micronaut-jvm" ] ||
      [ "$1" = "micronaut" ] ||
      [ "$1" = "elasticsearch-jvm" ] ||
      [ "$1" = "elasticsearch" ] ||
@@ -1153,6 +1180,7 @@ then
 
   if [ "$1" = "micronaut-elasticsearch-native" ] ||
      [ "$1" = "micronaut-elasticsearch" ] ||
+     [ "$1" = "micronaut-native" ] ||
      [ "$1" = "micronaut" ] ||
      [ "$1" = "elasticsearch-native" ] ||
      [ "$1" = "elasticsearch" ] ||
@@ -1193,6 +1221,7 @@ then
 
   if [ "$1" = "springboot-elasticsearch-jvm" ] ||
      [ "$1" = "springboot-elasticsearch" ] ||
+     [ "$1" = "springboot-jvm" ] ||
      [ "$1" = "springboot" ] ||
      [ "$1" = "elasticsearch-jvm" ] ||
      [ "$1" = "elasticsearch" ] ||
@@ -1234,6 +1263,7 @@ then
 
   if [ "$1" = "springboot-elasticsearch-native" ] ||
      [ "$1" = "springboot-elasticsearch" ] ||
+     [ "$1" = "springboot-native" ] ||
      [ "$1" = "springboot" ] ||
      [ "$1" = "elasticsearch-native" ] ||
      [ "$1" = "elasticsearch" ] ||
