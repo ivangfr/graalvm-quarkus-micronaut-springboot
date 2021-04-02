@@ -899,30 +899,30 @@ then
     echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
     echo "-----------------------------------------------"
 
-    docker run -d --rm --name springboot-consumer-api-jvm \
-      -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
+    # docker run -d --rm --name springboot-consumer-api-jvm \
+    #   -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    #   --network producer-consumer_default \
+    #   docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
 
-    wait_for_container_log "springboot-consumer-api-jvm" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    # wait_for_container_log "springboot-consumer-api-jvm" "Started"
+    # startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    # springboot_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
+    # springboot_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
 
-    wait_for_container_log "springboot-consumer-api-jvm" "OFFSET: 13999"
-    springboot_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
+    # wait_for_container_log "springboot-consumer-api-jvm" "OFFSET: 13999"
+    # springboot_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
-    springboot_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
+    # springboot_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
 
-    echo "== Stopping producer-consuner docker containers"
+    # echo "== Stopping producer-consuner docker containers"
 
-    run_command "docker stop springboot-producer-api-jvm"
-    springboot_producer_api_jvm[shutdown_time]=$run_command_exec_time
+    # run_command "docker stop springboot-producer-api-jvm"
+    # springboot_producer_api_jvm[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop springboot-consumer-api-jvm"
-    springboot_consumer_api_jvm[shutdown_time]=$run_command_exec_time
+    # run_command "docker stop springboot-consumer-api-jvm"
+    # springboot_consumer_api_jvm[shutdown_time]=$run_command_exec_time
 
   fi
 
@@ -940,27 +940,27 @@ then
     echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
     echo "--------------------------------------------------"
 
-    # docker run -d --rm --name springboot-producer-api-native \
-    #   -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    #   --network producer-consumer_default \
-    #   docker.mycompany.com/springboot-producer-api-native:1.0.0
+    docker run -d --rm --name springboot-producer-api-native \
+      -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      --network producer-consumer_default \
+      docker.mycompany.com/springboot-producer-api-native:1.0.0
 
-    # wait_for_container_log "springboot-producer-api-native" "Started"
-    # startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    # springboot_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    wait_for_container_log "springboot-producer-api-native" "Started"
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    springboot_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    # springboot_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+    springboot_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
 
-    # run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-    # springboot_producer_api_native[ab_testing_time]=$run_command_exec_time
+    run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
+    springboot_producer_api_native[ab_testing_time]=$run_command_exec_time
 
-    # warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9105/api/news"
+    warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9105/api/news"
 
-    # run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-    # springboot_producer_api_native[ab_testing_time_2]=$run_command_exec_time
+    run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
+    springboot_producer_api_native[ab_testing_time_2]=$run_command_exec_time
 
-    # springboot_producer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+    springboot_producer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
 
     echo
     echo "--------------------------------------------------"

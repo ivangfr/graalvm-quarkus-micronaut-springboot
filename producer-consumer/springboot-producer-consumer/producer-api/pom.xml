@@ -15,8 +15,8 @@
     <properties>
         <java.version>11</java.version>
         <spring-native.version>0.9.1</spring-native.version>
-        <jib.maven-plugin.version>2.8.0</jib.maven-plugin.version>
-        <docker.image.prefix>docker.mycompany.com</docker.image.prefix>
+        <jib-maven-plugin.version>2.8.0</jib-maven-plugin.version>
+        <docker-image.prefix>docker.mycompany.com</docker-image.prefix>
     </properties>
 
     <dependencies>
@@ -82,7 +82,7 @@
                     </excludes>
                     <image>
                         <builder>paketobuildpacks/builder:tiny</builder>
-                        <name>${docker.image.prefix}/springboot-${project.artifactId}-native:${project.version}</name>
+                        <name>${docker-image.prefix}/springboot-${project.artifactId}-native:${project.version}</name>
                         <env>
                             <BP_BOOT_NATIVE_IMAGE>true</BP_BOOT_NATIVE_IMAGE>
                             <BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
@@ -119,10 +119,10 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib.maven-plugin.version}</version>
+                <version>${jib-maven-plugin.version}</version>
                 <configuration>
                     <to>
-                        <image>${docker.image.prefix}/springboot-${project.artifactId}-jvm:${project.version}</image>
+                        <image>${docker-image.prefix}/springboot-${project.artifactId}-jvm:${project.version}</image>
                     </to>
                 </configuration>
             </plugin>
