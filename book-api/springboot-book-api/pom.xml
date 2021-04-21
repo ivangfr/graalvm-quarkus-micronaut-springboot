@@ -18,6 +18,7 @@
         <java.version>11</java.version>
         <spring-native.version>0.9.2</spring-native.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
         <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
         <docker-image.prefix>docker.mycompany.com</docker-image.prefix>
     </properties>
@@ -153,6 +154,11 @@
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                             <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${lombok-mapstruct-binding.version}</version>
                         </path>
                         <path>
                             <groupId>org.mapstruct</groupId>
