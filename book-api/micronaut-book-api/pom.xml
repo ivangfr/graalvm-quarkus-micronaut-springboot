@@ -22,7 +22,7 @@
         <micronaut.data.version>2.3.1</micronaut.data.version>
         <micronaut.runtime>netty</micronaut.runtime>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
-        <jib-maven-plugin.version>2.8.0</jib-maven-plugin.version>
+        <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
         <docker-image.prefix>docker.mycompany.com</docker-image.prefix>
     </properties>
 
