@@ -323,16 +323,16 @@ then
 
   cd producer-consumer/springboot-producer-consumer
 
-  # package_jar_build_image \
-  #   "./mvnw clean --projects producer-api" \
-  #   "./mvnw package --projects producer-api" \
-  #   "producer-api/target/producer-api-1.0.0.jar" \
-  #   "cd producer-api && ./docker-build.sh native && cd .." \
-  #   "docker.mycompany.com/springboot-producer-api-native:1.0.0"
-  # springboot_producer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-  # springboot_producer_api_native[jar_size]=$package_jar_build_image_jar_size
-  # springboot_producer_api_native[building_time]=$package_jar_build_image_building_time
-  # springboot_producer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+  package_jar_build_image \
+    "./mvnw clean --projects producer-api" \
+    "./mvnw package --projects producer-api" \
+    "producer-api/target/producer-api-1.0.0.jar" \
+    "cd producer-api && ./docker-build.sh native && cd .." \
+    "docker.mycompany.com/springboot-producer-api-native:1.0.0"
+  springboot_producer_api_native[packaging_time]=$package_jar_build_image_packaging_time
+  springboot_producer_api_native[jar_size]=$package_jar_build_image_jar_size
+  springboot_producer_api_native[building_time]=$package_jar_build_image_building_time
+  springboot_producer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 

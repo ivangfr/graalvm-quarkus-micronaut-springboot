@@ -24,7 +24,7 @@
 
 - Run the command below to start the application
   ```
-  ./mvnw clean spring-boot:run
+  ./mvnw clean package spring-boot:run
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -41,9 +41,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/springboot-book-api` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -54,7 +54,8 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name springboot-book-api-jvm \
-    -p 9090:8080 -e MYSQL_HOST=mysql --network book-api_default \
+    -p 9090:8080 -e MYSQL_HOST=mysql \
+    --network book-api_default \
     docker.mycompany.com/springboot-book-api-jvm:1.0.0
   ```
 
@@ -72,9 +73,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/springboot-book-api` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -85,7 +86,8 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name springboot-book-api-native \
-    -p 9091:8080 -e MYSQL_HOST=mysql --network book-api_default \
+    -p 9091:8080 -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
+    --network book-api_default \
     docker.mycompany.com/springboot-book-api-native:1.0.0
   ```
 

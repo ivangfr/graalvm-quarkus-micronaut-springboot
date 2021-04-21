@@ -3,14 +3,15 @@ version: "3.8"
 services:
 
   mysql:
-    image: mysql:5.7.32
+    image: mysql:5.7.33
     container_name: mysql
     restart: unless-stopped
     ports:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=bookdb
+    volumes:
+        - ./mysql/init:/docker-entrypoint-initdb.d
     healthcheck:
       test: "mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}"
       start_period: 10s

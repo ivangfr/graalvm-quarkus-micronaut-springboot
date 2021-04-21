@@ -40,7 +40,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/quarkus-elasticsearch` folder
 
-- Package the application `jar` file
+- Clean and package the application
   ```
   ./mvnw clean package
   ```
@@ -53,7 +53,8 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name quarkus-elasticsearch-jvm \
-    -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+    -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+    --network elasticsearch_default \
     docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0
   ```
 
@@ -71,7 +72,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/quarkus-elasticsearch` folder
 
-- Package the application `jar` file
+- Clean and package the application
   ```
   ./mvnw clean package -Pnative -Dquarkus.native.container-build=true
   ```
@@ -84,7 +85,8 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name quarkus-elasticsearch-native \
-    -p 9113:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+    -p 9113:8080 -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
+    --network elasticsearch_default \
     docker.mycompany.com/quarkus-elasticsearch-native:1.0.0
   ```
 

@@ -32,17 +32,26 @@ In this example, we will implement three versions of a Restful API for handling 
 
 - **Elasticsearch**
 
-  Check indexes
-  ```
-  curl "localhost:9200/_cat/indices?v"
-  ```
+  - Reset indexes script (make sure you are in `graalvm-quarkus-micronaut-springboot/elasticsearch` folder)
+    ```
+    ./init-es-indexes.sh
+    ```
 
-  Perform search
-  ```
-  curl "localhost:9200/quarkus.movies/_search?pretty"
-  curl "localhost:9200/micronaut.movies/_search?pretty"
-  curl "localhost:9200/springboot.movies/_search?pretty"
-  ```
+  - Check indexes
+    ```
+    curl "localhost:9200/_cat/indices?v"
+    ```
+
+  - Perform search
+    ```
+    curl "localhost:9200/quarkus.movies.jvm/_search?pretty"
+    curl "localhost:9200/micronaut.movies.jvm/_search?pretty"
+    curl "localhost:9200/springboot.movies.jvm/_search?pretty"
+
+    curl "localhost:9200/quarkus.movies.native/_search?pretty"
+    curl "localhost:9200/micronaut.movies.native/_search?pretty"
+    curl "localhost:9200/springboot.movies.native/_search?pretty"
+    ```
 
 ## Shutdown
 

@@ -23,7 +23,7 @@
 
 - Run the command below to start the application
   ```
-  ./mvnw clean spring-boot:run
+  ./mvnw clean package spring-boot:run
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -40,9 +40,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/springboot-elasticsearch` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -53,7 +53,8 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name springboot-elasticsearch-jvm \
-    -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+    -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+    --network elasticsearch_default \
     docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0
   ```
 
@@ -71,9 +72,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/springboot-elasticsearch` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -84,11 +85,12 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name springboot-elasticsearch-native \
-    -p 9117:8080 -e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default \
+    -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
+    --network elasticsearch_default \
     docker.mycompany.com/springboot-elasticsearch-native:1.0.0
   ```
 
-- A simple test can be done by opening a new terminal and running
+- A simple test can be done by opening a new terminal and running (See [Issues](#issues))
   ```
   curl -i -X POST "localhost:9117/api/movies" -H "Content-type: application/json" \
     -d '{"imdb": "789", "title": "Resident Evil"}'

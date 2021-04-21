@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.5.1
+    image: confluentinc/cp-zookeeper:6.1.1
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -15,7 +15,7 @@ services:
       start_period: 30s
 
   kafka:
-    image: confluentinc/cp-kafka:5.5.1
+    image: confluentinc/cp-kafka:6.1.1
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -34,7 +34,7 @@ services:
       start_period: 30s
 
   kafka-rest-proxy:
-    image: confluentinc/cp-kafka-rest:5.5.1
+    image: confluentinc/cp-kafka-rest:6.1.1
     container_name: kafka-rest-proxy
     restart: unless-stopped
     depends_on:

@@ -41,7 +41,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder
 
-- Package the application `jar` file
+- Clean and package the application
   ```
   ./mvnw clean package
   ```
@@ -54,7 +54,8 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name quarkus-book-api-jvm \
-    -p 9086:8080 -e MYSQL_HOST=mysql --network book-api_default \
+    -p 9086:8080 -e MYSQL_HOST=mysql \
+    --network book-api_default \
     docker.mycompany.com/quarkus-book-api-jvm:1.0.0
   ```
 
@@ -72,7 +73,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/quarkus-book-api` folder
 
-- Package the application `jar` file
+- Clean and package the application
   ```
   ./mvnw clean package -Pnative -Dquarkus.native.container-build=true
   ```
@@ -85,7 +86,8 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name quarkus-book-api-native \
-    -p 9087:8080 -e MYSQL_HOST=mysql --network book-api_default \
+    -p 9087:8080 -e QUARKUS_PROFILE=native -e MYSQL_HOST=mysql \
+    --network book-api_default \
     docker.mycompany.com/quarkus-book-api-native:1.0.0
   ```
 

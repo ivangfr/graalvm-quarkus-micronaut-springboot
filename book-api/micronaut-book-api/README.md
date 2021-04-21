@@ -41,9 +41,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -54,7 +54,8 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name micronaut-book-api-jvm \
-    -p 9088:8080 -e MYSQL_HOST=mysql --network book-api_default \
+    -p 9088:8080 -e MYSQL_HOST=mysql \
+    --network book-api_default \
     docker.mycompany.com/micronaut-book-api-jvm:1.0.0
   ```
 
@@ -72,9 +73,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/book-api/micronaut-book-api` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -85,7 +86,8 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name micronaut-book-api-native \
-    -p 9089:8080 -e MYSQL_HOST=mysql --network book-api_default \
+    -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
+    --network book-api_default \
     docker.mycompany.com/micronaut-book-api-native:1.0.0
   ```
 

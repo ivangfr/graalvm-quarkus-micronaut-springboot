@@ -57,7 +57,9 @@ AB_PARAMS_WARM_UP_ELASTICSEARCH='-c 5 -n 1000'
 
 if [ "$1" = "quarkus-simple-api-jvm" ] ||
    [ "$1" = "quarkus-simple-api" ] ||
+   [ "$1" = "quarkus-jvm" ] ||
    [ "$1" = "quarkus" ] ||
+   [ "$1" = "simple-api-jvm" ] ||
    [ "$1" = "simple-api" ] ||
    [ "$1" = "jvm" ] ||
    [ "$1" = "all" ];
@@ -68,7 +70,8 @@ then
   echo "QUARKUS-SIMPLE-API-JVM"
   echo "----------------------"
 
-  docker run -d --rm --name quarkus-simple-api-jvm -p 9080:8080 \
+  docker run -d --rm --name quarkus-simple-api-jvm \
+    -p 9080:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
     docker.mycompany.com/quarkus-simple-api-jvm:1.0.0
 
@@ -95,7 +98,9 @@ fi
 
 if [ "$1" = "quarkus-simple-api-native" ] ||
    [ "$1" = "quarkus-simple-api" ] ||
+   [ "$1" = "quarkus-native" ] ||
    [ "$1" = "quarkus" ] ||
+   [ "$1" = "simple-api-native" ] ||
    [ "$1" = "simple-api" ] ||
    [ "$1" = "native" ] ||
    [ "$1" = "all" ];
@@ -106,7 +111,8 @@ echo "-------------------------"
 echo "QUARKUS-SIMPLE-API-NATIVE"
 echo "-------------------------"
 
-  docker run -d --rm --name quarkus-simple-api-native -p 9081:8080 \
+  docker run -d --rm --name quarkus-simple-api-native \
+    -p 9081:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
     docker.mycompany.com/quarkus-simple-api-native:1.0.0
 
@@ -133,7 +139,9 @@ fi
 
 if [ "$1" = "micronaut-simple-api-jvm" ] ||
    [ "$1" = "micronaut-simple-api" ] ||
+   [ "$1" = "micronaut-jvm" ] ||
    [ "$1" = "micronaut" ] ||
+   [ "$1" = "simple-api-jvm" ] ||
    [ "$1" = "simple-api" ] ||
    [ "$1" = "jvm" ] ||
    [ "$1" = "all" ];
@@ -144,7 +152,8 @@ echo "------------------------"
 echo "MICRONAUT-SIMPLE-API-JVM"
 echo "------------------------"
 
-  docker run -d --rm --name micronaut-simple-api-jvm -p 9082:8080 \
+  docker run -d --rm --name micronaut-simple-api-jvm \
+    -p 9082:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
     docker.mycompany.com/micronaut-simple-api-jvm:1.0.0
 
@@ -170,7 +179,9 @@ fi
 
 if [ "$1" = "micronaut-simple-api-native" ] ||
    [ "$1" = "micronaut-simple-api" ] ||
+   [ "$1" = "micronaut-native" ] ||
    [ "$1" = "micronaut" ] ||
+   [ "$1" = "simple-api-native" ] ||
    [ "$1" = "simple-api" ] ||
    [ "$1" = "native" ] ||
    [ "$1" = "all" ];
@@ -181,7 +192,8 @@ echo "---------------------------"
 echo "MICRONAUT-SIMPLE-API-NATIVE"
 echo "---------------------------"
 
-docker run -d --rm --name micronaut-simple-api-native -p 9083:8080 \
+docker run -d --rm --name micronaut-simple-api-native \
+  -p 9083:8080 \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
   docker.mycompany.com/micronaut-simple-api-native:1.0.0
 
@@ -207,7 +219,9 @@ fi
 
 if [ "$1" = "springboot-simple-api-jvm" ] ||
    [ "$1" = "springboot-simple-api" ] ||
+   [ "$1" = "springboot-jvm" ] ||
    [ "$1" = "springboot" ] ||
+   [ "$1" = "simple-api-jvm" ] ||
    [ "$1" = "simple-api" ] ||
    [ "$1" = "jvm" ] ||
    [ "$1" = "all" ];
@@ -218,7 +232,8 @@ echo "-------------------------"
 echo "SPRINGBOOT-SIMPLE-API-JVM"
 echo "-------------------------"
 
-  docker run -d --rm --name springboot-simple-api-jvm -p 9084:8080 \
+  docker run -d --rm --name springboot-simple-api-jvm \
+    -p 9084:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
     docker.mycompany.com/springboot-simple-api-jvm:1.0.0
 
@@ -245,7 +260,9 @@ fi
 
 if [ "$1" = "springboot-simple-api-native" ] ||
    [ "$1" = "springboot-simple-api" ] ||
+   [ "$1" = "springboot-native" ] ||
    [ "$1" = "springboot" ] ||
+   [ "$1" = "simple-api-native" ] ||
    [ "$1" = "simple-api" ] ||
    [ "$1" = "native" ] ||
    [ "$1" = "all" ];
@@ -256,7 +273,8 @@ echo "----------------------------"
 echo "SPRINGBOOT-SIMPLE-API-NATIVE"
 echo "----------------------------"
 
-  docker run -d --rm --name springboot-simple-api-native -p 9085:8080 \
+  docker run -d --rm --name springboot-simple-api-native \
+    -p 9085:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
     docker.mycompany.com/springboot-simple-api-native:1.0.0
 
@@ -285,7 +303,10 @@ if [ "$1" = "quarkus-book-api-jvm" ] || [ "$1" = "quarkus-book-api-native" ] ||
    [ "$1" = "micronaut-book-api-jvm" ] || [ "$1" = "micronaut-book-api-native" ] ||
    [ "$1" = "springboot-book-api-jvm" ] || [ "$1" = "springboot-book-api-native" ] ||
    [ "$1" = "quarkus-book-api" ] || [ "$1" = "micronaut-book-api" ] || [ "$1" = "springboot-book-api" ] ||
+   [ "$1" = "quarkus-jvm" ] || [ "$1" = "micronaut-jvm" ] || [ "$1" = "springboot-jvm" ] ||
+   [ "$1" = "quarkus-native" ] || [ "$1" = "micronaut-native" ] || [ "$1" = "springboot-native" ] ||
    [ "$1" = "quarkus" ] || [ "$1" = "micronaut" ] || [ "$1" = "springboot" ] ||
+   [ "$1" = "book-api-jvm" ] || [ "$1" = "book-api-native" ] ||
    [ "$1" = "book-api" ] ||
    [ "$1" = "jvm" ] || [ "$1" = "native" ] ||
    [ "$1" = "all" ];
@@ -301,11 +322,11 @@ then
   docker-compose up -d
   wait_for_container_log "mysql" "port: 3306"
 
-  ./init-db.sh
-
   if [ "$1" = "quarkus-book-api-jvm" ] ||
      [ "$1" = "quarkus-book-api" ] ||
+     [ "$1" = "quarkus-jvm" ] ||
      [ "$1" = "quarkus" ] ||
+     [ "$1" = "book-api-jvm" ] ||
      [ "$1" = "book-api" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
@@ -316,7 +337,8 @@ then
     echo "QUARKUS-BOOK-API-JVM"
     echo "--------------------"
 
-    docker run -d --rm --name quarkus-book-api-jvm -p 9086:8080 -e MYSQL_HOST=mysql \
+    docker run -d --rm --name quarkus-book-api-jvm \
+      -p 9086:8080 -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network book-api_default \
       docker.mycompany.com/quarkus-book-api-jvm:1.0.0
@@ -344,7 +366,9 @@ then
 
   if [ "$1" = "quarkus-book-api-native" ] ||
      [ "$1" = "quarkus-book-api" ] ||
+     [ "$1" = "quarkus-native" ] ||
      [ "$1" = "quarkus" ] ||
+     [ "$1" = "book-api-native" ] ||
      [ "$1" = "book-api" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
@@ -355,7 +379,8 @@ then
     echo "QUARKUS-BOOK-API-NATIVE"
     echo "-----------------------"
 
-    docker run -d --rm --name quarkus-book-api-native -p 9087:8080 -e MYSQL_HOST=mysql \
+    docker run -d --rm --name quarkus-book-api-native \
+      -p 9087:8080 -e QUARKUS_PROFILE=native -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network book-api_default \
       docker.mycompany.com/quarkus-book-api-native:1.0.0
@@ -383,7 +408,9 @@ then
 
   if [ "$1" = "micronaut-book-api-jvm" ] ||
      [ "$1" = "micronaut-book-api" ] ||
+     [ "$1" = "micronaut-jvm" ] ||
      [ "$1" = "micronaut" ] ||
+     [ "$1" = "book-api-jvm" ] ||
      [ "$1" = "book-api" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
@@ -394,7 +421,8 @@ then
     echo "MICRONAUT-BOOK-API-JVM"
     echo "----------------------"
 
-    docker run -d --rm --name micronaut-book-api-jvm -p 9088:8080 -e MYSQL_HOST=mysql \
+    docker run -d --rm --name micronaut-book-api-jvm \
+      -p 9088:8080 -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network book-api_default \
       docker.mycompany.com/micronaut-book-api-jvm:1.0.0
@@ -421,7 +449,9 @@ then
 
   if [ "$1" = "micronaut-book-api-native" ] ||
      [ "$1" = "micronaut-book-api" ] ||
+     [ "$1" = "micronaut-native" ] ||
      [ "$1" = "micronaut" ] ||
+     [ "$1" = "book-api-native" ] ||
      [ "$1" = "book-api" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
@@ -432,10 +462,11 @@ then
     echo "MICRONAUT-BOOK-API-NATIVE"
     echo "-------------------------"
 
-    docker run -d --rm --name micronaut-book-api-native -p 9089:8080 -e MYSQL_HOST=mysql \
-    -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    --network book-api_default \
-    docker.mycompany.com/micronaut-book-api-native:1.0.0
+    docker run -d --rm --name micronaut-book-api-native \
+      -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
+      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      --network book-api_default \
+      docker.mycompany.com/micronaut-book-api-native:1.0.0
 
     wait_for_container_log "micronaut-book-api-native" "Startup completed in"
     micronaut_book_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -459,7 +490,9 @@ then
 
   if [ "$1" = "springboot-book-api-jvm" ] ||
      [ "$1" = "springboot-book-api" ] ||
+     [ "$1" = "springboot-jvm" ] ||
      [ "$1" = "springboot" ] ||
+     [ "$1" = "book-api-jvm" ] ||
      [ "$1" = "book-api" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
@@ -470,7 +503,8 @@ then
     echo "SPRINGBOOT-BOOK-API-JVM"
     echo "-----------------------"
 
-    docker run -d --rm --name springboot-book-api-jvm -p 9090:8080 -e MYSQL_HOST=mysql \
+    docker run -d --rm --name springboot-book-api-jvm \
+      -p 9090:8080 -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network book-api_default \
       docker.mycompany.com/springboot-book-api-jvm:1.0.0
@@ -498,7 +532,9 @@ then
 
   if [ "$1" = "springboot-book-api-native" ] ||
      [ "$1" = "springboot-book-api" ] ||
+     [ "$1" = "springboot-native" ] ||
      [ "$1" = "springboot" ] ||
+     [ "$1" = "book-api-native" ] ||
      [ "$1" = "book-api" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
@@ -509,7 +545,8 @@ then
     echo "SPRINGBOOT-BOOK-API-NATIVE"
     echo "--------------------------"
 
-    docker run -d --rm --name springboot-book-api-native -p 9091:8080 -e MYSQL_HOST=mysql \
+    docker run -d --rm --name springboot-book-api-native \
+      -p 9091:8080 -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network book-api_default \
       docker.mycompany.com/springboot-book-api-native:1.0.0
@@ -550,7 +587,10 @@ if [ "$1" = "quarkus-producer-consumer-jvm" ] || [ "$1" = "quarkus-producer-cons
    [ "$1" = "micronaut-producer-consumer-jvm" ] || [ "$1" = "micronaut-producer-consumer-native" ] ||
    [ "$1" = "springboot-producer-consumer-jvm" ] || [ "$1" = "springboot-producer-consumer-native" ] ||
    [ "$1" = "quarkus-producer-consumer" ] || [ "$1" = "micronaut-producer-consumer" ] || [ "$1" = "springboot-producer-consumer" ] ||
+   [ "$1" = "quarkus-jvm" ] || [ "$1" = "micronaut-jvm" ] || [ "$1" = "springboot-jvm" ] ||
+   [ "$1" = "quarkus-native" ] || [ "$1" = "micronaut-native" ] || [ "$1" = "springboot-native" ] ||
    [ "$1" = "quarkus" ] || [ "$1" = "micronaut" ] || [ "$1" = "springboot" ] ||
+   [ "$1" = "producer-consumer-jvm" ] || [ "$1" = "producer-consumer-native" ] ||
    [ "$1" = "producer-consumer" ] ||
    [ "$1" = "jvm" ] || [ "$1" = "native" ] ||
    [ "$1" = "all" ];
@@ -568,7 +608,9 @@ then
 
   if [ "$1" = "quarkus-producer-consumer-jvm" ] ||
      [ "$1" = "quarkus-producer-consumer" ] ||
+     [ "$1" = "quarkus-jvm" ] ||
      [ "$1" = "quarkus" ] ||
+     [ "$1" = "producer-consumer-jvm" ] ||
      [ "$1" = "producer-consumer" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
@@ -579,7 +621,8 @@ then
     echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-JVM"
     echo "--------------------------------------------"
 
-    docker run -d --rm --name quarkus-producer-api-jvm -p 9100:8080 \
+    docker run -d --rm --name quarkus-producer-api-jvm \
+      -p 9100:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       docker.mycompany.com/quarkus-producer-api-jvm:1.0.0
@@ -605,7 +648,8 @@ then
     echo "QUARKUS-PRODUCER-CONSUMER / CONSUMER-API-JVM"
     echo "--------------------------------------------"
 
-    docker run -d --rm --name quarkus-consumer-api-jvm -p 9106:8080 \
+    docker run -d --rm --name quarkus-consumer-api-jvm \
+      -p 9106:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0
@@ -633,7 +677,9 @@ then
 
   if [ "$1" = "quarkus-producer-consumer-native" ] ||
      [ "$1" = "quarkus-producer-consumer" ] ||
+     [ "$1" = "quarkus-native" ] ||
      [ "$1" = "quarkus" ] ||
+     [ "$1" = "producer-consumer-native" ] ||
      [ "$1" = "producer-consumer" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
@@ -644,7 +690,8 @@ then
     echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
     echo "-----------------------------------------------"
 
-    docker run -d --rm --name quarkus-producer-api-native -p 9101:8080 \
+    docker run -d --rm --name quarkus-producer-api-native \
+      -p 9101:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       docker.mycompany.com/quarkus-producer-api-native:1.0.0
@@ -670,7 +717,8 @@ then
     echo "QUARKUS-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
     echo "-----------------------------------------------"
 
-    docker run -d --rm --name quarkus-consumer-api-native -p 9107:8080 \
+    docker run -d --rm --name quarkus-consumer-api-native \
+      -p 9107:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       docker.mycompany.com/quarkus-consumer-api-native:1.0.0
@@ -681,7 +729,7 @@ then
 
     quarkus_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-native")
 
-    wait_for_container_log "quarkus-consumer-api-native" "OFFSET: 27999"
+    wait_for_container_log "quarkus-consumer-api-native" "OFFSET: 13999"
     quarkus_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
     quarkus_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-native")
@@ -698,7 +746,9 @@ then
 
   if [ "$1" = "micronaut-producer-consumer-jvm" ] ||
      [ "$1" = "micronaut-producer-consumer" ] ||
+     [ "$1" = "micronaut-jvm" ] ||
      [ "$1" = "micronaut" ] ||
+     [ "$1" = "producer-consumer-jvm" ] ||
      [ "$1" = "producer-consumer" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
@@ -709,7 +759,8 @@ then
     echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
     echo "----------------------------------------------"
 
-    docker run -d --rm --name micronaut-producer-api-jvm -p 9102:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    docker run -d --rm --name micronaut-producer-api-jvm \
+      -p 9102:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       docker.mycompany.com/micronaut-producer-api-jvm:1.0.0
@@ -734,7 +785,8 @@ then
     echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
     echo "----------------------------------------------"
 
-    docker run -d --rm --name micronaut-consumer-api-jvm -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    docker run -d --rm --name micronaut-consumer-api-jvm \
+      -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0
@@ -761,7 +813,9 @@ then
 
   if [ "$1" = "micronaut-producer-consumer-native" ] ||
      [ "$1" = "micronaut-producer-consumer" ] ||
+     [ "$1" = "micronaut-native" ] ||
      [ "$1" = "micronaut" ] ||
+     [ "$1" = "producer-consumer-native" ] ||
      [ "$1" = "producer-consumer" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
@@ -772,7 +826,8 @@ then
     echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
     echo "-------------------------------------------------"
 
-    docker run -d --rm --name micronaut-producer-api-native -p 9103:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    docker run -d --rm --name micronaut-producer-api-native \
+      -p 9103:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       docker.mycompany.com/micronaut-producer-api-native:1.0.0
@@ -797,7 +852,8 @@ then
     echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
     echo "-------------------------------------------------"
 
-    docker run -d --rm --name micronaut-consumer-api-native -p 9109:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    docker run -d --rm --name micronaut-consumer-api-native \
+      -p 9109:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       docker.mycompany.com/micronaut-consumer-api-native:1.0.0
@@ -807,7 +863,7 @@ then
 
     micronaut_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-native")
 
-    wait_for_container_log "micronaut-consumer-api-native" "OFFSET: 27999"
+    wait_for_container_log "micronaut-consumer-api-native" "OFFSET: 13999"
     micronaut_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
     micronaut_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-native")
@@ -824,7 +880,9 @@ then
 
   if [ "$1" = "springboot-producer-consumer-jvm" ] ||
      [ "$1" = "springboot-producer-consumer" ] ||
+     [ "$1" = "springboot-jvm" ] ||
      [ "$1" = "springboot" ] ||
+     [ "$1" = "producer-consumer-jvm" ] ||
      [ "$1" = "producer-consumer" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
@@ -835,7 +893,8 @@ then
     echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
     echo "-----------------------------------------------"
 
-    docker run -d --rm --name springboot-producer-api-jvm -p 9104:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    docker run -d --rm --name springboot-producer-api-jvm \
+      -p 9104:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       docker.mycompany.com/springboot-producer-api-jvm:1.0.0
@@ -861,35 +920,38 @@ then
     echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
     echo "-----------------------------------------------"
 
-    docker run -d --rm --name springboot-consumer-api-jvm -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
+    # docker run -d --rm --name springboot-consumer-api-jvm \
+    #   -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    #   --network producer-consumer_default \
+    #   docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
 
-    wait_for_container_log "springboot-consumer-api-jvm" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    # wait_for_container_log "springboot-consumer-api-jvm" "Started"
+    # startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    # springboot_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
+    # springboot_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
 
-    wait_for_container_log "springboot-consumer-api-jvm" "OFFSET: 13999"
-    springboot_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
+    # wait_for_container_log "springboot-consumer-api-jvm" "OFFSET: 13999"
+    # springboot_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
-    springboot_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
+    # springboot_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
 
     echo "== Stopping producer-consuner docker containers"
 
     run_command "docker stop springboot-producer-api-jvm"
     springboot_producer_api_jvm[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop springboot-consumer-api-jvm"
-    springboot_consumer_api_jvm[shutdown_time]=$run_command_exec_time
+    # run_command "docker stop springboot-consumer-api-jvm"
+    # springboot_consumer_api_jvm[shutdown_time]=$run_command_exec_time
 
   fi
 
   if [ "$1" = "springboot-producer-consumer-native" ] ||
      [ "$1" = "springboot-producer-consumer" ] ||
+     [ "$1" = "springboot-native" ] ||
      [ "$1" = "springboot" ] ||
+     [ "$1" = "producer-consumer-native" ] ||
      [ "$1" = "producer-consumer" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
@@ -900,33 +962,35 @@ then
     echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
     echo "--------------------------------------------------"
 
-    # docker run -d --rm --name springboot-producer-api-native -p 9105:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    #   --network producer-consumer_default \
-    #   docker.mycompany.com/springboot-producer-api-native:1.0.0
+    docker run -d --rm --name springboot-producer-api-native \
+      -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      --network producer-consumer_default \
+      docker.mycompany.com/springboot-producer-api-native:1.0.0
 
-    # wait_for_container_log "springboot-producer-api-native" "Started"
-    # startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    # springboot_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    wait_for_container_log "springboot-producer-api-native" "Started"
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    springboot_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    # springboot_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+    springboot_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
 
-    # run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-    # springboot_producer_api_native[ab_testing_time]=$run_command_exec_time
+    run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
+    springboot_producer_api_native[ab_testing_time]=$run_command_exec_time
 
-    # warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9105/api/news"
+    warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9105/api/news"
 
-    # run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-    # springboot_producer_api_native[ab_testing_time_2]=$run_command_exec_time
+    run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
+    springboot_producer_api_native[ab_testing_time_2]=$run_command_exec_time
 
-    # springboot_producer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+    springboot_producer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
 
     echo
     echo "--------------------------------------------------"
     echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
     echo "--------------------------------------------------"
 
-    # docker run -d --rm --name springboot-consumer-api-native -p 9111:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    # docker run -d --rm --name springboot-consumer-api-native \
+    #   -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
     #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
     #   --network producer-consumer_default \
     #   docker.mycompany.com/springboot-consumer-api-native:1.0.0
@@ -937,15 +1001,15 @@ then
 
     # springboot_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
 
-    # wait_for_container_log "springboot-consumer-api-native" "OFFSET: 27999"
+    # wait_for_container_log "springboot-consumer-api-native" "OFFSET: 13999"
     # springboot_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
     # springboot_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
 
-    # echo "== Stopping producer-consuner docker containers"
+    echo "== Stopping producer-consuner docker containers"
 
-    # run_command "docker stop springboot-producer-api-native"
-    # springboot_producer_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop springboot-producer-api-native"
+    springboot_producer_api_native[shutdown_time]=$run_command_exec_time
 
     # run_command "docker stop springboot-consumer-api-native"
     # springboot_consumer_api_native[shutdown_time]=$run_command_exec_time
@@ -967,7 +1031,10 @@ if [ "$1" = "quarkus-elasticsearch-jvm" ] || [ "$1" = "quarkus-elasticsearch-nat
    [ "$1" = "micronaut-elasticsearch-jvm" ] || [ "$1" = "micronaut-elasticsearch-native" ] ||
    [ "$1" = "springboot-elasticsearch-jvm" ] || [ "$1" = "springboot-elasticsearch-native" ] ||
    [ "$1" = "quarkus-elasticsearch" ] || [ "$1" = "micronaut-elasticsearch" ] || [ "$1" = "springboot-elasticsearch" ] ||
+   [ "$1" = "quarkus-jvm" ] || [ "$1" = "micronaut-jvm" ] || [ "$1" = "springboot-jvm" ] ||
+   [ "$1" = "quarkus-native" ] || [ "$1" = "micronaut-native" ] || [ "$1" = "springboot-native" ] ||
    [ "$1" = "quarkus" ] || [ "$1" = "micronaut" ] || [ "$1" = "springboot" ] ||
+   [ "$1" = "elasticsearch-jvm" ] || [ "$1" = "elasticsearch-native" ] ||
    [ "$1" = "elasticsearch" ] ||
    [ "$1" = "jvm" ] || [ "$1" = "native" ] ||
    [ "$1" = "all" ];
@@ -988,7 +1055,9 @@ then
 
   if [ "$1" = "quarkus-elasticsearch-jvm" ] ||
      [ "$1" = "quarkus-elasticsearch" ] ||
+     [ "$1" = "quarkus-jvm" ] ||
      [ "$1" = "quarkus" ] ||
+     [ "$1" = "elasticsearch-jvm" ] ||
      [ "$1" = "elasticsearch" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
@@ -999,7 +1068,8 @@ then
     echo "QUARKUS-ELASTICSEARCH-JVM"
     echo "-------------------------"
 
-    docker run -d --rm --name quarkus-elasticsearch-jvm -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+    docker run -d --rm --name quarkus-elasticsearch-jvm \
+      -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0
@@ -1027,7 +1097,9 @@ then
 
   if [ "$1" = "quarkus-elasticsearch-native" ] ||
      [ "$1" = "quarkus-elasticsearch" ] ||
+     [ "$1" = "quarkus-native" ] ||
      [ "$1" = "quarkus" ] ||
+     [ "$1" = "elasticsearch-native" ] ||
      [ "$1" = "elasticsearch" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
@@ -1038,7 +1110,8 @@ then
     echo "QUARKUS-ELASTICSEARCH-NATIVE"
     echo "----------------------------"
 
-    docker run -d --rm --name quarkus-elasticsearch-native -p 9113:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+    docker run -d --rm --name quarkus-elasticsearch-native \
+      -p 9113:8080 -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       docker.mycompany.com/quarkus-elasticsearch-native:1.0.0
@@ -1066,7 +1139,9 @@ then
 
   if [ "$1" = "micronaut-elasticsearch-jvm" ] ||
      [ "$1" = "micronaut-elasticsearch" ] ||
+     [ "$1" = "micronaut-jvm" ] ||
      [ "$1" = "micronaut" ] ||
+     [ "$1" = "elasticsearch-jvm" ] ||
      [ "$1" = "elasticsearch" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
@@ -1077,7 +1152,8 @@ then
     echo "MICRONAUT-ELASTICSEARCH-JVM"
     echo "---------------------------"
 
-    docker run -d --rm --name micronaut-elasticsearch-jvm -p 9114:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+    docker run -d --rm --name micronaut-elasticsearch-jvm \
+      -p 9114:8080 -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0
@@ -1104,7 +1180,9 @@ then
 
   if [ "$1" = "micronaut-elasticsearch-native" ] ||
      [ "$1" = "micronaut-elasticsearch" ] ||
+     [ "$1" = "micronaut-native" ] ||
      [ "$1" = "micronaut" ] ||
+     [ "$1" = "elasticsearch-native" ] ||
      [ "$1" = "elasticsearch" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
@@ -1115,7 +1193,8 @@ then
     echo "MICRONAUT-ELASTICSEARCH-NATIVE"
     echo "------------------------------"
 
-    # docker run -d --rm --name micronaut-elasticsearch-native -p 9115:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+    # docker run -d --rm --name micronaut-elasticsearch-native \
+    #   -p 9115:8080 -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=elasticsearch \
     #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
     #   --network elasticsearch_default \
     #   docker.mycompany.com/micronaut-elasticsearch-native:1.0.0
@@ -1142,7 +1221,9 @@ then
 
   if [ "$1" = "springboot-elasticsearch-jvm" ] ||
      [ "$1" = "springboot-elasticsearch" ] ||
+     [ "$1" = "springboot-jvm" ] ||
      [ "$1" = "springboot" ] ||
+     [ "$1" = "elasticsearch-jvm" ] ||
      [ "$1" = "elasticsearch" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
@@ -1153,7 +1234,8 @@ then
     echo "SPRINGBOOT-ELASTICSEARCH-JVM"
     echo "----------------------------"
 
-    docker run -d --rm --name springboot-elasticsearch-jvm -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+    docker run -d --rm --name springboot-elasticsearch-jvm \
+      -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0
@@ -1181,7 +1263,9 @@ then
 
   if [ "$1" = "springboot-elasticsearch-native" ] ||
      [ "$1" = "springboot-elasticsearch" ] ||
+     [ "$1" = "springboot-native" ] ||
      [ "$1" = "springboot" ] ||
+     [ "$1" = "elasticsearch-native" ] ||
      [ "$1" = "elasticsearch" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
@@ -1192,7 +1276,8 @@ then
     echo "SPRINGBOOT-ELASTICSEARCH-NATIVE"
     echo "-------------------------------"
 
-    docker run -d --rm --name springboot-elasticsearch-native -p 9117:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+    docker run -d --rm --name springboot-elasticsearch-native \
+      -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       docker.mycompany.com/springboot-elasticsearch-native:1.0.0

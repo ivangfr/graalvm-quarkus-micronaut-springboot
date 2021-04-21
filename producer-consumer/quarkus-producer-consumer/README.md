@@ -65,19 +65,20 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean and package the application
       ```
       ./mvnw clean package --projects producer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh && cd ..
       ```
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name quarkus-producer-api-jvm -p 9100:8080 \
+      docker run --rm --name quarkus-producer-api-jvm \
+        -p 9100:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network producer-consumer_default \
         docker.mycompany.com/quarkus-producer-api-jvm:1.0.0
       ```
@@ -86,19 +87,20 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean and package the application
       ```
       ./mvnw clean package --projects consumer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd consumer-api && ./docker-build.sh && cd ..
       ```
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name quarkus-consumer-api-jvm -p 9106:8080 \
+      docker run --rm --name quarkus-consumer-api-jvm \
+        -p 9106:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network producer-consumer_default \
         docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0
       ```
@@ -125,19 +127,20 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean and package the application
       ```
       ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects producer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh native && cd ..
       ```
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name quarkus-producer-api-native -p 9101:8080 \
+      docker run --rm --name quarkus-producer-api-native \
+        -p 9101:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network producer-consumer_default \
         docker.mycompany.com/quarkus-producer-api-native:1.0.0
       ```
@@ -146,19 +149,20 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - Open another terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer/quarkus-producer-consumer` folder
 
-    - Run the command below
+    - Clean and package the application
       ```
       ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects consumer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd consumer-api && ./docker-build.sh native && cd ..
       ```
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name quarkus-consumer-api-native -p 9107:8080 \
+      docker run --rm --name quarkus-consumer-api-native \
+        -p 9107:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network producer-consumer_default \
         docker.mycompany.com/quarkus-consumer-api-native:1.0.0
       ```

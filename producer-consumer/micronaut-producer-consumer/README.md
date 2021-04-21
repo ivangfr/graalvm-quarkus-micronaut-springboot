@@ -66,12 +66,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean the application
       ```
-      ./mvnw clean package --projects producer-api
+      ./mvnw clean --projects producer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh && cd ..
       ```
@@ -88,20 +88,21 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean the application
       ```
-      ./mvnw clean package --projects consumer-api
+      ./mvnw clean --projects consumer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd consumer-api && ./docker-build.sh && cd ..
       ```
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name micronaut-consumer-api-jvm -p 9108:8080 \
-        -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network producer-consumer_default \
+      docker run --rm --name micronaut-consumer-api-jvm \
+        -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+        --network producer-consumer_default \
         docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0
       ```
 
@@ -127,20 +128,21 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean the application
       ```
-      ./mvnw clean package --projects producer-api
+      ./mvnw clean --projects producer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd producer-api && ./docker-build.sh native && cd ..
       ```
 
     - Run the following command to start the Docker container
       ```
-      docker run --rm --name micronaut-producer-api-native -p 9103:8080 \
-        -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network producer-consumer_default \
+      docker run --rm --name micronaut-producer-api-native \
+        -p 9103:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+        --network producer-consumer_default \
         docker.mycompany.com/micronaut-producer-api-native:1.0.0
       ```
 
@@ -148,12 +150,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Package the application `jar` file
+    - Clean the application
       ```
-      ./mvnw clean package --projects consumer-api
+      ./mvnw clean --projects consumer-api
       ```
 
-    - Run the script below to build the Docker image
+    - Run the command below to build the Docker image
       ```
       cd consumer-api && ./docker-build.sh native && cd ..
       ```
@@ -161,7 +163,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
     - Run the following command to start the Docker container
       ```
       docker run --rm --name micronaut-consumer-api-native \
-        -p 9109:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+        -p 9109:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network producer-consumer_default \
         docker.mycompany.com/micronaut-consumer-api-native:1.0.0
       ```

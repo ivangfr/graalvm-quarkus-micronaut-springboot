@@ -6,7 +6,7 @@ if [ "$1" = "native" ];
 then
   ../mvnw spring-boot:build-image
 else
-  ../mvnw compile jib:dockerBuild
+  ../mvnw package jib:dockerBuild
 fi
 
 duration=$SECONDS

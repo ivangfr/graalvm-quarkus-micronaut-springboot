@@ -18,7 +18,7 @@
 
 - Run the command below to start the application
   ```
-  ./mvnw clean spring-boot:run
+  ./mvnw clean package spring-boot:run
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -32,9 +32,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/simple-api/springboot-simple-api` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
@@ -59,9 +59,9 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/simple-api/springboot-simple-api` folder
 
-- Package the application `jar` file
+- Clean the application
   ```
-  ./mvnw clean package
+  ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
