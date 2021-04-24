@@ -11,12 +11,12 @@ declare -A micronaut_simple_api_native
 declare -A springboot_simple_api_jvm
 declare -A springboot_simple_api_native
 
-declare -A quarkus_book_api_jvm
-declare -A quarkus_book_api_native
-declare -A micronaut_book_api_jvm
-declare -A micronaut_book_api_native
-declare -A springboot_book_api_jvm
-declare -A springboot_book_api_native
+declare -A quarkus_jpa_mysql_jvm
+declare -A quarkus_jpa_mysql_native
+declare -A micronaut_jpa_mysql_jvm
+declare -A micronaut_jpa_mysql_native
+declare -A springboot_jpa_mysql_jvm
+declare -A springboot_jpa_mysql_native
 
 declare -A quarkus_producer_api_jvm
 declare -A quarkus_consumer_api_jvm
@@ -44,14 +44,14 @@ JAVA_OPTS_XMX='-Xmx128m'
 CONTAINER_MAX_MEM=256M
 
 AB_PARAMS_SIMPLE_API='-c 10 -n 3000'
-AB_PARAMS_BOOK_API='-c 10 -n 2000'
+AB_PARAMS_JPA_MYSQL='-c 10 -n 2000'
 AB_PARAMS_PRODUCER_CONSUMER='-c 10 -n 4000'
 AB_PARAMS_ELASTICSEARCH='-c 10 -n 2000'
 
 WARM_UP_TIMES=3
 
 AB_PARAMS_WARM_UP_SIMPLE_API='-c 5 -n 1500'
-AB_PARAMS_WARM_UP_BOOK_API='-c 5 -n 1000'
+AB_PARAMS_WARM_UP_JPA_MYSQL='-c 5 -n 1000'
 AB_PARAMS_WARM_UP_PRODUCER_CONSUMER='-c 5 -n 2000'
 AB_PARAMS_WARM_UP_ELASTICSEARCH='-c 5 -n 1000'
 
@@ -299,20 +299,20 @@ echo "----------------------------"
 
 fi
 
-if [ "$1" = "quarkus-book-api-jvm" ] || [ "$1" = "quarkus-book-api-native" ] ||
-   [ "$1" = "micronaut-book-api-jvm" ] || [ "$1" = "micronaut-book-api-native" ] ||
-   [ "$1" = "springboot-book-api-jvm" ] || [ "$1" = "springboot-book-api-native" ] ||
-   [ "$1" = "quarkus-book-api" ] || [ "$1" = "micronaut-book-api" ] || [ "$1" = "springboot-book-api" ] ||
+if [ "$1" = "quarkus-jpa-mysql-jvm" ] || [ "$1" = "quarkus-jpa-mysql-native" ] ||
+   [ "$1" = "micronaut-jpa-mysql-jvm" ] || [ "$1" = "micronaut-jpa-mysql-native" ] ||
+   [ "$1" = "springboot-jpa-mysql-jvm" ] || [ "$1" = "springboot-jpa-mysql-native" ] ||
+   [ "$1" = "quarkus-jpa-mysql" ] || [ "$1" = "micronaut-jpa-mysql" ] || [ "$1" = "springboot-jpa-mysql" ] ||
    [ "$1" = "quarkus-jvm" ] || [ "$1" = "micronaut-jvm" ] || [ "$1" = "springboot-jvm" ] ||
    [ "$1" = "quarkus-native" ] || [ "$1" = "micronaut-native" ] || [ "$1" = "springboot-native" ] ||
    [ "$1" = "quarkus" ] || [ "$1" = "micronaut" ] || [ "$1" = "springboot" ] ||
-   [ "$1" = "book-api-jvm" ] || [ "$1" = "book-api-native" ] ||
-   [ "$1" = "book-api" ] ||
+   [ "$1" = "jpa-mysql-jvm" ] || [ "$1" = "jpa-mysql-native" ] ||
+   [ "$1" = "jpa-mysql" ] ||
    [ "$1" = "jvm" ] || [ "$1" = "native" ] ||
    [ "$1" = "all" ];
 then
 
-  cd book-api
+  cd jpa-mysql
 
   echo
   echo "=============="
@@ -322,253 +322,253 @@ then
   docker-compose up -d
   wait_for_container_log "mysql" "port: 3306"
 
-  if [ "$1" = "quarkus-book-api-jvm" ] ||
-     [ "$1" = "quarkus-book-api" ] ||
+  if [ "$1" = "quarkus-jpa-mysql-jvm" ] ||
+     [ "$1" = "quarkus-jpa-mysql" ] ||
      [ "$1" = "quarkus-jvm" ] ||
      [ "$1" = "quarkus" ] ||
-     [ "$1" = "book-api-jvm" ] ||
-     [ "$1" = "book-api" ] ||
+     [ "$1" = "jpa-mysql-jvm" ] ||
+     [ "$1" = "jpa-mysql" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "--------------------"
-    echo "QUARKUS-BOOK-API-JVM"
-    echo "--------------------"
+    echo "---------------------"
+    echo "QUARKUS-JPA-MYSQL-JVM"
+    echo "---------------------"
 
-    docker run -d --rm --name quarkus-book-api-jvm \
+    docker run -d --rm --name quarkus-jpa-mysql-jvm \
       -p 9086:8080 -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network book-api_default \
-      docker.mycompany.com/quarkus-book-api-jvm:1.0.0
+      --network jpa-mysql_default \
+      docker.mycompany.com/quarkus-jpa-mysql-jvm:1.0.0
 
-    wait_for_container_log "quarkus-book-api-jvm" "started in"
+    wait_for_container_log "quarkus-jpa-mysql-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
-    quarkus_book_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    quarkus_jpa_mysql_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    quarkus_book_api_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-book-api-jvm")
+    quarkus_jpa_mysql_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-jpa-mysql-jvm")
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9086/api/books"
-    quarkus_book_api_jvm[ab_testing_time]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9086/api/books"
+    quarkus_jpa_mysql_jvm[ab_testing_time]=$run_command_exec_time
 
-    warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9086/api/books"
+    warm_up $WARM_UP_TIMES "ab -p test-book.json -T 'application/json' $AB_PARAMS_WARM_UP_JPA_MYSQL http://localhost:9086/api/books"
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9086/api/books"
-    quarkus_book_api_jvm[ab_testing_time_2]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9086/api/books"
+    quarkus_jpa_mysql_jvm[ab_testing_time_2]=$run_command_exec_time
 
-    quarkus_book_api_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-book-api-jvm")
+    quarkus_jpa_mysql_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-jpa-mysql-jvm")
 
-    run_command "docker stop quarkus-book-api-jvm"
-    quarkus_book_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop quarkus-jpa-mysql-jvm"
+    quarkus_jpa_mysql_jvm[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "quarkus-book-api-native" ] ||
-     [ "$1" = "quarkus-book-api" ] ||
+  if [ "$1" = "quarkus-jpa-mysql-native" ] ||
+     [ "$1" = "quarkus-jpa-mysql" ] ||
      [ "$1" = "quarkus-native" ] ||
      [ "$1" = "quarkus" ] ||
-     [ "$1" = "book-api-native" ] ||
-     [ "$1" = "book-api" ] ||
+     [ "$1" = "jpa-mysql-native" ] ||
+     [ "$1" = "jpa-mysql" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "-----------------------"
-    echo "QUARKUS-BOOK-API-NATIVE"
-    echo "-----------------------"
+    echo "------------------------"
+    echo "QUARKUS-JPA-MYSQL-NATIVE"
+    echo "------------------------"
 
-    docker run -d --rm --name quarkus-book-api-native \
+    docker run -d --rm --name quarkus-jpa-mysql-native \
       -p 9087:8080 -e QUARKUS_PROFILE=native -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network book-api_default \
-      docker.mycompany.com/quarkus-book-api-native:1.0.0
+      --network jpa-mysql_default \
+      docker.mycompany.com/quarkus-jpa-mysql-native:1.0.0
 
-    wait_for_container_log "quarkus-book-api-native" "started in"
+    wait_for_container_log "quarkus-jpa-mysql-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
-    quarkus_book_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    quarkus_jpa_mysql_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    quarkus_book_api_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-book-api-native")
+    quarkus_jpa_mysql_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-jpa-mysql-native")
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9087/api/books"
-    quarkus_book_api_native[ab_testing_time]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9087/api/books"
+    quarkus_jpa_mysql_native[ab_testing_time]=$run_command_exec_time
 
-    warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9087/api/books"
+    warm_up $WARM_UP_TIMES "ab -p test-book.json -T 'application/json' $AB_PARAMS_WARM_UP_JPA_MYSQL http://localhost:9087/api/books"
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9087/api/books"
-    quarkus_book_api_native[ab_testing_time_2]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9087/api/books"
+    quarkus_jpa_mysql_native[ab_testing_time_2]=$run_command_exec_time
 
-    quarkus_book_api_native[final_memory_usage]=$(get_container_memory_usage "quarkus-book-api-native")
+    quarkus_jpa_mysql_native[final_memory_usage]=$(get_container_memory_usage "quarkus-jpa-mysql-native")
 
-    run_command "docker stop quarkus-book-api-native"
-    quarkus_book_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop quarkus-jpa-mysql-native"
+    quarkus_jpa_mysql_native[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "micronaut-book-api-jvm" ] ||
-     [ "$1" = "micronaut-book-api" ] ||
+  if [ "$1" = "micronaut-jpa-mysql-jvm" ] ||
+     [ "$1" = "micronaut-jpa-mysql" ] ||
      [ "$1" = "micronaut-jvm" ] ||
      [ "$1" = "micronaut" ] ||
-     [ "$1" = "book-api-jvm" ] ||
-     [ "$1" = "book-api" ] ||
+     [ "$1" = "jpa-mysql-jvm" ] ||
+     [ "$1" = "jpa-mysql" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "----------------------"
-    echo "MICRONAUT-BOOK-API-JVM"
-    echo "----------------------"
+    echo "-----------------------"
+    echo "MICRONAUT-JPA-MYSQL-JVM"
+    echo "-----------------------"
 
-    docker run -d --rm --name micronaut-book-api-jvm \
+    docker run -d --rm --name micronaut-jpa-mysql-jvm \
       -p 9088:8080 -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network book-api_default \
-      docker.mycompany.com/micronaut-book-api-jvm:1.0.0
+      --network jpa-mysql_default \
+      docker.mycompany.com/micronaut-jpa-mysql-jvm:1.0.0
 
-    wait_for_container_log "micronaut-book-api-jvm" "Startup completed in"
-    micronaut_book_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+    wait_for_container_log "micronaut-jpa-mysql-jvm" "Startup completed in"
+    micronaut_jpa_mysql_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
 
-    micronaut_book_api_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-book-api-jvm")
+    micronaut_jpa_mysql_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-jvm")
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9088/api/books"
-    micronaut_book_api_jvm[ab_testing_time]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9088/api/books"
+    micronaut_jpa_mysql_jvm[ab_testing_time]=$run_command_exec_time
 
-    warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9088/api/books"
+    warm_up $WARM_UP_TIMES "ab -p test-book.json -T 'application/json' $AB_PARAMS_WARM_UP_JPA_MYSQL http://localhost:9088/api/books"
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9088/api/books"
-    micronaut_book_api_jvm[ab_testing_time_2]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9088/api/books"
+    micronaut_jpa_mysql_jvm[ab_testing_time_2]=$run_command_exec_time
 
-    micronaut_book_api_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-book-api-jvm")
+    micronaut_jpa_mysql_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-jvm")
 
-    run_command "docker stop micronaut-book-api-jvm"
-    micronaut_book_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop micronaut-jpa-mysql-jvm"
+    micronaut_jpa_mysql_jvm[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "micronaut-book-api-native" ] ||
-     [ "$1" = "micronaut-book-api" ] ||
+  if [ "$1" = "micronaut-jpa-mysql-native" ] ||
+     [ "$1" = "micronaut-jpa-mysql" ] ||
      [ "$1" = "micronaut-native" ] ||
      [ "$1" = "micronaut" ] ||
-     [ "$1" = "book-api-native" ] ||
-     [ "$1" = "book-api" ] ||
+     [ "$1" = "jpa-mysql-native" ] ||
+     [ "$1" = "jpa-mysql" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "-------------------------"
-    echo "MICRONAUT-BOOK-API-NATIVE"
-    echo "-------------------------"
+    echo "--------------------------"
+    echo "MICRONAUT-JPA-MYSQL-NATIVE"
+    echo "--------------------------"
 
-    docker run -d --rm --name micronaut-book-api-native \
+    docker run -d --rm --name micronaut-jpa-mysql-native \
       -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network book-api_default \
-      docker.mycompany.com/micronaut-book-api-native:1.0.0
+      --network jpa-mysql_default \
+      docker.mycompany.com/micronaut-jpa-mysql-native:1.0.0
 
-    wait_for_container_log "micronaut-book-api-native" "Startup completed in"
-    micronaut_book_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+    wait_for_container_log "micronaut-jpa-mysql-native" "Startup completed in"
+    micronaut_jpa_mysql_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
 
-    micronaut_book_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-book-api-native")
+    micronaut_jpa_mysql_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-native")
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9089/api/books"
-    micronaut_book_api_native[ab_testing_time]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9089/api/books"
+    micronaut_jpa_mysql_native[ab_testing_time]=$run_command_exec_time
 
-    warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9089/api/books"
+    warm_up $WARM_UP_TIMES "ab -p test-book.json -T 'application/json' $AB_PARAMS_WARM_UP_JPA_MYSQL http://localhost:9089/api/books"
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9089/api/books"
-    micronaut_book_api_native[ab_testing_time_2]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9089/api/books"
+    micronaut_jpa_mysql_native[ab_testing_time_2]=$run_command_exec_time
 
-    micronaut_book_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-book-api-native")
+    micronaut_jpa_mysql_native[final_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-native")
 
-    run_command "docker stop micronaut-book-api-native"
-    micronaut_book_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop micronaut-jpa-mysql-native"
+    micronaut_jpa_mysql_native[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "springboot-book-api-jvm" ] ||
-     [ "$1" = "springboot-book-api" ] ||
+  if [ "$1" = "springboot-jpa-mysql-jvm" ] ||
+     [ "$1" = "springboot-jpa-mysql" ] ||
      [ "$1" = "springboot-jvm" ] ||
      [ "$1" = "springboot" ] ||
-     [ "$1" = "book-api-jvm" ] ||
-     [ "$1" = "book-api" ] ||
+     [ "$1" = "jpa-mysql-jvm" ] ||
+     [ "$1" = "jpa-mysql" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "-----------------------"
-    echo "SPRINGBOOT-BOOK-API-JVM"
-    echo "-----------------------"
+    echo "------------------------"
+    echo "SPRINGBOOT-JPA-MYSQL-JVM"
+    echo "------------------------"
 
-    docker run -d --rm --name springboot-book-api-jvm \
+    docker run -d --rm --name springboot-jpa-mysql-jvm \
       -p 9090:8080 -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network book-api_default \
-      docker.mycompany.com/springboot-book-api-jvm:1.0.0
+      --network jpa-mysql_default \
+      docker.mycompany.com/springboot-jpa-mysql-jvm:1.0.0
 
-    wait_for_container_log "springboot-book-api-jvm" "Started"
+    wait_for_container_log "springboot-jpa-mysql-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_book_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    springboot_jpa_mysql_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_book_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-book-api-jvm")
+    springboot_jpa_mysql_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-jpa-mysql-jvm")
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9090/api/books"
-    springboot_book_api_jvm[ab_testing_time]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9090/api/books"
+    springboot_jpa_mysql_jvm[ab_testing_time]=$run_command_exec_time
 
-    warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9090/api/books"
+    warm_up $WARM_UP_TIMES "ab -p test-book.json -T 'application/json' $AB_PARAMS_WARM_UP_JPA_MYSQL http://localhost:9090/api/books"
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9090/api/books"
-    springboot_book_api_jvm[ab_testing_time_2]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9090/api/books"
+    springboot_jpa_mysql_jvm[ab_testing_time_2]=$run_command_exec_time
 
-    springboot_book_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-book-api-jvm")
+    springboot_jpa_mysql_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-jpa-mysql-jvm")
 
-    run_command "docker stop springboot-book-api-jvm"
-    springboot_book_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop springboot-jpa-mysql-jvm"
+    springboot_jpa_mysql_jvm[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "springboot-book-api-native" ] ||
-     [ "$1" = "springboot-book-api" ] ||
+  if [ "$1" = "springboot-jpa-mysql-native" ] ||
+     [ "$1" = "springboot-jpa-mysql" ] ||
      [ "$1" = "springboot-native" ] ||
      [ "$1" = "springboot" ] ||
-     [ "$1" = "book-api-native" ] ||
-     [ "$1" = "book-api" ] ||
+     [ "$1" = "jpa-mysql-native" ] ||
+     [ "$1" = "jpa-mysql" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "--------------------------"
-    echo "SPRINGBOOT-BOOK-API-NATIVE"
-    echo "--------------------------"
+    echo "---------------------------"
+    echo "SPRINGBOOT-JPA-MYSQL-NATIVE"
+    echo "---------------------------"
 
-    docker run -d --rm --name springboot-book-api-native \
+    docker run -d --rm --name springboot-jpa-mysql-native \
       -p 9091:8080 -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network book-api_default \
-      docker.mycompany.com/springboot-book-api-native:1.0.0
+      --network jpa-mysql_default \
+      docker.mycompany.com/springboot-jpa-mysql-native:1.0.0
 
-    wait_for_container_log "springboot-book-api-native" "Started"
+    wait_for_container_log "springboot-jpa-mysql-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_book_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    springboot_jpa_mysql_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_book_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-book-api-native")
+    springboot_jpa_mysql_native[initial_memory_usage]=$(get_container_memory_usage "springboot-jpa-mysql-native")
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9091/api/books"
-    springboot_book_api_native[ab_testing_time]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9091/api/books"
+    springboot_jpa_mysql_native[ab_testing_time]=$run_command_exec_time
 
-    warm_up $WARM_UP_TIMES "ab -p test-books.json -T 'application/json' $AB_PARAMS_WARM_UP_BOOK_API http://localhost:9091/api/books"
+    warm_up $WARM_UP_TIMES "ab -p test-book.json -T 'application/json' $AB_PARAMS_WARM_UP_JPA_MYSQL http://localhost:9091/api/books"
 
-    run_command "ab -p test-books.json -T 'application/json' $AB_PARAMS_BOOK_API http://localhost:9091/api/books"
-    springboot_book_api_native[ab_testing_time_2]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9091/api/books"
+    springboot_jpa_mysql_native[ab_testing_time_2]=$run_command_exec_time
 
-    springboot_book_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-book-api-native")
+    springboot_jpa_mysql_native[final_memory_usage]=$(get_container_memory_usage "springboot-jpa-mysql-native")
 
-    run_command "docker stop springboot-book-api-native"
-    springboot_book_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop springboot-jpa-mysql-native"
+    springboot_jpa_mysql_native[shutdown_time]=$run_command_exec_time
 
   fi
 
@@ -1324,12 +1324,12 @@ printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-simple-api-
 printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-simple-api-native" ${micronaut_simple_api_native[startup_time]} ${micronaut_simple_api_native[initial_memory_usage]} ${micronaut_simple_api_native[ab_testing_time]} ${micronaut_simple_api_native[ab_testing_time_2]} ${micronaut_simple_api_native[final_memory_usage]} ${micronaut_simple_api_native[shutdown_time]}
 printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-simple-api-native" ${springboot_simple_api_native[startup_time]} ${springboot_simple_api_native[initial_memory_usage]} ${springboot_simple_api_native[ab_testing_time]} ${springboot_simple_api_native[ab_testing_time_2]} ${springboot_simple_api_native[final_memory_usage]} ${springboot_simple_api_native[shutdown_time]}
 printf "%31s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "..............................." "............" "........................" "..............." "................." "........................" "............"
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-book-api-jvm" ${quarkus_book_api_jvm[startup_time]} ${quarkus_book_api_jvm[initial_memory_usage]} ${quarkus_book_api_jvm[ab_testing_time]} ${quarkus_book_api_jvm[ab_testing_time_2]} ${quarkus_book_api_jvm[final_memory_usage]} ${quarkus_book_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-book-api-jvm" ${micronaut_book_api_jvm[startup_time]} ${micronaut_book_api_jvm[initial_memory_usage]} ${micronaut_book_api_jvm[ab_testing_time]} ${micronaut_book_api_jvm[ab_testing_time_2]} ${micronaut_book_api_jvm[final_memory_usage]} ${micronaut_book_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-book-api-jvm" ${springboot_book_api_jvm[startup_time]} ${springboot_book_api_jvm[initial_memory_usage]} ${springboot_book_api_jvm[ab_testing_time]} ${springboot_book_api_jvm[ab_testing_time_2]} ${springboot_book_api_jvm[final_memory_usage]} ${springboot_book_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-book-api-native" ${quarkus_book_api_native[startup_time]} ${quarkus_book_api_native[initial_memory_usage]} ${quarkus_book_api_native[ab_testing_time]} ${quarkus_book_api_native[ab_testing_time_2]} ${quarkus_book_api_native[final_memory_usage]} ${quarkus_book_api_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-book-api-native" ${micronaut_book_api_native[startup_time]} ${micronaut_book_api_native[initial_memory_usage]} ${micronaut_book_api_native[ab_testing_time]} ${micronaut_book_api_native[ab_testing_time_2]} ${micronaut_book_api_native[final_memory_usage]} ${micronaut_book_api_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-book-api-native" ${springboot_book_api_native[startup_time]} ${springboot_book_api_native[initial_memory_usage]} ${springboot_book_api_native[ab_testing_time]} ${springboot_book_api_native[ab_testing_time_2]} ${springboot_book_api_native[final_memory_usage]} ${springboot_book_api_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-jpa-mysql-jvm" ${quarkus_jpa_mysql_jvm[startup_time]} ${quarkus_jpa_mysql_jvm[initial_memory_usage]} ${quarkus_jpa_mysql_jvm[ab_testing_time]} ${quarkus_jpa_mysql_jvm[ab_testing_time_2]} ${quarkus_jpa_mysql_jvm[final_memory_usage]} ${quarkus_jpa_mysql_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-jpa-mysql-jvm" ${micronaut_jpa_mysql_jvm[startup_time]} ${micronaut_jpa_mysql_jvm[initial_memory_usage]} ${micronaut_jpa_mysql_jvm[ab_testing_time]} ${micronaut_jpa_mysql_jvm[ab_testing_time_2]} ${micronaut_jpa_mysql_jvm[final_memory_usage]} ${micronaut_jpa_mysql_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-jpa-mysql-jvm" ${springboot_jpa_mysql_jvm[startup_time]} ${springboot_jpa_mysql_jvm[initial_memory_usage]} ${springboot_jpa_mysql_jvm[ab_testing_time]} ${springboot_jpa_mysql_jvm[ab_testing_time_2]} ${springboot_jpa_mysql_jvm[final_memory_usage]} ${springboot_jpa_mysql_jvm[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-jpa-mysql-native" ${quarkus_jpa_mysql_native[startup_time]} ${quarkus_jpa_mysql_native[initial_memory_usage]} ${quarkus_jpa_mysql_native[ab_testing_time]} ${quarkus_jpa_mysql_native[ab_testing_time_2]} ${quarkus_jpa_mysql_native[final_memory_usage]} ${quarkus_jpa_mysql_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-jpa-mysql-native" ${micronaut_jpa_mysql_native[startup_time]} ${micronaut_jpa_mysql_native[initial_memory_usage]} ${micronaut_jpa_mysql_native[ab_testing_time]} ${micronaut_jpa_mysql_native[ab_testing_time_2]} ${micronaut_jpa_mysql_native[final_memory_usage]} ${micronaut_jpa_mysql_native[shutdown_time]}
+printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-jpa-mysql-native" ${springboot_jpa_mysql_native[startup_time]} ${springboot_jpa_mysql_native[initial_memory_usage]} ${springboot_jpa_mysql_native[ab_testing_time]} ${springboot_jpa_mysql_native[ab_testing_time_2]} ${springboot_jpa_mysql_native[final_memory_usage]} ${springboot_jpa_mysql_native[shutdown_time]}
 printf "%31s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "..............................." "............" "........................" "..............." "................." "........................" "............"
 printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-producer-api-jvm" ${quarkus_producer_api_jvm[startup_time]} ${quarkus_producer_api_jvm[initial_memory_usage]} ${quarkus_producer_api_jvm[ab_testing_time]} ${quarkus_producer_api_jvm[ab_testing_time_2]} ${quarkus_producer_api_jvm[final_memory_usage]} ${quarkus_producer_api_jvm[shutdown_time]}
 printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-producer-api-jvm" ${micronaut_producer_api_jvm[startup_time]} ${micronaut_producer_api_jvm[initial_memory_usage]} ${micronaut_producer_api_jvm[ab_testing_time]} ${micronaut_producer_api_jvm[ab_testing_time_2]} ${micronaut_producer_api_jvm[final_memory_usage]} ${micronaut_producer_api_jvm[shutdown_time]}

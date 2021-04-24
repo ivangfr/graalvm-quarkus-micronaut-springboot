@@ -4,9 +4,9 @@ docker rmi \
   docker.mycompany.com/quarkus-simple-api-native:1.0.0 \
   docker.mycompany.com/micronaut-simple-api-native:1.0.0 \
   docker.mycompany.com/springboot-simple-api-native:1.0.0 \
-  docker.mycompany.com/quarkus-book-api-native:1.0.0 \
-  docker.mycompany.com/micronaut-book-api-native:1.0.0 \
-  docker.mycompany.com/springboot-book-api-native:1.0.0 \
+  docker.mycompany.com/quarkus-jpa-mysql-native:1.0.0 \
+  docker.mycompany.com/micronaut-jpa-mysql-native:1.0.0 \
+  docker.mycompany.com/springboot-jpa-mysql-native:1.0.0 \
   docker.mycompany.com/quarkus-producer-api-native:1.0.0 \
   docker.mycompany.com/micronaut-producer-api-native:1.0.0 \
   docker.mycompany.com/springboot-producer-api-native:1.0.0 \
