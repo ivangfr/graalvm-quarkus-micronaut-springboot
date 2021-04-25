@@ -5,7 +5,7 @@ The goal of this project is to compare some Java frameworks like: [`Quarkus`](ht
 ## Examples
 
 - ### [simple-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/simple-api#graalvm-quarkus-micronaut-springboot)
-- ### [book-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/book-api#graalvm-quarkus-micronaut-springboot)
+- ### [jpa-mysql](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/jpa-mysql#graalvm-quarkus-micronaut-springboot)
 - ### [producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#graalvm-quarkus-micronaut-springboot)
 - ### [elasticsearch](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch#graalvm-quarkus-micronaut-springboot)
 
@@ -53,9 +53,9 @@ The following table shows the results after running the script `collect-jvm-jar-
       micronaut-simple-api-jvm |             5s |            16M |               17s |             359MB |
      springboot-simple-api-jvm |             8s |            20M |               15s |             268MB |
 .............................. + .............. + .............. + ................. + ................. |
-          quarkus-book-api-jvm |             9s |            32M |                2s |             402MB |
-        micronaut-book-api-jvm |             9s |            34M |               13s |             378MB |
-       springboot-book-api-jvm |            10s |            43M |               21s |             293MB |
+         quarkus-jpa-mysql-jvm |             9s |            32M |                2s |             402MB |
+       micronaut-jpa-mysql-jvm |             9s |            34M |               13s |             378MB |
+      springboot-jpa-mysql-jvm |            10s |            43M |               21s |             293MB |
 .............................. + .............. + .............. + ................. + ................. |
       quarkus-producer-api-jvm |             7s |            35M |                3s |             405MB |
     micronaut-producer-api-jvm |             7s |            28M |               13s |             372MB |
@@ -78,9 +78,9 @@ Table below shows the results after running the script `collect-native-jar-docke
     micronaut-simple-api-native |             5s |            15M |              223s |            87.2MB |
    springboot-simple-api-native |             7s |            20M |              625s |              84MB |
 ............................... + .............. + .............. + ................. + ................. |
-        quarkus-book-api-native |           248s |            71M |                4s |             178MB |
-      micronaut-book-api-native |             9s |            34M |              333s |             124MB |
-     springboot-book-api-native |            10s |            43M |              788s |             190MB |
+       quarkus-jpa-mysql-native |           248s |            71M |                4s |             178MB |
+     micronaut-jpa-mysql-native |             9s |            34M |              333s |             124MB |
+    springboot-jpa-mysql-native |            10s |            43M |              788s |             190MB |
 ............................... + .............. + .............. + ................. + ................. |
     quarkus-producer-api-native |           214s |            55M |                3s |             160MB |
   micronaut-producer-api-native |             8s |            28M |              241s |            98.6MB |
@@ -106,12 +106,12 @@ Finally, the following table shows the results after running the script `collect
     micronaut-simple-api-native |         27ms |   8.516MiB/256MiB(3.33%) |              5s |                6s |  94.43MiB/256MiB(36.89%) |            0s |
    springboot-simple-api-native |        129ms |  29.86MiB/256MiB(11.66%) |              5s |                5s |  100.5MiB/256MiB(39.28%) |            2s |
 ............................... + ............ + ........................ + ............... + ................. + ........................ +  ............ |
-           quarkus-book-api-jvm |       2855ms |    101MiB/256MiB(39.45%) |             11s |                6s |  157.9MiB/256MiB(61.69%) |            1s |
-         micronaut-book-api-jvm |       9083ms |  157.7MiB/256MiB(61.61%) |             12s |                7s |  250.5MiB/256MiB(97.84%) |            0s |
-        springboot-book-api-jvm |       5986ms |    166MiB/256MiB(64.85%) |             13s |                8s |  225.5MiB/256MiB(88.10%) |            2s |
-        quarkus-book-api-native |         29ms |   6.977MiB/256MiB(2.73%) |              7s |                6s |  39.47MiB/256MiB(15.42%) |            0s |
-      micronaut-book-api-native |         72ms |   20.56MiB/256MiB(8.03%) |              6s |                7s |    103MiB/256MiB(40.23%) |            1s |
-     springboot-book-api-native |        176ms |  47.23MiB/256MiB(18.45%) |              7s |                7s |  118.7MiB/256MiB(46.37%) |            2s |
+          quarkus-jpa-mysql-jvm |       2855ms |    101MiB/256MiB(39.45%) |             11s |                6s |  157.9MiB/256MiB(61.69%) |            1s |
+        micronaut-jpa-mysql-jvm |       9083ms |  157.7MiB/256MiB(61.61%) |             12s |                7s |  250.5MiB/256MiB(97.84%) |            0s |
+       springboot-jpa-mysql-jvm |       5986ms |    166MiB/256MiB(64.85%) |             13s |                8s |  225.5MiB/256MiB(88.10%) |            2s |
+       quarkus-jpa-mysql-native |         29ms |   6.977MiB/256MiB(2.73%) |              7s |                6s |  39.47MiB/256MiB(15.42%) |            0s |
+     micronaut-jpa-mysql-native |         72ms |   20.56MiB/256MiB(8.03%) |              6s |                7s |    103MiB/256MiB(40.23%) |            1s |
+    springboot-jpa-mysql-native |        176ms |  47.23MiB/256MiB(18.45%) |              7s |                7s |  118.7MiB/256MiB(46.37%) |            2s |
 ............................... + ............ + ........................ + ............... + ................. + ........................ +  ............ |
        quarkus-producer-api-jvm |       2595ms |  89.04MiB/256MiB(34.78%) |             18s |               11s |  158.4MiB/256MiB(61.87%) |            1s |
      micronaut-producer-api-jvm |       6800ms |  88.54MiB/256MiB(34.59%) |             17s |               13s |  213.4MiB/256MiB(83.37%) |            1s |
@@ -159,12 +159,12 @@ springboot-elasticsearch-native |        168ms |  91.31MiB/256MiB(35.67%) |     
       micronaut-simple-api-native | ab -c 10 -n 3000 http://localhost:9083/api/greeting?name=Ivan                                |
      springboot-simple-api-native | ab -c 10 -n 3000 http://localhost:9085/api/greeting?name=Ivan                                |
   ............................... + ............................................................................................ |
-             quarkus-book-api-jvm | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9086/api/books    |
-           micronaut-book-api-jvm | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9088/api/books    |
-          springboot-book-api-jvm | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9090/api/books    |
-          quarkus-book-api-native | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9087/api/books    |
-        micronaut-book-api-native | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9089/api/books    |
-       springboot-book-api-native | ab -p test-books.json -T 'application/json' -c 10 -n 2000 http://localhost:9091/api/books    |       
+            quarkus-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9086/api/books     |
+          micronaut-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9088/api/books     |
+         springboot-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9090/api/books     |
+         quarkus-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9087/api/books     |
+       micronaut-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9089/api/books     |
+      springboot-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9091/api/books     |       
   ............................... + ............................................................................................ |
          quarkus-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 4000 http://localhost:9100/api/news      |
        micronaut-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 4000 http://localhost:9102/api/news      |

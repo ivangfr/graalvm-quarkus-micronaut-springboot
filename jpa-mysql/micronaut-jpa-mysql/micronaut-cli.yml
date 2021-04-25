@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.mycompany.micronautjpamysql
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, data, data-jpa, graalvm, hibernate-jpa, http-client, java, java-application, jdbc-hikari, jib, junit, logback, lombok, management, maven, micrometer, micrometer-prometheus, mysql, netty-server, readme, yaml]

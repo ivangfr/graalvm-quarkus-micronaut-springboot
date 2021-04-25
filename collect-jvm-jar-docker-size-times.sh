@@ -8,9 +8,9 @@ declare -A quarkus_simple_api_jvm
 declare -A micronaut_simple_api_jvm
 declare -A springboot_simple_api_jvm
 
-declare -A quarkus_book_api_jvm
-declare -A micronaut_book_api_jvm
-declare -A springboot_book_api_jvm
+declare -A quarkus_jpa_mysql_jvm
+declare -A micronaut_jpa_mysql_jvm
+declare -A springboot_jpa_mysql_jvm
 
 declare -A quarkus_producer_api_jvm
 declare -A quarkus_consumer_api_jvm
@@ -109,85 +109,85 @@ then
 
 fi
 
-if [ "$1" = "quarkus-book-api" ] ||
+if [ "$1" = "quarkus-jpa-mysql" ] ||
    [ "$1" = "quarkus" ] ||
-   [ "$1" = "book-api" ] ||
+   [ "$1" = "jpa-mysql" ] ||
    [ "$1" = "all" ];
 then
 
   echo
-  echo "--------------------"
-  echo "QUARKUS-BOOK-API-JVM"
-  echo "--------------------"
+  echo "---------------------"
+  echo "QUARKUS-JPA-MYSQL-JVM"
+  echo "---------------------"
 
-  cd book-api/quarkus-book-api
+  cd jpa-mysql/quarkus-jpa-mysql
 
   package_jar_build_image \
     "./mvnw clean" \
     "./mvnw package" \
     "target/quarkus-app" \
     "./docker-build.sh" \
-    "docker.mycompany.com/quarkus-book-api-jvm:1.0.0"
-  quarkus_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-  quarkus_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
-  quarkus_book_api_jvm[building_time]=$package_jar_build_image_building_time
-  quarkus_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+    "docker.mycompany.com/quarkus-jpa-mysql-jvm:1.0.0"
+  quarkus_jpa_mysql_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  quarkus_jpa_mysql_jvm[jar_size]=$package_jar_build_image_jar_size
+  quarkus_jpa_mysql_jvm[building_time]=$package_jar_build_image_building_time
+  quarkus_jpa_mysql_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 
 fi
 
-if [ "$1" = "micronaut-book-api" ] ||
+if [ "$1" = "micronaut-jpa-mysql" ] ||
    [ "$1" = "micronaut" ] ||
-   [ "$1" = "book-api" ] ||
+   [ "$1" = "jpa-mysql" ] ||
    [ "$1" = "all" ];
 then
 
   echo
-  echo "----------------------"
-  echo "MICRONAUT-BOOK-API-JVM"
-  echo "----------------------"
+  echo "-----------------------"
+  echo "MICRONAUT-JPA-MYSQL-JVM"
+  echo "-----------------------"
 
-  cd book-api/micronaut-book-api
+  cd jpa-mysql/micronaut-jpa-mysql
 
   package_jar_build_image \
     "./mvnw clean" \
     "./mvnw package" \
-    "target/micronaut-book-api-1.0.0.jar" \
+    "target/micronaut-jpa-mysql-1.0.0.jar" \
     "./docker-build.sh" \
-    "docker.mycompany.com/micronaut-book-api-jvm:1.0.0"
-  micronaut_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-  micronaut_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
-  micronaut_book_api_jvm[building_time]=$package_jar_build_image_building_time
-  micronaut_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+    "docker.mycompany.com/micronaut-jpa-mysql-jvm:1.0.0"
+  micronaut_jpa_mysql_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  micronaut_jpa_mysql_jvm[jar_size]=$package_jar_build_image_jar_size
+  micronaut_jpa_mysql_jvm[building_time]=$package_jar_build_image_building_time
+  micronaut_jpa_mysql_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 
 fi
 
-if [ "$1" = "springboot-book-api" ] ||
+if [ "$1" = "springboot-jpa-mysql" ] ||
    [ "$1" = "springboot" ] ||
-   [ "$1" = "book-api" ] ||
+   [ "$1" = "jpa-mysql" ] ||
    [ "$1" = "all" ];
 then
 
   echo
-  echo "-----------------------"
-  echo "SPRINGBOOT-BOOK-API-JVM"
-  echo "-----------------------"
+  echo "------------------------"
+  echo "SPRINGBOOT-JPA-MYSQL-JVM"
+  echo "------------------------"
 
-  cd book-api/springboot-book-api
+  cd jpa-mysql/springboot-jpa-mysql
 
   package_jar_build_image \
     "./mvnw clean" \
     "./mvnw package" \
-    "target/springboot-book-api-1.0.0.jar" \
+    "target/springboot-jpa-mysql-1.0.0.jar" \
     "./docker-build.sh" \
-    "docker.mycompany.com/springboot-book-api-jvm:1.0.0"
-  springboot_book_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
-  springboot_book_api_jvm[jar_size]=$package_jar_build_image_jar_size
-  springboot_book_api_jvm[building_time]=$package_jar_build_image_building_time
-  springboot_book_api_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
+    "docker.mycompany.com/springboot-jpa-mysql-jvm:1.0.0"
+  springboot_jpa_mysql_jvm[packaging_time]=$package_jar_build_image_packaging_time
+  springboot_jpa_mysql_jvm[jar_size]=$package_jar_build_image_jar_size
+  springboot_jpa_mysql_jvm[building_time]=$package_jar_build_image_building_time
+  springboot_jpa_mysql_jvm[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 
@@ -458,9 +458,9 @@ printf "%30s | %14s | %14s | %17s | %17s |\n" "quarkus-simple-api-jvm" ${quarkus
 printf "%30s | %14s | %14s | %17s | %17s |\n" "micronaut-simple-api-jvm" ${micronaut_simple_api_jvm[packaging_time]} ${micronaut_simple_api_jvm[jar_size]} ${micronaut_simple_api_jvm[building_time]} ${micronaut_simple_api_jvm[docker_image_size]}
 printf "%30s | %14s | %14s | %17s | %17s |\n" "springboot-simple-api-jvm" ${springboot_simple_api_jvm[packaging_time]} ${springboot_simple_api_jvm[jar_size]} ${springboot_simple_api_jvm[building_time]} ${springboot_simple_api_jvm[docker_image_size]}
 printf "%30s + %14s + %14s + %17s + %17s |\n" ".............................." ".............." ".............." "................." "................."
-printf "%30s | %14s | %14s | %17s | %17s |\n" "quarkus-book-api-jvm" ${quarkus_book_api_jvm[packaging_time]} ${quarkus_book_api_jvm[jar_size]} ${quarkus_book_api_jvm[building_time]} ${quarkus_book_api_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "micronaut-book-api-jvm" ${micronaut_book_api_jvm[packaging_time]} ${micronaut_book_api_jvm[jar_size]} ${micronaut_book_api_jvm[building_time]} ${micronaut_book_api_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "springboot-book-api-jvm" ${springboot_book_api_jvm[packaging_time]} ${springboot_book_api_jvm[jar_size]} ${springboot_book_api_jvm[building_time]} ${springboot_book_api_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %17s | %17s |\n" "quarkus-jpa-mysql-jvm" ${quarkus_jpa_mysql_jvm[packaging_time]} ${quarkus_jpa_mysql_jvm[jar_size]} ${quarkus_jpa_mysql_jvm[building_time]} ${quarkus_jpa_mysql_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %17s | %17s |\n" "micronaut-jpa-mysql-jvm" ${micronaut_jpa_mysql_jvm[packaging_time]} ${micronaut_jpa_mysql_jvm[jar_size]} ${micronaut_jpa_mysql_jvm[building_time]} ${micronaut_jpa_mysql_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %17s | %17s |\n" "springboot-jpa-mysql-jvm" ${springboot_jpa_mysql_jvm[packaging_time]} ${springboot_jpa_mysql_jvm[jar_size]} ${springboot_jpa_mysql_jvm[building_time]} ${springboot_jpa_mysql_jvm[docker_image_size]}
 printf "%30s + %14s + %14s + %17s + %17s |\n" ".............................." ".............." ".............." "................." "................."
 printf "%30s | %14s | %14s | %17s | %17s |\n" "quarkus-producer-api-jvm" ${quarkus_producer_api_jvm[packaging_time]} ${quarkus_producer_api_jvm[jar_size]} ${quarkus_producer_api_jvm[building_time]} ${quarkus_producer_api_jvm[docker_image_size]}
 printf "%30s | %14s | %14s | %17s | %17s |\n" "micronaut-producer-api-jvm" ${micronaut_producer_api_jvm[packaging_time]} ${micronaut_producer_api_jvm[jar_size]} ${micronaut_producer_api_jvm[building_time]} ${micronaut_producer_api_jvm[docker_image_size]}
