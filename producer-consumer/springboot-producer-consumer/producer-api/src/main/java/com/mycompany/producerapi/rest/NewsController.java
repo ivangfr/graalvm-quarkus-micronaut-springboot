@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // -- Commented out as 'spring-boot-starter-validation' dependency is not working in native image
-//import javax.validation.Valid;
+// import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController

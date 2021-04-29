@@ -43,17 +43,17 @@ start_time=$(date)
 JAVA_OPTS_XMX='-Xmx128m'
 CONTAINER_MAX_MEM=256M
 
-AB_PARAMS_SIMPLE_API='-c 10 -n 3000'
+AB_PARAMS_SIMPLE_API='-c 10 -n 4000'
 AB_PARAMS_JPA_MYSQL='-c 10 -n 2000'
-AB_PARAMS_PRODUCER_CONSUMER='-c 10 -n 4000'
+AB_PARAMS_PRODUCER_CONSUMER='-c 10 -n 5000'
 AB_PARAMS_ELASTICSEARCH='-c 10 -n 2000'
 
-WARM_UP_TIMES=3
+WARM_UP_TIMES=5
 
-AB_PARAMS_WARM_UP_SIMPLE_API='-c 5 -n 1500'
-AB_PARAMS_WARM_UP_JPA_MYSQL='-c 5 -n 1000'
-AB_PARAMS_WARM_UP_PRODUCER_CONSUMER='-c 5 -n 2000'
-AB_PARAMS_WARM_UP_ELASTICSEARCH='-c 5 -n 1000'
+AB_PARAMS_WARM_UP_SIMPLE_API='-c 5 -n 1000'
+AB_PARAMS_WARM_UP_JPA_MYSQL='-c 5 -n 500'
+AB_PARAMS_WARM_UP_PRODUCER_CONSUMER='-c 5 -n 1000'
+AB_PARAMS_WARM_UP_ELASTICSEARCH='-c 5 -n 500'
 
 if [ "$1" = "quarkus-simple-api-jvm" ] ||
    [ "$1" = "quarkus-simple-api" ] ||
@@ -660,7 +660,7 @@ then
 
     quarkus_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-jvm")
 
-    wait_for_container_log "quarkus-consumer-api-jvm" "OFFSET: 13999"
+    wait_for_container_log "quarkus-consumer-api-jvm" "OFFSET: 14999"
     quarkus_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
     quarkus_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-jvm")
@@ -729,7 +729,7 @@ then
 
     quarkus_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-native")
 
-    wait_for_container_log "quarkus-consumer-api-native" "OFFSET: 13999"
+    wait_for_container_log "quarkus-consumer-api-native" "OFFSET: 14999"
     quarkus_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
     quarkus_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-native")
@@ -796,7 +796,7 @@ then
 
     micronaut_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-jvm")
 
-    wait_for_container_log "micronaut-consumer-api-jvm" "OFFSET: 13999"
+    wait_for_container_log "micronaut-consumer-api-jvm" "OFFSET: 14999"
     micronaut_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
     micronaut_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-jvm")
@@ -863,7 +863,7 @@ then
 
     micronaut_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-native")
 
-    wait_for_container_log "micronaut-consumer-api-native" "OFFSET: 13999"
+    wait_for_container_log "micronaut-consumer-api-native" "OFFSET: 14999"
     micronaut_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
     micronaut_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-native")
@@ -920,30 +920,30 @@ then
     echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
     echo "-----------------------------------------------"
 
-    # docker run -d --rm --name springboot-consumer-api-jvm \
-    #   -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    #   --network producer-consumer_default \
-    #   docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
+    docker run -d --rm --name springboot-consumer-api-jvm \
+      -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      --network producer-consumer_default \
+      docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
 
-    # wait_for_container_log "springboot-consumer-api-jvm" "Started"
-    # startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    # springboot_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    wait_for_container_log "springboot-consumer-api-jvm" "Started"
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    springboot_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    # springboot_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
+    springboot_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
 
-    # wait_for_container_log "springboot-consumer-api-jvm" "OFFSET: 13999"
-    # springboot_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
+    wait_for_container_log "springboot-consumer-api-jvm" "OFFSET: 14999"
+    springboot_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
-    # springboot_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
+    springboot_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
 
     echo "== Stopping producer-consuner docker containers"
 
     run_command "docker stop springboot-producer-api-jvm"
     springboot_producer_api_jvm[shutdown_time]=$run_command_exec_time
 
-    # run_command "docker stop springboot-consumer-api-jvm"
-    # springboot_consumer_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop springboot-consumer-api-jvm"
+    springboot_consumer_api_jvm[shutdown_time]=$run_command_exec_time
 
   fi
 
@@ -989,30 +989,30 @@ then
     echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
     echo "--------------------------------------------------"
 
-    # docker run -d --rm --name springboot-consumer-api-native \
-    #   -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    #   --network producer-consumer_default \
-    #   docker.mycompany.com/springboot-consumer-api-native:1.0.0
+    docker run -d --rm --name springboot-consumer-api-native \
+      -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      --network producer-consumer_default \
+      docker.mycompany.com/springboot-consumer-api-native:1.0.0
 
-    # wait_for_container_log "springboot-consumer-api-native" "Started"
-    # startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    # springboot_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    wait_for_container_log "springboot-consumer-api-native" "Started"
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    springboot_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    # springboot_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
+    springboot_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
 
-    # wait_for_container_log "springboot-consumer-api-native" "OFFSET: 13999"
-    # springboot_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
+    wait_for_container_log "springboot-consumer-api-native" "OFFSET: 14999"
+    springboot_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
-    # springboot_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
+    springboot_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
 
     echo "== Stopping producer-consuner docker containers"
 
     run_command "docker stop springboot-producer-api-native"
     springboot_producer_api_native[shutdown_time]=$run_command_exec_time
 
-    # run_command "docker stop springboot-consumer-api-native"
-    # springboot_consumer_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop springboot-consumer-api-native"
+    springboot_consumer_api_native[shutdown_time]=$run_command_exec_time
 
   fi
 

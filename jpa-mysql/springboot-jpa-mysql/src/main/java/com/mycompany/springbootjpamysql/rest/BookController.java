@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+// import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/books")
@@ -37,7 +37,8 @@ public class BookController {
     }
 
     @PostMapping
-    public Book createBook(@Valid @RequestBody CreateBookDto createBookDto) {
+    //public Book createBook(@Valid @RequestBody CreateBookDto createBookDto) {
+    public Book createBook(@RequestBody CreateBookDto createBookDto) {
         Book book = bookMapper.toBook(createBookDto);
         return bookService.saveBook(book);
     }

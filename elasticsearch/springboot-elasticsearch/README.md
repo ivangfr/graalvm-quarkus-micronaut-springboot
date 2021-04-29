@@ -90,7 +90,7 @@
     docker.mycompany.com/springboot-elasticsearch-native:1.0.0
   ```
 
-- A simple test can be done by opening a new terminal and running (See [Issues](#issues))
+- A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST "localhost:9117/api/movies" -H "Content-type: application/json" \
     -d '{"imdb": "789", "title": "Resident Evil"}'

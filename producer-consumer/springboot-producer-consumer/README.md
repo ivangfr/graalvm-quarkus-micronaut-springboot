@@ -39,7 +39,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Open another terminal and make sure your are in `graalvm-quarkus-micronaut-springboot/producer-consumer/springboot-producer-consumer` folder
 
-    - Run the command below to start the application (See [Issues](#springboot-consumer-api-issues))
+    - Run the command below to start the application
       ```
       ./mvnw clean package spring-boot:run --projects consumer-api -Dspring-boot.run.jvmArguments="-Dserver.port=8081"
       ```
@@ -98,7 +98,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       cd consumer-api && ./docker-build.sh && cd ..
       ```
 
-    - Run the following command to start the Docker container (See [Issues](#springboot-consumer-api-issues))
+    - Run the following command to start the Docker container
       ```
       docker run --rm --name springboot-consumer-api-jvm \
         -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
@@ -138,7 +138,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       cd producer-api && ./docker-build.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container (See [Issues](#springboot-producer-api-issues))
+    - Run the following command to start the Docker container
       ```
       docker run --rm --name springboot-producer-api-native \
         -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
@@ -160,7 +160,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       cd consumer-api && ./docker-build.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container (See [Issues](#springboot-consumer-api-issues))
+    - Run the following command to start the Docker container
       ```
       docker run --rm --name springboot-consumer-api-native \
         -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
@@ -181,42 +181,3 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 - **Shutdown**
 
   Press `Ctrl+C` in `producer-api` and `consumer-api` terminals
-
-## Issues
-
-### springboot-consumer-api issues
-
-- Unable to run in **Development Mode**, **Docker in JVM Mode** and **Docker in Native Mode**. It is related to this [issue #605](https://github.com/spring-projects-experimental/spring-native/issues/605)
-  ```
-  ERROR 13562 --- [           main] o.s.boot.SpringApplication               : Application run failed
-  
-  org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'newsConsumer' defined in   class path resource [com/mycompany/consumerapi/kafka/NewsConsumer.class]: Initialization of bean failed; nested   exception is java.lang.NullPointerException
-  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean  (AbstractAutowireCapableBeanFactory.java:610) ~[spring-beans-5.3.6.jar:5.3.6]
-  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean  (AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
-  	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)   ~[spring-beans-5.3.6.jar:5.3.6]
-  	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton  (DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
-  	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~  [spring-beans-5.3.6.jar:5.3.6]
-  	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~  [spring-beans-5.3.6.jar:5.3.6]
-  	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons  (DefaultListableBeanFactory.java:944) ~[spring-beans-5.3.6.jar:5.3.6]
-  	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization  (AbstractApplicationContext.java:918) ~[spring-context-5.3.6.jar:5.3.6]
-  	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~  [spring-context-5.3.6.jar:5.3.6]
-  	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh  (ReactiveWebServerApplicationContext.java:63) ~[spring-boot-2.4.5.jar:2.4.5]
-  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) ~[spring-boot-2.4.5.jar:2.4.5]
-  	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:774) ~[spring-boot-2.4.5.jar:2.4.5]
-  	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-2.4.5.  jar:2.4.5]
-  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:339) ~[spring-boot-2.4.5.jar:2.4.5]
-  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1340) ~[spring-boot-2.4.5.jar:2.4.5]
-  	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1329) ~[spring-boot-2.4.5.jar:2.4.5]
-  	at com.mycompany.consumerapi.ConsumerApiApplication.main(ConsumerApiApplication.java:10) ~[classes/:na]
-  Caused by: java.lang.NullPointerException: null
-  	at org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProcessor.resolveExpression  (KafkaListenerAnnotationBeanPostProcessor.java:735) ~[spring-kafka-2.6.7.jar:2.6.7]
-  	at org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProcessor.resolveExpressionAsString  (KafkaListenerAnnotationBeanPostProcessor.java:689) ~[spring-kafka-2.6.7.jar:2.6.7]
-  	at org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProcessor.getEndpointGroupId  (KafkaListenerAnnotationBeanPostProcessor.java:507) ~[spring-kafka-2.6.7.jar:2.6.7]
-  	at org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProcessor.processListener  (KafkaListenerAnnotationBeanPostProcessor.java:429) ~[spring-kafka-2.6.7.jar:2.6.7]
-  	at org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProcessor.processKafkaListener  (KafkaListenerAnnotationBeanPostProcessor.java:382) ~[spring-kafka-2.6.7.jar:2.6.7]
-  	at org.springframework.kafka.annotation.KafkaListenerAnnotationBeanPostProcessor.postProcessAfterInitialization  (KafkaListenerAnnotationBeanPostProcessor.java:310) ~[spring-kafka-2.6.7.jar:2.6.7]
-  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.  applyBeanPostProcessorsAfterInitialization(AbstractAutowireCapableBeanFactory.java:437) ~[spring-beans-5.3.6.  jar:5.3.6]
-  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean  (AbstractAutowireCapableBeanFactory.java:1790) ~[spring-beans-5.3.6.jar:5.3.6]
-  	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean  (AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.6.jar:5.3.6]
-  	... 16 common frames omitted
-	```
