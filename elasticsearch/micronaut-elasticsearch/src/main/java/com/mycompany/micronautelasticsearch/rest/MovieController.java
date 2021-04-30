@@ -12,10 +12,12 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.annotation.Status;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+@Slf4j
 @Controller("/api/movies")
 public class MovieController {
 
@@ -30,7 +32,9 @@ public class MovieController {
     @Status(HttpStatus.CREATED)
     @Post
     public String createMovie(@Valid @Body CreateMovieRequest createMovieRequest) {
+        log.info("1 - {}", createMovieRequest);
         Movie movie = movieMapper.toMovie(createMovieRequest);
+        log.info("2 - {}", movie);
         return movieService.saveMovie(movie);
     }
 

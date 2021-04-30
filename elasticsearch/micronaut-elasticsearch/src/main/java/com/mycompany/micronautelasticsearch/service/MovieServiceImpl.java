@@ -39,10 +39,15 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public String saveMovie(Movie movie) {
         try {
+            log.info("3 - {}", movie);
             String movieAsJsonString = objectMapper.writeValueAsString(movie);
+            log.info("4 - {}", movieAsJsonString);
             IndexRequest indexRequest = new IndexRequest(moviesIndex).source(movieAsJsonString, XContentType.JSON);
+            log.info("5 - {}", indexRequest);
             IndexResponse indexResponse = client.index(indexRequest, RequestOptions.DEFAULT);
+            log.info("6 - {}", indexResponse);
             String id = indexResponse.getId();
+            log.info("7 - {}", id);
             log.info("Document for '{}' {} successfully in ES. The id is: {}", movie, indexResponse.getResult(), id);
             return id;
         } catch (Exception e) {
