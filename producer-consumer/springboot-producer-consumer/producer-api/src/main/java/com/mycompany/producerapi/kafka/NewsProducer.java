@@ -16,7 +16,7 @@ public class NewsProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @Value("${kafka.producer.topic}")
+    @Value("${spring.kafka.producer.topic}")
     private String kafkaTopic;
 
     public void send(News news) {
