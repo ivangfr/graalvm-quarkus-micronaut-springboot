@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mycompany.micronautsimpleapi</groupId>
     <artifactId>micronaut-simple-api</artifactId>
@@ -10,14 +10,14 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>2.4.4</version>
+        <version>2.5.2</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.4.4</micronaut.version>
+        <micronaut.version>2.5.2</micronaut.version>
         <exec.mainClass>com.mycompany.micronautsimpleapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
         <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
