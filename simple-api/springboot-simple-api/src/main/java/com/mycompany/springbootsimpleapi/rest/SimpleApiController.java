@@ -2,6 +2,9 @@ package com.mycompany.springbootsimpleapi.rest;
 
 import com.mycompany.springbootsimpleapi.domain.Greeting;
 import com.mycompany.springbootsimpleapi.service.GreetingService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 // import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/greeting")
 public class SimpleApiController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(SimpleApiController.class);
+
     private final GreetingService greetingService;
 
     public SimpleApiController(GreetingService greetingService) {
@@ -30,6 +35,7 @@ public class SimpleApiController {
     //-- Without the @Validated annotation, the @NotBlank annotation won't work. So, it's also commented.
     // public Greeting greetName(@RequestParam(defaultValue = "World", required = false) @NotBlank String name) {
     public Greeting greetName(@RequestParam(defaultValue = "World", required = false) String name) {
+        LOG.info("Received request, name: {}", name);
         return greetingService.greet(name);
     }
 }
