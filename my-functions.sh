@@ -123,9 +123,9 @@ function warm_up() {
   echo
 }
 
-# -- check_builder_script_input_parameter --
+# -- check_docker_manager_script_input_parameter --
 # $1: input parameter
-function check_builder_script_input_parameter() {
+function check_docker_manager_script_input_parameter() {
   if [ "$1" != "all" ] &&
      [ "$1" != "quarkus" ] &&
      [ "$1" != "micronaut" ] &&

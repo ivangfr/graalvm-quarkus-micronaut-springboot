@@ -2,7 +2,7 @@
 
 source my-functions.sh
 
-check_builder_script_input_parameter $1
+check_docker_manager_script_input_parameter $1
 
 declare -A quarkus_simple_api_jvm
 declare -A micronaut_simple_api_jvm
