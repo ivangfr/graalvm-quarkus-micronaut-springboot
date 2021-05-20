@@ -73,7 +73,7 @@ then
   docker run -d --rm --name quarkus-simple-api-jvm \
     -p 9080:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    docker.mycompany.com/quarkus-simple-api-jvm:1.0.0
+    ivanfranchin/quarkus-simple-api-jvm:1.0.0
 
   wait_for_container_log "quarkus-simple-api-jvm" "started in"
   startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -114,7 +114,7 @@ echo "-------------------------"
   docker run -d --rm --name quarkus-simple-api-native \
     -p 9081:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    docker.mycompany.com/quarkus-simple-api-native:1.0.0
+    ivanfranchin/quarkus-simple-api-native:1.0.0
 
   wait_for_container_log "quarkus-simple-api-native" "started in"
   startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -155,7 +155,7 @@ echo "------------------------"
   docker run -d --rm --name micronaut-simple-api-jvm \
     -p 9082:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    docker.mycompany.com/micronaut-simple-api-jvm:1.0.0
+    ivanfranchin/micronaut-simple-api-jvm:1.0.0
 
   wait_for_container_log "micronaut-simple-api-jvm" "Startup completed in"
   micronaut_simple_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -195,7 +195,7 @@ echo "---------------------------"
 docker run -d --rm --name micronaut-simple-api-native \
   -p 9083:8080 \
   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-  docker.mycompany.com/micronaut-simple-api-native:1.0.0
+  ivanfranchin/micronaut-simple-api-native:1.0.0
 
 wait_for_container_log "micronaut-simple-api-native" "Startup completed in"
 micronaut_simple_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -235,7 +235,7 @@ echo "-------------------------"
   docker run -d --rm --name springboot-simple-api-jvm \
     -p 9084:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    docker.mycompany.com/springboot-simple-api-jvm:1.0.0
+    ivanfranchin/springboot-simple-api-jvm:1.0.0
 
   wait_for_container_log "springboot-simple-api-jvm" "Started"
   startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -276,7 +276,7 @@ echo "----------------------------"
   docker run -d --rm --name springboot-simple-api-native \
     -p 9085:8080 \
     -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    docker.mycompany.com/springboot-simple-api-native:1.0.0
+    ivanfranchin/springboot-simple-api-native:1.0.0
 
   wait_for_container_log "springboot-simple-api-native" "Started"
   startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -341,7 +341,7 @@ then
       -p 9086:8080 -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      docker.mycompany.com/quarkus-jpa-mysql-jvm:1.0.0
+      ivanfranchin/quarkus-jpa-mysql-jvm:1.0.0
 
     wait_for_container_log "quarkus-jpa-mysql-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -383,7 +383,7 @@ then
       -p 9087:8080 -e QUARKUS_PROFILE=native -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      docker.mycompany.com/quarkus-jpa-mysql-native:1.0.0
+      ivanfranchin/quarkus-jpa-mysql-native:1.0.0
 
     wait_for_container_log "quarkus-jpa-mysql-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -425,7 +425,7 @@ then
       -p 9088:8080 -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      docker.mycompany.com/micronaut-jpa-mysql-jvm:1.0.0
+      ivanfranchin/micronaut-jpa-mysql-jvm:1.0.0
 
     wait_for_container_log "micronaut-jpa-mysql-jvm" "Startup completed in"
     micronaut_jpa_mysql_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -466,7 +466,7 @@ then
       -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      docker.mycompany.com/micronaut-jpa-mysql-native:1.0.0
+      ivanfranchin/micronaut-jpa-mysql-native:1.0.0
 
     wait_for_container_log "micronaut-jpa-mysql-native" "Startup completed in"
     micronaut_jpa_mysql_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -507,7 +507,7 @@ then
       -p 9090:8080 -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      docker.mycompany.com/springboot-jpa-mysql-jvm:1.0.0
+      ivanfranchin/springboot-jpa-mysql-jvm:1.0.0
 
     wait_for_container_log "springboot-jpa-mysql-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -549,7 +549,7 @@ then
       -p 9091:8080 -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      docker.mycompany.com/springboot-jpa-mysql-native:1.0.0
+      ivanfranchin/springboot-jpa-mysql-native:1.0.0
 
     wait_for_container_log "springboot-jpa-mysql-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -625,7 +625,7 @@ then
       -p 9100:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/quarkus-producer-api-jvm:1.0.0
+      ivanfranchin/quarkus-producer-api-jvm:1.0.0
 
     wait_for_container_log "quarkus-producer-api-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -652,7 +652,7 @@ then
       -p 9106:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0
+      ivanfranchin/quarkus-consumer-api-jvm:1.0.0
 
     wait_for_container_log "quarkus-consumer-api-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -694,7 +694,7 @@ then
       -p 9101:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/quarkus-producer-api-native:1.0.0
+      ivanfranchin/quarkus-producer-api-native:1.0.0
 
     wait_for_container_log "quarkus-producer-api-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -721,7 +721,7 @@ then
       -p 9107:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/quarkus-consumer-api-native:1.0.0
+      ivanfranchin/quarkus-consumer-api-native:1.0.0
 
     wait_for_container_log "quarkus-consumer-api-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -763,7 +763,7 @@ then
       -p 9102:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/micronaut-producer-api-jvm:1.0.0
+      ivanfranchin/micronaut-producer-api-jvm:1.0.0
 
     wait_for_container_log "micronaut-producer-api-jvm" "Startup completed in"
     micronaut_producer_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -789,7 +789,7 @@ then
       -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0
+      ivanfranchin/micronaut-consumer-api-jvm:1.0.0
 
     wait_for_container_log "micronaut-consumer-api-jvm" "Startup completed in"
     micronaut_consumer_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -830,7 +830,7 @@ then
       -p 9103:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/micronaut-producer-api-native:1.0.0
+      ivanfranchin/micronaut-producer-api-native:1.0.0
 
     wait_for_container_log "micronaut-producer-api-native" "Startup completed in"
     micronaut_producer_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -856,7 +856,7 @@ then
       -p 9109:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/micronaut-consumer-api-native:1.0.0
+      ivanfranchin/micronaut-consumer-api-native:1.0.0
 
     wait_for_container_log "micronaut-consumer-api-native" "Startup completed in"
     micronaut_consumer_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -897,7 +897,7 @@ then
       -p 9104:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/springboot-producer-api-jvm:1.0.0
+      ivanfranchin/springboot-producer-api-jvm:1.0.0
 
     wait_for_container_log "springboot-producer-api-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -924,7 +924,7 @@ then
       -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/springboot-consumer-api-jvm:1.0.0
+      ivanfranchin/springboot-consumer-api-jvm:1.0.0
 
     wait_for_container_log "springboot-consumer-api-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -966,7 +966,7 @@ then
       -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/springboot-producer-api-native:1.0.0
+      ivanfranchin/springboot-producer-api-native:1.0.0
 
     wait_for_container_log "springboot-producer-api-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -993,7 +993,7 @@ then
       -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
-      docker.mycompany.com/springboot-consumer-api-native:1.0.0
+      ivanfranchin/springboot-consumer-api-native:1.0.0
 
     wait_for_container_log "springboot-consumer-api-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -1072,7 +1072,7 @@ then
       -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0
+      ivanfranchin/quarkus-elasticsearch-jvm:1.0.0
 
     wait_for_container_log "quarkus-elasticsearch-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -1114,7 +1114,7 @@ then
       -p 9113:8080 -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      docker.mycompany.com/quarkus-elasticsearch-native:1.0.0
+      ivanfranchin/quarkus-elasticsearch-native:1.0.0
 
     wait_for_container_log "quarkus-elasticsearch-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -1156,7 +1156,7 @@ then
       -p 9114:8080 -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0
+      ivanfranchin/micronaut-elasticsearch-jvm:1.0.0
 
     wait_for_container_log "micronaut-elasticsearch-jvm" "Startup completed in"
     micronaut_elasticsearch_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -1197,7 +1197,7 @@ then
     #   -p 9115:8080 -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=elasticsearch \
     #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
     #   --network elasticsearch_default \
-    #   docker.mycompany.com/micronaut-elasticsearch-native:1.0.0
+    #   ivanfranchin/micronaut-elasticsearch-native:1.0.0
 
     # wait_for_container_log "micronaut-elasticsearch-native" "Startup completed in"
     # micronaut_elasticsearch_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -1238,7 +1238,7 @@ then
       -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0
+      ivanfranchin/springboot-elasticsearch-jvm:1.0.0
 
     wait_for_container_log "springboot-elasticsearch-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -1280,7 +1280,7 @@ then
       -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      docker.mycompany.com/springboot-elasticsearch-native:1.0.0
+      ivanfranchin/springboot-elasticsearch-native:1.0.0
 
     wait_for_container_log "springboot-elasticsearch-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")

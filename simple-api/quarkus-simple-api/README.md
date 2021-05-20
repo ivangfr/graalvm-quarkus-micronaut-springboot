@@ -45,7 +45,7 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name quarkus-simple-api-jvm -p 9080:8080 \
-    docker.mycompany.com/quarkus-simple-api-jvm:1.0.0
+    ivanfranchin/quarkus-simple-api-jvm:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -72,7 +72,7 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name quarkus-simple-api-native -p 9081:8080 \
-    docker.mycompany.com/quarkus-simple-api-native:1.0.0
+    ivanfranchin/quarkus-simple-api-native:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running

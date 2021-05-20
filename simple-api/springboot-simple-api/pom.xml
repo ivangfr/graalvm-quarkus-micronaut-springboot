@@ -18,7 +18,7 @@
         <java.version>11</java.version>
         <spring-native.version>0.9.2</spring-native.version>
         <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
-        <docker-image.prefix>docker.mycompany.com</docker-image.prefix>
+        <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
 
     <dependencies>

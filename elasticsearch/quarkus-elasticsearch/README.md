@@ -55,7 +55,7 @@
   docker run --rm --name quarkus-elasticsearch-jvm \
     -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch \
     --network elasticsearch_default \
-    docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0
+    ivanfranchin/quarkus-elasticsearch-jvm:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -87,7 +87,7 @@
   docker run --rm --name quarkus-elasticsearch-native \
     -p 9113:8080 -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
     --network elasticsearch_default \
-    docker.mycompany.com/quarkus-elasticsearch-native:1.0.0
+    ivanfranchin/quarkus-elasticsearch-native:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running

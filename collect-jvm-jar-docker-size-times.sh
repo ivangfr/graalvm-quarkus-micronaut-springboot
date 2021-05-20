@@ -43,7 +43,7 @@ then
     "./mvnw package" \
     "target/quarkus-app" \
     "./docker-build.sh" \
-    "docker.mycompany.com/quarkus-simple-api-jvm:1.0.0"
+    "ivanfranchin/quarkus-simple-api-jvm:1.0.0"
   quarkus_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
   quarkus_simple_api_jvm[building_time]=$package_jar_build_image_building_time
@@ -71,7 +71,7 @@ then
     "./mvnw package" \
     "target/micronaut-simple-api-1.0.0.jar" \
     "./docker-build.sh" \
-    "docker.mycompany.com/micronaut-simple-api-jvm:1.0.0"
+    "ivanfranchin/micronaut-simple-api-jvm:1.0.0"
   micronaut_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
   micronaut_simple_api_jvm[building_time]=$package_jar_build_image_building_time
@@ -99,7 +99,7 @@ then
     "./mvnw package" \
     "target/springboot-simple-api-1.0.0.jar" \
     "./docker-build.sh" \
-    "docker.mycompany.com/springboot-simple-api-jvm:1.0.0"
+    "ivanfranchin/springboot-simple-api-jvm:1.0.0"
   springboot_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
   springboot_simple_api_jvm[building_time]=$package_jar_build_image_building_time
@@ -127,7 +127,7 @@ then
     "./mvnw package" \
     "target/quarkus-app" \
     "./docker-build.sh" \
-    "docker.mycompany.com/quarkus-jpa-mysql-jvm:1.0.0"
+    "ivanfranchin/quarkus-jpa-mysql-jvm:1.0.0"
   quarkus_jpa_mysql_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_jpa_mysql_jvm[jar_size]=$package_jar_build_image_jar_size
   quarkus_jpa_mysql_jvm[building_time]=$package_jar_build_image_building_time
@@ -155,7 +155,7 @@ then
     "./mvnw package" \
     "target/micronaut-jpa-mysql-1.0.0.jar" \
     "./docker-build.sh" \
-    "docker.mycompany.com/micronaut-jpa-mysql-jvm:1.0.0"
+    "ivanfranchin/micronaut-jpa-mysql-jvm:1.0.0"
   micronaut_jpa_mysql_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_jpa_mysql_jvm[jar_size]=$package_jar_build_image_jar_size
   micronaut_jpa_mysql_jvm[building_time]=$package_jar_build_image_building_time
@@ -183,7 +183,7 @@ then
     "./mvnw package" \
     "target/springboot-jpa-mysql-1.0.0.jar" \
     "./docker-build.sh" \
-    "docker.mycompany.com/springboot-jpa-mysql-jvm:1.0.0"
+    "ivanfranchin/springboot-jpa-mysql-jvm:1.0.0"
   springboot_jpa_mysql_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_jpa_mysql_jvm[jar_size]=$package_jar_build_image_jar_size
   springboot_jpa_mysql_jvm[building_time]=$package_jar_build_image_building_time
@@ -212,7 +212,7 @@ then
     "./mvnw package --projects producer-api" \
     "producer-api/target/quarkus-app" \
     "cd producer-api && ./docker-build.sh && cd .." \
-    "docker.mycompany.com/quarkus-producer-api-jvm:1.0.0"
+    "ivanfranchin/quarkus-producer-api-jvm:1.0.0"
   quarkus_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_producer_api_jvm[jar_size]=$package_jar_build_image_jar_size
   quarkus_producer_api_jvm[building_time]=$package_jar_build_image_building_time
@@ -241,7 +241,7 @@ then
     "./mvnw package --projects consumer-api" \
     "consumer-api/target/quarkus-app" \
     "cd consumer-api && ./docker-build.sh && cd .." \
-    "docker.mycompany.com/quarkus-consumer-api-jvm:1.0.0"
+    "ivanfranchin/quarkus-consumer-api-jvm:1.0.0"
   quarkus_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
   quarkus_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
@@ -270,7 +270,7 @@ then
     "./mvnw package --projects producer-api" \
     "producer-api/target/producer-api-1.0.0.jar" \
     "cd producer-api && ./docker-build.sh && cd .." \
-    "docker.mycompany.com/micronaut-producer-api-jvm:1.0.0"
+    "ivanfranchin/micronaut-producer-api-jvm:1.0.0"
   micronaut_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_producer_api_jvm[jar_size]=$package_jar_build_image_jar_size
   micronaut_producer_api_jvm[building_time]=$package_jar_build_image_building_time
@@ -299,7 +299,7 @@ then
     "./mvnw package --projects consumer-api" \
     "consumer-api/target/consumer-api-1.0.0.jar" \
     "cd consumer-api && ./docker-build.sh && cd .." \
-    "docker.mycompany.com/micronaut-consumer-api-jvm:1.0.0"
+    "ivanfranchin/micronaut-consumer-api-jvm:1.0.0"
   micronaut_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
   micronaut_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
@@ -328,7 +328,7 @@ then
     "./mvnw package --projects producer-api" \
     "producer-api/target/producer-api-1.0.0.jar" \
     "cd producer-api && ./docker-build.sh && cd .." \
-    "docker.mycompany.com/springboot-producer-api-jvm:1.0.0"
+    "ivanfranchin/springboot-producer-api-jvm:1.0.0"
   springboot_producer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_producer_api_jvm[jar_size]=$package_jar_build_image_jar_size
   springboot_producer_api_jvm[building_time]=$package_jar_build_image_building_time
@@ -357,7 +357,7 @@ then
     "./mvnw package --projects consumer-api" \
     "consumer-api/target/consumer-api-1.0.0.jar" \
     "cd consumer-api && ./docker-build.sh && cd .." \
-    "docker.mycompany.com/springboot-consumer-api-jvm:1.0.0"
+    "ivanfranchin/springboot-consumer-api-jvm:1.0.0"
   springboot_consumer_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_consumer_api_jvm[jar_size]=$package_jar_build_image_jar_size
   springboot_consumer_api_jvm[building_time]=$package_jar_build_image_building_time
@@ -385,7 +385,7 @@ then
     "./mvnw package" \
     "target/quarkus-app" \
     "./docker-build.sh" \
-    "docker.mycompany.com/quarkus-elasticsearch-jvm:1.0.0"
+    "ivanfranchin/quarkus-elasticsearch-jvm:1.0.0"
   quarkus_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
   quarkus_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
@@ -413,7 +413,7 @@ then
     "./mvnw package" \
     "target/micronaut-elasticsearch-1.0.0.jar" \
     "./docker-build.sh" \
-    "docker.mycompany.com/micronaut-elasticsearch-jvm:1.0.0"
+    "ivanfranchin/micronaut-elasticsearch-jvm:1.0.0"
   micronaut_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
   micronaut_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time
@@ -441,7 +441,7 @@ then
     "./mvnw package" \
     "target/springboot-elasticsearch-1.0.0.jar" \
     "./docker-build.sh" \
-    "docker.mycompany.com/springboot-elasticsearch-jvm:1.0.0"
+    "ivanfranchin/springboot-elasticsearch-jvm:1.0.0"
   springboot_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
   springboot_elasticsearch_jvm[building_time]=$package_jar_build_image_building_time

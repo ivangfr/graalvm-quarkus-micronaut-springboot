@@ -56,7 +56,7 @@
   docker run --rm --name springboot-jpa-mysql-jvm \
     -p 9090:8080 -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
-    docker.mycompany.com/springboot-jpa-mysql-jvm:1.0.0
+    ivanfranchin/springboot-jpa-mysql-jvm:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -88,7 +88,7 @@
   docker run --rm --name springboot-jpa-mysql-native \
     -p 9091:8080 -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
-    docker.mycompany.com/springboot-jpa-mysql-native:1.0.0
+    ivanfranchin/springboot-jpa-mysql-native:1.0.0
   ```
 
 - A simple test can be done by opening a new terminal and running

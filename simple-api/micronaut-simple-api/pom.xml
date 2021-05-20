@@ -21,7 +21,7 @@
         <exec.mainClass>com.mycompany.micronautsimpleapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
         <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
-        <docker-image.prefix>docker.mycompany.com</docker-image.prefix>
+        <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
 
     <repositories>
