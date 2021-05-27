@@ -97,10 +97,6 @@
                         <name>${docker-image.prefix}/${project.artifactId}-native:${project.version}</name>
                         <env>
                             <BP_BOOT_NATIVE_IMAGE>true</BP_BOOT_NATIVE_IMAGE>
-                            <BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                -Dspring.native.remove-yaml-support=true
-                                -Dspring.spel.ignore=true
-                            </BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
                         </env>
                     </image>
                 </configuration>

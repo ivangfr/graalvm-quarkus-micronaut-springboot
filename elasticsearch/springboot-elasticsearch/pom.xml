@@ -8,6 +8,7 @@
         <version>2.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    
     <groupId>com.mycompany</groupId>
     <artifactId>springboot-elasticsearch</artifactId>
     <version>1.0.0</version>
@@ -90,8 +91,6 @@
                         <env>
                             <BP_BOOT_NATIVE_IMAGE>true</BP_BOOT_NATIVE_IMAGE>
                             <BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                -Dspring.native.remove-yaml-support=true
-                                -Dspring.spel.ignore=true
                                 --enable-https
                             </BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
                         </env>

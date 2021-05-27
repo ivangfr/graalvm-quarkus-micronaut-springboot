@@ -8,6 +8,7 @@
         <version>1.0.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
+    
     <artifactId>consumer-api</artifactId>
     <name>consumer-api</name>
     <description>Demo project for Spring Boot</description>
@@ -79,9 +80,6 @@
                         <name>${docker-image.prefix}/springboot-${project.artifactId}-native:${project.version}</name>
                         <env>
                             <BP_BOOT_NATIVE_IMAGE>true</BP_BOOT_NATIVE_IMAGE>
-                            <BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                -Dspring.native.remove-yaml-support=true
-                            </BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
                         </env>
                     </image>
                 </configuration>

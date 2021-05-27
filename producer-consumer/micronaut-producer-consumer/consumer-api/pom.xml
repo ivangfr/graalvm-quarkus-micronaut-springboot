@@ -16,7 +16,7 @@
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.5.2</micronaut.version>
+        <micronaut.version>2.5.4</micronaut.version>
         <exec.mainClass>com.mycompany.consumerapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
         <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
@@ -40,11 +40,6 @@
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-validation</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -110,6 +105,11 @@
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -8,6 +8,7 @@
         <version>2.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    
     <groupId>com.mycompany</groupId>
     <artifactId>springboot-simple-api</artifactId>
     <version>1.0.0</version>
@@ -67,10 +68,6 @@
                         <name>${docker-image.prefix}/${project.artifactId}-native:${project.version}</name>
                         <env>
                             <BP_BOOT_NATIVE_IMAGE>true</BP_BOOT_NATIVE_IMAGE>
-                            <BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                -Dspring.native.remove-yaml-support=true
-                                -Dspring.spel.ignore=true
-                            </BP_BOOT_NATIVE_IMAGE_BUILD_ARGUMENTS>
                         </env>
                     </image>
                 </configuration>
