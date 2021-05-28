@@ -1,6 +1,5 @@
 package com.mycompany.quarkuselasticsearch.rest;
 
-import com.mycompany.quarkuselasticsearch.mapper.MovieMapper;
 import com.mycompany.quarkuselasticsearch.model.Movie;
 import com.mycompany.quarkuselasticsearch.rest.dto.CreateMovieRequest;
 import com.mycompany.quarkuselasticsearch.rest.dto.SearchMovieResponse;
@@ -21,12 +20,9 @@ public class MovieResource {
     @Inject
     MovieService movieService;
 
-    @Inject
-    MovieMapper movieMapper;
-
     @POST
     public Response createMovie(@Valid CreateMovieRequest createMovieRequest) {
-        Movie movie = movieMapper.toMovie(createMovieRequest);
+        Movie movie = toMovie(createMovieRequest);
         String id = movieService.saveMovie(movie);
         return Response.status(Response.Status.CREATED).entity(id).build();
     }
@@ -35,4 +31,9 @@ public class MovieResource {
     public SearchMovieResponse searchMovies(@QueryParam("title") @NotBlank String title) {
         return movieService.searchMovies(title);
     }
+
+    private Movie toMovie(CreateMovieRequest createMovieRequest) {
+        return new Movie(createMovieRequest.getImdb(), createMovieRequest.getTitle());
+    }
+
 }

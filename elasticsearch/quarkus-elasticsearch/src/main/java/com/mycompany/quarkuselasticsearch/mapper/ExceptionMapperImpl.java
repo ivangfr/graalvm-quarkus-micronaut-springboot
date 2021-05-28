@@ -13,8 +13,8 @@ public class ExceptionMapperImpl implements ExceptionMapper<Exception> {
 
     @Override
     public Response toResponse(Exception exception) {
-        int status = 500;
-        String error = Response.Status.INTERNAL_SERVER_ERROR.getReasonPhrase();
+        int status = 400;
+        String error = Response.Status.BAD_REQUEST.getReasonPhrase();
         if (exception instanceof WebApplicationException) {
             status = ((WebApplicationException) exception).getResponse().getStatus();
         }

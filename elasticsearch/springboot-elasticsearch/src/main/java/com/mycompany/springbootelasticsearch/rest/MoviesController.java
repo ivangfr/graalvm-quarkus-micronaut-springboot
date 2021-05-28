@@ -1,6 +1,5 @@
 package com.mycompany.springbootelasticsearch.rest;
 
-import com.mycompany.springbootelasticsearch.mapper.MovieMapper;
 import com.mycompany.springbootelasticsearch.model.Movie;
 import com.mycompany.springbootelasticsearch.rest.dto.CreateMovieRequest;
 import com.mycompany.springbootelasticsearch.rest.dto.SearchMovieResponse;
@@ -22,17 +21,15 @@ import javax.validation.constraints.NotBlank;
 public class MoviesController {
 
     private final MovieService movieService;
-    private final MovieMapper movieMapper;
 
-    public MoviesController(MovieService movieService, MovieMapper movieMapper) {
+    public MoviesController(MovieService movieService) {
         this.movieService = movieService;
-        this.movieMapper = movieMapper;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public String createMovie(@Valid @RequestBody CreateMovieRequest createMovieRequest) {
-        Movie movie = movieMapper.toMovie(createMovieRequest);
+        Movie movie = toMovie(createMovieRequest);
         return movieService.saveMovie(movie);
     }
 
@@ -40,4 +37,9 @@ public class MoviesController {
     public SearchMovieResponse searchMovies(@RequestParam(value = "title") @NotBlank String title) {
         return movieService.searchMovies(title);
     }
+
+    private Movie toMovie(CreateMovieRequest createMovieRequest) {
+        return new Movie(createMovieRequest.getImdb(), createMovieRequest.getTitle());
+    }
+
 }

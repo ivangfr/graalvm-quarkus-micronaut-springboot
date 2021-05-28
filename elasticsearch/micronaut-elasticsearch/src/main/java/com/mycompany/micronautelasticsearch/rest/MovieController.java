@@ -1,6 +1,5 @@
 package com.mycompany.micronautelasticsearch.rest;
 
-import com.mycompany.micronautelasticsearch.mapper.MovieMapper;
 import com.mycompany.micronautelasticsearch.model.Movie;
 import com.mycompany.micronautelasticsearch.rest.dto.CreateMovieRequest;
 import com.mycompany.micronautelasticsearch.rest.dto.SearchMovieResponse;
@@ -20,17 +19,15 @@ import javax.validation.constraints.NotBlank;
 public class MovieController {
 
     private final MovieService movieService;
-    private final MovieMapper movieMapper;
 
-    public MovieController(MovieService movieService, MovieMapper movieMapper) {
+    public MovieController(MovieService movieService) {
         this.movieService = movieService;
-        this.movieMapper = movieMapper;
     }
 
     @Status(HttpStatus.CREATED)
     @Post
     public String createMovie(@Valid @Body CreateMovieRequest createMovieRequest) {
-        Movie movie = movieMapper.toMovie(createMovieRequest);
+        Movie movie = toMovie(createMovieRequest);
         return movieService.saveMovie(movie);
     }
 
@@ -38,4 +35,9 @@ public class MovieController {
     public SearchMovieResponse searchMovies(@QueryValue("title") @NotBlank String title) {
         return movieService.searchMovies(title);
     }
+
+    private Movie toMovie(CreateMovieRequest createMovieRequest) {
+        return new Movie(createMovieRequest.getImdb(), createMovieRequest.getTitle());
+    }
+
 }

@@ -2,7 +2,6 @@ package com.mycompany.springbootelasticsearch.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.springbootelasticsearch.exception.MovieServiceException;
-import com.mycompany.springbootelasticsearch.mapper.MovieMapper;
 import com.mycompany.springbootelasticsearch.model.Movie;
 import com.mycompany.springbootelasticsearch.rest.dto.SearchMovieResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -12,11 +11,17 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -26,12 +31,10 @@ public class MovieServiceImpl implements MovieService {
     private String moviesIndex;
 
     private final RestHighLevelClient client;
-    private final MovieMapper movieMapper;
     private final ObjectMapper objectMapper;
 
-    public MovieServiceImpl(RestHighLevelClient client, MovieMapper movieMapper, ObjectMapper objectMapper) {
+    public MovieServiceImpl(RestHighLevelClient client, ObjectMapper objectMapper) {
         this.client = client;
-        this.movieMapper = movieMapper;
         this.objectMapper = objectMapper;
     }
 
@@ -60,7 +63,7 @@ public class MovieServiceImpl implements MovieService {
             searchRequest.source(searchSourceBuilder);
             SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
             log.info("Searching for '{}' took {} and found {}", title, searchResponse.getTook(), searchResponse.getHits().getTotalHits());
-            return movieMapper.toSearchMovieResponse(searchResponse.getHits(), searchResponse.getTook());
+            return toSearchMovieResponse(searchResponse.getHits(), searchResponse.getTook());
         } catch (Exception e) {
             String errorMessage = String.format("An exception occurred while searching for title '%s'. %s", title, e.getMessage());
             log.error(errorMessage);
@@ -68,10 +71,25 @@ public class MovieServiceImpl implements MovieService {
         }
     }
 
+    private SearchMovieResponse toSearchMovieResponse(SearchHits searchHits, TimeValue took) {
+        SearchMovieResponse searchMovieResponse = new SearchMovieResponse();
+        List<SearchMovieResponse.Hit> hits = new ArrayList<>();
+        for (SearchHit searchHit : searchHits.getHits()) {
+            SearchMovieResponse.Hit hit = new SearchMovieResponse.Hit();
+            hit.setIndex(searchHit.getIndex());
+            hit.setId(searchHit.getId());
+            hit.setScore(searchHit.getScore());
+            hit.setSource(searchHit.getSourceAsString());
+            hits.add(hit);
+        }
+        searchMovieResponse.setHits(hits);
+        searchMovieResponse.setTook(took.toString());
+        return searchMovieResponse;
+    }
+
     private SearchMovieResponse createSearchMovieResponseError(String errorMessage) {
         SearchMovieResponse searchMovieResponse = new SearchMovieResponse();
         searchMovieResponse.setError(new SearchMovieResponse.Error(errorMessage));
         return searchMovieResponse;
     }
-
 }

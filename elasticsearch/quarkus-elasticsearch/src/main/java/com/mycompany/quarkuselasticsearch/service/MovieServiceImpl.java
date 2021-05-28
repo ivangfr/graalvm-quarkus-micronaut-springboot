@@ -2,7 +2,6 @@ package com.mycompany.quarkuselasticsearch.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mycompany.quarkuselasticsearch.exception.MovieServiceException;
-import com.mycompany.quarkuselasticsearch.mapper.MovieMapper;
 import com.mycompany.quarkuselasticsearch.model.Movie;
 import com.mycompany.quarkuselasticsearch.rest.dto.SearchMovieResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -13,12 +12,17 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @ApplicationScoped
@@ -26,9 +30,6 @@ public class MovieServiceImpl implements MovieService {
 
     @Inject
     RestHighLevelClient client;
-
-    @Inject
-    MovieMapper movieMapper;
 
     @Inject
     ObjectMapper mapper;
@@ -61,12 +62,28 @@ public class MovieServiceImpl implements MovieService {
             searchRequest.source(searchSourceBuilder);
             SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
             log.info("Searching for '{}' took {} and found {}", title, searchResponse.getTook(), searchResponse.getHits().getTotalHits());
-            return movieMapper.toSearchMovieResponse(searchResponse.getHits(), searchResponse.getTook());
+            return toSearchMovieResponse(searchResponse.getHits(), searchResponse.getTook());
         } catch (Exception e) {
             String errorMessage = String.format("An exception occurred while searching for title '%s'. %s", title, e.getMessage());
             log.error(errorMessage);
             return createSearchMovieResponseError(errorMessage);
         }
+    }
+
+    private SearchMovieResponse toSearchMovieResponse(SearchHits searchHits, TimeValue took) {
+        SearchMovieResponse searchMovieResponse = new SearchMovieResponse();
+        List<SearchMovieResponse.Hit> hits = new ArrayList<>();
+        for (SearchHit searchHit : searchHits.getHits()) {
+            SearchMovieResponse.Hit hit = new SearchMovieResponse.Hit();
+            hit.setIndex(searchHit.getIndex());
+            hit.setId(searchHit.getId());
+            hit.setScore(searchHit.getScore());
+            hit.setSource(searchHit.getSourceAsString());
+            hits.add(hit);
+        }
+        searchMovieResponse.setHits(hits);
+        searchMovieResponse.setTook(took.toString());
+        return searchMovieResponse;
     }
 
     private SearchMovieResponse createSearchMovieResponseError(String errorMessage) {
