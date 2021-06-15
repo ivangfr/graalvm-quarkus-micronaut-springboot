@@ -16,10 +16,10 @@
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.5.4</micronaut.version>
+        <micronaut.version>2.5.5</micronaut.version>
         <exec.mainClass>com.mycompany.producerapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
-        <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
+        <jib-maven-plugin.version>3.1.1</jib-maven-plugin.version>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
 

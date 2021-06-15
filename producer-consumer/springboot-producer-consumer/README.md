@@ -32,7 +32,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Run the command below to start the application
       ```
-      ./mvnw clean package spring-boot:run --projects producer-api
+      ./mvnw clean spring-boot:run --projects producer-api
       ```
 
   - **consumer-api**
@@ -41,7 +41,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Run the command below to start the application
       ```
-      ./mvnw clean package spring-boot:run --projects consumer-api -Dspring-boot.run.jvmArguments="-Dserver.port=8081"
+      ./mvnw clean spring-boot:run --projects consumer-api -Dspring-boot.run.jvmArguments="-Dserver.port=8081"
       ```
 
 - **Simple Test**

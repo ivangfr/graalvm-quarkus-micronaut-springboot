@@ -18,7 +18,7 @@
 
 - Run the command below to start the application
   ```
-  ./mvnw clean package spring-boot:run
+  ./mvnw clean spring-boot:run
   ```
 
 - A simple test can be done by opening a new terminal and running
