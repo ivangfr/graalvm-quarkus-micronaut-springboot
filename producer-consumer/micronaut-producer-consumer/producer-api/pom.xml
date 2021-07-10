@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>producer-api</artifactId>
+    <version>1.0.0</version>
     <packaging>${packaging}</packaging>
 
     <parent>
-        <groupId>com.mycompany</groupId>
-        <artifactId>micronaut-producer-consumer</artifactId>
-        <version>1.0.0</version>
-        <relativePath>../pom.xml</relativePath>
+        <groupId>io.micronaut</groupId>
+        <artifactId>micronaut-parent</artifactId>
+        <version>2.5.8</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>2.5.5</micronaut.version>
+        <micronaut.version>2.5.8</micronaut.version>
         <exec.mainClass>com.mycompany.producerapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
-        <jib-maven-plugin.version>3.1.1</jib-maven-plugin.version>
+        <jib-maven-plugin.version>3.1.2</jib-maven-plugin.version>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
 

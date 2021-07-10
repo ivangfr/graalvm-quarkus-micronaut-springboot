@@ -7,12 +7,6 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <parent>
-        <groupId>io.micronaut</groupId>
-        <artifactId>micronaut-parent</artifactId>
-        <version>2.5.5</version>
-    </parent>
-
     <modules>
         <module>producer-api</module>
         <module>consumer-api</module>
