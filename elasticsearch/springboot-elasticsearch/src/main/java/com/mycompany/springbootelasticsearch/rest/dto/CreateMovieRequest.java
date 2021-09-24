@@ -12,5 +12,4 @@ public class CreateMovieRequest {
 
     @NotBlank
     private String title;
-
 }

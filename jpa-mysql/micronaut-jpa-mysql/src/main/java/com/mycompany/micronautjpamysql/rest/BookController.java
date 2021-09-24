@@ -3,7 +3,7 @@ package com.mycompany.micronautjpamysql.rest;
 import com.mycompany.micronautjpamysql.exception.BookNotFoundException;
 import com.mycompany.micronautjpamysql.mapper.BookMapper;
 import com.mycompany.micronautjpamysql.model.Book;
-import com.mycompany.micronautjpamysql.rest.dto.CreateBookDto;
+import com.mycompany.micronautjpamysql.rest.dto.CreateBookRequest;
 import com.mycompany.micronautjpamysql.service.BookService;
 
 import io.micronaut.http.HttpStatus;
@@ -42,10 +42,9 @@ public class BookController {
 
     @Status(HttpStatus.CREATED)
     @Post
-    public Book saveBook(@Valid @Body CreateBookDto createBookDto) {
-        log.info("Received request to create book: {}", createBookDto);
-        Book book = bookMapper.toBook(createBookDto);
+    public Book saveBook(@Valid @Body CreateBookRequest createBookRequest) {
+        log.info("Received request to create book: {}", createBookRequest);
+        Book book = bookMapper.toBook(createBookRequest);
         return bookService.saveBook(book);
     }
-
 }

@@ -1,16 +1,15 @@
-package com.mycompany.quarkusjpamysql.rest.dto;
+package com.mycompany.producerapi.rest.dto;
 
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class CreateBookDto {
+public class CreateNewsRequest {
 
     @NotBlank
-    private String isbn;
+    private String source;
 
     @NotBlank
     private String title;
-
 }

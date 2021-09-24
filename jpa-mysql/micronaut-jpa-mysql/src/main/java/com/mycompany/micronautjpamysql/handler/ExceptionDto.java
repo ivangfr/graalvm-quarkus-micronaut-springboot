@@ -12,5 +12,4 @@ public class ExceptionDto {
     String path;
     int status;
     String timestamp;
-
 }

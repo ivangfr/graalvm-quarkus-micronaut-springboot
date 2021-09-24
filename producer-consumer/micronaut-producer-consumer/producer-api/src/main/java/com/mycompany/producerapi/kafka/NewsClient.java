@@ -10,5 +10,4 @@ public interface NewsClient {
 
     @Topic("${app.kafka.output.topics}")
     void send(@KafkaKey String id, News newsMessage);
-
 }

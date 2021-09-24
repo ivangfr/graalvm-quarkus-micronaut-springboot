@@ -9,5 +9,4 @@ public class SpringbootJpaMysqlApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringbootJpaMysqlApplication.class, args);
     }
-
 }

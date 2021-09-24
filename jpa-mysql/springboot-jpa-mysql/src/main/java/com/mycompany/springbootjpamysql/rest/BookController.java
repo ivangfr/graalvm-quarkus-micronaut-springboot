@@ -3,7 +3,7 @@ package com.mycompany.springbootjpamysql.rest;
 import com.mycompany.springbootjpamysql.exception.BookNotFoundException;
 import com.mycompany.springbootjpamysql.mapper.BookMapper;
 import com.mycompany.springbootjpamysql.model.Book;
-import com.mycompany.springbootjpamysql.rest.dto.CreateBookDto;
+import com.mycompany.springbootjpamysql.rest.dto.CreateBookRequest;
 import com.mycompany.springbootjpamysql.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,11 +45,10 @@ public class BookController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    //public Book createBook(@Valid @RequestBody CreateBookDto createBookDto) {
-    public Book createBook(@RequestBody CreateBookDto createBookDto) {
-        log.info("Received request to create book: {}", createBookDto);
-        Book book = bookMapper.toBook(createBookDto);
+    //public Book createBook(@Valid @RequestBody CreateBookRequest createBookRequest) {
+    public Book createBook(@RequestBody CreateBookRequest createBookRequest) {
+        log.info("Received request to create book: {}", createBookRequest);
+        Book book = bookMapper.toBook(createBookRequest);
         return bookService.saveBook(book);
     }
-
 }

@@ -2,7 +2,7 @@ package com.mycompany.producerapi.rest;
 
 import com.mycompany.producerapi.domain.News;
 import com.mycompany.producerapi.kafka.NewsProducer;
-import com.mycompany.producerapi.rest.dto.CreateNewsDto;
+import com.mycompany.producerapi.rest.dto.CreateNewsRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,11 +23,10 @@ public class NewsController {
     }
 
     @PostMapping
-    // public String publishNews(@Valid @RequestBody CreateNewsDto createNewsDto) {
-    public String publishNews(@RequestBody CreateNewsDto createNewsDto) {
+    // public String publishNews(@Valid @RequestBody CreateNewsRequest createNewsRequest) {
+    public String publishNews(@RequestBody CreateNewsRequest createNewsRequest) {
         String id = UUID.randomUUID().toString();
-        newsProducer.send(new News(id, createNewsDto.getSource(), createNewsDto.getTitle()));
+        newsProducer.send(new News(id, createNewsRequest.getSource(), createNewsRequest.getTitle()));
         return id;
     }
-
 }

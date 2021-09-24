@@ -11,5 +11,4 @@ public class Movie {
 
     private String imdb;
     private String title;
-
 }

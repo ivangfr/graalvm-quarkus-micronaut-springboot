@@ -1,7 +1,7 @@
 package com.mycompany.quarkusjpamysql.mapper;
 
 import com.mycompany.quarkusjpamysql.model.Book;
-import com.mycompany.quarkusjpamysql.rest.dto.CreateBookDto;
+import com.mycompany.quarkusjpamysql.rest.dto.CreateBookRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -9,6 +9,5 @@ import org.mapstruct.Mapping;
 public interface BookMapper {
 
     @Mapping(target = "id", ignore = true)
-    Book toBook(CreateBookDto createBookDto);
-
+    Book toBook(CreateBookRequest createBookRequest);
 }

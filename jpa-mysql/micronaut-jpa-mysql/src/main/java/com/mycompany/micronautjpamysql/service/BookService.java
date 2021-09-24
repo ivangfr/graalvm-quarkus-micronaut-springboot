@@ -10,5 +10,4 @@ public interface BookService {
     Book validateAndGetBook(Long id) throws BookNotFoundException;
 
     Book saveBook(Book book);
-
 }

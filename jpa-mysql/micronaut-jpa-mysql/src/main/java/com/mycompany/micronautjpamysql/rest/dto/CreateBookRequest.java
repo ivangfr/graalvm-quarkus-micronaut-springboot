@@ -7,12 +7,11 @@ import javax.validation.constraints.NotBlank;
 
 @Introspected
 @Data
-public class CreateBookDto {
+public class CreateBookRequest {
 
     @NotBlank
     private String isbn;
 
     @NotBlank
     private String title;
-
 }

@@ -47,5 +47,4 @@ public class NewsProducerConfig {
                              @Value("${spring.kafka.producer.num-partitions}") Integer numPartitions) {
         return new NewTopic(topic, numPartitions, (short) 1);
     }
-
 }

@@ -1,7 +1,7 @@
 package com.mycompany.springbootjpamysql.mapper;
 
 import com.mycompany.springbootjpamysql.model.Book;
-import com.mycompany.springbootjpamysql.rest.dto.CreateBookDto;
+import com.mycompany.springbootjpamysql.rest.dto.CreateBookRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -9,6 +9,5 @@ import org.mapstruct.Mapping;
 public interface BookMapper {
 
     @Mapping(target = "id", ignore = true)
-    Book toBook(CreateBookDto createBookDto);
-
+    Book toBook(CreateBookRequest createBookRequest);
 }

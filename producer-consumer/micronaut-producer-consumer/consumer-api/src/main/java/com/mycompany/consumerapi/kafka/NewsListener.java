@@ -16,5 +16,4 @@ public class NewsListener {
         log.info("Received message\n---\nTOPIC: {}; PARTITION: {}; OFFSET: {}; TIMESTAMP: {};\nKEY: {}\nPAYLOAD: {}\n---",
                 topic, partition, offset, timestamp, key, newsMessage);
     }
-
 }

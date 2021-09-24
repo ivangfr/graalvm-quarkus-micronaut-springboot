@@ -3,7 +3,7 @@ package com.mycompany.quarkusjpamysql.rest;
 import com.mycompany.quarkusjpamysql.exception.BookNotFoundException;
 import com.mycompany.quarkusjpamysql.mapper.BookMapper;
 import com.mycompany.quarkusjpamysql.model.Book;
-import com.mycompany.quarkusjpamysql.rest.dto.CreateBookDto;
+import com.mycompany.quarkusjpamysql.rest.dto.CreateBookRequest;
 import com.mycompany.quarkusjpamysql.service.BookService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,11 +40,10 @@ public class BookResource {
     }
 
     @POST
-    public Response createBook(@Valid CreateBookDto createBookDto) {
-        log.info("Received request to create book: {}", createBookDto);
-        Book book = bookMapper.toBook(createBookDto);
+    public Response createBook(@Valid CreateBookRequest createBookRequest) {
+        log.info("Received request to create book: {}", createBookRequest);
+        Book book = bookMapper.toBook(createBookRequest);
         book = bookService.saveBook(book);
         return Response.status(Response.Status.CREATED).entity(book).build();
     }
-
 }

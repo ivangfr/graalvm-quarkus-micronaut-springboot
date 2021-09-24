@@ -35,5 +35,4 @@ public class MovieResource {
     private Movie toMovie(CreateMovieRequest createMovieRequest) {
         return new Movie(createMovieRequest.getImdb(), createMovieRequest.getTitle());
     }
-
 }

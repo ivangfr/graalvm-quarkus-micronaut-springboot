@@ -22,5 +22,4 @@ public class NewsListener {
                 kafkaRecord.getPayload());
         return kafkaRecord.ack();
     }
-
 }

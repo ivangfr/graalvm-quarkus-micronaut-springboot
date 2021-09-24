@@ -81,9 +81,6 @@
                         <name>${docker-image.prefix}/${project.artifactId}-native:${project.version}</name>
                         <env>
                             <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-                            <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
-                                --enable-https
-                            </BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
                         </env>
                     </image>
                 </configuration>

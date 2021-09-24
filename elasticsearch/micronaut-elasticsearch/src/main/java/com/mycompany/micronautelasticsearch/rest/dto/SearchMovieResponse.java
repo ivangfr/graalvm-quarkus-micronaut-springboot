@@ -31,5 +31,4 @@ public class SearchMovieResponse {
     public static class Error {
         private String message;
     }
-
 }

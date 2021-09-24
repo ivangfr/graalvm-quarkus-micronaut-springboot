@@ -15,5 +15,4 @@ public class NewsConsumer {
     public void listen(@Payload News news, ConsumerRecordMetadata metadata) {
         log.info("Received message\n---\nTOPIC: {}; PARTITION: {}; OFFSET: {};\nPAYLOAD: {}\n---", metadata.topic(), metadata.partition(), metadata.offset(), news);
     }
-
 }

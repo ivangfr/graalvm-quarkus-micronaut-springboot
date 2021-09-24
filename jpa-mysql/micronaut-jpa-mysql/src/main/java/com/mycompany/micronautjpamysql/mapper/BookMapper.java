@@ -1,7 +1,7 @@
 package com.mycompany.micronautjpamysql.mapper;
 
 import com.mycompany.micronautjpamysql.model.Book;
-import com.mycompany.micronautjpamysql.rest.dto.CreateBookDto;
+import com.mycompany.micronautjpamysql.rest.dto.CreateBookRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -12,6 +12,5 @@ import jakarta.inject.Singleton;
 public interface BookMapper {
 
     @Mapping(target = "id", ignore = true)
-    Book toBook(CreateBookDto createBookDto);
-
+    Book toBook(CreateBookRequest createBookRequest);
 }

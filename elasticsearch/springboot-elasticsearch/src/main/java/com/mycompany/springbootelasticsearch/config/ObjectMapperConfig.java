@@ -12,5 +12,4 @@ public class ObjectMapperConfig {
     ObjectMapper objectMapper() {
         return new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
-
 }

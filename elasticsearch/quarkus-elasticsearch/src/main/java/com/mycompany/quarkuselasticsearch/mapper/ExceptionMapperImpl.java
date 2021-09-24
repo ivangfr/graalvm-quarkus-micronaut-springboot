@@ -31,5 +31,4 @@ public class ExceptionMapperImpl implements ExceptionMapper<Exception> {
                 )
                 .build();
     }
-
 }

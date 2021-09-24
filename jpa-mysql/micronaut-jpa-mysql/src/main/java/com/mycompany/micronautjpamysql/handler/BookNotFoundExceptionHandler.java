@@ -28,5 +28,4 @@ public class BookNotFoundExceptionHandler implements ExceptionHandler<BookNotFou
         );
         return HttpResponse.notFound(exceptionDto);
     }
-
 }

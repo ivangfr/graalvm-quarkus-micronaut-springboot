@@ -8,5 +8,4 @@ public interface MovieService {
     String saveMovie(Movie movie);
 
     SearchMovieResponse searchMovies(String title);
-
 }

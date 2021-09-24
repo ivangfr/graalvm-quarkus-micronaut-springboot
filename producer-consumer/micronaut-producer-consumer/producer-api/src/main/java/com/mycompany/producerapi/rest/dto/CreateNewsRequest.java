@@ -5,9 +5,8 @@ import lombok.Data;
 
 @Introspected
 @Data
-public class CreateNewsDto {
+public class CreateNewsRequest {
 
     private String source;
     private String title;
-
 }

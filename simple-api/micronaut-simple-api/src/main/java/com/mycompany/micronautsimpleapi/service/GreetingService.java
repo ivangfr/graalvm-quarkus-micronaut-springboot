@@ -5,5 +5,4 @@ import com.mycompany.micronautsimpleapi.domain.Greeting;
 public interface GreetingService {
 
     Greeting greet(String name);
-
 }

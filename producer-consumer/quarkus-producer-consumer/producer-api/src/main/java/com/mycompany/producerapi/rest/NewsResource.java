@@ -1,7 +1,7 @@
 package com.mycompany.producerapi.rest;
 
 import com.mycompany.producerapi.domain.News;
-import com.mycompany.producerapi.rest.dto.CreateNewsDto;
+import com.mycompany.producerapi.rest.dto.CreateNewsRequest;
 import io.smallrye.reactive.messaging.kafka.KafkaRecord;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.reactive.messaging.Channel;
@@ -25,12 +25,11 @@ public class NewsResource {
     Emitter<News> emitter;
 
     @POST
-    public String createNews(@Valid CreateNewsDto createNewsDto) {
+    public String createNews(@Valid CreateNewsRequest createNewsRequest) {
         String id = UUID.randomUUID().toString();
-        News news = new News(id, createNewsDto.getSource(), createNewsDto.getTitle());
+        News news = new News(id, createNewsRequest.getSource(), createNewsRequest.getTitle());
         log.info("Sending News message: key={}, {}", id, news);
         emitter.send(KafkaRecord.of(id, news));
         return id;
     }
-
 }
