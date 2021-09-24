@@ -2,7 +2,7 @@ package com.mycompany.micronautsimpleapi.service;
 
 import com.mycompany.micronautsimpleapi.domain.Greeting;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class GreetingServiceImpl implements GreetingService {

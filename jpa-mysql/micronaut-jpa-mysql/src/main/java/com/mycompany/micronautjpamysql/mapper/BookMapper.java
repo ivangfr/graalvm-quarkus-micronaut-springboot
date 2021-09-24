@@ -5,7 +5,7 @@ import com.mycompany.micronautjpamysql.rest.dto.CreateBookDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 @Singleton
 @Mapper(componentModel = "jsr330")

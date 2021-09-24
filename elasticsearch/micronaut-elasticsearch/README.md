@@ -90,7 +90,7 @@
     ivanfranchin/micronaut-elasticsearch-native:1.0.0
   ```
 
-- A simple test can be done by opening a new terminal and running  (See [Issues](#issues))
+- A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST "localhost:9115/api/movies" -H "Content-type: application/json" \
     -d '{"imdb": "789", "title": "Resident Evil"}'
@@ -99,7 +99,3 @@
   ```
 
 - To stop and remove application Docker container, press `Ctrl+C` in its terminal
-
-## Issues
-
-After building successfuly the Docker native images and starting its Docker container, once a request to create a movie arrives, the application gets stuck. Besides, the app is taking 10 seconds to start. See [Micronaut Elasticsearch, issue #188](https://github.com/micronaut-projects/micronaut-elasticsearch/issues/188)

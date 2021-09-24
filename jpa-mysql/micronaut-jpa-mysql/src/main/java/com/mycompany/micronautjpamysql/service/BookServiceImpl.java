@@ -4,7 +4,7 @@ import com.mycompany.micronautjpamysql.exception.BookNotFoundException;
 import com.mycompany.micronautjpamysql.model.Book;
 import com.mycompany.micronautjpamysql.repository.BookRepository;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 @Singleton
 public class BookServiceImpl implements BookService {
