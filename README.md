@@ -55,11 +55,11 @@ The following table shows the results after running the script `collect-jvm-jar-
 .............................. + .............. + .............. + ................. + ................. |
          quarkus-jpa-mysql-jvm |            11s |            33M |                3s |             404MB |
        micronaut-jpa-mysql-jvm |             9s |            35M |               13s |             362MB |
-      springboot-jpa-mysql-jvm |            22s |            42M |               11s |             290MB |
+      springboot-jpa-mysql-jvm |            36s |            43M |               18s |             291MB |
 .............................. + .............. + .............. + ................. + ................. |
       quarkus-producer-api-jvm |             9s |            33M |                3s |             404MB |
     micronaut-producer-api-jvm |             8s |            28M |               13s |             354MB |
-   springboot-producer-api-jvm |            19s |            35M |               11s |             282MB |
+   springboot-producer-api-jvm |            19s |            36M |               10s |             284MB |
 .............................. + .............. + .............. + ................. + ................. |
       quarkus-consumer-api-jvm |             8s |            31M |                2s |             402MB |
     micronaut-consumer-api-jvm |             7s |            28M |               12s |             354MB |
@@ -67,7 +67,7 @@ The following table shows the results after running the script `collect-jvm-jar-
 .............................. + .............. + .............. + ................. + ................. |
      quarkus-elasticsearch-jvm |             8s |            40M |                2s |             412MB |
    micronaut-elasticsearch-jvm |            10s |            44M |               12s |             370MB |
-  springboot-elasticsearch-jvm |            20s |            52M |               11s |             301MB |
+  springboot-elasticsearch-jvm |            21s |            52M |               10s |             301MB |
 ```
 
 Table below shows the results after running the script `collect-native-jar-docker-size-times.sh`
@@ -80,11 +80,11 @@ Table below shows the results after running the script `collect-native-jar-docke
 ............................... + .............. + .............. + ................. + ................. |
        quarkus-jpa-mysql-native |           234s |            71M |                4s |             177MB |
      micronaut-jpa-mysql-native |             9s |            36M |              260s |             110MB |
-    springboot-jpa-mysql-native |            21s |            42M |              751s |             158MB |
+    springboot-jpa-mysql-native |            22s |            43M |             1088s |             187MB |
 ............................... + .............. + .............. + ................. + ................. |
     quarkus-producer-api-native |           206s |            64M |                3s |             169MB |
   micronaut-producer-api-native |             8s |            28M |              216s |            95.1MB |
- springboot-producer-api-native |            18s |            35M |              611s |             123MB |
+ springboot-producer-api-native |            18s |            36M |              752s |             152MB |
 ............................... + .............. + .............. + ................. + ................. |
     quarkus-consumer-api-native |           193s |            60M |                4s |             166MB |
   micronaut-consumer-api-native |             6s |            28M |              218s |            94.9MB |
@@ -92,7 +92,7 @@ Table below shows the results after running the script `collect-native-jar-docke
 ............................... + .............. + .............. + ................. + ................. |
    quarkus-elasticsearch-native |           202s |            52M |                7s |             157MB |
  micronaut-elasticsearch-native |             9s |            44M |              247s |            97.3MB |
-springboot-elasticsearch-native |            20s |            52M |              804s |             167MB |
+springboot-elasticsearch-native |            24s |            52M |              819s |             167MB |
 ```
 
 Finally, the following table shows the results after running the script `collect-ab-times-memory-usage.sh`

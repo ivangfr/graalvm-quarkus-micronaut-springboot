@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
-// import javax.validation.Valid;
+import javax.validation.Valid;
 
 @Slf4j
 @RestController
@@ -45,8 +45,7 @@ public class BookController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    //public Book createBook(@Valid @RequestBody CreateBookRequest createBookRequest) {
-    public Book createBook(@RequestBody CreateBookRequest createBookRequest) {
+    public Book createBook(@Valid @RequestBody CreateBookRequest createBookRequest) {
         log.info("Received request to create book: {}", createBookRequest);
         Book book = bookMapper.toBook(createBookRequest);
         return bookService.saveBook(book);

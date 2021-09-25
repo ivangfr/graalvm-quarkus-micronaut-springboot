@@ -18,7 +18,7 @@ In this example, we will implement three versions of `producer - consumer` appli
   docker-compose up -d
   ```
 
-- Wait a little bit until all containers `Up (healthy)`. You can check it by running
+- Wait for all containers to be with status `running (healthy)`. To check it, run
   ```
   docker-compose ps
   ```

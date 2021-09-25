@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-// -- Commented out as 'spring-boot-starter-validation' dependency is not working in native image
-// import javax.validation.Valid;
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -23,8 +22,7 @@ public class NewsController {
     }
 
     @PostMapping
-    // public String publishNews(@Valid @RequestBody CreateNewsRequest createNewsRequest) {
-    public String publishNews(@RequestBody CreateNewsRequest createNewsRequest) {
+    public String publishNews(@Valid @RequestBody CreateNewsRequest createNewsRequest) {
         String id = UUID.randomUUID().toString();
         newsProducer.send(new News(id, createNewsRequest.getSource(), createNewsRequest.getTitle()));
         return id;
