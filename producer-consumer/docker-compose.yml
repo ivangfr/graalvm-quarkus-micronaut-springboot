@@ -12,7 +12,6 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
     healthcheck:
       test: "echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT"
-      start_period: 30s
 
   kafka:
     image: confluentinc/cp-kafka:6.1.1
@@ -31,7 +30,6 @@ services:
       KAFKA_DELETE_TOPIC_ENABLE: "true"
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
-      start_period: 30s
 
   kafka-rest-proxy:
     image: confluentinc/cp-kafka-rest:6.1.1
@@ -50,7 +48,6 @@ services:
       KAFKA_REST_CONSUMER_REQUEST_TIMEOUT_MS: 30000
     healthcheck:
       test: "curl -f http://localhost:8082 || exit 1"
-      start_period: 30s
 
   kafka-topics-ui:
     image: landoop/kafka-topics-ui:0.9.4
@@ -65,7 +62,6 @@ services:
       PROXY: "true"
     healthcheck:
       test: "wget --quiet --tries=1 --spider http://localhost:8000 || exit 1"
-      start_period: 30s
 
   kafka-manager:
     container_name: kafka-manager
@@ -81,4 +77,3 @@ services:
     command: -Dpidfile.path=/dev/null
     healthcheck:
       test: "curl -f http://localhost:9000 || exit 1"
-      start_period: 30s

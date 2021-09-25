@@ -20,4 +20,3 @@ services:
         hard: -1
     healthcheck:
       test: "curl -f http://localhost:9200 || exit 1"
-      start_period: 1m
