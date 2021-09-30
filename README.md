@@ -54,7 +54,7 @@ The following table shows the results after running the script `collect-jvm-jar-
      springboot-simple-api-jvm |            17s |            23M |               14s |             268MB |
 .............................. + .............. + .............. + ................. + ................. |
          quarkus-jpa-mysql-jvm |            11s |            33M |                3s |             404MB |
-       micronaut-jpa-mysql-jvm |             9s |            35M |               13s |             362MB |
+       micronaut-jpa-mysql-jvm |             9s |            36M |               16s |             362MB |
       springboot-jpa-mysql-jvm |            36s |            43M |               18s |             291MB |
 .............................. + .............. + .............. + ................. + ................. |
       quarkus-producer-api-jvm |             9s |            33M |                3s |             404MB |
@@ -79,7 +79,7 @@ Table below shows the results after running the script `collect-native-jar-docke
    springboot-simple-api-native |            15s |            23M |              585s |             123MB |
 ............................... + .............. + .............. + ................. + ................. |
        quarkus-jpa-mysql-native |           234s |            71M |                4s |             177MB |
-     micronaut-jpa-mysql-native |             9s |            36M |              260s |             110MB |
+     micronaut-jpa-mysql-native |             9s |            36M |              272s |             110MB |
     springboot-jpa-mysql-native |            22s |            43M |             1088s |             187MB |
 ............................... + .............. + .............. + ................. + ................. |
     quarkus-producer-api-native |           206s |            64M |                3s |             169MB |
@@ -107,10 +107,10 @@ Finally, the following table shows the results after running the script `collect
    springboot-simple-api-native |        138ms |  34.53MiB/256MiB(13.49%) |              4s |                4s |  106.3MiB/256MiB(41.51%) |            4s |
 ............................... + ............ + ........................ + ............... + ................. + ........................ +  ............ |
           quarkus-jpa-mysql-jvm |       2764ms |  99.44MiB/256MiB(38.84%) |              9s |                6s |  157.5MiB/256MiB(61.52%) |            0s |
-        micronaut-jpa-mysql-jvm |       8595ms |  105.8MiB/256MiB(41.33%) |              8s |                6s |  157.7MiB/256MiB(61.61%) |            0s |
+        micronaut-jpa-mysql-jvm |       8689ms |  105.4MiB/256MiB(41.17%) |              8s |                6s |  156.9MiB/256MiB(61.27%) |            1s |
        springboot-jpa-mysql-jvm |       4837ms |  172.4MiB/256MiB(67.35%) |              8s |                6s |  219.8MiB/256MiB(85.87%) |            2s |
        quarkus-jpa-mysql-native |         31ms |   7.895MiB/256MiB(3.08%) |              5s |                6s |  41.81MiB/256MiB(16.33%) |            1s |
-     micronaut-jpa-mysql-native |            - |                        - |               - |                 - |                        - |             - |
+     micronaut-jpa-mysql-native |         54ms |   18.78MiB/256MiB(7.33%) |              5s |                6s |    172MiB/256MiB(67.21%) |            1s |
     springboot-jpa-mysql-native |        195ms |  44.86MiB/256MiB(17.52%) |              5s |                5s |  114.9MiB/256MiB(44.87%) |            3s |
 ............................... + ............ + ........................ + ............... + ................. + ........................ +  ............ |
        quarkus-producer-api-jvm |       2188ms |  88.23MiB/256MiB(34.47%) |             13s |               10s |  160.4MiB/256MiB(62.65%) |            1s |
@@ -138,8 +138,6 @@ springboot-elasticsearch-native |        160ms |  91.32MiB/256MiB(35.67%) |     
 **Comments**
 
 - Comparing `Ab Testing Time` with `Ab Testing Time 2` columns, we can see that JVM was able to perform some runtime optimizations, making the JVM applications to perform faster on the second ab test run;
-
-- Unable to collect running statistics for `micronaut-jpa-mysql-native` See [Issues](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/jpa-mysql/micronaut-jpa-mysql#issues);
 
 - `micronaut-producer-api-native` or `micronaut-consumer-api-native` has very slow startup time, 10s. See [Micronaut Core, issue #5206](https://github.com/micronaut-projects/micronaut-core/issues/5206);
 

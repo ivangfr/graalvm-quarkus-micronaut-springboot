@@ -462,29 +462,29 @@ then
     echo "MICRONAUT-JPA-MYSQL-NATIVE"
     echo "--------------------------"
 
-    # docker run -d --rm --name micronaut-jpa-mysql-native \
-    #   -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
-    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-    #   --network jpa-mysql_default \
-    #   ivanfranchin/micronaut-jpa-mysql-native:1.0.0
+    docker run -d --rm --name micronaut-jpa-mysql-native \
+      -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
+      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      --network jpa-mysql_default \
+      ivanfranchin/micronaut-jpa-mysql-native:1.0.0
 
-    # wait_for_container_log "micronaut-jpa-mysql-native" "Startup completed in"
-    # micronaut_jpa_mysql_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+    wait_for_container_log "micronaut-jpa-mysql-native" "Startup completed in"
+    micronaut_jpa_mysql_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
 
-    # micronaut_jpa_mysql_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-native")
+    micronaut_jpa_mysql_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-native")
 
-    # run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9089/api/books"
-    # micronaut_jpa_mysql_native[ab_testing_time]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9089/api/books"
+    micronaut_jpa_mysql_native[ab_testing_time]=$run_command_exec_time
 
-    # warm_up $WARM_UP_TIMES "ab -p test-book.json -T 'application/json' $AB_PARAMS_WARM_UP_JPA_MYSQL http://localhost:9089/api/books"
+    warm_up $WARM_UP_TIMES "ab -p test-book.json -T 'application/json' $AB_PARAMS_WARM_UP_JPA_MYSQL http://localhost:9089/api/books"
 
-    # run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9089/api/books"
-    # micronaut_jpa_mysql_native[ab_testing_time_2]=$run_command_exec_time
+    run_command "ab -p test-book.json -T 'application/json' $AB_PARAMS_JPA_MYSQL http://localhost:9089/api/books"
+    micronaut_jpa_mysql_native[ab_testing_time_2]=$run_command_exec_time
 
-    # micronaut_jpa_mysql_native[final_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-native")
+    micronaut_jpa_mysql_native[final_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-native")
 
-    # run_command "docker stop micronaut-jpa-mysql-native"
-    # micronaut_jpa_mysql_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop micronaut-jpa-mysql-native"
+    micronaut_jpa_mysql_native[shutdown_time]=$run_command_exec_time
 
   fi
 

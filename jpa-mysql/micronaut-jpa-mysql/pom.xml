@@ -72,9 +72,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-          <groupId>io.micronaut</groupId>
-          <artifactId>micronaut-management</artifactId>
-          <scope>compile</scope>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-management</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
@@ -87,18 +87,13 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-          <groupId>io.micronaut.micrometer</groupId>
-          <artifactId>micronaut-micrometer-core</artifactId>
-          <scope>compile</scope>
+            <groupId>io.micronaut.micrometer</groupId>
+            <artifactId>micronaut-micrometer-core</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
-          <groupId>io.micronaut.micrometer</groupId>
-          <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
-          <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.sql</groupId>
-            <artifactId>micronaut-hibernate-jpa</artifactId>
+            <groupId>io.micronaut.micrometer</groupId>
+            <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -117,13 +112,24 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.graalvm.nativeimage</groupId>
+            <artifactId>svm</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.graalvm.sdk</groupId>
+            <artifactId>graal-sdk</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- MapStruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
-        
+
         <!-- MapStruct needs this dependency -->
         <dependency>
             <groupId>javax.inject</groupId>
@@ -149,14 +155,14 @@
                 <groupId>io.micronaut.build</groupId>
                 <artifactId>micronaut-maven-plugin</artifactId>
             </plugin>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <!-- Uncomment to enable incremental compilation -->
                     <!-- <useIncrementalCompilation>false</useIncrementalCompilation> -->
-                    
+
                     <annotationProcessorPaths combine.self="override">
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -192,6 +198,11 @@
                             <groupId>io.micronaut.data</groupId>
                             <artifactId>micronaut-data-processor</artifactId>
                             <version>${micronaut.data.version}</version>
+                        </path>
+                        <path>
+                            <groupId>io.micronaut</groupId>
+                            <artifactId>micronaut-graal</artifactId>
+                            <version>${micronaut.version}</version>
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
