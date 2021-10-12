@@ -66,7 +66,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Clean the application
+    - Clean the target folder
       ```
       ./mvnw clean --projects producer-api
       ```
@@ -88,7 +88,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Clean the application
+    - Clean the target folder
       ```
       ./mvnw clean --projects consumer-api
       ```
@@ -128,7 +128,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Clean the application
+    - Clean the target folder
       ```
       ./mvnw clean --projects producer-api
       ```
@@ -150,7 +150,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/producer-consumer/micronaut-producer-consumer` folder
 
-    - Clean the application
+    - Clean the target folder
       ```
       ./mvnw clean --projects consumer-api
       ```

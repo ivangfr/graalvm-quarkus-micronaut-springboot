@@ -9,7 +9,7 @@ In this example, we will implement three versions of a Restful API for handling 
 - ### [micronaut-elasticsearch](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/micronaut-elasticsearch#graalvm-quarkus-micronaut-springboot)
 - ### [springboot-elasticsearch](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/springboot-elasticsearch#graalvm-quarkus-micronaut-springboot)
 
-## Start environment
+## Start Environment
 
 - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/elasticsearch` folder
 
@@ -18,7 +18,7 @@ In this example, we will implement three versions of a Restful API for handling 
   docker-compose up -d
   ```
 
-- Wait for `Elasticsearch` container to be with status `running (healthy)`. To check it, run
+- Wait for `Elasticsearch` container to be with state `Up (healthy)`. To check it, run
   ```
   docker-compose ps
   ```

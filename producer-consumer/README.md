@@ -9,7 +9,7 @@ In this example, we will implement three versions of `producer - consumer` appli
 - ### [micronaut-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/micronaut-producer-consumer#graalvm-quarkus-micronaut-springboot)
 - ### [springboot-producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer/springboot-producer-consumer#graalvm-quarkus-micronaut-springboot)
 
-## Start environment
+## Start Environment
 
 - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/producer-consumer` folder
 
@@ -18,7 +18,7 @@ In this example, we will implement three versions of `producer - consumer` appli
   docker-compose up -d
   ```
 
-- Wait for all containers to be with status `running (healthy)`. To check it, run
+- Wait for all containers to be with state `Up (healthy)`. To check it, run
   ```
   docker-compose ps
   ```

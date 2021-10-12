@@ -5,7 +5,7 @@
 
 - ### micronaut-elasticsearch
 
-  [`Micronaut`](https://micronaut.io/) Java Web application that expose a simple REST API for indexing and searching movies in `Elasticsearch`.
+  [`Micronaut`](https://micronaut.io/) Java Web application that exposes a simple REST API for indexing and searching movies in `Elasticsearch`.
   
   It has the following endpoint:
   ```
@@ -40,7 +40,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/micronaut-elasticsearch` folder
 
-- Clean the application
+- Clean the target folder
   ```
   ./mvnw clean
   ```
@@ -72,7 +72,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/elasticsearch/micronaut-elasticsearch` folder
 
-- Clean the application
+- Clean the target folder
   ```
   ./mvnw clean
   ```

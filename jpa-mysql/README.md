@@ -9,7 +9,7 @@ In this example, we will implement three versions of a Restful API for handling 
 - ### [micronaut-jpa-mysql](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/jpa-mysql/micronaut-jpa-mysql#graalvm-quarkus-micronaut-springboot)
 - ### [springboot-jpa-mysql](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/jpa-mysql/springboot-jpa-mysql#graalvm-quarkus-micronaut-springboot)
 
-## Start environment
+## Start Environment
 
 - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/jpa-mysql` folder
 
@@ -18,7 +18,7 @@ In this example, we will implement three versions of a Restful API for handling 
   docker-compose up -d
   ```
 
-- Wait for `MySQL` container to be with status `running (healthy)`. To check it, run
+- Wait for `MySQL` container to be with state `Up (healthy)`. To check it, run
   ```
   docker-compose ps
   ```

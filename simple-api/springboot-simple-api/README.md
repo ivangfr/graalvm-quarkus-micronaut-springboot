@@ -5,7 +5,7 @@
 
 - ### springboot-simple-api
 
-  [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that expose a simple REST API for greetings. It has the following endpoint
+  [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a simple REST API for greetings. It has the following endpoint
   ```
   GET /api/greeting[?name=...]
   ```
@@ -32,7 +32,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/simple-api/springboot-simple-api` folder
 
-- Clean the application
+- Clean the target folder
   ```
   ./mvnw clean
   ```
@@ -59,7 +59,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/simple-api/springboot-simple-api` folder
 
-- Clean the application
+- Clean the target folder
   ```
   ./mvnw clean
   ```

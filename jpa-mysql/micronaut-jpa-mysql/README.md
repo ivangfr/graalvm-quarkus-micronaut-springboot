@@ -41,7 +41,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/jpa-mysql/micronaut-jpa-mysql` folder
 
-- Clean the application
+- Clean the target folder
   ```
   ./mvnw clean
   ```
@@ -73,7 +73,7 @@
 
 - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/jpa-mysql/micronaut-jpa-mysql` folder
 
-- Clean the application
+- Clean the target folder
   ```
   ./mvnw clean
   ```
