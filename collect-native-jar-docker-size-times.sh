@@ -59,10 +59,10 @@ if [ "$1" = "micronaut-simple-api" ] ||
    [ "$1" = "all" ];
 then
 
-echo
-echo "---------------------------"
-echo "MICRONAUT-SIMPLE-API-NATIVE"
-echo "---------------------------"
+  echo
+  echo "---------------------------"
+  echo "MICRONAUT-SIMPLE-API-NATIVE"
+  echo "---------------------------"
 
   cd simple-api/micronaut-simple-api
 
@@ -87,10 +87,10 @@ if [ "$1" = "springboot-simple-api" ] ||
    [ "$1" = "all" ];
 then
 
-echo
-echo "----------------------------"
-echo "SPRINGBOOT-SIMPLE-API-NATIVE"
-echo "----------------------------"
+  echo
+  echo "----------------------------"
+  echo "SPRINGBOOT-SIMPLE-API-NATIVE"
+  echo "----------------------------"
 
   cd simple-api/springboot-simple-api
 
@@ -115,10 +115,10 @@ if [ "$1" = "quarkus-jpa-mysql" ] ||
    [ "$1" = "all" ];
 then
 
-echo
-echo "------------------------"
-echo "QUARKUS-JPA-MYSQL-NATIVE"
-echo "------------------------"
+  echo
+  echo "------------------------"
+  echo "QUARKUS-JPA-MYSQL-NATIVE"
+  echo "------------------------"
 
   cd jpa-mysql/quarkus-jpa-mysql
 
@@ -171,10 +171,10 @@ if [ "$1" = "springboot-jpa-mysql" ] ||
    [ "$1" = "all" ];
 then
 
-echo
-echo "---------------------------"
-echo "SPRINGBOOT-JPA-MYSQL-NATIVE"
-echo "---------------------------"
+  echo
+  echo "---------------------------"
+  echo "SPRINGBOOT-JPA-MYSQL-NATIVE"
+  echo "---------------------------"
 
   cd jpa-mysql/springboot-jpa-mysql
 

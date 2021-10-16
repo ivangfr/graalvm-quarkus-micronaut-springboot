@@ -106,10 +106,10 @@ if [ "$1" = "quarkus-simple-api-native" ] ||
    [ "$1" = "all" ];
 then
 
-echo
-echo "-------------------------"
-echo "QUARKUS-SIMPLE-API-NATIVE"
-echo "-------------------------"
+  echo
+  echo "-------------------------"
+  echo "QUARKUS-SIMPLE-API-NATIVE"
+  echo "-------------------------"
 
   docker run -d --rm --name quarkus-simple-api-native \
     -p 9081:8080 \
@@ -147,10 +147,10 @@ if [ "$1" = "micronaut-simple-api-jvm" ] ||
    [ "$1" = "all" ];
 then
 
-echo
-echo "------------------------"
-echo "MICRONAUT-SIMPLE-API-JVM"
-echo "------------------------"
+  echo
+  echo "------------------------"
+  echo "MICRONAUT-SIMPLE-API-JVM"
+  echo "------------------------"
 
   docker run -d --rm --name micronaut-simple-api-jvm \
     -p 9082:8080 \
@@ -187,33 +187,33 @@ if [ "$1" = "micronaut-simple-api-native" ] ||
    [ "$1" = "all" ];
 then
 
-echo
-echo "---------------------------"
-echo "MICRONAUT-SIMPLE-API-NATIVE"
-echo "---------------------------"
+  echo
+  echo "---------------------------"
+  echo "MICRONAUT-SIMPLE-API-NATIVE"
+  echo "---------------------------"
 
-docker run -d --rm --name micronaut-simple-api-native \
-  -p 9083:8080 \
-  -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-  ivanfranchin/micronaut-simple-api-native:1.0.0
+  docker run -d --rm --name micronaut-simple-api-native \
+    -p 9083:8080 \
+    -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    ivanfranchin/micronaut-simple-api-native:1.0.0
 
-wait_for_container_log "micronaut-simple-api-native" "Startup completed in"
-micronaut_simple_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+  wait_for_container_log "micronaut-simple-api-native" "Startup completed in"
+  micronaut_simple_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
 
-micronaut_simple_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-simple-api-native")
+  micronaut_simple_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-simple-api-native")
 
-run_command "ab $AB_PARAMS_SIMPLE_API http://localhost:9083/api/greeting?name=Ivan"
-micronaut_simple_api_native[ab_testing_time]=$run_command_exec_time
+  run_command "ab $AB_PARAMS_SIMPLE_API http://localhost:9083/api/greeting?name=Ivan"
+  micronaut_simple_api_native[ab_testing_time]=$run_command_exec_time
 
-warm_up $WARM_UP_TIMES "ab $AB_PARAMS_WARM_UP_SIMPLE_API http://localhost:9083/api/greeting?name=Ivan"
+  warm_up $WARM_UP_TIMES "ab $AB_PARAMS_WARM_UP_SIMPLE_API http://localhost:9083/api/greeting?name=Ivan"
 
-run_command "ab $AB_PARAMS_SIMPLE_API http://localhost:9083/api/greeting?name=Ivan"
-micronaut_simple_api_native[ab_testing_time_2]=$run_command_exec_time
+  run_command "ab $AB_PARAMS_SIMPLE_API http://localhost:9083/api/greeting?name=Ivan"
+  micronaut_simple_api_native[ab_testing_time_2]=$run_command_exec_time
 
-micronaut_simple_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-simple-api-native")
+  micronaut_simple_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-simple-api-native")
 
-run_command "docker stop micronaut-simple-api-native"
-micronaut_simple_api_native[shutdown_time]=$run_command_exec_time
+  run_command "docker stop micronaut-simple-api-native"
+  micronaut_simple_api_native[shutdown_time]=$run_command_exec_time
 
 fi
 
@@ -227,10 +227,10 @@ if [ "$1" = "springboot-simple-api-jvm" ] ||
    [ "$1" = "all" ];
 then
 
-echo
-echo "-------------------------"
-echo "SPRINGBOOT-SIMPLE-API-JVM"
-echo "-------------------------"
+  echo
+  echo "-------------------------"
+  echo "SPRINGBOOT-SIMPLE-API-JVM"
+  echo "-------------------------"
 
   docker run -d --rm --name springboot-simple-api-jvm \
     -p 9084:8080 \
@@ -268,10 +268,10 @@ if [ "$1" = "springboot-simple-api-native" ] ||
    [ "$1" = "all" ];
 then
 
-echo
-echo "----------------------------"
-echo "SPRINGBOOT-SIMPLE-API-NATIVE"
-echo "----------------------------"
+  echo
+  echo "----------------------------"
+  echo "SPRINGBOOT-SIMPLE-API-NATIVE"
+  echo "----------------------------"
 
   docker run -d --rm --name springboot-simple-api-native \
     -p 9085:8080 \
