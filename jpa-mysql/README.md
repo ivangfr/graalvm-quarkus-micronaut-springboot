@@ -18,7 +18,7 @@ In this example, we will implement three versions of a Restful API for handling 
   docker-compose up -d
   ```
 
-- Wait for `MySQL` container to be with state `Up (healthy)`. To check it, run
+- Wait for `MySQL` container to be up and running. To check it, run
   ```
   docker-compose ps
   ```
