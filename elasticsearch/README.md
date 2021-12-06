@@ -9,6 +9,14 @@ In this example, we will implement three versions of a Restful API for handling 
 - ### [micronaut-elasticsearch](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/micronaut-elasticsearch#graalvm-quarkus-micronaut-springboot)
 - ### [springboot-elasticsearch](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch/springboot-elasticsearch#graalvm-quarkus-micronaut-springboot)
 
+## Dependency version
+
+| Framework   | Elasticsearch |
+| ----------- | ------------- |
+| Quarkus     | 7.10.0        |
+| Micronaut   | 7.15.2        |
+| Spring Boot | 7.15.2        |
+
 ## Start Environment
 
 - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/elasticsearch` folder

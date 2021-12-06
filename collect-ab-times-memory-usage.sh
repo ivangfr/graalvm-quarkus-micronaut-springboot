@@ -40,8 +40,8 @@ declare -A springboot_elasticsearch_native
 
 start_time=$(date)
 
-JAVA_OPTS_XMX='-Xmx128m'
-CONTAINER_MAX_MEM=256M
+JAVA_OPTS_XMX='-Xmx256m'
+CONTAINER_MAX_MEM=512M
 
 AB_PARAMS_SIMPLE_API='-c 10 -n 4000'
 AB_PARAMS_JPA_MYSQL='-c 10 -n 2000'
