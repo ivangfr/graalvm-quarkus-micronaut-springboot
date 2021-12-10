@@ -40,8 +40,8 @@ declare -A springboot_elasticsearch_native
 
 start_time=$(date)
 
-JAVA_OPTS_XMX='-Xmx128m'
-CONTAINER_MAX_MEM=256M
+JAVA_OPTS_XMX='-Xmx256m'
+CONTAINER_MAX_MEM=512M
 
 AB_PARAMS_SIMPLE_API='-c 10 -n 4000'
 AB_PARAMS_JPA_MYSQL='-c 10 -n 2000'
@@ -962,57 +962,57 @@ then
     echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
     echo "--------------------------------------------------"
 
-    docker run -d --rm --name springboot-producer-api-native \
-      -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/springboot-producer-api-native:1.0.0
+    # docker run -d --rm --name springboot-producer-api-native \
+    #   -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    #   --network producer-consumer_default \
+    #   ivanfranchin/springboot-producer-api-native:1.0.0
 
-    wait_for_container_log "springboot-producer-api-native" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    # wait_for_container_log "springboot-producer-api-native" "Started"
+    # startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    # springboot_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+    # springboot_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
 
-    run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-    springboot_producer_api_native[ab_testing_time]=$run_command_exec_time
+    # run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
+    # springboot_producer_api_native[ab_testing_time]=$run_command_exec_time
 
-    warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9105/api/news"
+    # warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9105/api/news"
 
-    run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-    springboot_producer_api_native[ab_testing_time_2]=$run_command_exec_time
+    # run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
+    # springboot_producer_api_native[ab_testing_time_2]=$run_command_exec_time
 
-    springboot_producer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+    # springboot_producer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
 
     echo
     echo "--------------------------------------------------"
     echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
     echo "--------------------------------------------------"
 
-    docker run -d --rm --name springboot-consumer-api-native \
-      -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/springboot-consumer-api-native:1.0.0
+    # docker run -d --rm --name springboot-consumer-api-native \
+    #   -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    #   --network producer-consumer_default \
+    #   ivanfranchin/springboot-consumer-api-native:1.0.0
 
-    wait_for_container_log "springboot-consumer-api-native" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    # wait_for_container_log "springboot-consumer-api-native" "Started"
+    # startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    # springboot_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
+    # springboot_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
 
-    wait_for_container_log "springboot-consumer-api-native" "OFFSET: 14999"
-    springboot_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
+    # wait_for_container_log "springboot-consumer-api-native" "OFFSET: 14999"
+    # springboot_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
 
-    springboot_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
+    # springboot_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
 
-    echo "== Stopping producer-consuner docker containers"
+    # echo "== Stopping producer-consuner docker containers"
 
-    run_command "docker stop springboot-producer-api-native"
-    springboot_producer_api_native[shutdown_time]=$run_command_exec_time
+    # run_command "docker stop springboot-producer-api-native"
+    # springboot_producer_api_native[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop springboot-consumer-api-native"
-    springboot_consumer_api_native[shutdown_time]=$run_command_exec_time
+    # run_command "docker stop springboot-consumer-api-native"
+    # springboot_consumer_api_native[shutdown_time]=$run_command_exec_time
 
   fi
 
@@ -1276,30 +1276,30 @@ then
     echo "SPRINGBOOT-ELASTICSEARCH-NATIVE"
     echo "-------------------------------"
 
-    docker run -d --rm --name springboot-elasticsearch-native \
-      -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
-      --network elasticsearch_default \
-      ivanfranchin/springboot-elasticsearch-native:1.0.0
+    # docker run -d --rm --name springboot-elasticsearch-native \
+    #   -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
+    #   -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    #   --network elasticsearch_default \
+    #   ivanfranchin/springboot-elasticsearch-native:1.0.0
 
-    wait_for_container_log "springboot-elasticsearch-native" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_elasticsearch_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    # wait_for_container_log "springboot-elasticsearch-native" "Started"
+    # startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    # springboot_elasticsearch_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
+    # springboot_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
 
-    run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
-    springboot_elasticsearch_native[ab_testing_time]=$run_command_exec_time
+    # run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
+    # springboot_elasticsearch_native[ab_testing_time]=$run_command_exec_time
 
-    warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9117/api/movies"
+    # warm_up $WARM_UP_TIMES "ab -p test-movies.json -T 'application/json' $AB_PARAMS_WARM_UP_ELASTICSEARCH http://localhost:9117/api/movies"
 
-    run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
-    springboot_elasticsearch_native[ab_testing_time_2]=$run_command_exec_time
+    # run_command "ab -p test-movies.json -T 'application/json' $AB_PARAMS_ELASTICSEARCH http://localhost:9117/api/movies"
+    # springboot_elasticsearch_native[ab_testing_time_2]=$run_command_exec_time
 
-    springboot_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
+    # springboot_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
 
-    run_command "docker stop springboot-elasticsearch-native"
-    springboot_elasticsearch_native[shutdown_time]=$run_command_exec_time
+    # run_command "docker stop springboot-elasticsearch-native"
+    # springboot_elasticsearch_native[shutdown_time]=$run_command_exec_time
 
   fi
 

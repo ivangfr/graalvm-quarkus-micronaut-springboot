@@ -41,7 +41,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - Run the command below
       ```
-      ./mvnw clean compile quarkus:dev -Ddebug=5006 -Dquarkus.http.port=8081 --projects consumer-api
+      ./mvnw clean compile quarkus:dev --projects consumer-api -Ddebug=5006 -Dquarkus.http.port=8081
       ```
 
 - **Simple Test**
