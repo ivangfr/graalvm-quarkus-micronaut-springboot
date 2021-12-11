@@ -76,15 +76,15 @@ Table below shows the results after running the script `collect-native-jar-docke
 ------------------------------- + -------------- + -------------- + ----------------- + ----------------- |
       quarkus-simple-api-native |           174s |            44M |                3s |             149MB |
     micronaut-simple-api-native |             5s |            15M |              174s |            77.6MB |
-   springboot-simple-api-native |            15s |            23M |              257s |             106MB |
+   springboot-simple-api-native |            15s |            23M |              257s |             108MB |
 ............................... + .............. + .............. + ................. + ................. |
        quarkus-jpa-mysql-native |           263s |            82M |                6s |             188MB |
      micronaut-jpa-mysql-native |             9s |            34M |              249s |             117MB |
-    springboot-jpa-mysql-native |            21s |            43M |              409s |             157MB |
+    springboot-jpa-mysql-native |            21s |            43M |              409s |             160MB |
 ............................... + .............. + .............. + ................. + ................. |
     quarkus-producer-api-native |           178s |            63M |                4s |             168MB |
   micronaut-producer-api-native |             7s |            29M |              193s |            94.7MB |
- springboot-producer-api-native |            16s |            38M |              305s |             131MB |
+ springboot-producer-api-native |            16s |            38M |              305s |             134MB |
 ............................... + .............. + .............. + ................. + ................. |
     quarkus-consumer-api-native |           177s |            59M |                4s |             165MB |
   micronaut-consumer-api-native |             7s |            29M |              184s |            94.6MB |
@@ -92,7 +92,7 @@ Table below shows the results after running the script `collect-native-jar-docke
 ............................... + .............. + .............. + ................. + ................. |
    quarkus-elasticsearch-native |           190s |            52M |                6s |             157MB |
  micronaut-elasticsearch-native |             9s |            45M |              222s |              97MB |
-springboot-elasticsearch-native |            17s |            54M |              370s |             132MB |
+springboot-elasticsearch-native |            17s |            54M |              370s |             135MB |
 ```
 
 Finally, the following table shows the results after running the script `collect-ab-times-memory-usage.sh`
