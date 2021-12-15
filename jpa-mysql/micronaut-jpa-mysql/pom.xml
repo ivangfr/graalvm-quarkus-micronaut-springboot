@@ -10,15 +10,15 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.3</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>3.2.1</micronaut.version>
-        <micronaut.data.version>3.2.0</micronaut.data.version>
+        <micronaut.version>3.2.3</micronaut.version>
+        <micronaut.data.version>3.2.1</micronaut.data.version>
         <exec.mainClass>com.mycompany.micronautjpamysql.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
@@ -102,8 +102,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
