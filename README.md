@@ -15,7 +15,7 @@ We are using the following Framework versions
 
 | Framework   | Version     |
 | ----------- | ----------- |
-| Quarkus     | 2.5.1.Final |
+| Quarkus     | 2.6.0.Final |
 | Micronaut   | 3.2.3       |
 | Spring Boot | 2.6.2       |
 
@@ -49,23 +49,23 @@ The following table shows the results after running the script `collect-jvm-jar-
 ```
                    Application | Packaging Time | Packaging Size | Docker Build Time | Docker Image Size |
 ------------------------------ + -------------- + -------------- + ----------------- + ----------------- |
-        quarkus-simple-api-jvm |             5s |            16M |                3s |             388MB |
+        quarkus-simple-api-jvm |             5s |            16M |                3s |             383MB |
       micronaut-simple-api-jvm |             5s |            15M |               17s |             341MB |
      springboot-simple-api-jvm |            14s |            23M |               15s |             268MB |
 .............................. + .............. + .............. + ................. + ................. |
-         quarkus-jpa-mysql-jvm |             8s |            34M |                3s |             407MB |
+         quarkus-jpa-mysql-jvm |             8s |            34M |                3s |             402MB |
        micronaut-jpa-mysql-jvm |            10s |            33M |               13s |             361MB |
       springboot-jpa-mysql-jvm |            26s |            43M |               16s |             291MB |
 .............................. + .............. + .............. + ................. + ................. |
-      quarkus-producer-api-jvm |             8s |            33M |                4s |             406MB |
+      quarkus-producer-api-jvm |             8s |            33M |                4s |             401MB |
     micronaut-producer-api-jvm |             9s |            28M |               13s |             355MB |
    springboot-producer-api-jvm |            16s |            38M |               14s |             286MB |
 .............................. + .............. + .............. + ................. + ................. |
-      quarkus-consumer-api-jvm |             8s |            31M |                2s |             404MB |
+      quarkus-consumer-api-jvm |             8s |            32M |                2s |             399MB |
     micronaut-consumer-api-jvm |             9s |            28M |               12s |             355MB |
    springboot-consumer-api-jvm |            15s |            37M |               11s |             284MB |
 .............................. + .............. + .............. + ................. + ................. |
-     quarkus-elasticsearch-jvm |             7s |            41M |                4s |             415MB |
+     quarkus-elasticsearch-jvm |             7s |            41M |                4s |             410MB |
    micronaut-elasticsearch-jvm |            10s |            47M |               14s |             375MB |
   springboot-elasticsearch-jvm |            17s |            54M |               12s |             303MB |
 ```
@@ -74,23 +74,23 @@ Table below shows the results after running the script `collect-native-jar-docke
 ```
                     Application | Packaging Time | Packaging Size | Docker Build Time | Docker Image Size |
 ------------------------------- + -------------- + -------------- + ----------------- + ----------------- |
-      quarkus-simple-api-native |           174s |            44M |                3s |             149MB |
+      quarkus-simple-api-native |           174s |            44M |                3s |            84.9MB |
     micronaut-simple-api-native |             5s |            15M |              174s |            79.3MB |
    springboot-simple-api-native |            15s |            23M |              257s |             108MB |
 ............................... + .............. + .............. + ................. + ................. |
-       quarkus-jpa-mysql-native |           263s |            82M |                6s |             188MB |
+       quarkus-jpa-mysql-native |           263s |            82M |                6s |             124MB |
      micronaut-jpa-mysql-native |             9s |            34M |              249s |             119MB |
     springboot-jpa-mysql-native |            21s |            43M |              409s |             160MB |
 ............................... + .............. + .............. + ................. + ................. |
-    quarkus-producer-api-native |           178s |            63M |                4s |             168MB |
+    quarkus-producer-api-native |           178s |            63M |                4s |             105MB |
   micronaut-producer-api-native |             7s |            28M |              193s |            96.5MB |
  springboot-producer-api-native |            16s |            38M |              305s |             134MB |
 ............................... + .............. + .............. + ................. + ................. |
-    quarkus-consumer-api-native |           177s |            59M |                4s |             165MB |
+    quarkus-consumer-api-native |           177s |            60M |                4s |             101MB |
   micronaut-consumer-api-native |             7s |            28M |              184s |            96.4MB |
  springboot-consumer-api-native |            16s |            37M |              280s |             112MB |
 ............................... + .............. + .............. + ................. + ................. |
-   quarkus-elasticsearch-native |           190s |            52M |                6s |             157MB |
+   quarkus-elasticsearch-native |           190s |            52M |                6s |            93.4MB |
  micronaut-elasticsearch-native |             9s |            47M |              222s |            98.8MB |
 springboot-elasticsearch-native |            17s |            54M |              370s |             135MB |
 ```
