@@ -14,7 +14,7 @@ The goal of this project is to compare some Java frameworks like: [`Quarkus`](ht
 We are using the following Framework versions
 
 | Framework   | Version     |
-| ----------- | ----------- |
+|-------------|-------------|
 | Quarkus     | 2.6.0.Final |
 | Micronaut   | 3.2.3       |
 | Spring Boot | 2.6.2       |

@@ -12,7 +12,7 @@ In this example, we will implement three versions of a Restful API for handling 
 ## Dependency version
 
 | Framework   | Elasticsearch |
-| ----------- | ------------- |
+|-------------|---------------|
 | Quarkus     | 7.10.0        |
 | Micronaut   | 7.15.2        |
 | Spring Boot | 7.15.2        |

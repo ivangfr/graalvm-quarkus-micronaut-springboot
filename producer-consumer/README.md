@@ -12,7 +12,7 @@ In this example, we will implement three versions of `producer - consumer` appli
 ## Dependency version
 
 | Framework   | Confluent Platform | Apache Kafka |
-| ----------- | ------------------ | ------------ |
+|-------------|--------------------|--------------|
 | Quarkus     | 7.0.x              | 3.0.0        |
 | Micronaut   | 6.2.x              | 2.8.0        |
 | Spring Boot | 7.0.x              | 3.0.0        |
