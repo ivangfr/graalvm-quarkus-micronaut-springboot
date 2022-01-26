@@ -14,7 +14,7 @@ In this example, we will implement three versions of a Restful API for handling 
 | Framework   | Elasticsearch |
 |-------------|---------------|
 | Quarkus     | 7.10.0        |
-| Micronaut   | 7.15.2        |
+| Micronaut   | 7.16.1        |
 | Spring Boot | 7.15.2        |
 
 ## Start Environment
