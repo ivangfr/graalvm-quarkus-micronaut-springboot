@@ -51,23 +51,23 @@ The following table shows the results after running the script `collect-jvm-jar-
 ------------------------------ + -------------- + -------------- + ----------------- + ----------------- |
         quarkus-simple-api-jvm |             5s |            16M |                3s |             383MB |
       micronaut-simple-api-jvm |             5s |            16M |               17s |             341MB |
-     springboot-simple-api-jvm |            14s |            23M |               15s |             294MB |
+     springboot-simple-api-jvm |            14s |            23M |               15s |             269MB |
 .............................. + .............. + .............. + ................. + ................. |
          quarkus-jpa-mysql-jvm |             8s |            34M |                3s |             402MB |
        micronaut-jpa-mysql-jvm |            10s |            34M |               13s |             361MB |
-      springboot-jpa-mysql-jvm |            26s |            43M |               16s |             318MB |
+      springboot-jpa-mysql-jvm |            26s |            43M |               16s |             292MB |
 .............................. + .............. + .............. + ................. + ................. |
       quarkus-producer-api-jvm |             8s |            33M |                4s |             401MB |
     micronaut-producer-api-jvm |             9s |            29M |               13s |             355MB |
-   springboot-producer-api-jvm |            16s |            38M |               14s |             313MB |
+   springboot-producer-api-jvm |            16s |            38M |               14s |             287MB |
 .............................. + .............. + .............. + ................. + ................. |
       quarkus-consumer-api-jvm |             8s |            32M |                2s |             400MB |
     micronaut-consumer-api-jvm |             9s |            29M |               12s |             355MB |
-   springboot-consumer-api-jvm |            15s |            37M |               11s |             311MB |
+   springboot-consumer-api-jvm |            15s |            37M |               11s |             285MB |
 .............................. + .............. + .............. + ................. + ................. |
      quarkus-elasticsearch-jvm |             7s |            41M |                4s |             410MB |
    micronaut-elasticsearch-jvm |            10s |            57M |               14s |             384MB |
-  springboot-elasticsearch-jvm |            17s |            54M |               12s |             329MB |
+  springboot-elasticsearch-jvm |            17s |            54M |               12s |             303MB |
 ```
 
 Table below shows the results after running the script `collect-native-jar-docker-size-times.sh`

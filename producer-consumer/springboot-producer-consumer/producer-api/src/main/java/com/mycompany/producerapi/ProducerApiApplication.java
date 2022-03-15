@@ -9,7 +9,6 @@ import org.springframework.nativex.hint.TypeHint;
 // Add the @TypeHint below due to this [issue #659](https://github.com/spring-projects-experimental/spring-native/issues/659)
 @TypeHint(
         types = News.class,
-        typeNames = "org.springframework.validation.beanvalidation.SpringValidatorAdapter$ViolationFieldError",
         access = { TypeAccess.PUBLIC_CONSTRUCTORS, TypeAccess.PUBLIC_METHODS }
 )
 @SpringBootApplication

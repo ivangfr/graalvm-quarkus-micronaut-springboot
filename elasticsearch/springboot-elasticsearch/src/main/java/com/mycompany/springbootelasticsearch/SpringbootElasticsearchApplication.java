@@ -12,7 +12,6 @@ import org.springframework.nativex.hint.TypeHint;
         options = { "--enable-https" },
         types = @TypeHint(
                 types = Movie.class,
-                typeNames = "org.springframework.validation.beanvalidation.SpringValidatorAdapter$ViolationFieldError",
                 access = { TypeAccess.PUBLIC_CONSTRUCTORS, TypeAccess.PUBLIC_METHODS }
         )
 )
