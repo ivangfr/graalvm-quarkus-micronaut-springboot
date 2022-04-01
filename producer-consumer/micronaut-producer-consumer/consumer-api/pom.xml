@@ -19,7 +19,7 @@
         <micronaut.version>3.4.0</micronaut.version>
         <exec.mainClass>com.mycompany.consumerapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
-        <jib-maven-plugin.version>3.2.0</jib-maven-plugin.version>
+        <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
 
