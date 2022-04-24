@@ -9,14 +9,14 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.2</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>3.4.0</micronaut.version>
+        <micronaut.version>3.4.2</micronaut.version>
         <exec.mainClass>com.mycompany.consumerapi.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
         <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
@@ -129,19 +129,14 @@
 
                     <annotationProcessorPaths combine.self="override">
                         <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                        <path>
-                            <groupId>io.micronaut</groupId>
-                            <artifactId>micronaut-graal</artifactId>
-                            <version>${micronaut.version}</version>
-                        </path>
-                        <path>
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-http-validation</artifactId>
                             <version>${micronaut.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
                         </path>
                         <path>
                             <groupId>io.micronaut</groupId>
@@ -151,6 +146,11 @@
                         <path>
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-validation</artifactId>
+                            <version>${micronaut.version}</version>
+                        </path>
+                        <path>
+                            <groupId>io.micronaut</groupId>
+                            <artifactId>micronaut-graal</artifactId>
                             <version>${micronaut.version}</version>
                         </path>
                     </annotationProcessorPaths>
