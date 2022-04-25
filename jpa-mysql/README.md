@@ -35,11 +35,11 @@ In this example, we will implement three versions of a Restful API for handling 
   - Connecting to `MySQL Monitor`
     - JVM
       ```
-      docker exec -it mysql mysql -uroot -psecret --database bookdb_jvm
+      docker exec -it -e MYSQL_PWD="secret" mysql mysql -uroot --database bookdb_jvm
       ```
     - Native
       ```
-      docker exec -it mysql mysql -uroot -psecret --database bookdb_native
+      docker exec -it -e MYSQL_PWD="secret" mysql mysql -uroot --database bookdb_native
       ```
 
     Insite `MySQL Monitor` terminal

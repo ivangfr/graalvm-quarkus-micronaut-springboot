@@ -11,7 +11,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
   It has the following endpoint:
   ```
-  POST /api/news {"source": "...", "title": "..."}
+  POST /api/news {"source":"...", "title":"..."}
   ```
 
 - ### consumer-api
@@ -49,7 +49,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
   - In a new terminal, post a news
     ```
     curl -i -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
-      -d '{ "source":"Spring Boot Blog", "title":"Dev Spring Boot Framework" }'
+      -d '{"source":"Spring Boot Blog", "title":"Dev Spring Boot Framework"}'
     ```
 
   - See `producer-api` and `consumer-api` logs
@@ -111,7 +111,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
   - In a new terminal, post a news
     ```
     curl -i -X POST localhost:9104/api/news -H 'Content-Type: application/json' \
-      -d '{ "source":"Spring Boot Blog", "title":"Spring Boot Framework" }'
+      -d '{"source":"Spring Boot Blog", "title":"Spring Boot Framework"}'
     ```
 
   - See `producer-api` and `consumer-api` logs
@@ -173,7 +173,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
   - In a new terminal, post a news
     ```
     curl -i -X POST localhost:9105/api/news -H 'Content-Type: application/json' \
-      -d '{ "source":"Spring Boot Blog", "title":"Spring Boot Framework & GraalVM" }'
+      -d '{"source":"Spring Boot Blog", "title":"Spring Boot Framework & GraalVM"}'
     ```
 
   - See `producer-api` and `consumer-api` logs

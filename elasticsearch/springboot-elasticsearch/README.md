@@ -9,7 +9,7 @@
   
   It has the following endpoint:
   ```
-  POST /api/movies -d {"imdb": "...", "title": "..."}
+  POST /api/movies -d {"imdb":"...", "title":"..."}
   GET /api/movies[?title=...]
   ```
 
@@ -29,7 +29,7 @@
 - A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST "localhost:8080/api/movies" -H "Content-type: application/json" \
-    -d '{"imdb": "123", "title": "I, Tonya"}'
+    -d '{"imdb":"123", "title":"I, Tonya"}'
   
   curl -i "localhost:8080/api/movies?title=tonya"
   ```
@@ -61,7 +61,7 @@
 - A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST "localhost:9116/api/movies" -H "Content-type: application/json" \
-    -d '{"imdb": "456", "title": "American Pie"}'
+    -d '{"imdb":"456", "title":"American Pie"}'
   
   curl -i "localhost:9116/api/movies?title=american"
   ```
@@ -93,7 +93,7 @@
 - A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST "localhost:9117/api/movies" -H "Content-type: application/json" \
-    -d '{"imdb": "789", "title": "Resident Evil"}'
+    -d '{"imdb":"789", "title":"Resident Evil"}'
   
   curl -i "localhost:9117/api/movies?title=evil"
   ```

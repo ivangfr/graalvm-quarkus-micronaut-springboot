@@ -11,7 +11,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   It has the following endpoint:
   ```
-  POST /api/news {"source": "...", "title": "..."}
+  POST /api/news {"source":"...", "title":"..."}
   ```
 
 - ### consumer-api
@@ -49,7 +49,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
   - In a new terminal, post a news
     ```
     curl -i -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
-      -d '{ "source":"Micronaut Blog", "title":"Dev Micronaut Framework" }'
+      -d '{"source":"Micronaut Blog", "title":"Dev Micronaut Framework"}'
     ```
 
   - See `producer-api` and `consumer-api` logs
@@ -111,7 +111,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
   - In a new terminal, post a news
     ```
     curl -i -X POST localhost:9102/api/news -H 'Content-Type: application/json' \
-      -d '{ "source":"Micronaut Blog", "title":"Micronaut Framework" }'
+      -d '{"source":"Micronaut Blog", "title":"Micronaut Framework"}'
     ```
 
   - See `producer-api` and `consumer-api` Docker logs
@@ -173,7 +173,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
   - In a new terminal, post a news
     ```
     curl -i -X POST localhost:9103/api/news -H 'Content-Type: application/json' \
-      -d '{ "source":"Micronaut Blog", "title":"Micronaut Framework & GraalVM" }'
+      -d '{"source":"Micronaut Blog", "title":"Micronaut Framework & GraalVM"}'
     ```
 
   - See `producer-api` and `consumer-api` Docker logs

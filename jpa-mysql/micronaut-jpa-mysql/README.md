@@ -11,7 +11,7 @@
   ```
   GET /api/books
   GET /api/books/{id}
-  POST /api/books {"isbn": "...", "title": "..."}
+  POST /api/books {"isbn":"...", "title":"..."}
   ```
 
 ## Running application
@@ -30,7 +30,7 @@
 - A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST localhost:8080/api/books -H "Content-Type: application/json" \
-    -d '{"isbn": "123", "title": "Learn Java"}'
+    -d '{"isbn":"123", "title":"Learn Java"}'
   
   curl -i localhost:8080/api/books
   ```
@@ -62,7 +62,7 @@
 - A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST localhost:9088/api/books -H "Content-Type: application/json" \
-    -d '{"isbn": "456", "title": "Learn Docker"}'
+    -d '{"isbn":"456", "title":"Learn Docker"}'
   
   curl -i localhost:9088/api/books
   ```
@@ -94,7 +94,7 @@
 - A simple test can be done by opening a new terminal and running
   ```
   curl -i -X POST localhost:9089/api/books -H "Content-Type: application/json" \
-    -d '{"isbn": "789", "title": "Learn GraalVM"}'
+    -d '{"isbn":"789", "title":"Learn GraalVM"}'
   
   curl -i localhost:9089/api/books
   ```
