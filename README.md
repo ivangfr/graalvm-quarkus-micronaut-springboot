@@ -96,6 +96,9 @@ springboot-elasticsearch-native |            19s |            54M |             
 ```
 
 Finally, the following table shows the results after running the script `collect-ab-times-memory-usage.sh`
+
+> **Note:** in order to a better insight about the Docker container's CPU and Memory Usage, we can use [`cAdvisor`](https://github.com/google/cadvisor). In the section [Monitoring CPU and Memory with cAdvisor](#monitoring-cpu-and-memory-with-cadvisor), we explain how to start it.
+
 ```
                     Application | Startup Time |     Initial Memory Usage | Ab Testing Time | Ab Testing Time 2 |       Final Memory Usage | Shutdown Time |
 ------------------------------- + ------------ + ------------------------ + --------------- + ----------------- + ------------------------ + ------------- |
@@ -170,4 +173,29 @@ springboot-elasticsearch-native |         88ms |   32.47MiB/512MiB(6.34%) |     
      quarkus-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9113/api/movies  |
    micronaut-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9115/api/movies  |
   springboot-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9117/api/movies  |
+  ```
+
+## Monitoring CPU and Memory with cAdvisor
+
+- In a terminal, run the following command
+  ```
+  docker run -d --rm --name=cadvisor -p 8080:8080 \
+    -v /:/rootfs:ro \
+    -v /var/run:/var/run:ro \
+    -v /sys:/sys:ro \
+    -v /var/lib/docker/:/var/lib/docker:ro \
+    -v /dev/disk/:/dev/disk:ro \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    --privileged \
+    --device=/dev/kmsg \
+    gcr.io/cadvisor/cadvisor:v0.39.3
+  ```
+
+- In a browser, access
+  - http://localhost:8080/docker to explore the running containers;
+  - http://localhost:8080/docker/container-name; to go directly to the info of a specific container.
+
+- To stop it, run
+  ```
+  docker stop cadvisor
   ```
