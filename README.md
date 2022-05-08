@@ -192,8 +192,8 @@ springboot-elasticsearch-native |         88ms |   32.47MiB/512MiB(6.34%) |     
   ```
 
 - In a browser, access
-  - http://localhost:8080/docker to explore the running containers;
-  - http://localhost:8080/docker/container-name; to go directly to the info of a specific container.
+  - http://localhost:8080/docker/ to explore the running containers;
+  - http://localhost:8080/docker/container-name to go directly to the info of a specific container.
 
 - To stop it, run
   ```
