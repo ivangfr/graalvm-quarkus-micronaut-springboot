@@ -15,7 +15,7 @@ We are using the following Framework versions
 
 | Framework   | Version     |
 |-------------|-------------|
-| Quarkus     | 2.8.3.Final |
+| Quarkus     | 2.9.0.Final |
 | Micronaut   | 3.4.3       |
 | Spring Boot | 2.6.7       |
 
@@ -74,7 +74,7 @@ Table below shows the results after running the script `collect-native-jar-docke
 ```
                     Application | Packaging Time | Packaging Size | Docker Build Time | Docker Image Size |
 ------------------------------- + -------------- + -------------- + ----------------- + ----------------- |
-      quarkus-simple-api-native |           170s |            42M |                6s |             146MB |
+      quarkus-simple-api-native |           170s |            42M |                6s |             147MB |
     micronaut-simple-api-native |             6s |            16M |               12s |              76MB |
    springboot-simple-api-native |            15s |            23M |              302s |             104MB |
 ............................... + .............. + .............. + ................. + ................. |
