@@ -1069,7 +1069,7 @@ then
     echo "-------------------------"
 
     docker run -d --rm --name quarkus-elasticsearch-jvm \
-      -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+      -p 9112:8080 -e ELASTICSEARCH_HOST=opensearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/quarkus-elasticsearch-jvm:1.0.0
@@ -1111,7 +1111,7 @@ then
     echo "----------------------------"
 
     docker run -d --rm --name quarkus-elasticsearch-native \
-      -p 9113:8080 -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
+      -p 9113:8080 -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=opensearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/quarkus-elasticsearch-native:1.0.0
@@ -1153,7 +1153,7 @@ then
     echo "---------------------------"
 
     docker run -d --rm --name micronaut-elasticsearch-jvm \
-      -p 9114:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+      -p 9114:8080 -e ELASTICSEARCH_HOST=opensearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/micronaut-elasticsearch-jvm:1.0.0
@@ -1194,7 +1194,7 @@ then
     echo "------------------------------"
 
     docker run -d --rm --name micronaut-elasticsearch-native \
-      -p 9115:8080 -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=elasticsearch \
+      -p 9115:8080 -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=opensearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/micronaut-elasticsearch-native:1.0.0
@@ -1235,7 +1235,7 @@ then
     echo "----------------------------"
 
     docker run -d --rm --name springboot-elasticsearch-jvm \
-      -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+      -p 9116:8080 -e ELASTICSEARCH_HOST=opensearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/springboot-elasticsearch-jvm:1.0.0
@@ -1277,7 +1277,7 @@ then
     echo "-------------------------------"
 
     docker run -d --rm --name springboot-elasticsearch-native \
-      -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
+      -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=opensearch \
       -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/springboot-elasticsearch-native:1.0.0

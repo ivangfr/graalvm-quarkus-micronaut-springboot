@@ -2,16 +2,18 @@ version: "3.8"
 
 services:
 
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
-    container_name: elasticsearch
+  opensearch:
+    image: opensearchproject/opensearch:1.3.2
+    container_name: opensearch
     restart: unless-stopped
     ports:
       - "9200:9200"
-      - "9300:9300"
+      - "9600:9600"
     environment:
       discovery.type: single-node
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-      xpack.security.enabled: false
+      bootstrap.memory_lock: true
+      OPENSEARCH_JAVA_OPTS: "-Xms512m -Xmx512m"
+      DISABLE_INSTALL_DEMO_CONFIG: true
+      DISABLE_SECURITY_PLUGIN: true
     healthcheck:
       test: "curl -f http://localhost:9200 || exit 1"

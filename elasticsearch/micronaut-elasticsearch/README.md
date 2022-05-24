@@ -53,7 +53,7 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name micronaut-elasticsearch-jvm \
-    -p 9114:8080 -e ELASTICSEARCH_HOST=elasticsearch \
+    -p 9114:8080 -e ELASTICSEARCH_HOST=opensearch \
     --network elasticsearch_default \
     ivanfranchin/micronaut-elasticsearch-jvm:1.0.0
   ```
@@ -85,7 +85,7 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name micronaut-elasticsearch-native \
-    -p 9115:8080 -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=elasticsearch \
+    -p 9115:8080 -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=opensearch \
     --network elasticsearch_default \
     ivanfranchin/micronaut-elasticsearch-native:1.0.0
   ```

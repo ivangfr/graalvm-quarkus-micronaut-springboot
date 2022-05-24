@@ -5,21 +5,20 @@ import com.mycompany.micronautelasticsearch.exception.MovieServiceException;
 import com.mycompany.micronautelasticsearch.model.Movie;
 import com.mycompany.micronautelasticsearch.rest.dto.SearchMovieResponse;
 import io.micronaut.context.annotation.Value;
-import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.xcontent.XContentType;
-import org.elasticsearch.core.TimeValue;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHits;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
-
 import jakarta.inject.Singleton;
+import lombok.extern.slf4j.Slf4j;
+import org.opensearch.action.index.IndexRequest;
+import org.opensearch.action.index.IndexResponse;
+import org.opensearch.action.search.SearchRequest;
+import org.opensearch.action.search.SearchResponse;
+import org.opensearch.client.RequestOptions;
+import org.opensearch.client.RestHighLevelClient;
+import org.opensearch.common.unit.TimeValue;
+import org.opensearch.common.xcontent.XContentType;
+import org.opensearch.index.query.QueryBuilders;
+import org.opensearch.search.SearchHit;
+import org.opensearch.search.SearchHits;
+import org.opensearch.search.builder.SearchSourceBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.List;
 @Singleton
 public class MovieServiceImpl implements MovieService {
 
-    @Value("${elasticsearch.indexes.movies}")
+    @Value("${opensearch.indexes.movies}")
     String moviesIndex;
 
     private final RestHighLevelClient client;
