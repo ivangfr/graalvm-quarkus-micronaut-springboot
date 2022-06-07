@@ -10,17 +10,17 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>3.4.4</version>
+        <version>3.5.1</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>3.4.4</micronaut.version>
-        <micronaut.data.version>3.3.0</micronaut.data.version>
-        <exec.mainClass>com.mycompany.micronautjpamysql.Application</exec.mainClass>
+        <micronaut.version>3.5.1</micronaut.version>
+        <micronaut.data.version>3.4.1</micronaut.data.version>
         <micronaut.runtime>netty</micronaut.runtime>
+        <exec.mainClass>com.mycompany.micronautjpamysql.Application</exec.mainClass>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <javax-inject.version>1</javax-inject.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
@@ -79,11 +79,6 @@
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-management</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-runtime</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
