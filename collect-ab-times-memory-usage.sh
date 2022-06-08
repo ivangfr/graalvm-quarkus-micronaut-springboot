@@ -40,7 +40,6 @@ declare -A springboot_elasticsearch_native
 
 start_time=$(date)
 
-JAVA_OPTS_XMX='-Xmx256m'
 CONTAINER_MAX_MEM=512M
 
 AB_PARAMS_SIMPLE_API='-c 10 -n 4000'
@@ -72,7 +71,7 @@ then
 
   docker run -d --rm --name quarkus-simple-api-jvm \
     -p 9080:8080 \
-    -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    -m $CONTAINER_MAX_MEM \
     ivanfranchin/quarkus-simple-api-jvm:1.0.0
 
   wait_for_container_log "quarkus-simple-api-jvm" "started in"
@@ -113,7 +112,7 @@ then
 
   docker run -d --rm --name quarkus-simple-api-native \
     -p 9081:8080 \
-    -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    -m $CONTAINER_MAX_MEM \
     ivanfranchin/quarkus-simple-api-native:1.0.0
 
   wait_for_container_log "quarkus-simple-api-native" "started in"
@@ -154,7 +153,7 @@ then
 
   docker run -d --rm --name micronaut-simple-api-jvm \
     -p 9082:8080 \
-    -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    -m $CONTAINER_MAX_MEM \
     ivanfranchin/micronaut-simple-api-jvm:1.0.0
 
   wait_for_container_log "micronaut-simple-api-jvm" "Startup completed in"
@@ -194,7 +193,7 @@ then
 
   docker run -d --rm --name micronaut-simple-api-native \
     -p 9083:8080 \
-    -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    -m $CONTAINER_MAX_MEM \
     ivanfranchin/micronaut-simple-api-native:1.0.0
 
   wait_for_container_log "micronaut-simple-api-native" "Startup completed in"
@@ -234,7 +233,7 @@ then
 
   docker run -d --rm --name springboot-simple-api-jvm \
     -p 9084:8080 \
-    -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    -m $CONTAINER_MAX_MEM \
     ivanfranchin/springboot-simple-api-jvm:1.0.0
 
   wait_for_container_log "springboot-simple-api-jvm" "Started"
@@ -275,7 +274,7 @@ then
 
   docker run -d --rm --name springboot-simple-api-native \
     -p 9085:8080 \
-    -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+    -m $CONTAINER_MAX_MEM \
     ivanfranchin/springboot-simple-api-native:1.0.0
 
   wait_for_container_log "springboot-simple-api-native" "Started"
@@ -338,8 +337,9 @@ then
     echo "---------------------"
 
     docker run -d --rm --name quarkus-jpa-mysql-jvm \
-      -p 9086:8080 -e MYSQL_HOST=mysql \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9086:8080 \
+      -e MYSQL_HOST=mysql \
+      -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
       ivanfranchin/quarkus-jpa-mysql-jvm:1.0.0
 
@@ -380,8 +380,9 @@ then
     echo "------------------------"
 
     docker run -d --rm --name quarkus-jpa-mysql-native \
-      -p 9087:8080 -e QUARKUS_PROFILE=native -e MYSQL_HOST=mysql \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9087:8080 \
+      -e QUARKUS_PROFILE=native -e MYSQL_HOST=mysql \
+      -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
       ivanfranchin/quarkus-jpa-mysql-native:1.0.0
 
@@ -422,8 +423,9 @@ then
     echo "-----------------------"
 
     docker run -d --rm --name micronaut-jpa-mysql-jvm \
-      -p 9088:8080 -e MYSQL_HOST=mysql \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9088:8080 \
+      -e MYSQL_HOST=mysql \
+      -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
       ivanfranchin/micronaut-jpa-mysql-jvm:1.0.0
 
@@ -463,8 +465,9 @@ then
     echo "--------------------------"
 
     docker run -d --rm --name micronaut-jpa-mysql-native \
-      -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9089:8080 \
+      -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
+      -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
       ivanfranchin/micronaut-jpa-mysql-native:1.0.0
 
@@ -504,8 +507,9 @@ then
     echo "------------------------"
 
     docker run -d --rm --name springboot-jpa-mysql-jvm \
-      -p 9090:8080 -e MYSQL_HOST=mysql \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9090:8080 \
+      -e MYSQL_HOST=mysql \
+      -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
       ivanfranchin/springboot-jpa-mysql-jvm:1.0.0
 
@@ -546,8 +550,9 @@ then
     echo "---------------------------"
 
     docker run -d --rm --name springboot-jpa-mysql-native \
-      -p 9091:8080 -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9091:8080 \
+      -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
+      -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
       ivanfranchin/springboot-jpa-mysql-native:1.0.0
 
@@ -622,8 +627,9 @@ then
     echo "--------------------------------------------"
 
     docker run -d --rm --name quarkus-producer-api-jvm \
-      -p 9100:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9100:8080 \
+      -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/quarkus-producer-api-jvm:1.0.0
 
@@ -649,8 +655,9 @@ then
     echo "--------------------------------------------"
 
     docker run -d --rm --name quarkus-consumer-api-jvm \
-      -p 9106:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9106:8080 \
+      -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/quarkus-consumer-api-jvm:1.0.0
 
@@ -691,8 +698,9 @@ then
     echo "-----------------------------------------------"
 
     docker run -d --rm --name quarkus-producer-api-native \
-      -p 9101:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9101:8080 \
+      -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/quarkus-producer-api-native:1.0.0
 
@@ -718,8 +726,9 @@ then
     echo "-----------------------------------------------"
 
     docker run -d --rm --name quarkus-consumer-api-native \
-      -p 9107:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9107:8080 \
+      -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/quarkus-consumer-api-native:1.0.0
 
@@ -760,8 +769,9 @@ then
     echo "----------------------------------------------"
 
     docker run -d --rm --name micronaut-producer-api-jvm \
-      -p 9102:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9102:8080 \
+      -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/micronaut-producer-api-jvm:1.0.0
 
@@ -786,8 +796,9 @@ then
     echo "----------------------------------------------"
 
     docker run -d --rm --name micronaut-consumer-api-jvm \
-      -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9108:8080 \
+      -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/micronaut-consumer-api-jvm:1.0.0
 
@@ -827,8 +838,9 @@ then
     echo "-------------------------------------------------"
 
     docker run -d --rm --name micronaut-producer-api-native \
-      -p 9103:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9103:8080 \
+      -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/micronaut-producer-api-native:1.0.0
 
@@ -853,8 +865,9 @@ then
     echo "-------------------------------------------------"
 
     docker run -d --rm --name micronaut-consumer-api-native \
-      -p 9109:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9109:8080 \
+      -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/micronaut-consumer-api-native:1.0.0
 
@@ -894,8 +907,9 @@ then
     echo "-----------------------------------------------"
 
     docker run -d --rm --name springboot-producer-api-jvm \
-      -p 9104:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9104:8080 \
+      -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/springboot-producer-api-jvm:1.0.0
 
@@ -921,8 +935,9 @@ then
     echo "-----------------------------------------------"
 
     docker run -d --rm --name springboot-consumer-api-jvm \
-      -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9110:8080 \
+      -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/springboot-consumer-api-jvm:1.0.0
 
@@ -963,8 +978,9 @@ then
     echo "--------------------------------------------------"
 
     docker run -d --rm --name springboot-producer-api-native \
-      -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9105:8080 \
+      -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/springboot-producer-api-native:1.0.0
 
@@ -990,8 +1006,9 @@ then
     echo "--------------------------------------------------"
 
     docker run -d --rm --name springboot-consumer-api-native \
-      -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9111:8080 \
+      -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
+      -m $CONTAINER_MAX_MEM \
       --network producer-consumer_default \
       ivanfranchin/springboot-consumer-api-native:1.0.0
 
@@ -1069,8 +1086,9 @@ then
     echo "-------------------------"
 
     docker run -d --rm --name quarkus-elasticsearch-jvm \
-      -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9112:8080 \
+      -e ELASTICSEARCH_HOST=elasticsearch \
+      -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/quarkus-elasticsearch-jvm:1.0.0
 
@@ -1111,8 +1129,9 @@ then
     echo "----------------------------"
 
     docker run -d --rm --name quarkus-elasticsearch-native \
-      -p 9113:8080 -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9113:8080 \
+      -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
+      -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/quarkus-elasticsearch-native:1.0.0
 
@@ -1153,8 +1172,9 @@ then
     echo "---------------------------"
 
     docker run -d --rm --name micronaut-elasticsearch-jvm \
-      -p 9114:8080 -e ELASTICSEARCH_HOST=elasticsearch \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9114:8080 \
+      -e ELASTICSEARCH_HOST=elasticsearch \
+      -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/micronaut-elasticsearch-jvm:1.0.0
 
@@ -1194,8 +1214,9 @@ then
     echo "------------------------------"
 
     docker run -d --rm --name micronaut-elasticsearch-native \
-      -p 9115:8080 -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=elasticsearch \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9115:8080 \
+      -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=elasticsearch \
+      -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/micronaut-elasticsearch-native:1.0.0
 
@@ -1235,8 +1256,9 @@ then
     echo "----------------------------"
 
     docker run -d --rm --name springboot-elasticsearch-jvm \
-      -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9116:8080 \
+      -e ELASTICSEARCH_HOST=elasticsearch \
+      -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/springboot-elasticsearch-jvm:1.0.0
 
@@ -1277,8 +1299,9 @@ then
     echo "-------------------------------"
 
     docker run -d --rm --name springboot-elasticsearch-native \
-      -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
-      -e JAVA_OPTIONS=$JAVA_OPTS_XMX -m $CONTAINER_MAX_MEM \
+      -p 9117:8080 \
+      -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
+      -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
       ivanfranchin/springboot-elasticsearch-native:1.0.0
 
