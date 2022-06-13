@@ -80,7 +80,7 @@ public class MovieServiceImpl implements MovieService {
             hit.setIndex(searchHit.getIndex());
             hit.setId(searchHit.getId());
             hit.setScore(searchHit.getScore());
-            hit.setSource(searchHit.getSourceAsString());
+            hit.setSource(searchHit.getSourceAsMap());
             hits.add(hit);
         }
         searchMovieResponse.setHits(hits);

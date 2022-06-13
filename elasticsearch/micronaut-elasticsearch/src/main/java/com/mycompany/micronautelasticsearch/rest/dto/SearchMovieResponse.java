@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 @Introspected
 @Data
@@ -22,7 +23,7 @@ public class SearchMovieResponse {
         private String index;
         private String id;
         private Float score;
-        private String source;
+        private Map<String, ?> source;
     }
 
     @Introspected

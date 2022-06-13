@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @JsonInclude(Include.NON_NULL)
@@ -20,7 +21,7 @@ public class SearchMovieResponse {
         private String index;
         private String id;
         private Float score;
-        private String source;
+        private Map<String, ?> source;
     }
 
     @Data
