@@ -27,8 +27,8 @@ public class NewsConsumerConfig {
     }
 
     @Bean
-    ConsumerFactory<String, News> consumerFactory(@Value("${spring.kafka.bootstrap-servers}") String bootstrapServers,
-                                                  @Value("${spring.kafka.consumer.auto-offset-reset}") String autoOffsetReset) {
+    public ConsumerFactory<String, News> consumerFactory(@Value("${spring.kafka.bootstrap-servers}") String bootstrapServers,
+                                                         @Value("${spring.kafka.consumer.auto-offset-reset}") String autoOffsetReset) {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);

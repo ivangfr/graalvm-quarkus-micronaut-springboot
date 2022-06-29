@@ -14,7 +14,7 @@ In this example, we will implement three versions of `producer - consumer` appli
 | Framework   | Confluent Platform | Apache Kafka |
 |-------------|--------------------|--------------|
 | Quarkus     | 7.0.x              | 3.1.0        |
-| Micronaut   | 6.2.x              | 2.8.1        |
+| Micronaut   | 6.2.x              | 2.8.0        |
 | Spring Boot | 7.0.x              | 3.1.1        |
 
 ## Start Environment
@@ -42,18 +42,6 @@ In this example, we will implement three versions of `producer - consumer` appli
 
 ## Useful links
 
-- **Kafka Topics UI**
-     
-  `Kafka Topics UI` can be accessed at http://localhost:8085
+- **Kafdrop**
 
-- **Kafka Manager**
-     
-  `Kafka Manager` can be accessed at http://localhost:9000
-
-  *Configuration*
-
-  - First, you must create a new cluster. Click on `Cluster` (dropdown on the header) and then on `Add Cluster`
-  - Type the name of your cluster in `Cluster Name` field, for example: `MyCluster`
-  - Type `zookeeper:2181` in `Cluster Zookeeper Hosts` field
-  - Enable checkbox `Poll consumer information (Not recommended for large # of consumers)`
-  - Click on `Save` button at the bottom of the page.
+  `Kafdrop` can be accessed at http://localhost:9000

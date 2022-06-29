@@ -9,14 +9,14 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>3.5.1</version>
+        <version>3.5.2</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>11</jdk.version>
         <release.version>11</release.version>
-        <micronaut.version>3.5.1</micronaut.version>
+        <micronaut.version>3.5.2</micronaut.version>
         <micronaut.runtime>netty</micronaut.runtime>
         <exec.mainClass>com.mycompany.consumerapi.Application</exec.mainClass>
         <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
