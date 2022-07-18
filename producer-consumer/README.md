@@ -14,7 +14,7 @@ In this example, we will implement three versions of `producer - consumer` appli
 | Framework   | Confluent Platform | Apache Kafka |
 |-------------|--------------------|--------------|
 | Quarkus     | 7.0.x              | 3.1.0        |
-| Micronaut   | 6.2.x              | 2.8.0        |
+| Micronaut   | 6.2.x              | 2.8.1        |
 | Spring Boot | 7.0.x              | 3.1.1        |
 
 ## Start Environment
