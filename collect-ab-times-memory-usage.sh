@@ -18,18 +18,18 @@ declare -A micronaut_jpa_mysql_native
 declare -A springboot_jpa_mysql_jvm
 declare -A springboot_jpa_mysql_native
 
-declare -A quarkus_producer_api_jvm
-declare -A quarkus_consumer_api_jvm
-declare -A quarkus_producer_api_native
-declare -A quarkus_consumer_api_native
-declare -A micronaut_producer_api_jvm
-declare -A micronaut_consumer_api_jvm
-declare -A micronaut_producer_api_native
-declare -A micronaut_consumer_api_native
-declare -A springboot_producer_api_jvm
-declare -A springboot_consumer_api_jvm
-declare -A springboot_producer_api_native
-declare -A springboot_consumer_api_native
+declare -A quarkus_kafka_producer_jvm
+declare -A quarkus_kafka_consumer_jvm
+declare -A quarkus_kafka_producer_native
+declare -A quarkus_kafka_consumer_native
+declare -A micronaut_kafka_producer_jvm
+declare -A micronaut_kafka_consumer_jvm
+declare -A micronaut_kafka_producer_native
+declare -A micronaut_kafka_consumer_native
+declare -A springboot_kafka_producer_jvm
+declare -A springboot_kafka_consumer_jvm
+declare -A springboot_kafka_producer_native
+declare -A springboot_kafka_consumer_native
 
 declare -A quarkus_elasticsearch_jvm
 declare -A quarkus_elasticsearch_native
@@ -588,20 +588,20 @@ then
 
 fi
 
-if [ "$1" = "quarkus-producer-consumer-jvm" ] || [ "$1" = "quarkus-producer-consumer-native" ] ||
-   [ "$1" = "micronaut-producer-consumer-jvm" ] || [ "$1" = "micronaut-producer-consumer-native" ] ||
-   [ "$1" = "springboot-producer-consumer-jvm" ] || [ "$1" = "springboot-producer-consumer-native" ] ||
-   [ "$1" = "quarkus-producer-consumer" ] || [ "$1" = "micronaut-producer-consumer" ] || [ "$1" = "springboot-producer-consumer" ] ||
+if [ "$1" = "quarkus-kafka-jvm" ] || [ "$1" = "quarkus-kafka-native" ] ||
+   [ "$1" = "micronaut-kafka-jvm" ] || [ "$1" = "micronaut-kafka-native" ] ||
+   [ "$1" = "springboot-kafka-jvm" ] || [ "$1" = "springboot-kafka-native" ] ||
+   [ "$1" = "quarkus-kafka" ] || [ "$1" = "micronaut-kafka" ] || [ "$1" = "springboot-kafka" ] ||
    [ "$1" = "quarkus-jvm" ] || [ "$1" = "micronaut-jvm" ] || [ "$1" = "springboot-jvm" ] ||
    [ "$1" = "quarkus-native" ] || [ "$1" = "micronaut-native" ] || [ "$1" = "springboot-native" ] ||
    [ "$1" = "quarkus" ] || [ "$1" = "micronaut" ] || [ "$1" = "springboot" ] ||
-   [ "$1" = "producer-consumer-jvm" ] || [ "$1" = "producer-consumer-native" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka-jvm" ] || [ "$1" = "kafka-native" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "jvm" ] || [ "$1" = "native" ] ||
    [ "$1" = "all" ];
 then
 
-  cd producer-consumer
+  cd kafka
 
   echo
   echo "=============="
@@ -611,425 +611,425 @@ then
   docker-compose up -d zookeeper kafka
   wait_for_container_status_healthy "9092"
 
-  if [ "$1" = "quarkus-producer-consumer-jvm" ] ||
-     [ "$1" = "quarkus-producer-consumer" ] ||
+  if [ "$1" = "quarkus-kafka-jvm" ] ||
+     [ "$1" = "quarkus-kafka" ] ||
      [ "$1" = "quarkus-jvm" ] ||
      [ "$1" = "quarkus" ] ||
-     [ "$1" = "producer-consumer-jvm" ] ||
-     [ "$1" = "producer-consumer" ] ||
+     [ "$1" = "kafka-jvm" ] ||
+     [ "$1" = "kafka" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "--------------------------------------------"
-    echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-JVM"
-    echo "--------------------------------------------"
+    echo "----------------------------------"
+    echo "QUARKUS-KAFKA / KAFKA-PRODUCER-JVM"
+    echo "----------------------------------"
 
-    docker run -d --rm --name quarkus-producer-api-jvm \
+    docker run -d --rm --name quarkus-kafka-producer-jvm \
       -p 9100:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/quarkus-producer-api-jvm:1.0.0
+      --network kafka_default \
+      ivanfranchin/quarkus-kafka-producer-jvm:1.0.0
 
-    wait_for_container_log "quarkus-producer-api-jvm" "started in"
+    wait_for_container_log "quarkus-kafka-producer-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
-    quarkus_producer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    quarkus_kafka_producer_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    quarkus_producer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-producer-api-jvm")
+    quarkus_kafka_producer_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-kafka-producer-jvm")
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9100/api/news"
-    quarkus_producer_api_jvm[ab_testing_time]=$run_command_exec_time
+    quarkus_kafka_producer_jvm[ab_testing_time]=$run_command_exec_time
 
     warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9100/api/news"
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9100/api/news"
-    quarkus_producer_api_jvm[ab_testing_time_2]=$run_command_exec_time
+    quarkus_kafka_producer_jvm[ab_testing_time_2]=$run_command_exec_time
 
-    quarkus_producer_api_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-producer-api-jvm")
+    quarkus_kafka_producer_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-kafka-producer-jvm")
 
     echo
-    echo "--------------------------------------------"
-    echo "QUARKUS-PRODUCER-CONSUMER / CONSUMER-API-JVM"
-    echo "--------------------------------------------"
+    echo "----------------------------------"
+    echo "QUARKUS-KAFKA / KAFKA-CONSUMER-JVM"
+    echo "----------------------------------"
 
-    docker run -d --rm --name quarkus-consumer-api-jvm \
+    docker run -d --rm --name quarkus-kafka-consumer-jvm \
       -p 9106:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/quarkus-consumer-api-jvm:1.0.0
+      --network kafka_default \
+      ivanfranchin/quarkus-kafka-consumer-jvm:1.0.0
 
-    wait_for_container_log "quarkus-consumer-api-jvm" "started in"
+    wait_for_container_log "quarkus-kafka-consumer-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
-    quarkus_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    quarkus_kafka_consumer_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    quarkus_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-jvm")
+    quarkus_kafka_consumer_jvm[initial_memory_usage]=$(get_container_memory_usage "quarkus-kafka-consumer-jvm")
 
-    wait_for_container_log "quarkus-consumer-api-jvm" "OFFSET: 14999"
-    quarkus_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
+    wait_for_container_log "quarkus-kafka-consumer-jvm" "OFFSET: 14999"
+    quarkus_kafka_consumer_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
-    quarkus_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-jvm")
+    quarkus_kafka_consumer_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-kafka-consumer-jvm")
 
     echo "== Stopping producer-consuner docker containers"
 
-    run_command "docker stop quarkus-producer-api-jvm"
-    quarkus_producer_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop quarkus-kafka-producer-jvm"
+    quarkus_kafka_producer_jvm[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop quarkus-consumer-api-jvm"
-    quarkus_consumer_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop quarkus-kafka-consumer-jvm"
+    quarkus_kafka_consumer_jvm[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "quarkus-producer-consumer-native" ] ||
-     [ "$1" = "quarkus-producer-consumer" ] ||
+  if [ "$1" = "quarkus-kafka-native" ] ||
+     [ "$1" = "quarkus-kafka" ] ||
      [ "$1" = "quarkus-native" ] ||
      [ "$1" = "quarkus" ] ||
-     [ "$1" = "producer-consumer-native" ] ||
-     [ "$1" = "producer-consumer" ] ||
+     [ "$1" = "kafka-native" ] ||
+     [ "$1" = "kafka" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "-----------------------------------------------"
-    echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
-    echo "-----------------------------------------------"
+    echo "-------------------------------------"
+    echo "QUARKUS-KAFKA / KAFKA-PRODUCER-NATIVE"
+    echo "-------------------------------------"
 
-    docker run -d --rm --name quarkus-producer-api-native \
+    docker run -d --rm --name quarkus-kafka-producer-native \
       -p 9101:8080 \
       -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/quarkus-producer-api-native:1.0.0
+      --network kafka_default \
+      ivanfranchin/quarkus-kafka-producer-native:1.0.0
 
-    wait_for_container_log "quarkus-producer-api-native" "started in"
+    wait_for_container_log "quarkus-kafka-producer-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
-    quarkus_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    quarkus_kafka_producer_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    quarkus_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-producer-api-native")
+    quarkus_kafka_producer_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-kafka-producer-native")
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9101/api/news"
-    quarkus_producer_api_native[ab_testing_time]=$run_command_exec_time
+    quarkus_kafka_producer_native[ab_testing_time]=$run_command_exec_time
 
     warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9101/api/news"
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9101/api/news"
-    quarkus_producer_api_native[ab_testing_time_2]=$run_command_exec_time
+    quarkus_kafka_producer_native[ab_testing_time_2]=$run_command_exec_time
 
-    quarkus_producer_api_native[final_memory_usage]=$(get_container_memory_usage "quarkus-producer-api-native")
+    quarkus_kafka_producer_native[final_memory_usage]=$(get_container_memory_usage "quarkus-kafka-producer-native")
 
     echo
-    echo "-----------------------------------------------"
-    echo "QUARKUS-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
-    echo "-----------------------------------------------"
+    echo "-------------------------------------"
+    echo "QUARKUS-KAFKA / KAFKA-CONSUMER-NATIVE"
+    echo "-------------------------------------"
 
-    docker run -d --rm --name quarkus-consumer-api-native \
+    docker run -d --rm --name quarkus-kafka-consumer-native \
       -p 9107:8080 \
       -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/quarkus-consumer-api-native:1.0.0
+      --network kafka_default \
+      ivanfranchin/quarkus-kafka-consumer-native:1.0.0
 
-    wait_for_container_log "quarkus-consumer-api-native" "started in"
+    wait_for_container_log "quarkus-kafka-consumer-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
-    quarkus_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    quarkus_kafka_consumer_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    quarkus_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-native")
+    quarkus_kafka_consumer_native[initial_memory_usage]=$(get_container_memory_usage "quarkus-kafka-consumer-native")
 
-    wait_for_container_log "quarkus-consumer-api-native" "OFFSET: 14999"
-    quarkus_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
+    wait_for_container_log "quarkus-kafka-consumer-native" "OFFSET: 14999"
+    quarkus_kafka_consumer_native[ab_testing_time]=$wait_for_container_log_exec_time
 
-    quarkus_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "quarkus-consumer-api-native")
+    quarkus_kafka_consumer_native[final_memory_usage]=$(get_container_memory_usage "quarkus-kafka-consumer-native")
 
     echo "== Stopping producer-consuner docker containers"
 
-    run_command "docker stop quarkus-producer-api-native"
-    quarkus_producer_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop quarkus-kafka-producer-native"
+    quarkus_kafka_producer_native[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop quarkus-consumer-api-native"
-    quarkus_consumer_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop quarkus-kafka-consumer-native"
+    quarkus_kafka_consumer_native[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "micronaut-producer-consumer-jvm" ] ||
-     [ "$1" = "micronaut-producer-consumer" ] ||
+  if [ "$1" = "micronaut-kafka-jvm" ] ||
+     [ "$1" = "micronaut-kafka" ] ||
      [ "$1" = "micronaut-jvm" ] ||
      [ "$1" = "micronaut" ] ||
-     [ "$1" = "producer-consumer-jvm" ] ||
-     [ "$1" = "producer-consumer" ] ||
+     [ "$1" = "kafka-jvm" ] ||
+     [ "$1" = "kafka" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "----------------------------------------------"
-    echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
-    echo "----------------------------------------------"
+    echo "------------------------------------"
+    echo "MICRONAUT-KAFKA / KAFKA-PRODUCER-JVM"
+    echo "------------------------------------"
 
-    docker run -d --rm --name micronaut-producer-api-jvm \
+    docker run -d --rm --name micronaut-kafka-producer-jvm \
       -p 9102:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/micronaut-producer-api-jvm:1.0.0
+      --network kafka_default \
+      ivanfranchin/micronaut-kafka-producer-jvm:1.0.0
 
-    wait_for_container_log "micronaut-producer-api-jvm" "Startup completed in"
-    micronaut_producer_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+    wait_for_container_log "micronaut-kafka-producer-jvm" "Startup completed in"
+    micronaut_kafka_producer_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
 
-    micronaut_producer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-producer-api-jvm")
+    micronaut_kafka_producer_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-kafka-producer-jvm")
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9102/api/news"
-    micronaut_producer_api_jvm[ab_testing_time]=$run_command_exec_time
+    micronaut_kafka_producer_jvm[ab_testing_time]=$run_command_exec_time
 
     warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9102/api/news"
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9102/api/news"
-    micronaut_producer_api_jvm[ab_testing_time_2]=$run_command_exec_time
+    micronaut_kafka_producer_jvm[ab_testing_time_2]=$run_command_exec_time
 
-    micronaut_producer_api_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-producer-api-jvm")
+    micronaut_kafka_producer_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-kafka-producer-jvm")
 
     echo
-    echo "----------------------------------------------"
-    echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
-    echo "----------------------------------------------"
+    echo "------------------------------------"
+    echo "MICRONAUT-KAFKA / KAFKA-CONSUMER-JVM"
+    echo "------------------------------------"
 
-    docker run -d --rm --name micronaut-consumer-api-jvm \
+    docker run -d --rm --name micronaut-kafka-consumer-jvm \
       -p 9108:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/micronaut-consumer-api-jvm:1.0.0
+      --network kafka_default \
+      ivanfranchin/micronaut-kafka-consumer-jvm:1.0.0
 
-    wait_for_container_log "micronaut-consumer-api-jvm" "Startup completed in"
-    micronaut_consumer_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+    wait_for_container_log "micronaut-kafka-consumer-jvm" "Startup completed in"
+    micronaut_kafka_consumer_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
 
-    micronaut_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-jvm")
+    micronaut_kafka_consumer_jvm[initial_memory_usage]=$(get_container_memory_usage "micronaut-kafka-consumer-jvm")
 
-    wait_for_container_log "micronaut-consumer-api-jvm" "OFFSET: 14999"
-    micronaut_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
+    wait_for_container_log "micronaut-kafka-consumer-jvm" "OFFSET: 14999"
+    micronaut_kafka_consumer_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
-    micronaut_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-jvm")
+    micronaut_kafka_consumer_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-kafka-consumer-jvm")
 
     echo "== Stopping producer-consuner docker containers"
 
-    run_command "docker stop micronaut-producer-api-jvm"
-    micronaut_producer_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop micronaut-kafka-producer-jvm"
+    micronaut_kafka_producer_jvm[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop micronaut-consumer-api-jvm"
-    micronaut_consumer_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop micronaut-kafka-consumer-jvm"
+    micronaut_kafka_consumer_jvm[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "micronaut-producer-consumer-native" ] ||
-     [ "$1" = "micronaut-producer-consumer" ] ||
+  if [ "$1" = "micronaut-kafka-native" ] ||
+     [ "$1" = "micronaut-kafka" ] ||
      [ "$1" = "micronaut-native" ] ||
      [ "$1" = "micronaut" ] ||
-     [ "$1" = "producer-consumer-native" ] ||
-     [ "$1" = "producer-consumer" ] ||
+     [ "$1" = "kafka-native" ] ||
+     [ "$1" = "kafka" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "-------------------------------------------------"
-    echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
-    echo "-------------------------------------------------"
+    echo "---------------------------------------"
+    echo "MICRONAUT-KAFKA / KAFKA-PRODUCER-NATIVE"
+    echo "---------------------------------------"
 
-    docker run -d --rm --name micronaut-producer-api-native \
+    docker run -d --rm --name micronaut-kafka-producer-native \
       -p 9103:8080 \
       -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/micronaut-producer-api-native:1.0.0
+      --network kafka_default \
+      ivanfranchin/micronaut-kafka-producer-native:1.0.0
 
-    wait_for_container_log "micronaut-producer-api-native" "Startup completed in"
-    micronaut_producer_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+    wait_for_container_log "micronaut-kafka-producer-native" "Startup completed in"
+    micronaut_kafka_producer_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
 
-    micronaut_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-producer-api-native")
+    micronaut_kafka_producer_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-kafka-producer-native")
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9103/api/news"
-    micronaut_producer_api_native[ab_testing_time]=$run_command_exec_time
+    micronaut_kafka_producer_native[ab_testing_time]=$run_command_exec_time
 
     warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9103/api/news"
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9103/api/news"
-    micronaut_producer_api_native[ab_testing_time_2]=$run_command_exec_time
+    micronaut_kafka_producer_native[ab_testing_time_2]=$run_command_exec_time
 
-    micronaut_producer_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-producer-api-native")
+    micronaut_kafka_producer_native[final_memory_usage]=$(get_container_memory_usage "micronaut-kafka-producer-native")
 
     echo
-    echo "-------------------------------------------------"
-    echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
-    echo "-------------------------------------------------"
+    echo "---------------------------------------"
+    echo "MICRONAUT-KAFKA / KAFKA-CONSUMER-NATIVE"
+    echo "---------------------------------------"
 
-    docker run -d --rm --name micronaut-consumer-api-native \
+    docker run -d --rm --name micronaut-kafka-consumer-native \
       -p 9109:8080 \
       -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/micronaut-consumer-api-native:1.0.0
+      --network kafka_default \
+      ivanfranchin/micronaut-kafka-consumer-native:1.0.0
 
-    wait_for_container_log "micronaut-consumer-api-native" "Startup completed in"
-    micronaut_consumer_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
+    wait_for_container_log "micronaut-kafka-consumer-native" "Startup completed in"
+    micronaut_kafka_consumer_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
 
-    micronaut_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-native")
+    micronaut_kafka_consumer_native[initial_memory_usage]=$(get_container_memory_usage "micronaut-kafka-consumer-native")
 
-    wait_for_container_log "micronaut-consumer-api-native" "OFFSET: 14999"
-    micronaut_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
+    wait_for_container_log "micronaut-kafka-consumer-native" "OFFSET: 14999"
+    micronaut_kafka_consumer_native[ab_testing_time]=$wait_for_container_log_exec_time
 
-    micronaut_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-consumer-api-native")
+    micronaut_kafka_consumer_native[final_memory_usage]=$(get_container_memory_usage "micronaut-kafka-consumer-native")
 
     echo "== Stopping producer-consuner docker containers"
 
-    run_command "docker stop micronaut-producer-api-native"
-    micronaut_producer_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop micronaut-kafka-producer-native"
+    micronaut_kafka_producer_native[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop micronaut-consumer-api-native"
-    micronaut_consumer_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop micronaut-kafka-consumer-native"
+    micronaut_kafka_consumer_native[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "springboot-producer-consumer-jvm" ] ||
-     [ "$1" = "springboot-producer-consumer" ] ||
+  if [ "$1" = "springboot-kafka-jvm" ] ||
+     [ "$1" = "springboot-kafka" ] ||
      [ "$1" = "springboot-jvm" ] ||
      [ "$1" = "springboot" ] ||
-     [ "$1" = "producer-consumer-jvm" ] ||
-     [ "$1" = "producer-consumer" ] ||
+     [ "$1" = "kafka-jvm" ] ||
+     [ "$1" = "kafka" ] ||
      [ "$1" = "jvm" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "-----------------------------------------------"
-    echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-JVM"
-    echo "-----------------------------------------------"
+    echo "-------------------------------------"
+    echo "SPRINGBOOT-KAFKA / KAFKA-PRODUCER-JVM"
+    echo "-------------------------------------"
 
-    docker run -d --rm --name springboot-producer-api-jvm \
+    docker run -d --rm --name springboot-kafka-producer-jvm \
       -p 9104:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/springboot-producer-api-jvm:1.0.0
+      --network kafka_default \
+      ivanfranchin/springboot-kafka-producer-jvm:1.0.0
 
-    wait_for_container_log "springboot-producer-api-jvm" "Started"
+    wait_for_container_log "springboot-kafka-producer-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_producer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    springboot_kafka_producer_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_producer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-jvm")
+    springboot_kafka_producer_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-kafka-producer-jvm")
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9104/api/news"
-    springboot_producer_api_jvm[ab_testing_time]=$run_command_exec_time
+    springboot_kafka_producer_jvm[ab_testing_time]=$run_command_exec_time
 
     warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9104/api/news"
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9104/api/news"
-    springboot_producer_api_jvm[ab_testing_time_2]=$run_command_exec_time
+    springboot_kafka_producer_jvm[ab_testing_time_2]=$run_command_exec_time
 
-    springboot_producer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-jvm")
+    springboot_kafka_producer_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-kafka-producer-jvm")
 
     echo
-    echo "-----------------------------------------------"
-    echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-JVM"
-    echo "-----------------------------------------------"
+    echo "-------------------------------------"
+    echo "SPRINGBOOT-KAFKA / KAFKA-CONSUMER-JVM"
+    echo "-------------------------------------"
 
-    docker run -d --rm --name springboot-consumer-api-jvm \
+    docker run -d --rm --name springboot-kafka-consumer-jvm \
       -p 9110:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/springboot-consumer-api-jvm:1.0.0
+      --network kafka_default \
+      ivanfranchin/springboot-kafka-consumer-jvm:1.0.0
 
-    wait_for_container_log "springboot-consumer-api-jvm" "Started"
+    wait_for_container_log "springboot-kafka-consumer-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_consumer_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    springboot_kafka_consumer_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_consumer_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
+    springboot_kafka_consumer_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-kafka-consumer-jvm")
 
-    wait_for_container_log "springboot-consumer-api-jvm" "OFFSET: 14999"
-    springboot_consumer_api_jvm[ab_testing_time]=$wait_for_container_log_exec_time
+    wait_for_container_log "springboot-kafka-consumer-jvm" "OFFSET: 14999"
+    springboot_kafka_consumer_jvm[ab_testing_time]=$wait_for_container_log_exec_time
 
-    springboot_consumer_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-jvm")
+    springboot_kafka_consumer_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-kafka-consumer-jvm")
 
     echo "== Stopping producer-consuner docker containers"
 
-    run_command "docker stop springboot-producer-api-jvm"
-    springboot_producer_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop springboot-kafka-producer-jvm"
+    springboot_kafka_producer_jvm[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop springboot-consumer-api-jvm"
-    springboot_consumer_api_jvm[shutdown_time]=$run_command_exec_time
+    run_command "docker stop springboot-kafka-consumer-jvm"
+    springboot_kafka_consumer_jvm[shutdown_time]=$run_command_exec_time
 
   fi
 
-  if [ "$1" = "springboot-producer-consumer-native" ] ||
-     [ "$1" = "springboot-producer-consumer" ] ||
+  if [ "$1" = "springboot-kafka-native" ] ||
+     [ "$1" = "springboot-kafka" ] ||
      [ "$1" = "springboot-native" ] ||
      [ "$1" = "springboot" ] ||
-     [ "$1" = "producer-consumer-native" ] ||
-     [ "$1" = "producer-consumer" ] ||
+     [ "$1" = "kafka-native" ] ||
+     [ "$1" = "kafka" ] ||
      [ "$1" = "native" ] ||
      [ "$1" = "all" ];
   then
 
     echo
-    echo "--------------------------------------------------"
-    echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
-    echo "--------------------------------------------------"
+    echo "----------------------------------------"
+    echo "SPRINGBOOT-KAFKA / KAFKA-PRODUCER-NATIVE"
+    echo "----------------------------------------"
 
-    docker run -d --rm --name springboot-producer-api-native \
+    docker run -d --rm --name springboot-kafka-producer-native \
       -p 9105:8080 \
       -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/springboot-producer-api-native:1.0.0
+      --network kafka_default \
+      ivanfranchin/springboot-kafka-producer-native:1.0.0
 
-    wait_for_container_log "springboot-producer-api-native" "Started"
+    wait_for_container_log "springboot-kafka-producer-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_producer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    springboot_kafka_producer_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_producer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+    springboot_kafka_producer_native[initial_memory_usage]=$(get_container_memory_usage "springboot-kafka-producer-native")
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-    springboot_producer_api_native[ab_testing_time]=$run_command_exec_time
+    springboot_kafka_producer_native[ab_testing_time]=$run_command_exec_time
 
     warm_up $WARM_UP_TIMES "ab -p test-news.json -T 'application/json' $AB_PARAMS_WARM_UP_PRODUCER_CONSUMER http://localhost:9105/api/news"
 
     run_command "ab -p test-news.json -T 'application/json' $AB_PARAMS_PRODUCER_CONSUMER http://localhost:9105/api/news"
-    springboot_producer_api_native[ab_testing_time_2]=$run_command_exec_time
+    springboot_kafka_producer_native[ab_testing_time_2]=$run_command_exec_time
 
-    springboot_producer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-producer-api-native")
+    springboot_kafka_producer_native[final_memory_usage]=$(get_container_memory_usage "springboot-kafka-producer-native")
 
     echo
-    echo "--------------------------------------------------"
-    echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
-    echo "--------------------------------------------------"
+    echo "----------------------------------------"
+    echo "SPRINGBOOT-KAFKA / KAFKA-CONSUMER-NATIVE"
+    echo "----------------------------------------"
 
-    docker run -d --rm --name springboot-consumer-api-native \
+    docker run -d --rm --name springboot-kafka-consumer-native \
       -p 9111:8080 \
       -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
-      --network producer-consumer_default \
-      ivanfranchin/springboot-consumer-api-native:1.0.0
+      --network kafka_default \
+      ivanfranchin/springboot-kafka-consumer-native:1.0.0
 
-    wait_for_container_log "springboot-consumer-api-native" "Started"
+    wait_for_container_log "springboot-kafka-consumer-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
-    springboot_consumer_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
+    springboot_kafka_consumer_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
-    springboot_consumer_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
+    springboot_kafka_consumer_native[initial_memory_usage]=$(get_container_memory_usage "springboot-kafka-consumer-native")
 
-    wait_for_container_log "springboot-consumer-api-native" "OFFSET: 14999"
-    springboot_consumer_api_native[ab_testing_time]=$wait_for_container_log_exec_time
+    wait_for_container_log "springboot-kafka-consumer-native" "OFFSET: 14999"
+    springboot_kafka_consumer_native[ab_testing_time]=$wait_for_container_log_exec_time
 
-    springboot_consumer_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-consumer-api-native")
+    springboot_kafka_consumer_native[final_memory_usage]=$(get_container_memory_usage "springboot-kafka-consumer-native")
 
     echo "== Stopping producer-consuner docker containers"
 
-    run_command "docker stop springboot-producer-api-native"
-    springboot_producer_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop springboot-kafka-producer-native"
+    springboot_kafka_producer_native[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop springboot-consumer-api-native"
-    springboot_consumer_api_native[shutdown_time]=$run_command_exec_time
+    run_command "docker stop springboot-kafka-consumer-native"
+    springboot_kafka_consumer_native[shutdown_time]=$run_command_exec_time
 
   fi
 
@@ -1338,42 +1338,42 @@ then
 fi
 
 printf "\n"
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "Application" "Startup Time" "Initial Memory Usage" "Ab Testing Time" "Ab Testing Time 2" "Final Memory Usage" "Shutdown Time"
-printf "%31s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "-------------------------------" "------------" "------------------------" "---------------" "-----------------" "------------------------" "-------------"
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-simple-api-jvm" ${quarkus_simple_api_jvm[startup_time]} ${quarkus_simple_api_jvm[initial_memory_usage]} ${quarkus_simple_api_jvm[ab_testing_time]} ${quarkus_simple_api_jvm[ab_testing_time_2]} ${quarkus_simple_api_jvm[final_memory_usage]} ${quarkus_simple_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-simple-api-jvm" ${micronaut_simple_api_jvm[startup_time]} ${micronaut_simple_api_jvm[initial_memory_usage]} ${micronaut_simple_api_jvm[ab_testing_time]} ${micronaut_simple_api_jvm[ab_testing_time_2]} ${micronaut_simple_api_jvm[final_memory_usage]} ${micronaut_simple_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-simple-api-jvm" ${springboot_simple_api_jvm[startup_time]} ${springboot_simple_api_jvm[initial_memory_usage]} ${springboot_simple_api_jvm[ab_testing_time]} ${springboot_simple_api_jvm[ab_testing_time_2]} ${springboot_simple_api_jvm[final_memory_usage]} ${springboot_simple_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-simple-api-native" ${quarkus_simple_api_native[startup_time]} ${quarkus_simple_api_native[initial_memory_usage]} ${quarkus_simple_api_native[ab_testing_time]} ${quarkus_simple_api_native[ab_testing_time_2]} ${quarkus_simple_api_native[final_memory_usage]} ${quarkus_simple_api_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-simple-api-native" ${micronaut_simple_api_native[startup_time]} ${micronaut_simple_api_native[initial_memory_usage]} ${micronaut_simple_api_native[ab_testing_time]} ${micronaut_simple_api_native[ab_testing_time_2]} ${micronaut_simple_api_native[final_memory_usage]} ${micronaut_simple_api_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-simple-api-native" ${springboot_simple_api_native[startup_time]} ${springboot_simple_api_native[initial_memory_usage]} ${springboot_simple_api_native[ab_testing_time]} ${springboot_simple_api_native[ab_testing_time_2]} ${springboot_simple_api_native[final_memory_usage]} ${springboot_simple_api_native[shutdown_time]}
-printf "%31s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "..............................." "............" "........................" "..............." "................." "........................" "............."
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-jpa-mysql-jvm" ${quarkus_jpa_mysql_jvm[startup_time]} ${quarkus_jpa_mysql_jvm[initial_memory_usage]} ${quarkus_jpa_mysql_jvm[ab_testing_time]} ${quarkus_jpa_mysql_jvm[ab_testing_time_2]} ${quarkus_jpa_mysql_jvm[final_memory_usage]} ${quarkus_jpa_mysql_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-jpa-mysql-jvm" ${micronaut_jpa_mysql_jvm[startup_time]} ${micronaut_jpa_mysql_jvm[initial_memory_usage]} ${micronaut_jpa_mysql_jvm[ab_testing_time]} ${micronaut_jpa_mysql_jvm[ab_testing_time_2]} ${micronaut_jpa_mysql_jvm[final_memory_usage]} ${micronaut_jpa_mysql_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-jpa-mysql-jvm" ${springboot_jpa_mysql_jvm[startup_time]} ${springboot_jpa_mysql_jvm[initial_memory_usage]} ${springboot_jpa_mysql_jvm[ab_testing_time]} ${springboot_jpa_mysql_jvm[ab_testing_time_2]} ${springboot_jpa_mysql_jvm[final_memory_usage]} ${springboot_jpa_mysql_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-jpa-mysql-native" ${quarkus_jpa_mysql_native[startup_time]} ${quarkus_jpa_mysql_native[initial_memory_usage]} ${quarkus_jpa_mysql_native[ab_testing_time]} ${quarkus_jpa_mysql_native[ab_testing_time_2]} ${quarkus_jpa_mysql_native[final_memory_usage]} ${quarkus_jpa_mysql_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-jpa-mysql-native" ${micronaut_jpa_mysql_native[startup_time]} ${micronaut_jpa_mysql_native[initial_memory_usage]} ${micronaut_jpa_mysql_native[ab_testing_time]} ${micronaut_jpa_mysql_native[ab_testing_time_2]} ${micronaut_jpa_mysql_native[final_memory_usage]} ${micronaut_jpa_mysql_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-jpa-mysql-native" ${springboot_jpa_mysql_native[startup_time]} ${springboot_jpa_mysql_native[initial_memory_usage]} ${springboot_jpa_mysql_native[ab_testing_time]} ${springboot_jpa_mysql_native[ab_testing_time_2]} ${springboot_jpa_mysql_native[final_memory_usage]} ${springboot_jpa_mysql_native[shutdown_time]}
-printf "%31s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "..............................." "............" "........................" "..............." "................." "........................" "............."
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-producer-api-jvm" ${quarkus_producer_api_jvm[startup_time]} ${quarkus_producer_api_jvm[initial_memory_usage]} ${quarkus_producer_api_jvm[ab_testing_time]} ${quarkus_producer_api_jvm[ab_testing_time_2]} ${quarkus_producer_api_jvm[final_memory_usage]} ${quarkus_producer_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-producer-api-jvm" ${micronaut_producer_api_jvm[startup_time]} ${micronaut_producer_api_jvm[initial_memory_usage]} ${micronaut_producer_api_jvm[ab_testing_time]} ${micronaut_producer_api_jvm[ab_testing_time_2]} ${micronaut_producer_api_jvm[final_memory_usage]} ${micronaut_producer_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-producer-api-jvm" ${springboot_producer_api_jvm[startup_time]} ${springboot_producer_api_jvm[initial_memory_usage]} ${springboot_producer_api_jvm[ab_testing_time]} ${springboot_producer_api_jvm[ab_testing_time_2]} ${springboot_producer_api_jvm[final_memory_usage]} ${springboot_producer_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-producer-api-native" ${quarkus_producer_api_native[startup_time]} ${quarkus_producer_api_native[initial_memory_usage]} ${quarkus_producer_api_native[ab_testing_time]} ${quarkus_producer_api_native[ab_testing_time_2]} ${quarkus_producer_api_native[final_memory_usage]} ${quarkus_producer_api_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-producer-api-native" ${micronaut_producer_api_native[startup_time]} ${micronaut_producer_api_native[initial_memory_usage]} ${micronaut_producer_api_native[ab_testing_time]} ${micronaut_producer_api_native[ab_testing_time_2]} ${micronaut_producer_api_native[final_memory_usage]} ${micronaut_producer_api_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-producer-api-native" ${springboot_producer_api_native[startup_time]} ${springboot_producer_api_native[initial_memory_usage]} ${springboot_producer_api_native[ab_testing_time]} ${springboot_producer_api_native[ab_testing_time_2]} ${springboot_producer_api_native[final_memory_usage]} ${springboot_producer_api_native[shutdown_time]}
-printf "%31s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "..............................." "............" "........................" "..............." "................." "........................" "............."
-printf "%31s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "quarkus-consumer-api-jvm" ${quarkus_consumer_api_jvm[startup_time]} ${quarkus_consumer_api_jvm[initial_memory_usage]} " " ${quarkus_consumer_api_jvm[ab_testing_time]} ${quarkus_consumer_api_jvm[final_memory_usage]} ${quarkus_consumer_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "micronaut-consumer-api-jvm" ${micronaut_consumer_api_jvm[startup_time]} ${micronaut_consumer_api_jvm[initial_memory_usage]} " " ${micronaut_consumer_api_jvm[ab_testing_time]} ${micronaut_consumer_api_jvm[final_memory_usage]} ${micronaut_consumer_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "springboot-consumer-api-jvm" ${springboot_consumer_api_jvm[startup_time]} ${springboot_consumer_api_jvm[initial_memory_usage]} " " ${springboot_consumer_api_jvm[ab_testing_time]} ${springboot_consumer_api_jvm[final_memory_usage]} ${springboot_consumer_api_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "quarkus-consumer-api-native" ${quarkus_consumer_api_native[startup_time]} ${quarkus_consumer_api_native[initial_memory_usage]} " " ${quarkus_consumer_api_native[ab_testing_time]} ${quarkus_consumer_api_native[final_memory_usage]} ${quarkus_consumer_api_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "micronaut-consumer-api-native" ${micronaut_consumer_api_native[startup_time]} ${micronaut_consumer_api_native[initial_memory_usage]} " " ${micronaut_consumer_api_native[ab_testing_time]} ${micronaut_consumer_api_native[final_memory_usage]} ${micronaut_consumer_api_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "springboot-consumer-api-native" ${springboot_consumer_api_native[startup_time]} ${springboot_consumer_api_native[initial_memory_usage]} " " ${springboot_consumer_api_native[ab_testing_time]} ${springboot_consumer_api_native[final_memory_usage]} ${springboot_consumer_api_native[shutdown_time]}
-printf "%31s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "..............................." "............" "........................" "..............." "................." "........................" "............."
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-elasticsearch-jvm" ${quarkus_elasticsearch_jvm[startup_time]} ${quarkus_elasticsearch_jvm[initial_memory_usage]} ${quarkus_elasticsearch_jvm[ab_testing_time]} ${quarkus_elasticsearch_jvm[ab_testing_time_2]} ${quarkus_elasticsearch_jvm[final_memory_usage]} ${quarkus_elasticsearch_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-elasticsearch-jvm" ${micronaut_elasticsearch_jvm[startup_time]} ${micronaut_elasticsearch_jvm[initial_memory_usage]} ${micronaut_elasticsearch_jvm[ab_testing_time]} ${micronaut_elasticsearch_jvm[ab_testing_time_2]} ${micronaut_elasticsearch_jvm[final_memory_usage]} ${micronaut_elasticsearch_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-elasticsearch-jvm" ${springboot_elasticsearch_jvm[startup_time]} ${springboot_elasticsearch_jvm[initial_memory_usage]} ${springboot_elasticsearch_jvm[ab_testing_time]} ${springboot_elasticsearch_jvm[ab_testing_time_2]} ${springboot_elasticsearch_jvm[final_memory_usage]} ${springboot_elasticsearch_jvm[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-elasticsearch-native" ${quarkus_elasticsearch_native[startup_time]} ${quarkus_elasticsearch_native[initial_memory_usage]} ${quarkus_elasticsearch_native[ab_testing_time]} ${quarkus_elasticsearch_native[ab_testing_time_2]} ${quarkus_elasticsearch_native[final_memory_usage]} ${quarkus_elasticsearch_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[startup_time]} ${micronaut_elasticsearch_native[initial_memory_usage]} ${micronaut_elasticsearch_native[ab_testing_time]} ${micronaut_elasticsearch_native[ab_testing_time_2]} ${micronaut_elasticsearch_native[final_memory_usage]} ${micronaut_elasticsearch_native[shutdown_time]}
-printf "%31s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-elasticsearch-native" ${springboot_elasticsearch_native[startup_time]} ${springboot_elasticsearch_native[initial_memory_usage]} ${springboot_elasticsearch_native[ab_testing_time]} ${springboot_elasticsearch_native[ab_testing_time_2]} ${springboot_elasticsearch_native[final_memory_usage]} ${springboot_elasticsearch_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "Application" "Startup Time" "Initial Memory Usage" "Ab Testing Time" "Ab Testing Time 2" "Final Memory Usage" "Shutdown Time"
+printf "%32s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "--------------------------------" "------------" "------------------------" "---------------" "-----------------" "------------------------" "-------------"
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-simple-api-jvm" ${quarkus_simple_api_jvm[startup_time]} ${quarkus_simple_api_jvm[initial_memory_usage]} ${quarkus_simple_api_jvm[ab_testing_time]} ${quarkus_simple_api_jvm[ab_testing_time_2]} ${quarkus_simple_api_jvm[final_memory_usage]} ${quarkus_simple_api_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-simple-api-jvm" ${micronaut_simple_api_jvm[startup_time]} ${micronaut_simple_api_jvm[initial_memory_usage]} ${micronaut_simple_api_jvm[ab_testing_time]} ${micronaut_simple_api_jvm[ab_testing_time_2]} ${micronaut_simple_api_jvm[final_memory_usage]} ${micronaut_simple_api_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-simple-api-jvm" ${springboot_simple_api_jvm[startup_time]} ${springboot_simple_api_jvm[initial_memory_usage]} ${springboot_simple_api_jvm[ab_testing_time]} ${springboot_simple_api_jvm[ab_testing_time_2]} ${springboot_simple_api_jvm[final_memory_usage]} ${springboot_simple_api_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-simple-api-native" ${quarkus_simple_api_native[startup_time]} ${quarkus_simple_api_native[initial_memory_usage]} ${quarkus_simple_api_native[ab_testing_time]} ${quarkus_simple_api_native[ab_testing_time_2]} ${quarkus_simple_api_native[final_memory_usage]} ${quarkus_simple_api_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-simple-api-native" ${micronaut_simple_api_native[startup_time]} ${micronaut_simple_api_native[initial_memory_usage]} ${micronaut_simple_api_native[ab_testing_time]} ${micronaut_simple_api_native[ab_testing_time_2]} ${micronaut_simple_api_native[final_memory_usage]} ${micronaut_simple_api_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-simple-api-native" ${springboot_simple_api_native[startup_time]} ${springboot_simple_api_native[initial_memory_usage]} ${springboot_simple_api_native[ab_testing_time]} ${springboot_simple_api_native[ab_testing_time_2]} ${springboot_simple_api_native[final_memory_usage]} ${springboot_simple_api_native[shutdown_time]}
+printf "%32s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "................................" "............" "........................" "..............." "................." "........................" "............."
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-jpa-mysql-jvm" ${quarkus_jpa_mysql_jvm[startup_time]} ${quarkus_jpa_mysql_jvm[initial_memory_usage]} ${quarkus_jpa_mysql_jvm[ab_testing_time]} ${quarkus_jpa_mysql_jvm[ab_testing_time_2]} ${quarkus_jpa_mysql_jvm[final_memory_usage]} ${quarkus_jpa_mysql_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-jpa-mysql-jvm" ${micronaut_jpa_mysql_jvm[startup_time]} ${micronaut_jpa_mysql_jvm[initial_memory_usage]} ${micronaut_jpa_mysql_jvm[ab_testing_time]} ${micronaut_jpa_mysql_jvm[ab_testing_time_2]} ${micronaut_jpa_mysql_jvm[final_memory_usage]} ${micronaut_jpa_mysql_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-jpa-mysql-jvm" ${springboot_jpa_mysql_jvm[startup_time]} ${springboot_jpa_mysql_jvm[initial_memory_usage]} ${springboot_jpa_mysql_jvm[ab_testing_time]} ${springboot_jpa_mysql_jvm[ab_testing_time_2]} ${springboot_jpa_mysql_jvm[final_memory_usage]} ${springboot_jpa_mysql_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-jpa-mysql-native" ${quarkus_jpa_mysql_native[startup_time]} ${quarkus_jpa_mysql_native[initial_memory_usage]} ${quarkus_jpa_mysql_native[ab_testing_time]} ${quarkus_jpa_mysql_native[ab_testing_time_2]} ${quarkus_jpa_mysql_native[final_memory_usage]} ${quarkus_jpa_mysql_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-jpa-mysql-native" ${micronaut_jpa_mysql_native[startup_time]} ${micronaut_jpa_mysql_native[initial_memory_usage]} ${micronaut_jpa_mysql_native[ab_testing_time]} ${micronaut_jpa_mysql_native[ab_testing_time_2]} ${micronaut_jpa_mysql_native[final_memory_usage]} ${micronaut_jpa_mysql_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-jpa-mysql-native" ${springboot_jpa_mysql_native[startup_time]} ${springboot_jpa_mysql_native[initial_memory_usage]} ${springboot_jpa_mysql_native[ab_testing_time]} ${springboot_jpa_mysql_native[ab_testing_time_2]} ${springboot_jpa_mysql_native[final_memory_usage]} ${springboot_jpa_mysql_native[shutdown_time]}
+printf "%32s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "................................" "............" "........................" "..............." "................." "........................" "............."
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-kafka-producer-jvm" ${quarkus_kafka_producer_jvm[startup_time]} ${quarkus_kafka_producer_jvm[initial_memory_usage]} ${quarkus_kafka_producer_jvm[ab_testing_time]} ${quarkus_kafka_producer_jvm[ab_testing_time_2]} ${quarkus_kafka_producer_jvm[final_memory_usage]} ${quarkus_kafka_producer_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-kafka-producer-jvm" ${micronaut_kafka_producer_jvm[startup_time]} ${micronaut_kafka_producer_jvm[initial_memory_usage]} ${micronaut_kafka_producer_jvm[ab_testing_time]} ${micronaut_kafka_producer_jvm[ab_testing_time_2]} ${micronaut_kafka_producer_jvm[final_memory_usage]} ${micronaut_kafka_producer_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-kafka-producer-jvm" ${springboot_kafka_producer_jvm[startup_time]} ${springboot_kafka_producer_jvm[initial_memory_usage]} ${springboot_kafka_producer_jvm[ab_testing_time]} ${springboot_kafka_producer_jvm[ab_testing_time_2]} ${springboot_kafka_producer_jvm[final_memory_usage]} ${springboot_kafka_producer_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-kafka-producer-native" ${quarkus_kafka_producer_native[startup_time]} ${quarkus_kafka_producer_native[initial_memory_usage]} ${quarkus_kafka_producer_native[ab_testing_time]} ${quarkus_kafka_producer_native[ab_testing_time_2]} ${quarkus_kafka_producer_native[final_memory_usage]} ${quarkus_kafka_producer_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-kafka-producer-native" ${micronaut_kafka_producer_native[startup_time]} ${micronaut_kafka_producer_native[initial_memory_usage]} ${micronaut_kafka_producer_native[ab_testing_time]} ${micronaut_kafka_producer_native[ab_testing_time_2]} ${micronaut_kafka_producer_native[final_memory_usage]} ${micronaut_kafka_producer_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-kafka-producer-native" ${springboot_kafka_producer_native[startup_time]} ${springboot_kafka_producer_native[initial_memory_usage]} ${springboot_kafka_producer_native[ab_testing_time]} ${springboot_kafka_producer_native[ab_testing_time_2]} ${springboot_kafka_producer_native[final_memory_usage]} ${springboot_kafka_producer_native[shutdown_time]}
+printf "%32s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "................................" "............" "........................" "..............." "................." "........................" "............."
+printf "%32s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "quarkus-kafka-consumer-jvm" ${quarkus_kafka_consumer_jvm[startup_time]} ${quarkus_kafka_consumer_jvm[initial_memory_usage]} " " ${quarkus_kafka_consumer_jvm[ab_testing_time]} ${quarkus_kafka_consumer_jvm[final_memory_usage]} ${quarkus_kafka_consumer_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "micronaut-kafka-consumer-jvm" ${micronaut_kafka_consumer_jvm[startup_time]} ${micronaut_kafka_consumer_jvm[initial_memory_usage]} " " ${micronaut_kafka_consumer_jvm[ab_testing_time]} ${micronaut_kafka_consumer_jvm[final_memory_usage]} ${micronaut_kafka_consumer_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "springboot-kafka-consumer-jvm" ${springboot_kafka_consumer_jvm[startup_time]} ${springboot_kafka_consumer_jvm[initial_memory_usage]} " " ${springboot_kafka_consumer_jvm[ab_testing_time]} ${springboot_kafka_consumer_jvm[final_memory_usage]} ${springboot_kafka_consumer_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "quarkus-kafka-consumer-native" ${quarkus_kafka_consumer_native[startup_time]} ${quarkus_kafka_consumer_native[initial_memory_usage]} " " ${quarkus_kafka_consumer_native[ab_testing_time]} ${quarkus_kafka_consumer_native[final_memory_usage]} ${quarkus_kafka_consumer_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "micronaut-kafka-consumer-native" ${micronaut_kafka_consumer_native[startup_time]} ${micronaut_kafka_consumer_native[initial_memory_usage]} " " ${micronaut_kafka_consumer_native[ab_testing_time]} ${micronaut_kafka_consumer_native[final_memory_usage]} ${micronaut_kafka_consumer_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s   %17s | %24s | %13s |\n" "springboot-kafka-consumer-native" ${springboot_kafka_consumer_native[startup_time]} ${springboot_kafka_consumer_native[initial_memory_usage]} " " ${springboot_kafka_consumer_native[ab_testing_time]} ${springboot_kafka_consumer_native[final_memory_usage]} ${springboot_kafka_consumer_native[shutdown_time]}
+printf "%32s + %12s + %24s + %15s + %17s + %24s + %13s |\n" "................................" "............" "........................" "..............." "................." "........................" "............."
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-elasticsearch-jvm" ${quarkus_elasticsearch_jvm[startup_time]} ${quarkus_elasticsearch_jvm[initial_memory_usage]} ${quarkus_elasticsearch_jvm[ab_testing_time]} ${quarkus_elasticsearch_jvm[ab_testing_time_2]} ${quarkus_elasticsearch_jvm[final_memory_usage]} ${quarkus_elasticsearch_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-elasticsearch-jvm" ${micronaut_elasticsearch_jvm[startup_time]} ${micronaut_elasticsearch_jvm[initial_memory_usage]} ${micronaut_elasticsearch_jvm[ab_testing_time]} ${micronaut_elasticsearch_jvm[ab_testing_time_2]} ${micronaut_elasticsearch_jvm[final_memory_usage]} ${micronaut_elasticsearch_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-elasticsearch-jvm" ${springboot_elasticsearch_jvm[startup_time]} ${springboot_elasticsearch_jvm[initial_memory_usage]} ${springboot_elasticsearch_jvm[ab_testing_time]} ${springboot_elasticsearch_jvm[ab_testing_time_2]} ${springboot_elasticsearch_jvm[final_memory_usage]} ${springboot_elasticsearch_jvm[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "quarkus-elasticsearch-native" ${quarkus_elasticsearch_native[startup_time]} ${quarkus_elasticsearch_native[initial_memory_usage]} ${quarkus_elasticsearch_native[ab_testing_time]} ${quarkus_elasticsearch_native[ab_testing_time_2]} ${quarkus_elasticsearch_native[final_memory_usage]} ${quarkus_elasticsearch_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[startup_time]} ${micronaut_elasticsearch_native[initial_memory_usage]} ${micronaut_elasticsearch_native[ab_testing_time]} ${micronaut_elasticsearch_native[ab_testing_time_2]} ${micronaut_elasticsearch_native[final_memory_usage]} ${micronaut_elasticsearch_native[shutdown_time]}
+printf "%32s | %12s | %24s | %15s | %17s | %24s | %13s |\n" "springboot-elasticsearch-native" ${springboot_elasticsearch_native[startup_time]} ${springboot_elasticsearch_native[initial_memory_usage]} ${springboot_elasticsearch_native[ab_testing_time]} ${springboot_elasticsearch_native[ab_testing_time_2]} ${springboot_elasticsearch_native[final_memory_usage]} ${springboot_elasticsearch_native[shutdown_time]}
 
 echo
 echo "==>  START AT: ${start_time}"

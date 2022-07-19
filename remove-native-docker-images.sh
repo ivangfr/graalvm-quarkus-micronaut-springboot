@@ -64,69 +64,69 @@ then
 
 fi
 
-if [ "$1" = "quarkus-producer-consumer_producer-api" ] ||
-   [ "$1" = "quarkus-producer-consumer" ] ||
+if [ "$1" = "quarkus-kafka-producer" ] ||
+   [ "$1" = "quarkus-kafka" ] ||
    [ "$1" = "quarkus" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
-  docker rmi ivanfranchin/quarkus-producer-api-native:1.0.0
+  docker rmi ivanfranchin/quarkus-kafka-producer-native:1.0.0
 
 fi
 
-if [ "$1" = "quarkus-producer-consumer_consumer-api" ] ||
-   [ "$1" = "quarkus-producer-consumer" ] ||
+if [ "$1" = "quarkus-kafka-consumer" ] ||
+   [ "$1" = "quarkus-kafka" ] ||
    [ "$1" = "quarkus" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
-  docker rmi ivanfranchin/quarkus-consumer-api-native:1.0.0
+  docker rmi ivanfranchin/quarkus-kafka-consumer-native:1.0.0
 
 fi
 
-if [ "$1" = "micronaut-producer-consumer_producer-api" ] ||
-   [ "$1" = "micronaut-producer-consumer" ] ||
+if [ "$1" = "micronaut-kafka-producer" ] ||
+   [ "$1" = "micronaut-kafka" ] ||
    [ "$1" = "micronaut" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
-  docker rmi ivanfranchin/micronaut-producer-api-native:1.0.0
+  docker rmi ivanfranchin/micronaut-kafka-producer-native:1.0.0
 
 fi
 
-if [ "$1" = "micronaut-producer-consumer_consumer-api" ] ||
-   [ "$1" = "micronaut-producer-consumer" ] ||
+if [ "$1" = "micronaut-kafka-consumer" ] ||
+   [ "$1" = "micronaut-kafka" ] ||
    [ "$1" = "micronaut" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
-  docker rmi ivanfranchin/micronaut-consumer-api-native:1.0.0
+  docker rmi ivanfranchin/micronaut-kafka-consumer-native:1.0.0
 
 fi
 
-if [ "$1" = "springboot-producer-consumer_producer-api" ] ||
-   [ "$1" = "springboot-producer-consumer" ] ||
+if [ "$1" = "springboot-kafka-producer" ] ||
+   [ "$1" = "springboot-kafka" ] ||
    [ "$1" = "springboot" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
-  docker rmi ivanfranchin/springboot-producer-api-native:1.0.0
+  docker rmi ivanfranchin/springboot-kafka-producer-native:1.0.0
 
 fi
 
-if [ "$1" = "springboot-producer-consumer_consumer-api" ] ||
-   [ "$1" = "springboot-producer-consumer" ] ||
+if [ "$1" = "springboot-kafka-consumer" ] ||
+   [ "$1" = "springboot-kafka" ] ||
    [ "$1" = "springboot" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
-  docker rmi ivanfranchin/springboot-consumer-api-native:1.0.0
+  docker rmi ivanfranchin/springboot-kafka-consumer-native:1.0.0
 
 fi
 

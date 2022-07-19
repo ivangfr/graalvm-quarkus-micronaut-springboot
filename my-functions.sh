@@ -132,7 +132,7 @@ function check_docker_manager_script_input_parameter() {
      [ "$1" != "springboot" ] &&
      [ "$1" != "simple-api" ] &&
      [ "$1" != "jpa-mysql" ] &&
-     [ "$1" != "producer-consumer" ] &&
+     [ "$1" != "kafka" ] &&
      [ "$1" != "elasticsearch" ] &&
      [ "$1" != "quarkus-simple-api" ] &&
      [ "$1" != "micronaut-simple-api" ] &&
@@ -140,15 +140,15 @@ function check_docker_manager_script_input_parameter() {
      [ "$1" != "quarkus-jpa-mysql" ] &&
      [ "$1" != "micronaut-jpa-mysql" ] &&
      [ "$1" != "springboot-jpa-mysql" ] &&
-     [ "$1" != "quarkus-producer-consumer" ] &&
-     [ "$1" != "micronaut-producer-consumer" ] &&
-     [ "$1" != "springboot-producer-consumer" ] &&
-     [ "$1" != "quarkus-producer-consumer_producer-api" ] &&
-     [ "$1" != "quarkus-producer-consumer_consumer-api" ] &&
-     [ "$1" != "micronaut-producer-consumer_producer-api" ] &&
-     [ "$1" != "micronaut-producer-consumer_consumer-api" ] &&
-     [ "$1" != "springboot-producer-consumer_producer-api" ] &&
-     [ "$1" != "springboot-producer-consumer_consumer-api" ] &&
+     [ "$1" != "quarkus-kafka" ] &&
+     [ "$1" != "micronaut-kafka" ] &&
+     [ "$1" != "springboot-kafka" ] &&
+     [ "$1" != "quarkus-kafka-producer" ] &&
+     [ "$1" != "quarkus-kafka-consumer" ] &&
+     [ "$1" != "micronaut-kafka-producer" ] &&
+     [ "$1" != "micronaut-kafka-consumer" ] &&
+     [ "$1" != "springboot-kafka-producer" ] &&
+     [ "$1" != "springboot-kafka-consumer" ] &&
      [ "$1" != "quarkus-elasticsearch" ] &&
      [ "$1" != "micronaut-elasticsearch" ] &&
      [ "$1" != "springboot-elasticsearch" ];
@@ -157,30 +157,30 @@ function check_docker_manager_script_input_parameter() {
     printf "\nValid Parameters:"
 
     printf "\n\tall"
-    printf "\n\tsimple-api\tjpa-mysql\tproducer-consumer\telasticsearch"
+    printf "\n\tsimple-api\tjpa-mysql\tkafka\telasticsearch"
     
     printf "\n\tquarkus"
     printf "\n\t\tquarkus-simple-api"
     printf "\n\t\tquarkus-jpa-mysql"
-    printf "\n\t\tquarkus-producer-consumer"
-    printf "\n\t\t\tquarkus-producer-consumer_producer-api"
-    printf "\n\t\t\tquarkus-producer-consumer_consumer-api"
+    printf "\n\t\tquarkus-kafka"
+    printf "\n\t\t\tquarkus-kafka-producer"
+    printf "\n\t\t\tquarkus-kafka-consumer"
     printf "\n\t\tquarkus-elasticsearch"
 
     printf "\n\tmicronaut"
     printf "\n\t\tmicronaut-simple-api"
     printf "\n\t\tmicronaut-jpa-mysql"
-    printf "\n\t\tmicronaut-producer-consumer"
-    printf "\n\t\t\tmicronaut-producer-consumer_producer-api"
-    printf "\n\t\t\tmicronaut-producer-consumer_consumer-api"
+    printf "\n\t\tmicronaut-kafka"
+    printf "\n\t\t\tmicronaut-kafka-producer"
+    printf "\n\t\t\tmicronaut-kafka-consumer"
     printf "\n\t\tmicronaut-elasticsearch"
 
     printf "\n\tspringboot"
     printf "\n\t\tspringboot-simple-api"
     printf "\n\t\tspringboot-jpa-mysql"
-    printf "\n\t\tspringboot-producer-consumer"
-    printf "\n\t\t\tspringboot-producer-consumer_producer-api"
-    printf "\n\t\t\tspringboot-producer-consumer_consumer-api"
+    printf "\n\t\tspringboot-kafka"
+    printf "\n\t\t\tspringboot-kafka-producer"
+    printf "\n\t\t\tspringboot-kafka-consumer"
     printf "\n\t\tspringboot-elasticsearch"
 
     printf "\n"
@@ -205,15 +205,15 @@ function check_runner_script_input_parameter() {
      [ "$1" != "springboot-native" ] &&
      [ "$1" != "simple-api" ] &&
      [ "$1" != "jpa-mysql" ] &&
-     [ "$1" != "producer-consumer" ] &&
+     [ "$1" != "kafka" ] &&
      [ "$1" != "elasticsearch" ] &&
      [ "$1" != "simple-api-jvm" ] &&
      [ "$1" != "jpa-mysql-jvm" ] &&
-     [ "$1" != "producer-consumer-jvm" ] &&
+     [ "$1" != "kafka-jvm" ] &&
      [ "$1" != "elasticsearch-jvm" ] &&
      [ "$1" != "simple-api-native" ] &&
      [ "$1" != "jpa-mysql-native" ] &&
-     [ "$1" != "producer-consumer-native" ] &&
+     [ "$1" != "kafka-native" ] &&
      [ "$1" != "elasticsearch-native" ] &&
      [ "$1" != "quarkus-simple-api" ] && 
      [ "$1" != "micronaut-simple-api" ] &&
@@ -221,9 +221,9 @@ function check_runner_script_input_parameter() {
      [ "$1" != "quarkus-jpa-mysql" ] &&
      [ "$1" != "micronaut-jpa-mysql" ] &&
      [ "$1" != "springboot-jpa-mysql" ] &&
-     [ "$1" != "quarkus-producer-consumer" ] &&
-     [ "$1" != "micronaut-producer-consumer" ] &&
-     [ "$1" != "springboot-producer-consumer" ] &&
+     [ "$1" != "quarkus-kafka" ] &&
+     [ "$1" != "micronaut-kafka" ] &&
+     [ "$1" != "springboot-kafka" ] &&
      [ "$1" != "quarkus-elasticsearch" ] &&
      [ "$1" != "micronaut-elasticsearch" ] &&
      [ "$1" != "springboot-elasticsearch" ] &&
@@ -233,9 +233,9 @@ function check_runner_script_input_parameter() {
      [ "$1" != "quarkus-jpa-mysql-jvm" ] && [ "$1" != "quarkus-jpa-mysql-native" ] &&
      [ "$1" != "micronaut-jpa-mysql-jvm" ] && [ "$1" != "micronaut-jpa-mysql-native" ] &&
      [ "$1" != "springboot-jpa-mysql-jvm" ] && [ "$1" != "springboot-jpa-mysql-native" ] &&
-     [ "$1" != "quarkus-producer-consumer-jvm" ] && [ "$1" != "quarkus-producer-consumer-native" ] &&
-     [ "$1" != "micronaut-producer-consumer-jvm" ] && [ "$1" != "micronaut-producer-consumer-native" ] &&
-     [ "$1" != "springboot-producer-consumer-jvm" ] && [ "$1" != "springboot-producer-consumer-native" ] &&
+     [ "$1" != "quarkus-kafka-jvm" ] && [ "$1" != "quarkus-kafka-native" ] &&
+     [ "$1" != "micronaut-kafka-jvm" ] && [ "$1" != "micronaut-kafka-native" ] &&
+     [ "$1" != "springboot-kafka-jvm" ] && [ "$1" != "springboot-kafka-native" ] &&
      [ "$1" != "quarkus-elasticsearch-jvm" ] && [ "$1" != "quarkus-elasticsearch-native" ] &&
      [ "$1" != "micronaut-elasticsearch-jvm" ] && [ "$1" != "micronaut-elasticsearch-native" ] &&
      [ "$1" != "springboot-elasticsearch-jvm" ] && [ "$1" != "springboot-elasticsearch-native" ];
@@ -245,10 +245,10 @@ function check_runner_script_input_parameter() {
 
     printf "\n\tall"
     printf "\n\tjvm\tnative"
-    printf "\n\tsimple-api\tjpa-mysql\tproducer-consumer\telasticsearch"
+    printf "\n\tsimple-api\tjpa-mysql\tkafka\telasticsearch"
     
-    printf "\n\tsimple-api-jvm\tjpa-mysql-jvm\tproducer-consumer-jvm\telasticsearch-jvm"
-    printf "\n\tsimple-api-native\tjpa-mysql-native\tproducer-consumer-native\telasticsearch-native"
+    printf "\n\tsimple-api-jvm\tjpa-mysql-jvm\tkafka-jvm\telasticsearch-jvm"
+    printf "\n\tsimple-api-native\tjpa-mysql-native\tkafka-native\telasticsearch-native"
     
     printf "\n\tquarkus"
     printf "\n\t\tquarkus-jvm"
@@ -259,9 +259,9 @@ function check_runner_script_input_parameter() {
     printf "\n\t\t\tquarkus-jpa-mysql"
     printf "\n\t\t\t\tquarkus-jpa-mysql-jvm"
     printf "\n\t\t\t\tquarkus-jpa-mysql-native"
-    printf "\n\t\t\tquarkus-producer-consumer"
-    printf "\n\t\t\t\tquarkus-producer-consumer-jvm"
-    printf "\n\t\t\t\tquarkus-producer-consumer-native"
+    printf "\n\t\t\tquarkus-kafka"
+    printf "\n\t\t\t\tquarkus-kafka-jvm"
+    printf "\n\t\t\t\tquarkus-kafka-native"
     printf "\n\t\t\tquarkus-elasticsearch"
     printf "\n\t\t\t\tquarkus-elasticsearch-jvm"
     printf "\n\t\t\t\tquarkus-elasticsearch-native"
@@ -275,9 +275,9 @@ function check_runner_script_input_parameter() {
     printf "\n\t\t\tmicronaut-jpa-mysql"
     printf "\n\t\t\t\tmicronaut-jpa-mysql-jvm"
     printf "\n\t\t\t\tmicronaut-jpa-mysql-native"
-    printf "\n\t\t\tmicronaut-producer-consumer"
-    printf "\n\t\t\t\tmicronaut-producer-consumer-jvm"
-    printf "\n\t\t\t\tmicronaut-producer-consumer-native"
+    printf "\n\t\t\tmicronaut-kafka"
+    printf "\n\t\t\t\tmicronaut-kafka-jvm"
+    printf "\n\t\t\t\tmicronaut-kafka-native"
     printf "\n\t\t\tmicronaut-elasticsearch"
     printf "\n\t\t\t\tmicronaut-elasticsearch-jvm"
     printf "\n\t\t\t\tmicronaut-elasticsearch-native"
@@ -291,9 +291,9 @@ function check_runner_script_input_parameter() {
     printf "\n\t\t\tspringboot-jpa-mysql"
     printf "\n\t\t\t\tspringboot-jpa-mysql-jvm"
     printf "\n\t\t\t\tspringboot-jpa-mysql-native"
-    printf "\n\t\t\tspringboot-producer-consumer"
-    printf "\n\t\t\t\tspringboot-producer-consumer-jvm"
-    printf "\n\t\t\t\tspringboot-producer-consumer-native"
+    printf "\n\t\t\tspringboot-kafka"
+    printf "\n\t\t\t\tspringboot-kafka-jvm"
+    printf "\n\t\t\t\tspringboot-kafka-native"
     printf "\n\t\t\tspringboot-elasticsearch"
     printf "\n\t\t\t\tspringboot-elasticsearch-jvm"
     printf "\n\t\t\t\tspringboot-elasticsearch-native"

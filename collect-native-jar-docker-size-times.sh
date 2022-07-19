@@ -12,12 +12,12 @@ declare -A quarkus_jpa_mysql_native
 declare -A micronaut_jpa_mysql_native
 declare -A springboot_jpa_mysql_native
 
-declare -A quarkus_producer_api_native
-declare -A quarkus_consumer_api_native
-declare -A micronaut_producer_api_native
-declare -A micronaut_consumer_api_native
-declare -A springboot_producer_api_native
-declare -A springboot_consumer_api_native
+declare -A quarkus_kafka_producer_native
+declare -A quarkus_kafka_consumer_native
+declare -A micronaut_kafka_producer_native
+declare -A micronaut_kafka_consumer_native
+declare -A springboot_kafka_producer_native
+declare -A springboot_kafka_consumer_native
 
 declare -A quarkus_elasticsearch_native
 declare -A micronaut_elasticsearch_native
@@ -193,175 +193,175 @@ then
 
 fi
 
-if [ "$1" = "quarkus-producer-consumer_producer-api" ] ||
-   [ "$1" = "quarkus-producer-consumer" ] ||
+if [ "$1" = "quarkus-kafka-producer" ] ||
+   [ "$1" = "quarkus-kafka" ] ||
    [ "$1" = "quarkus" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
   echo
-  echo "-----------------------------------------------"
-  echo "QUARKUS-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
-  echo "-----------------------------------------------"
+  echo "-------------------------------------"
+  echo "QUARKUS-KAFKA / KAFKA-PRODUCER-NATIVE"
+  echo "-------------------------------------"
 
-  cd producer-consumer/quarkus-producer-consumer
+  cd kafka/quarkus-kafka
 
   package_jar_build_image \
-    "./mvnw clean --projects producer-api" \
-    "./mvnw package -Pnative -Dquarkus.native.container-build=true --projects producer-api" \
-    "producer-api/target/producer-api-1.0.0-runner" \
-    "cd producer-api && ./docker-build.sh native && cd .." \
-    "ivanfranchin/quarkus-producer-api-native:1.0.0"
-  quarkus_producer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-  quarkus_producer_api_native[jar_size]=$package_jar_build_image_jar_size
-  quarkus_producer_api_native[building_time]=$package_jar_build_image_building_time
-  quarkus_producer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+    "./mvnw clean --projects kafka-producer" \
+    "./mvnw package -Pnative -Dquarkus.native.container-build=true --projects kafka-producer" \
+    "kafka-producer/target/kafka-producer-1.0.0-runner" \
+    "cd kafka-producer && ./docker-build.sh native && cd .." \
+    "ivanfranchin/quarkus-kafka-producer-native:1.0.0"
+  quarkus_kafka_producer_native[packaging_time]=$package_jar_build_image_packaging_time
+  quarkus_kafka_producer_native[jar_size]=$package_jar_build_image_jar_size
+  quarkus_kafka_producer_native[building_time]=$package_jar_build_image_building_time
+  quarkus_kafka_producer_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 
 fi
 
-if [ "$1" = "quarkus-producer-consumer_consumer-api" ] ||
-   [ "$1" = "quarkus-producer-consumer" ] ||
+if [ "$1" = "quarkus-kafka-consumer" ] ||
+   [ "$1" = "quarkus-kafka" ] ||
    [ "$1" = "quarkus" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
   echo
-  echo "-----------------------------------------------"
-  echo "QUARKUS-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
-  echo "-----------------------------------------------"
+  echo "-------------------------------------"
+  echo "QUARKUS-KAFKA / KAFKA-CONSUMER-NATIVE"
+  echo "-------------------------------------"
 
-  cd producer-consumer/quarkus-producer-consumer
+  cd kafka/quarkus-kafka
 
   package_jar_build_image \
-    "./mvnw clean --projects consumer-api" \
-    "./mvnw package -Pnative -Dquarkus.native.container-build=true --projects consumer-api" \
-    "consumer-api/target/consumer-api-1.0.0-runner" \
-    "cd consumer-api && ./docker-build.sh native && cd .." \
-    "ivanfranchin/quarkus-consumer-api-native:1.0.0"
-  quarkus_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-  quarkus_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
-  quarkus_consumer_api_native[building_time]=$package_jar_build_image_building_time
-  quarkus_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+    "./mvnw clean --projects kafka-consumer" \
+    "./mvnw package -Pnative -Dquarkus.native.container-build=true --projects kafka-consumer" \
+    "kafka-consumer/target/kafka-consumer-1.0.0-runner" \
+    "cd kafka-consumer && ./docker-build.sh native && cd .." \
+    "ivanfranchin/quarkus-kafka-consumer-native:1.0.0"
+  quarkus_kafka_consumer_native[packaging_time]=$package_jar_build_image_packaging_time
+  quarkus_kafka_consumer_native[jar_size]=$package_jar_build_image_jar_size
+  quarkus_kafka_consumer_native[building_time]=$package_jar_build_image_building_time
+  quarkus_kafka_consumer_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 
 fi
 
-if [ "$1" = "micronaut-producer-consumer_producer-api" ] ||
-   [ "$1" = "micronaut-producer-consumer" ] ||
+if [ "$1" = "micronaut-kafka-producer" ] ||
+   [ "$1" = "micronaut-kafka" ] ||
    [ "$1" = "micronaut" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
   echo
-  echo "-------------------------------------------------"
-  echo "MICRONAUT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
-  echo "-------------------------------------------------"
+  echo "---------------------------------------"
+  echo "MICRONAUT-KAFKA / KAFKA-PRODUCER-NATIVE"
+  echo "---------------------------------------"
 
-  cd producer-consumer/micronaut-producer-consumer
+  cd kafka/micronaut-kafka
 
   package_jar_build_image \
-    "./mvnw clean --projects producer-api" \
-    "./mvnw package --projects producer-api" \
-    "producer-api/target/producer-api-1.0.0.jar" \
-    "cd producer-api && ./docker-build.sh native && cd .." \
-    "ivanfranchin/micronaut-producer-api-native:1.0.0"
-  micronaut_producer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-  micronaut_producer_api_native[jar_size]=$package_jar_build_image_jar_size
-  micronaut_producer_api_native[building_time]=$package_jar_build_image_building_time
-  micronaut_producer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+    "./mvnw clean --projects kafka-producer" \
+    "./mvnw package --projects kafka-producer" \
+    "kafka-producer/target/kafka-producer-1.0.0.jar" \
+    "cd kafka-producer && ./docker-build.sh native && cd .." \
+    "ivanfranchin/micronaut-kafka-producer-native:1.0.0"
+  micronaut_kafka_producer_native[packaging_time]=$package_jar_build_image_packaging_time
+  micronaut_kafka_producer_native[jar_size]=$package_jar_build_image_jar_size
+  micronaut_kafka_producer_native[building_time]=$package_jar_build_image_building_time
+  micronaut_kafka_producer_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 
 fi
 
-if [ "$1" = "micronaut-producer-consumer_consumer-api" ] ||
-   [ "$1" = "micronaut-producer-consumer" ] ||
+if [ "$1" = "micronaut-kafka-consumer" ] ||
+   [ "$1" = "micronaut-kafka" ] ||
    [ "$1" = "micronaut" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
   echo
-  echo "-------------------------------------------------"
-  echo "MICRONAUT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
-  echo "-------------------------------------------------"
+  echo "---------------------------------------"
+  echo "MICRONAUT-KAFKA / KAFKA-CONSUMER-NATIVE"
+  echo "---------------------------------------"
 
-  cd producer-consumer/micronaut-producer-consumer
+  cd kafka/micronaut-kafka
 
   package_jar_build_image \
-    "./mvnw clean --projects consumer-api" \
-    "./mvnw package --projects consumer-api" \
-    "consumer-api/target/consumer-api-1.0.0.jar" \
-    "cd consumer-api && ./docker-build.sh native && cd .." \
-    "ivanfranchin/micronaut-consumer-api-native:1.0.0"
-  micronaut_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-  micronaut_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
-  micronaut_consumer_api_native[building_time]=$package_jar_build_image_building_time
-  micronaut_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+    "./mvnw clean --projects kafka-consumer" \
+    "./mvnw package --projects kafka-consumer" \
+    "kafka-consumer/target/kafka-consumer-1.0.0.jar" \
+    "cd kafka-consumer && ./docker-build.sh native && cd .." \
+    "ivanfranchin/micronaut-kafka-consumer-native:1.0.0"
+  micronaut_kafka_consumer_native[packaging_time]=$package_jar_build_image_packaging_time
+  micronaut_kafka_consumer_native[jar_size]=$package_jar_build_image_jar_size
+  micronaut_kafka_consumer_native[building_time]=$package_jar_build_image_building_time
+  micronaut_kafka_consumer_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 
 fi
 
-if [ "$1" = "springboot-producer-consumer_producer-api" ] ||
-   [ "$1" = "springboot-producer-consumer" ] ||
+if [ "$1" = "springboot-kafka-producer" ] ||
+   [ "$1" = "springboot-kafka" ] ||
    [ "$1" = "springboot" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
   echo
-  echo "--------------------------------------------------"
-  echo "SPRINGBOOT-PRODUCER-CONSUMER / PRODUCER-API-NATIVE"
-  echo "--------------------------------------------------"
+  echo "----------------------------------------"
+  echo "SPRINGBOOT-KAFKA / KAFKA-PRODUCER-NATIVE"
+  echo "----------------------------------------"
 
-  cd producer-consumer/springboot-producer-consumer
+  cd kafka/springboot-kafka
 
   package_jar_build_image \
-    "./mvnw clean --projects producer-api" \
-    "./mvnw package --projects producer-api" \
-    "producer-api/target/producer-api-1.0.0.jar" \
-    "cd producer-api && ./docker-build.sh native && cd .." \
-    "ivanfranchin/springboot-producer-api-native:1.0.0"
-  springboot_producer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-  springboot_producer_api_native[jar_size]=$package_jar_build_image_jar_size
-  springboot_producer_api_native[building_time]=$package_jar_build_image_building_time
-  springboot_producer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+    "./mvnw clean --projects kafka-producer" \
+    "./mvnw package --projects kafka-producer" \
+    "kafka-producer/target/kafka-producer-1.0.0.jar" \
+    "cd kafka-producer && ./docker-build.sh native && cd .." \
+    "ivanfranchin/springboot-kafka-producer-native:1.0.0"
+  springboot_kafka_producer_native[packaging_time]=$package_jar_build_image_packaging_time
+  springboot_kafka_producer_native[jar_size]=$package_jar_build_image_jar_size
+  springboot_kafka_producer_native[building_time]=$package_jar_build_image_building_time
+  springboot_kafka_producer_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 
 fi
 
-if [ "$1" = "springboot-producer-consumer_consumer-api" ] ||
-   [ "$1" = "springboot-producer-consumer" ] ||
+if [ "$1" = "springboot-kafka-consumer" ] ||
+   [ "$1" = "springboot-kafka" ] ||
    [ "$1" = "springboot" ] ||
-   [ "$1" = "producer-consumer" ] ||
+   [ "$1" = "kafka" ] ||
    [ "$1" = "all" ];
 then
 
   echo
-  echo "--------------------------------------------------"
-  echo "SPRINGBOOT-PRODUCER-CONSUMER / CONSUMER-API-NATIVE"
-  echo "--------------------------------------------------"
+  echo "----------------------------------------"
+  echo "SPRINGBOOT-KAFKA / KAFKA-CONSUMER-NATIVE"
+  echo "----------------------------------------"
 
-  cd producer-consumer/springboot-producer-consumer
+  cd kafka/springboot-kafka
 
   package_jar_build_image \
-    "./mvnw clean --projects consumer-api" \
-    "./mvnw package --projects consumer-api" \
-    "consumer-api/target/consumer-api-1.0.0.jar" \
-    "cd consumer-api && ./docker-build.sh native && cd .." \
-    "ivanfranchin/springboot-consumer-api-native:1.0.0"
-  springboot_consumer_api_native[packaging_time]=$package_jar_build_image_packaging_time
-  springboot_consumer_api_native[jar_size]=$package_jar_build_image_jar_size
-  springboot_consumer_api_native[building_time]=$package_jar_build_image_building_time
-  springboot_consumer_api_native[docker_image_size]=$package_jar_build_image_docker_image_size
+    "./mvnw clean --projects kafka-consumer" \
+    "./mvnw package --projects kafka-consumer" \
+    "kafka-consumer/target/kafka-consumer-1.0.0.jar" \
+    "cd kafka-consumer && ./docker-build.sh native && cd .." \
+    "ivanfranchin/springboot-kafka-consumer-native:1.0.0"
+  springboot_kafka_consumer_native[packaging_time]=$package_jar_build_image_packaging_time
+  springboot_kafka_consumer_native[jar_size]=$package_jar_build_image_jar_size
+  springboot_kafka_consumer_native[building_time]=$package_jar_build_image_building_time
+  springboot_kafka_consumer_native[docker_image_size]=$package_jar_build_image_docker_image_size
 
   cd ../..
 
@@ -452,27 +452,27 @@ then
 fi
 
 printf "\n"
-printf "%31s | %14s | %14s | %17s | %17s |\n" "Application" "Packaging Time" "Packaging Size" "Docker Build Time" "Docker Image Size"
-printf "%31s + %14s + %14s + %17s + %17s |\n" "-------------------------------" "--------------" "--------------" "-----------------" "-----------------"
-printf "%31s | %14s | %14s | %17s | %17s |\n" "quarkus-simple-api-native" ${quarkus_simple_api_native[packaging_time]} ${quarkus_simple_api_native[jar_size]} ${quarkus_simple_api_native[building_time]} ${quarkus_simple_api_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "micronaut-simple-api-native" ${micronaut_simple_api_native[packaging_time]} ${micronaut_simple_api_native[jar_size]} ${micronaut_simple_api_native[building_time]} ${micronaut_simple_api_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "springboot-simple-api-native" ${springboot_simple_api_native[packaging_time]} ${springboot_simple_api_native[jar_size]} ${springboot_simple_api_native[building_time]} ${springboot_simple_api_native[docker_image_size]}
-printf "%31s + %14s + %14s + %17s + %17s |\n" "..............................." ".............." ".............." "................." "................."
-printf "%31s | %14s | %14s | %17s | %17s |\n" "quarkus-jpa-mysql-native" ${quarkus_jpa_mysql_native[packaging_time]} ${quarkus_jpa_mysql_native[jar_size]} ${quarkus_jpa_mysql_native[building_time]} ${quarkus_jpa_mysql_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "micronaut-jpa-mysql-native" ${micronaut_jpa_mysql_native[packaging_time]} ${micronaut_jpa_mysql_native[jar_size]} ${micronaut_jpa_mysql_native[building_time]} ${micronaut_jpa_mysql_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "springboot-jpa-mysql-native" ${springboot_jpa_mysql_native[packaging_time]} ${springboot_jpa_mysql_native[jar_size]} ${springboot_jpa_mysql_native[building_time]} ${springboot_jpa_mysql_native[docker_image_size]}
-printf "%31s + %14s + %14s + %17s + %17s |\n" "..............................." ".............." ".............." "................." "................."
-printf "%31s | %14s | %14s | %17s | %17s |\n" "quarkus-producer-api-native" ${quarkus_producer_api_native[packaging_time]} ${quarkus_producer_api_native[jar_size]} ${quarkus_producer_api_native[building_time]} ${quarkus_producer_api_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "micronaut-producer-api-native" ${micronaut_producer_api_native[packaging_time]} ${micronaut_producer_api_native[jar_size]} ${micronaut_producer_api_native[building_time]} ${micronaut_producer_api_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "springboot-producer-api-native" ${springboot_producer_api_native[packaging_time]} ${springboot_producer_api_native[jar_size]} ${springboot_producer_api_native[building_time]} ${springboot_producer_api_native[docker_image_size]}
-printf "%31s + %14s + %14s + %17s + %17s |\n" "..............................." ".............." ".............." "................." "................."
-printf "%31s | %14s | %14s | %17s | %17s |\n" "quarkus-consumer-api-native" ${quarkus_consumer_api_native[packaging_time]} ${quarkus_consumer_api_native[jar_size]} ${quarkus_consumer_api_native[building_time]} ${quarkus_consumer_api_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "micronaut-consumer-api-native" ${micronaut_consumer_api_native[packaging_time]} ${micronaut_consumer_api_native[jar_size]} ${micronaut_consumer_api_native[building_time]} ${micronaut_consumer_api_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "springboot-consumer-api-native" ${springboot_consumer_api_native[packaging_time]} ${springboot_consumer_api_native[jar_size]} ${springboot_consumer_api_native[building_time]} ${springboot_consumer_api_native[docker_image_size]}
-printf "%31s + %14s + %14s + %17s + %17s |\n" "..............................." ".............." ".............." "................." "................."
-printf "%31s | %14s | %14s | %17s | %17s |\n" "quarkus-elasticsearch-native" ${quarkus_elasticsearch_native[packaging_time]} ${quarkus_elasticsearch_native[jar_size]} ${quarkus_elasticsearch_native[building_time]} ${quarkus_elasticsearch_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[packaging_time]} ${micronaut_elasticsearch_native[jar_size]} ${micronaut_elasticsearch_native[building_time]} ${micronaut_elasticsearch_native[docker_image_size]}
-printf "%31s | %14s | %14s | %17s | %17s |\n" "springboot-elasticsearch-native" ${springboot_elasticsearch_native[packaging_time]} ${springboot_elasticsearch_native[jar_size]} ${springboot_elasticsearch_native[building_time]} ${springboot_elasticsearch_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "Application" "Packaging Time" "Packaging Size" "Docker Build Time" "Docker Image Size"
+printf "%32s + %14s + %14s + %17s + %17s |\n" "--------------------------------" "--------------" "--------------" "-----------------" "-----------------"
+printf "%32s | %14s | %14s | %17s | %17s |\n" "quarkus-simple-api-native" ${quarkus_simple_api_native[packaging_time]} ${quarkus_simple_api_native[jar_size]} ${quarkus_simple_api_native[building_time]} ${quarkus_simple_api_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "micronaut-simple-api-native" ${micronaut_simple_api_native[packaging_time]} ${micronaut_simple_api_native[jar_size]} ${micronaut_simple_api_native[building_time]} ${micronaut_simple_api_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "springboot-simple-api-native" ${springboot_simple_api_native[packaging_time]} ${springboot_simple_api_native[jar_size]} ${springboot_simple_api_native[building_time]} ${springboot_simple_api_native[docker_image_size]}
+printf "%32s + %14s + %14s + %17s + %17s |\n" "................................" ".............." ".............." "................." "................."
+printf "%32s | %14s | %14s | %17s | %17s |\n" "quarkus-jpa-mysql-native" ${quarkus_jpa_mysql_native[packaging_time]} ${quarkus_jpa_mysql_native[jar_size]} ${quarkus_jpa_mysql_native[building_time]} ${quarkus_jpa_mysql_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "micronaut-jpa-mysql-native" ${micronaut_jpa_mysql_native[packaging_time]} ${micronaut_jpa_mysql_native[jar_size]} ${micronaut_jpa_mysql_native[building_time]} ${micronaut_jpa_mysql_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "springboot-jpa-mysql-native" ${springboot_jpa_mysql_native[packaging_time]} ${springboot_jpa_mysql_native[jar_size]} ${springboot_jpa_mysql_native[building_time]} ${springboot_jpa_mysql_native[docker_image_size]}
+printf "%32s + %14s + %14s + %17s + %17s |\n" "................................" ".............." ".............." "................." "................."
+printf "%32s | %14s | %14s | %17s | %17s |\n" "quarkus-kafka-producer-native" ${quarkus_kafka_producer_native[packaging_time]} ${quarkus_kafka_producer_native[jar_size]} ${quarkus_kafka_producer_native[building_time]} ${quarkus_kafka_producer_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "micronaut-kafka-producer-native" ${micronaut_kafka_producer_native[packaging_time]} ${micronaut_kafka_producer_native[jar_size]} ${micronaut_kafka_producer_native[building_time]} ${micronaut_kafka_producer_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "springboot-kafka-producer-native" ${springboot_kafka_producer_native[packaging_time]} ${springboot_kafka_producer_native[jar_size]} ${springboot_kafka_producer_native[building_time]} ${springboot_kafka_producer_native[docker_image_size]}
+printf "%32s + %14s + %14s + %17s + %17s |\n" "................................" ".............." ".............." "................." "................."
+printf "%32s | %14s | %14s | %17s | %17s |\n" "quarkus-kafka-consumer-native" ${quarkus_kafka_consumer_native[packaging_time]} ${quarkus_kafka_consumer_native[jar_size]} ${quarkus_kafka_consumer_native[building_time]} ${quarkus_kafka_consumer_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "micronaut-kafka-consumer-native" ${micronaut_kafka_consumer_native[packaging_time]} ${micronaut_kafka_consumer_native[jar_size]} ${micronaut_kafka_consumer_native[building_time]} ${micronaut_kafka_consumer_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "springboot-kafka-consumer-native" ${springboot_kafka_consumer_native[packaging_time]} ${springboot_kafka_consumer_native[jar_size]} ${springboot_kafka_consumer_native[building_time]} ${springboot_kafka_consumer_native[docker_image_size]}
+printf "%32s + %14s + %14s + %17s + %17s |\n" "................................" ".............." ".............." "................." "................."
+printf "%32s | %14s | %14s | %17s | %17s |\n" "quarkus-elasticsearch-native" ${quarkus_elasticsearch_native[packaging_time]} ${quarkus_elasticsearch_native[jar_size]} ${quarkus_elasticsearch_native[building_time]} ${quarkus_elasticsearch_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "micronaut-elasticsearch-native" ${micronaut_elasticsearch_native[packaging_time]} ${micronaut_elasticsearch_native[jar_size]} ${micronaut_elasticsearch_native[building_time]} ${micronaut_elasticsearch_native[docker_image_size]}
+printf "%32s | %14s | %14s | %17s | %17s |\n" "springboot-elasticsearch-native" ${springboot_elasticsearch_native[packaging_time]} ${springboot_elasticsearch_native[jar_size]} ${springboot_elasticsearch_native[building_time]} ${springboot_elasticsearch_native[docker_image_size]}
 
 echo
 echo "==>  START AT: ${start_time}"

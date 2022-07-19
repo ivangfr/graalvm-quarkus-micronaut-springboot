@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.mycompany.kafkaproducer
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [annotation-api, app-name, graalvm, http-client, java, java-application, jib, junit, kafka, logback, lombok, management, maven, micrometer, micrometer-prometheus, netty-server, readme, yaml]

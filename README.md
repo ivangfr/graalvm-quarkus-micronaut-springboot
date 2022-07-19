@@ -6,7 +6,7 @@ The goal of this project is to compare some Java frameworks like: [`Quarkus`](ht
 
 - ### [simple-api](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/simple-api#graalvm-quarkus-micronaut-springboot)
 - ### [jpa-mysql](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/jpa-mysql#graalvm-quarkus-micronaut-springboot)
-- ### [producer-consumer](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/producer-consumer#graalvm-quarkus-micronaut-springboot)
+- ### [kafka](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/kafkar#graalvm-quarkus-micronaut-springboot)
 - ### [elasticsearch](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/elasticsearch#graalvm-quarkus-micronaut-springboot)
 
 ## Framework version
@@ -57,13 +57,13 @@ The following table shows the results after running the script `collect-jvm-jar-
        micronaut-jpa-mysql-jvm |            10s |            35M |               12s |             361MB |
       springboot-jpa-mysql-jvm |            17s |            43M |               11s |             313MB |
 .............................. + .............. + .............. + ................. + ................. |
-      quarkus-producer-api-jvm |             8s |            34M |                2s |             439MB |
-    micronaut-producer-api-jvm |             8s |            29M |               12s |             355MB |
-   springboot-producer-api-jvm |            14s |            39M |               10s |             308MB |
+    quarkus-kafka-producer-jvm |             8s |            34M |                2s |             439MB |
+  micronaut-kafka-producer-jvm |             8s |            29M |               12s |             355MB |
+ springboot-kafka-producer-jvm |            14s |            39M |               10s |             308MB |
 .............................. + .............. + .............. + ................. + ................. |
-      quarkus-consumer-api-jvm |             6s |            32M |                3s |             437MB |
-    micronaut-consumer-api-jvm |             6s |            29M |               11s |             355MB |
-   springboot-consumer-api-jvm |            14s |            37M |               10s |             306MB |
+    quarkus-kafka-consumer-jvm |             6s |            32M |                3s |             437MB |
+  micronaut-kafka-consumer-jvm |             6s |            29M |               11s |             355MB |
+ springboot-kafka-consumer-jvm |            14s |            37M |               10s |             306MB |
 .............................. + .............. + .............. + ................. + ................. |
      quarkus-elasticsearch-jvm |             8s |            42M |                3s |             447MB |
    micronaut-elasticsearch-jvm |            11s |            57M |               13s |             385MB |
@@ -72,27 +72,27 @@ The following table shows the results after running the script `collect-jvm-jar-
 
 Table below shows the results after running the script `collect-native-jar-docker-size-times.sh`
 ```
-                    Application | Packaging Time | Packaging Size | Docker Build Time | Docker Image Size |
-------------------------------- + -------------- + -------------- + ----------------- + ----------------- |
-      quarkus-simple-api-native |           147s |            46M |                3s |             151MB |
-    micronaut-simple-api-native |             6s |            15M |              151s |            79.9MB |
-   springboot-simple-api-native |            16s |            23M |              376s |             104MB |
-............................... + .............. + .............. + ................. + ................. |
-       quarkus-jpa-mysql-native |           195s |            79M |                5s |             186MB |
-     micronaut-jpa-mysql-native |             9s |            35M |              227s |             119MB |
-    springboot-jpa-mysql-native |            19s |            43M |              523s |             146MB |
-............................... + .............. + .............. + ................. + ................. |
-    quarkus-producer-api-native |           193s |            64M |                6s |             170MB |
-  micronaut-producer-api-native |             7s |            29M |              182s |            97.7MB |
- springboot-producer-api-native |            16s |            39M |              412s |             124MB |
-............................... + .............. + .............. + ................. + ................. |
-    quarkus-consumer-api-native |           159s |            60M |                4s |             165MB |
-  micronaut-consumer-api-native |             7s |            29M |              184s |            97.6MB |
- springboot-consumer-api-native |            15s |            37M |              394s |             108MB |
-............................... + .............. + .............. + ................. + ................. |
-   quarkus-elasticsearch-native |           166s |            55M |                7s |             160MB |
- micronaut-elasticsearch-native |            10s |            57M |              204s |             101MB |
-springboot-elasticsearch-native |            18s |            65M |              442s |             120MB |
+                     Application | Packaging Time | Packaging Size | Docker Build Time | Docker Image Size |
+-------------------------------- + -------------- + -------------- + ----------------- + ----------------- |
+       quarkus-simple-api-native |           147s |            46M |                3s |             151MB |
+     micronaut-simple-api-native |             6s |            15M |              151s |            79.9MB |
+    springboot-simple-api-native |            16s |            23M |              376s |             104MB |
+................................ + .............. + .............. + ................. + ................. |
+        quarkus-jpa-mysql-native |           195s |            79M |                5s |             186MB |
+      micronaut-jpa-mysql-native |             9s |            35M |              227s |             119MB |
+     springboot-jpa-mysql-native |            19s |            43M |              523s |             146MB |
+................................ + .............. + .............. + ................. + ................. |
+   quarkus-kafka-producer-native |           193s |            64M |                6s |             170MB |
+ micronaut-kafka-producer-native |             7s |            29M |              182s |            97.7MB |
+springboot-kafka-producer-native |            16s |            39M |              412s |             124MB |
+................................ + .............. + .............. + ................. + ................. |
+   quarkus-kafka-consumer-native |           159s |            60M |                4s |             165MB |
+ micronaut-kafka-consumer-native |             7s |            29M |              184s |            97.6MB |
+springboot-kafka-consumer-native |            15s |            37M |              394s |             108MB |
+................................ + .............. + .............. + ................. + ................. |
+    quarkus-elasticsearch-native |           166s |            55M |                7s |             160MB |
+  micronaut-elasticsearch-native |            10s |            57M |              204s |             101MB |
+ springboot-elasticsearch-native |            18s |            65M |              442s |             120MB |
 ```
 
 Finally, the following table shows the results after running the script `collect-ab-times-memory-usage.sh`
@@ -116,19 +116,19 @@ Finally, the following table shows the results after running the script `collect
      micronaut-jpa-mysql-native |         61ms |   20.79MiB/512MiB(4.06%) |              3s |                2s |   33.39MiB/512MiB(6.52%) |            0s |
     springboot-jpa-mysql-native |        152ms |  65.86MiB/512MiB(12.86%) |              3s |                3s |  103.4MiB/512MiB(20.19%) |            2s |
 ............................... + ............ + ........................ + ............... + ................. + ........................ + ............. |
-       quarkus-producer-api-jvm |       1353ms |  93.45MiB/512MiB(18.25%) |              9s |                6s |  150.9MiB/512MiB(29.48%) |            0s |
-     micronaut-producer-api-jvm |       6350ms |  81.83MiB/512MiB(15.98%) |              8s |                5s |  135.2MiB/512MiB(26.40%) |            1s |
-    springboot-producer-api-jvm |       2511ms |  154.4MiB/512MiB(30.15%) |             10s |                6s |  192.2MiB/512MiB(37.55%) |            2s |
-    quarkus-producer-api-native |         29ms |   9.156MiB/512MiB(1.79%) |              5s |                5s |  65.49MiB/512MiB(12.79%) |            0s |
-  micronaut-producer-api-native |         32ms |   9.492MiB/512MiB(1.85%) |              5s |                5s |    36.2MiB/512MiB(7.07%) |            1s |
- springboot-producer-api-native |        125ms |   37.23MiB/512MiB(7.27%) |              5s |                5s |   34.24MiB/512MiB(6.69%) |            3s |
+      quarkus-kafka-producer-jvm |       1353ms |  93.45MiB/512MiB(18.25%) |              9s |                6s |  150.9MiB/512MiB(29.48%) |            0s |
+    micronaut-kafka-producer-jvm |       6350ms |  81.83MiB/512MiB(15.98%) |              8s |                5s |  135.2MiB/512MiB(26.40%) |            1s |
+   springboot-kafka-producer-jvm |       2511ms |  154.4MiB/512MiB(30.15%) |             10s |                6s |  192.2MiB/512MiB(37.55%) |            2s |
+   quarkus-kafka-producer-native |         29ms |   9.156MiB/512MiB(1.79%) |              5s |                5s |  65.49MiB/512MiB(12.79%) |            0s |
+ micronaut-kafka-producer-native |         32ms |   9.492MiB/512MiB(1.85%) |              5s |                5s |    36.2MiB/512MiB(7.07%) |            1s |
+springboot-kafka-producer-native |        125ms |   37.23MiB/512MiB(7.27%) |              5s |                5s |   34.24MiB/512MiB(6.69%) |            3s |
 ............................... + ............ + ........................ + ............... + ................. + ........................ + ............. |
-       quarkus-consumer-api-jvm |       1066ms |  75.74MiB/512MiB(14.79%) |                                  4s |  144.1MiB/512MiB(28.14%) |            3s |
-     micronaut-consumer-api-jvm |       1905ms |  106.1MiB/512MiB(20.73%) |                                  3s |  97.31MiB/512MiB(19.01%) |            0s |
-    springboot-consumer-api-jvm |       2165ms |  147.3MiB/512MiB(28.76%) |                                  2s |  156.5MiB/512MiB(30.57%) |            3s |
-    quarkus-consumer-api-native |         35ms |   11.05MiB/512MiB(2.16%) |                                  3s |   59.3MiB/512MiB(11.58%) |            3s |
-  micronaut-consumer-api-native |         52ms |   12.49MiB/512MiB(2.44%) |                                  2s |  57.21MiB/512MiB(11.17%) |            0s |
- springboot-consumer-api-native |         74ms |   35.43MiB/512MiB(6.92%) |                                  2s |  70.54MiB/512MiB(13.78%) |            2s |
+      quarkus-kafka-consumer-jvm |       1066ms |  75.74MiB/512MiB(14.79%) |                                  4s |  144.1MiB/512MiB(28.14%) |            3s |
+    micronaut-kafka-consumer-jvm |       1905ms |  106.1MiB/512MiB(20.73%) |                                  3s |  97.31MiB/512MiB(19.01%) |            0s |
+   springboot-kafka-consumer-jvm |       2165ms |  147.3MiB/512MiB(28.76%) |                                  2s |  156.5MiB/512MiB(30.57%) |            3s |
+   quarkus-kafka-consumer-native |         35ms |   11.05MiB/512MiB(2.16%) |                                  3s |   59.3MiB/512MiB(11.58%) |            3s |
+ micronaut-kafka-consumer-native |         52ms |   12.49MiB/512MiB(2.44%) |                                  2s |  57.21MiB/512MiB(11.17%) |            0s |
+springboot-kafka-consumer-native |         74ms |   35.43MiB/512MiB(6.92%) |                                  2s |  70.54MiB/512MiB(13.78%) |            2s |
 ............................... + ............ + ........................ + ............... + ................. + ........................ + ............. |
       quarkus-elasticsearch-jvm |       1241ms |  82.21MiB/512MiB(16.06%) |              8s |                5s |  145.3MiB/512MiB(28.37%) |            1s |
     micronaut-elasticsearch-jvm |       6318ms |  81.07MiB/512MiB(15.83%) |              7s |                5s |  153.5MiB/512MiB(29.97%) |            0s |
@@ -144,35 +144,35 @@ springboot-elasticsearch-native |         70ms |   35.64MiB/512MiB(6.96%) |     
 
 - `ab` tests used
   ```
-                      Application | ab Test                                                                                      |
-  ------------------------------- + -------------------------------------------------------------------------------------------- |
-           quarkus-simple-api-jvm | ab -c 10 -n 4000 'http://localhost:9080/api/greeting?name=Ivan'                              |
-         micronaut-simple-api-jvm | ab -c 10 -n 4000 'http://localhost:9082/api/greeting?name=Ivan'                              |
-        springboot-simple-api-jvm | ab -c 10 -n 4000 'http://localhost:9084/api/greeting?name=Ivan'                              |
-        quarkus-simple-api-native | ab -c 10 -n 4000 'http://localhost:9081/api/greeting?name=Ivan'                              |
-      micronaut-simple-api-native | ab -c 10 -n 4000 'http://localhost:9083/api/greeting?name=Ivan'                              |
-     springboot-simple-api-native | ab -c 10 -n 4000 'http://localhost:9085/api/greeting?name=Ivan'                              |
-  ............................... + ............................................................................................ |
-            quarkus-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9086/api/books     |
-          micronaut-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9088/api/books     |
-         springboot-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9090/api/books     |
-         quarkus-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9087/api/books     |
-       micronaut-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9089/api/books     |
-      springboot-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9091/api/books     |       
-  ............................... + ............................................................................................ |
-         quarkus-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9100/api/news      |
-       micronaut-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9102/api/news      |
-      springboot-producer-api-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9104/api/news      |
-      quarkus-producer-api-native | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9101/api/news      |
-    micronaut-producer-api-native | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9103/api/news      |
-   springboot-producer-api-native | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9105/api/news      |
-  ............................... + ............................................................................................ |
-        quarkus-elasticsearch-jvm | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9112/api/movies  |
-      micronaut-elasticsearch-jvm | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9114/api/movies  |
-     springboot-elasticsearch-jvm | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9116/api/movies  |
-     quarkus-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9113/api/movies  |
-   micronaut-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9115/api/movies  |
-  springboot-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9117/api/movies  |
+                       Application | ab Test                                                                                      |
+  -------------------------------- + -------------------------------------------------------------------------------------------- |
+            quarkus-simple-api-jvm | ab -c 10 -n 4000 'http://localhost:9080/api/greeting?name=Ivan'                              |
+          micronaut-simple-api-jvm | ab -c 10 -n 4000 'http://localhost:9082/api/greeting?name=Ivan'                              |
+         springboot-simple-api-jvm | ab -c 10 -n 4000 'http://localhost:9084/api/greeting?name=Ivan'                              |
+         quarkus-simple-api-native | ab -c 10 -n 4000 'http://localhost:9081/api/greeting?name=Ivan'                              |
+       micronaut-simple-api-native | ab -c 10 -n 4000 'http://localhost:9083/api/greeting?name=Ivan'                              |
+      springboot-simple-api-native | ab -c 10 -n 4000 'http://localhost:9085/api/greeting?name=Ivan'                              |
+  ................................ + ............................................................................................ |
+             quarkus-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9086/api/books     |
+           micronaut-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9088/api/books     |
+          springboot-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9090/api/books     |
+          quarkus-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9087/api/books     |
+        micronaut-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9089/api/books     |
+       springboot-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 10 -n 2000 http://localhost:9091/api/books     |       
+  ................................ + ............................................................................................ |
+        quarkus-kafka-producer-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9100/api/news      |
+      micronaut-kafka-producer-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9102/api/news      |
+     springboot-kafka-producer-jvm | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9104/api/news      |
+     quarkus-kafka-producer-native | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9101/api/news      |
+   micronaut-kafka-producer-native | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9103/api/news      |
+  springboot-kafka-producer-native | ab -p test-news.json -T 'application/json' -c 10 -n 5000 http://localhost:9105/api/news      |
+  ................................ + ............................................................................................ |
+         quarkus-elasticsearch-jvm | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9112/api/movies  |
+       micronaut-elasticsearch-jvm | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9114/api/movies  |
+      springboot-elasticsearch-jvm | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9116/api/movies  |
+      quarkus-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9113/api/movies  |
+    micronaut-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9115/api/movies  |
+   springboot-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 10 -n 2000 http://localhost:9117/api/movies  |
   ```
 
 ## Monitoring CPU and Memory with cAdvisor
