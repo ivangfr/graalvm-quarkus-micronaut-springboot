@@ -1,5 +1,5 @@
 applicationType: default
-defaultPackage: com.mycompany.micronautelasticsearch
+defaultPackage: com.ivanfranchin.micronautelasticsearch
 testFramework: junit
 sourceLanguage: java
 buildTool: maven

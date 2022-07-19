@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mycompany.micronautjpamysql</groupId>
+    <groupId>com.ivanfranchin.micronautjpamysql</groupId>
     <artifactId>micronaut-jpa-mysql</artifactId>
     <version>1.0.0</version>
     <packaging>${packaging}</packaging>
@@ -20,7 +20,7 @@
         <micronaut.version>3.5.3</micronaut.version>
         <micronaut.data.version>3.4.3</micronaut.data.version>
         <micronaut.runtime>netty</micronaut.runtime>
-        <exec.mainClass>com.mycompany.micronautjpamysql.Application</exec.mainClass>
+        <exec.mainClass>com.ivanfranchin.micronautjpamysql.Application</exec.mainClass>
         <org.mapstruct.version>1.5.2.Final</org.mapstruct.version>
         <javax-inject.version>1</javax-inject.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
@@ -195,7 +195,7 @@
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Amicronaut.processing.group=com.mycompany.micronautjpamysql</arg>
+                        <arg>-Amicronaut.processing.group=com.ivanfranchin.micronautjpamysql</arg>
                         <arg>-Amicronaut.processing.module=micronaut-jpa-mysql</arg>
                     </compilerArgs>
                 </configuration>

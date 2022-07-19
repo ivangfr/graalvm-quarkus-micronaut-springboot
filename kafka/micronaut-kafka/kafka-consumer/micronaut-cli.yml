@@ -1,5 +1,5 @@
 applicationType: default
-defaultPackage: com.mycompany.kafkaconsumer
+defaultPackage: com.ivanfranchin.kafkaconsumer
 testFramework: junit
 sourceLanguage: java
 buildTool: maven

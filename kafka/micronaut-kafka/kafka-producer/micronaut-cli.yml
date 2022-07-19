@@ -1,5 +1,5 @@
 applicationType: default
-defaultPackage: com.mycompany.kafkaproducer
+defaultPackage: com.ivanfranchin.kafkaproducer
 testFramework: junit
 sourceLanguage: java
 buildTool: maven

@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mycompany.micronautelasticsearch</groupId>
+    <groupId>com.ivanfranchin.micronautelasticsearch</groupId>
     <artifactId>micronaut-elasticsearch</artifactId>
     <version>1.0.0</version>
     <packaging>${packaging}</packaging>
@@ -19,7 +19,7 @@
         <release.version>17</release.version>
         <micronaut.version>3.5.3</micronaut.version>
         <micronaut.runtime>netty</micronaut.runtime>
-        <exec.mainClass>com.mycompany.micronautelasticsearch.Application</exec.mainClass>
+        <exec.mainClass>com.ivanfranchin.micronautelasticsearch.Application</exec.mainClass>
         <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
@@ -169,7 +169,7 @@
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Amicronaut.processing.group=com.mycompany.micronautelasticsearch</arg>
+                        <arg>-Amicronaut.processing.group=com.ivanfranchin.micronautelasticsearch</arg>
                         <arg>-Amicronaut.processing.module=micronaut-elasticsearch</arg>
                     </compilerArgs>
                 </configuration>

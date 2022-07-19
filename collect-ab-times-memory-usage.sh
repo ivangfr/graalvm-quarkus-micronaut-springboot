@@ -582,7 +582,7 @@ then
   echo "DOCKER-COMPOSE"
   echo "=============="
 
-  docker-compose down -v
+  #docker-compose down -v
 
   cd ..
 
@@ -1038,7 +1038,7 @@ then
   echo "DOCKER-COMPOSE"
   echo "=============="
 
-  docker-compose down -v
+  #docker-compose down -v
 
   cd ..
 
@@ -1331,7 +1331,7 @@ then
   echo "DOCKER-COMPOSE"
   echo "=============="
 
-  docker-compose down -v
+  #docker-compose down -v
 
   cd ..
 

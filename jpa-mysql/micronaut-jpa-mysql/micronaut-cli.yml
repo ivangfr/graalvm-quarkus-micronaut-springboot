@@ -1,5 +1,5 @@
 applicationType: default
-defaultPackage: com.mycompany.micronautjpamysql
+defaultPackage: com.ivanfranchin.micronautjpamysql
 testFramework: junit
 sourceLanguage: java
 buildTool: maven

@@ -18,7 +18,7 @@
         <release.version>17</release.version>
         <micronaut.version>3.5.3</micronaut.version>
         <micronaut.runtime>netty</micronaut.runtime>
-        <exec.mainClass>com.mycompany.kafkaconsumer.Application</exec.mainClass>
+        <exec.mainClass>com.ivanfranchin.kafkaconsumer.Application</exec.mainClass>
         <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
@@ -150,7 +150,7 @@
                         </path>
                     </annotationProcessorPaths>
                     <compilerArgs>
-                        <arg>-Amicronaut.processing.group=com.mycompany.kafkaconsumer</arg>
+                        <arg>-Amicronaut.processing.group=com.ivanfranchin.kafkaconsumer</arg>
                         <arg>-Amicronaut.processing.module=micronaut-kafka-consumer</arg>
                     </compilerArgs>
                 </configuration>

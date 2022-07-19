@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.mycompany</groupId>
+    <groupId>com.ivanfranchin</groupId>
     <artifactId>springboot-simple-api</artifactId>
     <version>1.0.0</version>
     <name>springboot-simple-api</name>
