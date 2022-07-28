@@ -24,7 +24,7 @@ public class NewsController {
     @PostMapping
     public String publishNews(@Valid @RequestBody CreateNewsRequest createNewsRequest) {
         String id = UUID.randomUUID().toString();
-        newsProducer.send(new News(id, createNewsRequest.getSource(), createNewsRequest.getTitle()));
+        newsProducer.send(new News(id, createNewsRequest.source(), createNewsRequest.title()));
         return id;
     }
 }

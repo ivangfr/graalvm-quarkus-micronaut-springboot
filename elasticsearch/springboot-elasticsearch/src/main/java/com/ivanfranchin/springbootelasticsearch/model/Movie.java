@@ -1,12 +1,4 @@
 package com.ivanfranchin.springbootelasticsearch.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@Data
-@AllArgsConstructor
-public class Movie {
-
-    private String imdb;
-    private String title;
+public record Movie(String imdb, String title) {
 }

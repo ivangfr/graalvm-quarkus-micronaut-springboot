@@ -3,11 +3,12 @@ package com.ivanfranchin.kafkaproducer.rest;
 import com.ivanfranchin.kafkaproducer.domain.News;
 import com.ivanfranchin.kafkaproducer.rest.dto.CreateNewsRequest;
 import io.smallrye.reactive.messaging.kafka.KafkaRecord;
-import lombok.extern.slf4j.Slf4j;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.OnOverflow;
 import org.eclipse.microprofile.reactive.messaging.OnOverflow.Strategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -15,9 +16,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.util.UUID;
 
-@Slf4j
 @Path("/api/news")
 public class NewsResource {
+
+    private static final Logger log = LoggerFactory.getLogger(NewsResource.class);
 
     @Inject
     @Channel("news")
@@ -27,7 +29,7 @@ public class NewsResource {
     @POST
     public String createNews(@Valid CreateNewsRequest createNewsRequest) {
         String id = UUID.randomUUID().toString();
-        News news = new News(id, createNewsRequest.getSource(), createNewsRequest.getTitle());
+        News news = new News(id, createNewsRequest.source(), createNewsRequest.title());
         log.info("Sending News message: key={}, {}", id, news);
         emitter.send(KafkaRecord.of(id, news));
         return id;

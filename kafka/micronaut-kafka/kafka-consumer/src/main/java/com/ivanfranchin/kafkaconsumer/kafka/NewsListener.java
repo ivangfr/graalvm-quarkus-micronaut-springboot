@@ -5,11 +5,13 @@ import io.micronaut.configuration.kafka.annotation.KafkaKey;
 import io.micronaut.configuration.kafka.annotation.KafkaListener;
 import io.micronaut.configuration.kafka.annotation.OffsetReset;
 import io.micronaut.configuration.kafka.annotation.Topic;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Slf4j
 @KafkaListener(groupId = "${app.kafka.group-id}", offsetReset = OffsetReset.EARLIEST)
 public class NewsListener {
+
+    private static final Logger log = LoggerFactory.getLogger(NewsListener.class);
 
     @Topic("${app.kafka.input.topics}")
     public void receive(@KafkaKey String key, News newsMessage, long offset, int partition, String topic, long timestamp) {

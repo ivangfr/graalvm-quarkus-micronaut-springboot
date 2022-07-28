@@ -3,9 +3,11 @@ package com.ivanfranchin.quarkusjpamysql.rest;
 import com.ivanfranchin.quarkusjpamysql.exception.BookNotFoundException;
 import com.ivanfranchin.quarkusjpamysql.mapper.BookMapper;
 import com.ivanfranchin.quarkusjpamysql.model.Book;
+import com.ivanfranchin.quarkusjpamysql.rest.dto.BookResponse;
 import com.ivanfranchin.quarkusjpamysql.rest.dto.CreateBookRequest;
 import com.ivanfranchin.quarkusjpamysql.service.BookService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -14,10 +16,13 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@Slf4j
 @Path("/api/books")
 public class BookResource {
+
+    private static final Logger log = LoggerFactory.getLogger(BookResource.class);
 
     @Inject
     BookService bookService;
@@ -26,23 +31,22 @@ public class BookResource {
     BookMapper bookMapper;
 
     @GET
-    public Iterable<Book> getBooks() {
+    public List<BookResponse> getBooks() {
         log.info("Received request to get all books");
-        return bookService.getBooks();
+        return bookService.getBooks().stream().map(bookMapper::toBookResponse).collect(Collectors.toList());
     }
 
     @GET
     @Path("/{id}")
-    public Book getBook(@PathParam("id") Long id) throws BookNotFoundException {
+    public BookResponse getBook(@PathParam("id") Long id) throws BookNotFoundException {
         log.info("Received request to get books with id: {}", id);
-        return bookService.validateAndGetBook(id);
+        return bookMapper.toBookResponse(bookService.validateAndGetBook(id));
     }
 
     @POST
     public Response createBook(@Valid CreateBookRequest createBookRequest) {
         log.info("Received request to create book: {}", createBookRequest);
-        Book book = bookMapper.toBook(createBookRequest);
-        book = bookService.saveBook(book);
-        return Response.status(Response.Status.CREATED).entity(book).build();
+        Book book = bookService.saveBook(bookMapper.toBook(createBookRequest));
+        return Response.status(Response.Status.CREATED).entity(bookMapper.toBookResponse(book)).build();
     }
 }

@@ -37,7 +37,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
   - **kafka-consumer**
 
-    - Open another terminal and make sure your are in `graalvm-quarkus-micronaut-springboot/kafka/springboot-kafka` folder
+    - Open another terminal and make sure you are in `graalvm-quarkus-micronaut-springboot/kafka/springboot-kafka` folder
 
     - Run the command below to start the application
       ```

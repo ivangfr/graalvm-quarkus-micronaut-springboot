@@ -5,6 +5,8 @@ import com.ivanfranchin.springbootjpamysql.model.Book;
 import com.ivanfranchin.springbootjpamysql.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -15,7 +17,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Iterable<Book> getBooks() {
+    public List<Book> getBooks() {
         return bookRepository.findAll();
     }
 

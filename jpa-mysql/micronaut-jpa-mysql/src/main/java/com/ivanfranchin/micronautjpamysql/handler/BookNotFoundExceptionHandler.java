@@ -15,17 +15,17 @@ import java.time.format.DateTimeFormatter;
 @Produces
 @Singleton
 @Requires(classes = {BookNotFoundException.class, ExceptionHandler.class})
-public class BookNotFoundExceptionHandler implements ExceptionHandler<BookNotFoundException, HttpResponse> {
+public class BookNotFoundExceptionHandler implements ExceptionHandler<BookNotFoundException, HttpResponse<?>> {
 
     @Override
-    public HttpResponse handle(HttpRequest request, BookNotFoundException exception) {
-        ExceptionDto exceptionDto = new ExceptionDto(
-                HttpStatus.NOT_FOUND.getReason(),
-                exception.getMessage(),
-                request.getPath(),
-                HttpStatus.NOT_FOUND.getCode(),
-                ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-        );
-        return HttpResponse.notFound(exceptionDto);
+    public HttpResponse<?> handle(HttpRequest request, BookNotFoundException exception) {
+        return HttpResponse.notFound(
+                new ExceptionDto(
+                        HttpStatus.NOT_FOUND.getReason(),
+                        exception.getMessage(),
+                        request.getPath(),
+                        HttpStatus.NOT_FOUND.getCode(),
+                        ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                ));
     }
 }

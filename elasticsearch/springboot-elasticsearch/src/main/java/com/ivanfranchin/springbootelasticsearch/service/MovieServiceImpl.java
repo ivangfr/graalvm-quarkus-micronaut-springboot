@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ivanfranchin.springbootelasticsearch.exception.MovieServiceException;
 import com.ivanfranchin.springbootelasticsearch.model.Movie;
 import com.ivanfranchin.springbootelasticsearch.rest.dto.SearchMovieResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
@@ -17,18 +16,18 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.xcontent.XContentType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 @Service
 public class MovieServiceImpl implements MovieService {
 
-    @Value("${elasticsearch.indexes.movies}")
-    private String moviesIndex;
+    private static final Logger log = LoggerFactory.getLogger(MovieServiceImpl.class);
 
     private final RestHighLevelClient client;
     private final ObjectMapper objectMapper;
@@ -37,6 +36,9 @@ public class MovieServiceImpl implements MovieService {
         this.client = client;
         this.objectMapper = objectMapper;
     }
+
+    @Value("${elasticsearch.indexes.movies}")
+    private String moviesIndex;
 
     @Override
     public String saveMovie(Movie movie) {
@@ -72,24 +74,19 @@ public class MovieServiceImpl implements MovieService {
     }
 
     private SearchMovieResponse toSearchMovieResponse(SearchHits searchHits, TimeValue took) {
-        SearchMovieResponse searchMovieResponse = new SearchMovieResponse();
         List<SearchMovieResponse.Hit> hits = new ArrayList<>();
         for (SearchHit searchHit : searchHits.getHits()) {
-            SearchMovieResponse.Hit hit = new SearchMovieResponse.Hit();
-            hit.setIndex(searchHit.getIndex());
-            hit.setId(searchHit.getId());
-            hit.setScore(searchHit.getScore());
-            hit.setSource(searchHit.getSourceAsMap());
+            SearchMovieResponse.Hit hit = new SearchMovieResponse.Hit(
+                    searchHit.getIndex(),
+                    searchHit.getId(),
+                    searchHit.getScore(),
+                    searchHit.getSourceAsMap());
             hits.add(hit);
         }
-        searchMovieResponse.setHits(hits);
-        searchMovieResponse.setTook(took.toString());
-        return searchMovieResponse;
+        return new SearchMovieResponse(hits, took.toString());
     }
 
     private SearchMovieResponse createSearchMovieResponseError(String errorMessage) {
-        SearchMovieResponse searchMovieResponse = new SearchMovieResponse();
-        searchMovieResponse.setError(new SearchMovieResponse.Error(errorMessage));
-        return searchMovieResponse;
+        return new SearchMovieResponse(new SearchMovieResponse.Error(errorMessage));
     }
 }

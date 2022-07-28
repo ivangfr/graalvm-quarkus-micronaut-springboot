@@ -3,9 +3,11 @@ package com.ivanfranchin.quarkusjpamysql.service;
 import com.ivanfranchin.quarkusjpamysql.exception.BookNotFoundException;
 import com.ivanfranchin.quarkusjpamysql.model.Book;
 
+import java.util.List;
+
 public interface BookService {
 
-    Iterable<Book> getBooks();
+    List<Book> getBooks();
 
     Book validateAndGetBook(Long id) throws BookNotFoundException;
 

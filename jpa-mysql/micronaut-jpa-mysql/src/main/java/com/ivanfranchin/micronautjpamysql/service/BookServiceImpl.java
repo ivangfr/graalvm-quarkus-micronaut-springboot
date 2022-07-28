@@ -5,6 +5,8 @@ import com.ivanfranchin.micronautjpamysql.model.Book;
 import com.ivanfranchin.micronautjpamysql.repository.BookRepository;
 import jakarta.inject.Singleton;
 
+import java.util.List;
+
 @Singleton
 public class BookServiceImpl implements BookService {
 
@@ -15,7 +17,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Iterable<Book> getBooks() {
+    public List<Book> getBooks() {
         return bookRepository.findAll();
     }
 

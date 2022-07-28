@@ -6,6 +6,7 @@ import com.ivanfranchin.quarkusjpamysql.repository.BookRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.List;
 
 @ApplicationScoped
 public class BookServiceImpl implements BookService {
@@ -14,7 +15,7 @@ public class BookServiceImpl implements BookService {
     BookRepository bookRepository;
 
     @Override
-    public Iterable<Book> getBooks() {
+    public List<Book> getBooks() {
         return bookRepository.findAll();
     }
 

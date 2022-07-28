@@ -37,6 +37,6 @@ public class MovieController {
     }
 
     private Movie toMovie(CreateMovieRequest createMovieRequest) {
-        return new Movie(createMovieRequest.getImdb(), createMovieRequest.getTitle());
+        return new Movie(createMovieRequest.imdb(), createMovieRequest.title());
     }
 }

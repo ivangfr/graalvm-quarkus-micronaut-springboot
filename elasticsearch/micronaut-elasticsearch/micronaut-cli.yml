@@ -3,4 +3,4 @@ defaultPackage: com.ivanfranchin.micronautelasticsearch
 testFramework: junit
 sourceLanguage: java
 buildTool: maven
-features: [annotation-api, app-name, elasticsearch, graalvm, http-client, java, java-application, jib, junit, logback, lombok, management, maven, micrometer, micrometer-prometheus, netty-server, readme, yaml]
+features: [annotation-api, app-name, elasticsearch, graalvm, http-client, java, java-application, jib, junit, logback, management, maven, micrometer, micrometer-prometheus, netty-server, readme, yaml]

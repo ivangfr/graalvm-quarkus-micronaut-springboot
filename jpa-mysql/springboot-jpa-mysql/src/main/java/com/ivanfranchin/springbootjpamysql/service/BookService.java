@@ -3,9 +3,11 @@ package com.ivanfranchin.springbootjpamysql.service;
 import com.ivanfranchin.springbootjpamysql.exception.BookNotFoundException;
 import com.ivanfranchin.springbootjpamysql.model.Book;
 
+import java.util.List;
+
 public interface BookService {
 
-    Iterable<Book> getBooks();
+    List<Book> getBooks();
 
     Book validateAndGetBook(Long id) throws BookNotFoundException;
 

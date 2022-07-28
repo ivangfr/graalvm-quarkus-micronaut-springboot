@@ -1,35 +1,29 @@
 package com.ivanfranchin.micronautelasticsearch.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import io.micronaut.core.annotation.Introspected;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 import java.util.List;
 import java.util.Map;
 
 @Introspected
-@Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class SearchMovieResponse {
+@JsonInclude(Include.NON_NULL)
+public record SearchMovieResponse(List<Hit> hits, String took, Error error) {
 
-    private List<Hit> hits;
-    private String took;
-    private Error error;
+    public SearchMovieResponse(List<Hit> hits, String took) {
+        this(hits, took, null);
+    }
 
-    @Introspected
-    @Data
-    public static class Hit {
-        private String index;
-        private String id;
-        private Float score;
-        private Map<String, ?> source;
+    public SearchMovieResponse(Error error) {
+        this(null, null, error);
     }
 
     @Introspected
-    @Data
-    @AllArgsConstructor
-    public static class Error {
-        private String message;
+    public record Hit(String index, String id, Float score, Map<String, ?> source) {
+    }
+
+    @Introspected
+    public record Error(String message) {
     }
 }
