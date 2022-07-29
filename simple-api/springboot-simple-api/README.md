@@ -5,9 +5,13 @@
 
 - ### springboot-simple-api
 
-  [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a simple REST API for greetings. It has the following endpoint
+  [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a simple REST API for greetings.
+  
+  It has the following endpoints:
   ```
   GET /api/greeting[?name=...]
+  GET /actuator/health
+  GET /actuator/metrics
   ```
 
 ## Running application

@@ -15,14 +15,14 @@ import javax.ws.rs.QueryParam;
 @Path("/api/greeting")
 public class SimpleApiResource {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SimpleApiResource.class);
+    private static final Logger log = LoggerFactory.getLogger(SimpleApiResource.class);
 
     @Inject
     GreetingService greetingService;
 
     @GET
     public Greeting greetName(@QueryParam("name") @DefaultValue("World") @NotBlank String name) {
-        LOG.info("Received request, name: {}", name);
+        log.info("Received request, name: {}", name);
         return greetingService.greet(name);
     }
 }

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Controller("/api/greeting")
 public class SimpleApiController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(SimpleApiController.class);
+    private static final Logger log = LoggerFactory.getLogger(SimpleApiController.class);
 
     private final GreetingService greetingService;
 
@@ -23,7 +23,7 @@ public class SimpleApiController {
 
     @Get
     public Greeting greetName(@QueryValue(defaultValue = "World") @NotBlank String name) {
-        LOG.info("Received request, name: {}", name);
+        log.info("Received request, name: {}", name);
         return greetingService.greet(name);
     }
 }

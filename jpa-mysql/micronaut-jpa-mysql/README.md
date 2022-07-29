@@ -12,6 +12,8 @@
   GET /api/books
   GET /api/books/{id}
   POST /api/books {"isbn":"...", "title":"..."}
+  GET /health
+  GET /metrics
   ```
 
 ## Running application

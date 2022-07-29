@@ -9,14 +9,22 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
   `Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`.
 
-  It has the following endpoint:
+  It has the following endpoints:
   ```
   POST /api/news {"source":"...", "title":"..."}
+  GET /actuator/health
+  GET /actuator/metrics
   ```
 
 - ### kafka-consumer
 
   `Spring Boot` Web Java application that listens to messages (published by the `kafka-producer`) and logs it.
+
+  It has the following endpoints:
+  ```
+  GET /actuator/health
+  GET /actuator/metrics
+  ```
 
 ## Running applications
 

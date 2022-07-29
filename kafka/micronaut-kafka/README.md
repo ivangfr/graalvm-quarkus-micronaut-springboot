@@ -9,14 +9,22 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   `Micronaut` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`.
 
-  It has the following endpoint:
+  It has the following endpoints:
   ```
   POST /api/news {"source":"...", "title":"..."}
+  GET /health
+  GET /metrics
   ```
 
 - ### kafka-consumer
 
   `Micronaut` Web Java application that listens to messages (published by the `kafka-producer`) and logs it.
+
+  It has the following endpoints:
+  ```
+  GET /health
+  GET /metrics
+  ```
 
 ## Running applications
 
@@ -41,7 +49,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the command below
       ```
-      export MICRONAUT_SERVER_PORT=8081 && ./mvnw clean mn:run --projects kafka-consumer
+      MICRONAUT_SERVER_PORT=8081 && ./mvnw clean mn:run --projects kafka-consumer
       ```
 
 - **Simple Test**

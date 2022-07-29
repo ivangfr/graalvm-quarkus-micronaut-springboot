@@ -5,9 +5,13 @@
 
 - ### micronaut-simple-api
 
-  [`Micronaut`](https://micronaut.io/) Java Web application that exposes a simple REST API for greetings. It has the following endpoint
+  [`Micronaut`](https://micronaut.io/) Java Web application that exposes a simple REST API for greetings.
+  
+  It has the following endpoints:
   ```
   GET /api/greeting[?name=...]
+  GET /health
+  GET /metrics
   ```
 
 ## Running application

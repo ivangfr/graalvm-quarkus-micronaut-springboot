@@ -7,10 +7,12 @@
 
   [`Quarkus`](https://quarkus.io/) Java Web application that exposes a simple REST API for indexing and searching movies in `Elasticsearch`.
   
-  It has the following endpoint:
+  It has the following endpoints:
   ```
   POST /api/movies -d {"imdb":"...", "title":"..."}
   GET /api/movies[?title=...]
+  GET /q/health
+  GET /q/metrics
   ```
 
 ## Running application

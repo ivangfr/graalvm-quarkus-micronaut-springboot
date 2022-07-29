@@ -7,10 +7,12 @@
 
   [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a simple REST API for indexing and searching movies in `Elasticsearch`.
   
-  It has the following endpoint:
+  It has the following endpoints:
   ```
   POST /api/movies -d {"imdb":"...", "title":"..."}
   GET /api/movies[?title=...]
+  GET /actuator/health
+  GET /actuator/metrics
   ```
 
 ## Running application
