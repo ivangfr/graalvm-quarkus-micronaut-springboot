@@ -9,15 +9,16 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>3.6.3</version>
+        <version>3.7.0</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <micronaut.version>3.6.3</micronaut.version>
+        <micronaut.version>3.7.0</micronaut.version>
         <micronaut.runtime>netty</micronaut.runtime>
+        <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
         <exec.mainClass>com.ivanfranchin.kafkaconsumer.Application</exec.mainClass>
         <jib-maven-plugin.version>3.3.0</jib-maven-plugin.version>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
@@ -40,21 +41,6 @@
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-validation</artifactId>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.test</groupId>
-            <artifactId>micronaut-test-junit5</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
@@ -101,6 +87,21 @@
             <artifactId>logback-classic</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>io.micronaut.test</groupId>
+            <artifactId>micronaut-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -108,6 +109,9 @@
             <plugin>
                 <groupId>io.micronaut.build</groupId>
                 <artifactId>micronaut-maven-plugin</artifactId>
+                <configuration>
+                    <shared>true</shared>
+                </configuration>
             </plugin>
             
             <plugin>
