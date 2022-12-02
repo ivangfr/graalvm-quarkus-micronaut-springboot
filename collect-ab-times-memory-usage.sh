@@ -237,7 +237,7 @@ then
     ivanfranchin/springboot-simple-api-jvm:1.0.0
 
   wait_for_container_log "springboot-simple-api-jvm" "Started"
-  startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+  startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
   springboot_simple_api_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
   springboot_simple_api_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-simple-api-jvm")
@@ -278,7 +278,7 @@ then
     ivanfranchin/springboot-simple-api-native:1.0.0
 
   wait_for_container_log "springboot-simple-api-native" "Started"
-  startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+  startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
   springboot_simple_api_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
   springboot_simple_api_native[initial_memory_usage]=$(get_container_memory_usage "springboot-simple-api-native")
@@ -514,7 +514,7 @@ then
       ivanfranchin/springboot-jpa-mysql-jvm:1.0.0
 
     wait_for_container_log "springboot-jpa-mysql-jvm" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
     springboot_jpa_mysql_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
     springboot_jpa_mysql_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-jpa-mysql-jvm")
@@ -557,7 +557,7 @@ then
       ivanfranchin/springboot-jpa-mysql-native:1.0.0
 
     wait_for_container_log "springboot-jpa-mysql-native" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
     springboot_jpa_mysql_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
     springboot_jpa_mysql_native[initial_memory_usage]=$(get_container_memory_usage "springboot-jpa-mysql-native")
@@ -914,7 +914,7 @@ then
       ivanfranchin/springboot-kafka-producer-jvm:1.0.0
 
     wait_for_container_log "springboot-kafka-producer-jvm" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
     springboot_kafka_producer_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
     springboot_kafka_producer_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-kafka-producer-jvm")
@@ -942,7 +942,7 @@ then
       ivanfranchin/springboot-kafka-consumer-jvm:1.0.0
 
     wait_for_container_log "springboot-kafka-consumer-jvm" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
     springboot_kafka_consumer_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
     springboot_kafka_consumer_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-kafka-consumer-jvm")
@@ -985,7 +985,7 @@ then
       ivanfranchin/springboot-kafka-producer-native:1.0.0
 
     wait_for_container_log "springboot-kafka-producer-native" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
     springboot_kafka_producer_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
     springboot_kafka_producer_native[initial_memory_usage]=$(get_container_memory_usage "springboot-kafka-producer-native")
@@ -1013,7 +1013,7 @@ then
       ivanfranchin/springboot-kafka-consumer-native:1.0.0
 
     wait_for_container_log "springboot-kafka-consumer-native" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
     springboot_kafka_consumer_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
     springboot_kafka_consumer_native[initial_memory_usage]=$(get_container_memory_usage "springboot-kafka-consumer-native")
@@ -1263,7 +1263,7 @@ then
       ivanfranchin/springboot-elasticsearch-jvm:1.0.0
 
     wait_for_container_log "springboot-elasticsearch-jvm" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
     springboot_elasticsearch_jvm[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
     springboot_elasticsearch_jvm[initial_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-jvm")
@@ -1306,7 +1306,7 @@ then
       ivanfranchin/springboot-elasticsearch-native:1.0.0
 
     wait_for_container_log "springboot-elasticsearch-native" "Started"
-    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
+    startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$12}")
     springboot_elasticsearch_native[startup_time]="$(convert_seconds_to_millis $startup_time_sec)ms"
 
     springboot_elasticsearch_native[initial_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")

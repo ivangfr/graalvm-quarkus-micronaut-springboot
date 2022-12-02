@@ -4,6 +4,8 @@ import com.ivanfranchin.springbootelasticsearch.model.Movie;
 import com.ivanfranchin.springbootelasticsearch.rest.dto.CreateMovieRequest;
 import com.ivanfranchin.springbootelasticsearch.rest.dto.SearchMovieResponse;
 import com.ivanfranchin.springbootelasticsearch.service.MovieService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/api/movies")
