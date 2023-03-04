@@ -10,17 +10,17 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>3.7.4</version>
+        <version>3.8.6</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <micronaut.version>3.7.4</micronaut.version>
-        <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
+        <micronaut.version>3.8.6</micronaut.version>
         <micronaut.runtime>netty</micronaut.runtime>
-        <micronaut.data.version>3.8.1</micronaut.data.version>
+        <micronaut.data.version>3.9.6</micronaut.data.version>
+        <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
         <exec.mainClass>com.ivanfranchin.micronautjpamysql.Application</exec.mainClass>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <javax-inject.version>1</javax-inject.version>
