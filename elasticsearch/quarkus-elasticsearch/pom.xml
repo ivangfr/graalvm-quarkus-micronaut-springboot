@@ -31,11 +31,11 @@
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-hibernate-validator</artifactId>
+            <artifactId>quarkus-elasticsearch-java-client</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-elasticsearch-rest-high-level-client</artifactId>
+            <artifactId>quarkus-hibernate-validator</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>

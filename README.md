@@ -65,7 +65,7 @@ The following table shows the results after running the script `collect-jvm-jar-
   micronaut-kafka-consumer-jvm |            10s |            30M |               10s |             356MB |
  springboot-kafka-consumer-jvm |             3s |            37M |                9s |             305MB |
 .............................. + .............. + .............. + ................. + ................. |
-     quarkus-elasticsearch-jvm |            18s |            43M |                2s |             446MB |
+     quarkus-elasticsearch-jvm |            12s |            32M |                4s |             434MB |
    micronaut-elasticsearch-jvm |            16s |            57M |               14s |             385MB |
   springboot-elasticsearch-jvm |             4s |            39M |                9s |             307MB |
 ```
@@ -90,7 +90,7 @@ springboot-kafka-producer-native |             5s |            39M |            
  micronaut-kafka-consumer-native |            11s |            30M |              189s |            98.4MB |
 springboot-kafka-consumer-native |             4s |            37M |              505s |             128MB |
 ................................ + .............. + .............. + ................. + ................. |
-    quarkus-elasticsearch-native |           198s |            54M |                4s |             151MB |
+    quarkus-elasticsearch-native |           322s |            52M |                4s |             148MB |
   micronaut-elasticsearch-native |            16s |            58M |              228s |             104MB |
  springboot-elasticsearch-native |             5s |            39M |              536s |             121MB |
 ```

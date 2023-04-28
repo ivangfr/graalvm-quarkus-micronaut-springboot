@@ -4,7 +4,6 @@ import com.ivanfranchin.quarkuselasticsearch.model.Movie;
 import com.ivanfranchin.quarkuselasticsearch.rest.dto.CreateMovieRequest;
 import com.ivanfranchin.quarkuselasticsearch.rest.dto.SearchMovieResponse;
 import com.ivanfranchin.quarkuselasticsearch.service.MovieService;
-
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
