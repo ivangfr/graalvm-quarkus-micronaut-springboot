@@ -188,7 +188,7 @@ springboot-kafka-consumer-native |        100ms |  67.37MiB/512MiB(13.16%) |    
     -v /var/run/docker.sock:/var/run/docker.sock \
     --privileged \
     --device=/dev/kmsg \
-    gcr.io/cadvisor/cadvisor:v0.46.0
+    gcr.io/cadvisor/cadvisor:v0.47.1
   ```
 
 - In a browser, access
