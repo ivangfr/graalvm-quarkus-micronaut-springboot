@@ -2,7 +2,7 @@ package com.ivanfranchin.quarkussimpleapi.service;
 
 import com.ivanfranchin.quarkussimpleapi.domain.Greeting;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class GreetingServiceImpl implements GreetingService {

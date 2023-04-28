@@ -5,14 +5,14 @@ import com.ivanfranchin.quarkuselasticsearch.rest.dto.CreateMovieRequest;
 import com.ivanfranchin.quarkuselasticsearch.rest.dto.SearchMovieResponse;
 import com.ivanfranchin.quarkuselasticsearch.service.MovieService;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("/api/movies")
 public class MovieResource {

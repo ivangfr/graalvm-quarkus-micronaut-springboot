@@ -4,8 +4,8 @@ import com.ivanfranchin.quarkusjpamysql.exception.BookNotFoundException;
 import com.ivanfranchin.quarkusjpamysql.model.Book;
 import com.ivanfranchin.quarkusjpamysql.repository.BookRepository;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import java.util.List;
 
 @ApplicationScoped

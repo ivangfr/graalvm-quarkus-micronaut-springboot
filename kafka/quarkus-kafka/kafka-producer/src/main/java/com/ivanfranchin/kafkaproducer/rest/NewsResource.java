@@ -3,6 +3,10 @@ package com.ivanfranchin.kafkaproducer.rest;
 import com.ivanfranchin.kafkaproducer.domain.News;
 import com.ivanfranchin.kafkaproducer.rest.dto.CreateNewsRequest;
 import io.smallrye.reactive.messaging.kafka.KafkaRecord;
+import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.OnOverflow;
@@ -10,10 +14,6 @@ import org.eclipse.microprofile.reactive.messaging.OnOverflow.Strategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
 import java.util.UUID;
 
 @Path("/api/news")
