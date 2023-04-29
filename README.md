@@ -16,7 +16,7 @@ We are using the following Framework versions
 | Framework   | Version     |
 |-------------|-------------|
 | Quarkus     | 3.0.1.Final |
-| Micronaut   | 3.8.6       |
+| Micronaut   | 3.9.0       |
 | Spring Boot | 3.0.6       |
 
 ## Prerequisites
@@ -50,23 +50,23 @@ The following table shows the results after running the script `collect-jvm-jar-
                    Application | Packaging Time | Packaging Size | Docker Build Time | Docker Image Size |
 ------------------------------ + -------------- + -------------- + ----------------- + ----------------- |
         quarkus-simple-api-jvm |            11s |            18M |                5s |             419MB |
-      micronaut-simple-api-jvm |            12s |            16M |               18s |             342MB |
+      micronaut-simple-api-jvm |             6s |            16M |               15s |             342MB |
      springboot-simple-api-jvm |             4s |            24M |               14s |             292MB |
 .............................. + .............. + .............. + ................. + ................. |
          quarkus-jpa-mysql-jvm |            10s |            39M |                1s |             442MB |
-       micronaut-jpa-mysql-jvm |            20s |            35M |               15s |             363MB |
+       micronaut-jpa-mysql-jvm |            14s |            36M |               12s |             363MB |
       springboot-jpa-mysql-jvm |             9s |            47M |               14s |             317MB |
 .............................. + .............. + .............. + ................. + ................. |
     quarkus-kafka-producer-jvm |            12s |            35M |                3s |             437MB |
-  micronaut-kafka-producer-jvm |            17s |            29M |               14s |             356MB |
+  micronaut-kafka-producer-jvm |            11s |            30M |               12s |             356MB |
  springboot-kafka-producer-jvm |             5s |            39M |               10s |             307MB |
 .............................. + .............. + .............. + ................. + ................. |
     quarkus-kafka-consumer-jvm |            12s |            33M |                2s |             436MB |
-  micronaut-kafka-consumer-jvm |            10s |            30M |               10s |             356MB |
+  micronaut-kafka-consumer-jvm |            11s |            30M |               10s |             356MB |
  springboot-kafka-consumer-jvm |             3s |            37M |               10s |             306MB |
 .............................. + .............. + .............. + ................. + ................. |
      quarkus-elasticsearch-jvm |            12s |            32M |                4s |             434MB |
-   micronaut-elasticsearch-jvm |            16s |            57M |               14s |             385MB |
+   micronaut-elasticsearch-jvm |            10s |            58M |               13s |             386MB |
   springboot-elasticsearch-jvm |             3s |            40M |               10s |             308MB |
 ```
 
@@ -75,23 +75,23 @@ Table below shows the results after running the script `collect-native-jar-docke
                      Application | Packaging Time | Packaging Size | Docker Build Time | Docker Image Size |
 -------------------------------- + -------------- + -------------- + ----------------- + ----------------- |
        quarkus-simple-api-native |           223s |            46M |               22s |             142MB |
-     micronaut-simple-api-native |             7s |            16M |              191s |            86.1MB |
+     micronaut-simple-api-native |             7s |            17M |              166s |            86.2MB |
     springboot-simple-api-native |             4s |            24M |              581s |             106MB |
 ................................ + .............. + .............. + ................. + ................. |
         quarkus-jpa-mysql-native |           327s |            87M |                3s |             185MB |
-      micronaut-jpa-mysql-native |            21s |            36M |              388s |             118MB |
+      micronaut-jpa-mysql-native |            16s |            35M |              234s |             118MB |
      springboot-jpa-mysql-native |             7s |            47M |              689s |             169MB |
 ................................ + .............. + .............. + ................. + ................. |
    quarkus-kafka-producer-native |           252s |            65M |                2s |             162MB |
- micronaut-kafka-producer-native |            13s |            29M |              207s |            98.6MB |
+ micronaut-kafka-producer-native |            12s |            29M |              186s |            98.8MB |
 springboot-kafka-producer-native |             5s |            39M |              495s |             137MB |
 ................................ + .............. + .............. + ................. + ................. |
    quarkus-kafka-consumer-native |           201s |            61M |                3s |             158MB |
- micronaut-kafka-consumer-native |            11s |            30M |              189s |            98.4MB |
+ micronaut-kafka-consumer-native |            11s |            29M |              183s |            98.6MB |
 springboot-kafka-consumer-native |             5s |            37M |              651s |             129MB |
 ................................ + .............. + .............. + ................. + ................. |
     quarkus-elasticsearch-native |           322s |            52M |                4s |             148MB |
-  micronaut-elasticsearch-native |            16s |            58M |              228s |             104MB |
+  micronaut-elasticsearch-native |            12s |            58M |              227s |             106MB |
  springboot-elasticsearch-native |             4s |            40M |              592s |             123MB |
 ```
 
