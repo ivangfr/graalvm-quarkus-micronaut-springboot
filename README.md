@@ -16,7 +16,7 @@ We are using the following Framework versions
 | Framework   | Version     |
 |-------------|-------------|
 | Quarkus     | 3.0.1.Final |
-| Micronaut   | 3.9.0       |
+| Micronaut   | 3.9.4       |
 | Spring Boot | 3.0.6       |
 
 ## Prerequisites

@@ -10,14 +10,14 @@
     <parent>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>3.9.0</version>
+        <version>3.9.4</version>
     </parent>
 
     <properties>
         <packaging>jar</packaging>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <micronaut.version>3.9.0</micronaut.version>
+        <micronaut.version>3.9.4</micronaut.version>
         <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
         <micronaut.data.version>3.10.0</micronaut.data.version>
         <micronaut.runtime>netty</micronaut.runtime>
@@ -36,16 +36,6 @@
     <dependencies>
         <dependency>
             <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-inject</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-validation</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-client</artifactId>
             <scope>compile</scope>
         </dependency>
@@ -62,6 +52,11 @@
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-management</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut</groupId>
+            <artifactId>micronaut-validation</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
