@@ -15,12 +15,12 @@ In this example, we will implement three versions of a Restful API for handling 
 
 - Run the command
   ```
-  docker-compose up -d
+  docker compose up -d
   ```
 
 - Wait for `MySQL` container to be up and running. To check it, run
   ```
-  docker-compose ps
+  docker compose ps
   ```
 
 ## Useful Commands
@@ -56,5 +56,5 @@ In this example, we will implement three versions of a Restful API for handling 
 
 - To stop and remove docker-compose containers, networks and volumes, run
   ```
-  docker-compose down -v
+  docker compose down -v
   ```

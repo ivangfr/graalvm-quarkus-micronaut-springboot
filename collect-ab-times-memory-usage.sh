@@ -318,7 +318,7 @@ then
   echo "DOCKER-COMPOSE"
   echo "=============="
 
-  docker-compose up -d
+  docker compose up -d
   wait_for_container_log "mysql" "port: 3306"
 
   if [ "$1" = "quarkus-jpa-mysql-jvm" ] ||
@@ -582,7 +582,7 @@ then
   echo "DOCKER-COMPOSE"
   echo "=============="
 
-  docker-compose down -v
+  docker compose down -v
 
   cd ..
 
@@ -608,7 +608,7 @@ then
   echo "DOCKER-COMPOSE"
   echo "=============="
 
-  docker-compose up -d zookeeper kafka
+  docker compose up -d zookeeper kafka
   wait_for_container_status_healthy "9092"
 
   if [ "$1" = "quarkus-kafka-jvm" ] ||
@@ -1038,7 +1038,7 @@ then
   echo "DOCKER-COMPOSE"
   echo "=============="
 
-  docker-compose down -v
+  docker compose down -v
 
   cd ..
 
@@ -1064,7 +1064,7 @@ then
   echo "DOCKER-COMPOSE"
   echo "=============="
 
-  docker-compose up -d
+  docker compose up -d
   wait_for_container_status_healthy "9200"
 
   ./init-es-indexes.sh
@@ -1331,7 +1331,7 @@ then
   echo "DOCKER-COMPOSE"
   echo "=============="
 
-  docker-compose down -v
+  docker compose down -v
 
   cd ..
 

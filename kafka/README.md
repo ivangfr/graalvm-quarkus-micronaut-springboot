@@ -23,12 +23,12 @@ In this example, we will implement three versions of `kafka-producer - kafka-con
 
 - Run the command
   ```
-  docker-compose up -d
+  docker compose up -d
   ```
 
 - Wait for all containers to be up and running. To check it, run
   ```
-  docker-compose ps
+  docker compose ps
   ```
 
 ## Shutdown
@@ -37,7 +37,7 @@ In this example, we will implement three versions of `kafka-producer - kafka-con
 
 - To stop and remove docker-compose containers, networks and volumes, run
   ```
-  docker-compose down -v
+  docker compose down -v
   ```
 
 ## Useful links
