@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.6</version>
+        <version>3.1.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -17,7 +17,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <jib-maven-plugin.version>3.3.1</jib-maven-plugin.version>
+        <jib-maven-plugin.version>3.3.2</jib-maven-plugin.version>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
 
@@ -74,11 +74,9 @@
                             <goal>enhance</goal>
                         </goals>
                         <configuration>
-                            <failOnError>true</failOnError>
                             <enableLazyInitialization>true</enableLazyInitialization>
                             <enableDirtyTracking>true</enableDirtyTracking>
                             <enableAssociationManagement>true</enableAssociationManagement>
-                            <enableExtendedEnhancement>false</enableExtendedEnhancement>
                         </configuration>
                     </execution>
                 </executions>
@@ -86,16 +84,6 @@
             <plugin>
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
-                <!-- 
-                    Workarround due to this issue
-                    https://stackoverflow.com/questions/76110898/how-to-build-a-spring-boot-3-0-6-rest-api-into-a-working-native-image
-                -->
-                <configuration>
-                    <metadataRepository>
-                        <enabled>true</enabled>
-                        <version>0.2.6</version>
-                    </metadataRepository>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

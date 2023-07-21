@@ -15,7 +15,7 @@ In this example, we will implement three versions of a Restful API for handling 
 |-------------|---------------|
 | Quarkus     | 8.7.0         |
 | Micronaut   | 7.17.9        |
-| Spring Boot | 8.5.3         |
+| Spring Boot | 8.7.1         |
 
 ## Start Environment
 
