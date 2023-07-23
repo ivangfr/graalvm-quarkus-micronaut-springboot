@@ -35,7 +35,7 @@ In this example, we will implement three versions of `kafka-producer - kafka-con
 
 - In a terminal, make sure you are in `graalvm-quarkus-micronaut-springboot/kafka` folder
 
-- To stop and remove docker-compose containers, networks and volumes, run
+- To stop and remove docker compose containers, networks and volumes, run
   ```
   docker compose down -v
   ```

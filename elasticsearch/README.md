@@ -65,7 +65,7 @@ In this example, we will implement three versions of a Restful API for handling 
 
 - In a terminal, make sure you are in `graalvm-quarkus-micronaut-springboot/elasticsearch` folder
 
-- To stop and remove docker-compose containers, networks and volumes, run
+- To stop and remove docker compose containers, networks and volumes, run
   ```
   docker compose down -v
   ```

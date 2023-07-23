@@ -315,7 +315,7 @@ then
 
   echo
   echo "=============="
-  echo "DOCKER-COMPOSE"
+  echo "DOCKER COMPOSE"
   echo "=============="
 
   docker compose up -d
@@ -579,7 +579,7 @@ then
 
   echo
   echo "=============="
-  echo "DOCKER-COMPOSE"
+  echo "DOCKER COMPOSE"
   echo "=============="
 
   docker compose down -v
@@ -605,7 +605,7 @@ then
 
   echo
   echo "=============="
-  echo "DOCKER-COMPOSE"
+  echo "DOCKER COMPOSE"
   echo "=============="
 
   docker compose up -d zookeeper kafka
@@ -1035,7 +1035,7 @@ then
 
   echo
   echo "=============="
-  echo "DOCKER-COMPOSE"
+  echo "DOCKER COMPOSE"
   echo "=============="
 
   docker compose down -v
@@ -1061,7 +1061,7 @@ then
 
   echo
   echo "=============="
-  echo "DOCKER-COMPOSE"
+  echo "DOCKER COMPOSE"
   echo "=============="
 
   docker compose up -d
@@ -1328,7 +1328,7 @@ then
 
   echo
   echo "=============="
-  echo "DOCKER-COMPOSE"
+  echo "DOCKER COMPOSE"
   echo "=============="
 
   docker compose down -v
