@@ -3,4 +3,4 @@ defaultPackage: com.ivanfranchin.micronautjpamysql
 testFramework: junit
 sourceLanguage: java
 buildTool: maven
-features: [annotation-api, app-name, data, data-jpa, graalvm, http-client, jackson-databind, java, java-application, jdbc-hikari, jib, junit, logback, lombok, management, maven, micrometer, micrometer-prometheus, micronaut-validation, mysql, netty-server, readme, shade, test-resources, yaml]
+features: [app-name, data, data-jpa, graalvm, http-client, jackson-databind, java, java-application, jdbc-hikari, jib, junit, logback, lombok, management, maven, maven-enforcer-plugin, micrometer, micrometer-prometheus, micronaut-aot, mysql, netty-server, properties, readme, shade, test-resources, validation]

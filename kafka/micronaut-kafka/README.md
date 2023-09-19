@@ -49,7 +49,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the command below
       ```
-      MICRONAUT_SERVER_PORT=8081 && ./mvnw clean mn:run --projects kafka-consumer
+      export MICRONAUT_SERVER_PORT=8081 && ./mvnw clean mn:run --projects kafka-consumer
       ```
 
 - **Simple Test**
