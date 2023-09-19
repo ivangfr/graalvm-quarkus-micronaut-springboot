@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.1
+    image: confluentinc/cp-zookeeper:7.4.1
     container_name: zookeeper
     restart: unless-stopped
     ports:
@@ -14,7 +14,7 @@ services:
       test: "echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT"
 
   kafka:
-    image: confluentinc/cp-kafka:7.3.1
+    image: confluentinc/cp-kafka:7.4.1
     container_name: kafka
     restart: unless-stopped
     depends_on:
@@ -31,7 +31,7 @@ services:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
 
   kafdrop:
-    image: obsidiandynamics/kafdrop:3.30.0
+    image: obsidiandynamics/kafdrop:3.31.0
     container_name: kafdrop
     restart: unless-stopped
     depends_on:
