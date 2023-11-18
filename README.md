@@ -17,11 +17,11 @@ On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-C
 
 We are using the following Framework versions
 
-| Framework   | Version     |
-|-------------|-------------|
-| Quarkus     | 3.2.1.Final |
-| Micronaut   | 4.2.0       |
-| Spring Boot | 3.1.5       |
+| Framework   | Version |
+|-------------|---------|
+| Quarkus     | 3.5.2   |
+| Micronaut   | 4.2.0   |
+| Spring Boot | 3.1.5   |
 
 ## Prerequisites
 
