@@ -32,7 +32,7 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public String saveMovie(Movie movie) {
         try {
-            IndexResponse indexResponse = client.index(IndexRequestBuilder -> IndexRequestBuilder
+            IndexResponse indexResponse = client.index(indexRequestBuilder -> indexRequestBuilder
                     .index(moviesIndex)
                     .document(movie));
             String id = indexResponse.id();
@@ -48,10 +48,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public SearchMovieResponse searchMovies(String title) {
         try {
-            SearchResponse<Movie> searchResponse = client.search(SearchRequestBuilder -> SearchRequestBuilder
+            SearchResponse<Movie> searchResponse = client.search(searchRequestBuilder -> searchRequestBuilder
                             .index(moviesIndex)
-                            .query(QueryBuilder -> QueryBuilder
-                                    .term(TermQueryBuilder -> TermQueryBuilder
+                            .query(queryBuilder -> queryBuilder
+                                    .term(termQueryBuilder -> termQueryBuilder
                                             .field("title").value(FieldValue.of(title)))),
                     Movie.class);
             List<Hit<Movie>> hits = searchResponse.hits().hits();
