@@ -14,7 +14,7 @@ In this example, we will implement three versions of `kafka-producer - kafka-con
 | Framework   | Confluent Platform | Apache Kafka |
 |-------------|--------------------|--------------|
 | Quarkus     | 7.5.x              | 3.6.1        |
-| Micronaut   | 7.5.x              | 3.6.0        |
+| Micronaut   | 7.5.x              | 3.6.1        |
 | Spring Boot | 7.5.x              | 3.6.1        |
 
 ## Start Environment
