@@ -13,7 +13,7 @@ In this example, we will implement three versions of a Restful API for handling 
 
 | Framework   | Elasticsearch |
 |-------------|---------------|
-| Quarkus     | 8.10.4        |
+| Quarkus     | 8.11.4        |
 | Micronaut   | 8.12.0        |
 | Spring Boot | 8.10.4        |
 
