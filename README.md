@@ -20,7 +20,7 @@ We are using the following Framework versions
 | Framework   | Version |
 |-------------|---------|
 | Quarkus     | 3.7.2   |
-| Micronaut   | 4.3.0   |
+| Micronaut   | 4.3.1   |
 | Spring Boot | 3.2.2   |
 
 ## Prerequisites
