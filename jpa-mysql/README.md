@@ -1,7 +1,7 @@
 # graalvm-quarkus-micronaut-springboot
 ## `> jpa-mysql`
 
-In this example, we will implement three versions of a Restful API for handling Books using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks. The books information are store in a database.
+In this category, we have implemented three versions of a Restful API for handling Books using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks. The books information are store in a database.
 
 ## Applications
 

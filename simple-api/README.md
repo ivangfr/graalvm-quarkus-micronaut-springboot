@@ -1,7 +1,7 @@
 # graalvm-quarkus-micronaut-springboot
 ## `> simple-api`
 
-In this example, we will implement three versions of a simple Greeting REST API using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks.
+In this category, we have implemented three versions of a simple Greeting REST API using `Quarkus`, `Micronaut` and `Spring Boot` Frameworks.
 
 ## Applications
 
