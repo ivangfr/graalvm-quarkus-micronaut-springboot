@@ -43,7 +43,7 @@ then
     "./mvnw package -Pnative -Dquarkus.native.container-build=true" \
     "target/quarkus-simple-api-1.0.0-runner" \
     "./docker-build.sh native" \
-    "ivanfranchin/quarkus-simple-api-native:1.0.0"
+    "ivanfranchin/quarkus-simple-api-native:latest"
   quarkus_simple_api_native[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_simple_api_native[jar_size]=$package_jar_build_image_jar_size
   quarkus_simple_api_native[building_time]=$package_jar_build_image_building_time
@@ -71,7 +71,7 @@ then
     "./mvnw package" \
     "target/micronaut-simple-api-1.0.0.jar" \
     "./docker-build.sh native" \
-    "ivanfranchin/micronaut-simple-api-native:1.0.0"
+    "ivanfranchin/micronaut-simple-api-native:latest"
   micronaut_simple_api_native[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_simple_api_native[jar_size]=$package_jar_build_image_jar_size
   micronaut_simple_api_native[building_time]=$package_jar_build_image_building_time
@@ -99,7 +99,7 @@ then
     "./mvnw package" \
     "target/springboot-simple-api-1.0.0.jar" \
     "./docker-build.sh native" \
-    "ivanfranchin/springboot-simple-api-native:1.0.0"
+    "ivanfranchin/springboot-simple-api-native:latest"
   springboot_simple_api_native[packaging_time]=$package_jar_build_image_packaging_time
   springboot_simple_api_native[jar_size]=$package_jar_build_image_jar_size
   springboot_simple_api_native[building_time]=$package_jar_build_image_building_time
@@ -127,7 +127,7 @@ then
     "./mvnw package -Pnative -Dquarkus.native.container-build=true" \
     "target/quarkus-jpa-mysql-1.0.0-runner" \
     "./docker-build.sh native" \
-    "ivanfranchin/quarkus-jpa-mysql-native:1.0.0"
+    "ivanfranchin/quarkus-jpa-mysql-native:latest"
   quarkus_jpa_mysql_native[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_jpa_mysql_native[jar_size]=$package_jar_build_image_jar_size
   quarkus_jpa_mysql_native[building_time]=$package_jar_build_image_building_time
@@ -155,7 +155,7 @@ then
     "./mvnw package" \
     "target/micronaut-jpa-mysql-1.0.0.jar" \
     "./docker-build.sh native" \
-    "ivanfranchin/micronaut-jpa-mysql-native:1.0.0"
+    "ivanfranchin/micronaut-jpa-mysql-native:latest"
   micronaut_jpa_mysql_native[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_jpa_mysql_native[jar_size]=$package_jar_build_image_jar_size
   micronaut_jpa_mysql_native[building_time]=$package_jar_build_image_building_time
@@ -183,7 +183,7 @@ then
     "./mvnw package" \
     "target/springboot-jpa-mysql-1.0.0.jar" \
     "./docker-build.sh native" \
-    "ivanfranchin/springboot-jpa-mysql-native:1.0.0"
+    "ivanfranchin/springboot-jpa-mysql-native:latest"
   springboot_jpa_mysql_native[packaging_time]=$package_jar_build_image_packaging_time
   springboot_jpa_mysql_native[jar_size]=$package_jar_build_image_jar_size
   springboot_jpa_mysql_native[building_time]=$package_jar_build_image_building_time
@@ -212,7 +212,7 @@ then
     "./mvnw package -Pnative -Dquarkus.native.container-build=true --projects kafka-producer" \
     "kafka-producer/target/kafka-producer-1.0.0-runner" \
     "cd kafka-producer && ./docker-build.sh native && cd .." \
-    "ivanfranchin/quarkus-kafka-producer-native:1.0.0"
+    "ivanfranchin/quarkus-kafka-producer-native:latest"
   quarkus_kafka_producer_native[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_kafka_producer_native[jar_size]=$package_jar_build_image_jar_size
   quarkus_kafka_producer_native[building_time]=$package_jar_build_image_building_time
@@ -241,7 +241,7 @@ then
     "./mvnw package -Pnative -Dquarkus.native.container-build=true --projects kafka-consumer" \
     "kafka-consumer/target/kafka-consumer-1.0.0-runner" \
     "cd kafka-consumer && ./docker-build.sh native && cd .." \
-    "ivanfranchin/quarkus-kafka-consumer-native:1.0.0"
+    "ivanfranchin/quarkus-kafka-consumer-native:latest"
   quarkus_kafka_consumer_native[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_kafka_consumer_native[jar_size]=$package_jar_build_image_jar_size
   quarkus_kafka_consumer_native[building_time]=$package_jar_build_image_building_time
@@ -270,7 +270,7 @@ then
     "./mvnw package --projects kafka-producer" \
     "kafka-producer/target/kafka-producer-1.0.0.jar" \
     "cd kafka-producer && ./docker-build.sh native && cd .." \
-    "ivanfranchin/micronaut-kafka-producer-native:1.0.0"
+    "ivanfranchin/micronaut-kafka-producer-native:latest"
   micronaut_kafka_producer_native[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_kafka_producer_native[jar_size]=$package_jar_build_image_jar_size
   micronaut_kafka_producer_native[building_time]=$package_jar_build_image_building_time
@@ -299,7 +299,7 @@ then
     "./mvnw package --projects kafka-consumer" \
     "kafka-consumer/target/kafka-consumer-1.0.0.jar" \
     "cd kafka-consumer && ./docker-build.sh native && cd .." \
-    "ivanfranchin/micronaut-kafka-consumer-native:1.0.0"
+    "ivanfranchin/micronaut-kafka-consumer-native:latest"
   micronaut_kafka_consumer_native[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_kafka_consumer_native[jar_size]=$package_jar_build_image_jar_size
   micronaut_kafka_consumer_native[building_time]=$package_jar_build_image_building_time
@@ -328,7 +328,7 @@ then
     "./mvnw package --projects kafka-producer" \
     "kafka-producer/target/kafka-producer-1.0.0.jar" \
     "cd kafka-producer && ./docker-build.sh native && cd .." \
-    "ivanfranchin/springboot-kafka-producer-native:1.0.0"
+    "ivanfranchin/springboot-kafka-producer-native:latest"
   springboot_kafka_producer_native[packaging_time]=$package_jar_build_image_packaging_time
   springboot_kafka_producer_native[jar_size]=$package_jar_build_image_jar_size
   springboot_kafka_producer_native[building_time]=$package_jar_build_image_building_time
@@ -357,7 +357,7 @@ then
     "./mvnw package --projects kafka-consumer" \
     "kafka-consumer/target/kafka-consumer-1.0.0.jar" \
     "cd kafka-consumer && ./docker-build.sh native && cd .." \
-    "ivanfranchin/springboot-kafka-consumer-native:1.0.0"
+    "ivanfranchin/springboot-kafka-consumer-native:latest"
   springboot_kafka_consumer_native[packaging_time]=$package_jar_build_image_packaging_time
   springboot_kafka_consumer_native[jar_size]=$package_jar_build_image_jar_size
   springboot_kafka_consumer_native[building_time]=$package_jar_build_image_building_time
@@ -385,7 +385,7 @@ then
     "./mvnw package -Pnative -Dquarkus.native.container-build=true" \
     "target/quarkus-elasticsearch-1.0.0-runner" \
     "./docker-build.sh native" \
-    "ivanfranchin/quarkus-elasticsearch-native:1.0.0"
+    "ivanfranchin/quarkus-elasticsearch-native:latest"
   quarkus_elasticsearch_native[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_elasticsearch_native[jar_size]=$package_jar_build_image_jar_size
   quarkus_elasticsearch_native[building_time]=$package_jar_build_image_building_time
@@ -413,7 +413,7 @@ then
     "./mvnw package" \
     "target/micronaut-elasticsearch-1.0.0.jar" \
     "./docker-build.sh native" \
-    "ivanfranchin/micronaut-elasticsearch-native:1.0.0"
+    "ivanfranchin/micronaut-elasticsearch-native:latest"
   micronaut_elasticsearch_native[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_elasticsearch_native[jar_size]=$package_jar_build_image_jar_size
   micronaut_elasticsearch_native[building_time]=$package_jar_build_image_building_time
@@ -441,7 +441,7 @@ then
     "./mvnw package" \
     "target/springboot-elasticsearch-1.0.0.jar" \
     "./docker-build.sh native" \
-    "ivanfranchin/springboot-elasticsearch-native:1.0.0"
+    "ivanfranchin/springboot-elasticsearch-native:latest"
   springboot_elasticsearch_native[packaging_time]=$package_jar_build_image_packaging_time
   springboot_elasticsearch_native[jar_size]=$package_jar_build_image_jar_size
   springboot_elasticsearch_native[building_time]=$package_jar_build_image_building_time

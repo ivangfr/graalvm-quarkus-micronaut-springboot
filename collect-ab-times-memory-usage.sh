@@ -38,6 +38,10 @@ declare -A micronaut_elasticsearch_native
 declare -A springboot_elasticsearch_jvm
 declare -A springboot_elasticsearch_native
 
+QUARKUS_VERSION=latest
+MICRONAUT_VERSION=latest
+SPRING_BOOT_VERSION=latest
+
 start_time=$(date)
 
 CONTAINER_MAX_MEM=512M
@@ -72,7 +76,7 @@ then
   docker run -d --rm --name quarkus-simple-api-jvm \
     -p 9080:8080 \
     -m $CONTAINER_MAX_MEM \
-    ivanfranchin/quarkus-simple-api-jvm:1.0.0
+    ivanfranchin/quarkus-simple-api-jvm:$QUARKUS_VERSION
 
   wait_for_container_log "quarkus-simple-api-jvm" "started in"
   startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -113,7 +117,7 @@ then
   docker run -d --rm --name quarkus-simple-api-native \
     -p 9081:8080 \
     -m $CONTAINER_MAX_MEM \
-    ivanfranchin/quarkus-simple-api-native:1.0.0
+    ivanfranchin/quarkus-simple-api-native:$QUARKUS_VERSION
 
   wait_for_container_log "quarkus-simple-api-native" "started in"
   startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -154,7 +158,7 @@ then
   docker run -d --rm --name micronaut-simple-api-jvm \
     -p 9082:8080 \
     -m $CONTAINER_MAX_MEM \
-    ivanfranchin/micronaut-simple-api-jvm:1.0.0
+    ivanfranchin/micronaut-simple-api-jvm:$MICRONAUT_VERSION
 
   wait_for_container_log "micronaut-simple-api-jvm" "Startup completed in"
   micronaut_simple_api_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -194,7 +198,7 @@ then
   docker run -d --rm --name micronaut-simple-api-native \
     -p 9083:8080 \
     -m $CONTAINER_MAX_MEM \
-    ivanfranchin/micronaut-simple-api-native:1.0.0
+    ivanfranchin/micronaut-simple-api-native:$MICRONAUT_VERSION
 
   wait_for_container_log "micronaut-simple-api-native" "Startup completed in"
   micronaut_simple_api_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -234,7 +238,7 @@ then
   docker run -d --rm --name springboot-simple-api-jvm \
     -p 9084:8080 \
     -m $CONTAINER_MAX_MEM \
-    ivanfranchin/springboot-simple-api-jvm:1.0.0
+    ivanfranchin/springboot-simple-api-jvm:$SPRING_BOOT_VERSION
 
   wait_for_container_log "springboot-simple-api-jvm" "Started"
   startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -275,7 +279,7 @@ then
   docker run -d --rm --name springboot-simple-api-native \
     -p 9085:8080 \
     -m $CONTAINER_MAX_MEM \
-    ivanfranchin/springboot-simple-api-native:1.0.0
+    ivanfranchin/springboot-simple-api-native:$SPRING_BOOT_VERSION
 
   wait_for_container_log "springboot-simple-api-native" "Started"
   startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -341,7 +345,7 @@ then
       -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      ivanfranchin/quarkus-jpa-mysql-jvm:1.0.0
+      ivanfranchin/quarkus-jpa-mysql-jvm:$QUARKUS_VERSION
 
     wait_for_container_log "quarkus-jpa-mysql-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -384,7 +388,7 @@ then
       -e QUARKUS_PROFILE=native -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      ivanfranchin/quarkus-jpa-mysql-native:1.0.0
+      ivanfranchin/quarkus-jpa-mysql-native:$QUARKUS_VERSION
 
     wait_for_container_log "quarkus-jpa-mysql-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -427,7 +431,7 @@ then
       -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      ivanfranchin/micronaut-jpa-mysql-jvm:1.0.0
+      ivanfranchin/micronaut-jpa-mysql-jvm:$MICRONAUT_VERSION
 
     wait_for_container_log "micronaut-jpa-mysql-jvm" "Startup completed in"
     micronaut_jpa_mysql_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -469,7 +473,7 @@ then
       -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      ivanfranchin/micronaut-jpa-mysql-native:1.0.0
+      ivanfranchin/micronaut-jpa-mysql-native:$MICRONAUT_VERSION
 
     wait_for_container_log "micronaut-jpa-mysql-native" "Startup completed in"
     micronaut_jpa_mysql_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -511,7 +515,7 @@ then
       -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      ivanfranchin/springboot-jpa-mysql-jvm:1.0.0
+      ivanfranchin/springboot-jpa-mysql-jvm:$SPRING_BOOT_VERSION
 
     wait_for_container_log "springboot-jpa-mysql-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -554,7 +558,7 @@ then
       -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
       --network jpa-mysql_default \
-      ivanfranchin/springboot-jpa-mysql-native:1.0.0
+      ivanfranchin/springboot-jpa-mysql-native:$SPRING_BOOT_VERSION
 
     wait_for_container_log "springboot-jpa-mysql-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -631,7 +635,7 @@ then
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/quarkus-kafka-producer-jvm:1.0.0
+      ivanfranchin/quarkus-kafka-producer-jvm:$QUARKUS_VERSION
 
     wait_for_container_log "quarkus-kafka-producer-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -659,7 +663,7 @@ then
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/quarkus-kafka-consumer-jvm:1.0.0
+      ivanfranchin/quarkus-kafka-consumer-jvm:$QUARKUS_VERSION
 
     wait_for_container_log "quarkus-kafka-consumer-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -702,7 +706,7 @@ then
       -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/quarkus-kafka-producer-native:1.0.0
+      ivanfranchin/quarkus-kafka-producer-native:$QUARKUS_VERSION
 
     wait_for_container_log "quarkus-kafka-producer-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -730,7 +734,7 @@ then
       -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/quarkus-kafka-consumer-native:1.0.0
+      ivanfranchin/quarkus-kafka-consumer-native:$QUARKUS_VERSION
 
     wait_for_container_log "quarkus-kafka-consumer-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -773,7 +777,7 @@ then
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/micronaut-kafka-producer-jvm:1.0.0
+      ivanfranchin/micronaut-kafka-producer-jvm:$MICRONAUT_VERSION
 
     wait_for_container_log "micronaut-kafka-producer-jvm" "Startup completed in"
     micronaut_kafka_producer_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -800,7 +804,7 @@ then
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/micronaut-kafka-consumer-jvm:1.0.0
+      ivanfranchin/micronaut-kafka-consumer-jvm:$MICRONAUT_VERSION
 
     wait_for_container_log "micronaut-kafka-consumer-jvm" "Startup completed in"
     micronaut_kafka_consumer_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -842,7 +846,7 @@ then
       -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/micronaut-kafka-producer-native:1.0.0
+      ivanfranchin/micronaut-kafka-producer-native:$MICRONAUT_VERSION
 
     wait_for_container_log "micronaut-kafka-producer-native" "Startup completed in"
     micronaut_kafka_producer_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -869,7 +873,7 @@ then
       -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/micronaut-kafka-consumer-native:1.0.0
+      ivanfranchin/micronaut-kafka-consumer-native:$MICRONAUT_VERSION
 
     wait_for_container_log "micronaut-kafka-consumer-native" "Startup completed in"
     micronaut_kafka_consumer_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -911,7 +915,7 @@ then
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/springboot-kafka-producer-jvm:1.0.0
+      ivanfranchin/springboot-kafka-producer-jvm:$SPRING_BOOT_VERSION
 
     wait_for_container_log "springboot-kafka-producer-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -939,7 +943,7 @@ then
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/springboot-kafka-consumer-jvm:1.0.0
+      ivanfranchin/springboot-kafka-consumer-jvm:$SPRING_BOOT_VERSION
 
     wait_for_container_log "springboot-kafka-consumer-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -982,7 +986,7 @@ then
       -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/springboot-kafka-producer-native:1.0.0
+      ivanfranchin/springboot-kafka-producer-native:$SPRING_BOOT_VERSION
 
     wait_for_container_log "springboot-kafka-producer-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -1010,7 +1014,7 @@ then
       -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
       --network kafka_default \
-      ivanfranchin/springboot-kafka-consumer-native:1.0.0
+      ivanfranchin/springboot-kafka-consumer-native:$SPRING_BOOT_VERSION
 
     wait_for_container_log "springboot-kafka-consumer-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -1090,7 +1094,7 @@ then
       -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      ivanfranchin/quarkus-elasticsearch-jvm:1.0.0
+      ivanfranchin/quarkus-elasticsearch-jvm:$QUARKUS_VERSION
 
     wait_for_container_log "quarkus-elasticsearch-jvm" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$16,0,length(\$16)-2)}")
@@ -1133,7 +1137,7 @@ then
       -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      ivanfranchin/quarkus-elasticsearch-native:1.0.0
+      ivanfranchin/quarkus-elasticsearch-native:$QUARKUS_VERSION
 
     wait_for_container_log "quarkus-elasticsearch-native" "started in"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$15,0,length(\$15)-2)}")
@@ -1176,7 +1180,7 @@ then
       -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      ivanfranchin/micronaut-elasticsearch-jvm:1.0.0
+      ivanfranchin/micronaut-elasticsearch-jvm:$MICRONAUT_VERSION
 
     wait_for_container_log "micronaut-elasticsearch-jvm" "Startup completed in"
     micronaut_elasticsearch_jvm[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -1218,7 +1222,7 @@ then
       -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      ivanfranchin/micronaut-elasticsearch-native:1.0.0
+      ivanfranchin/micronaut-elasticsearch-native:$MICRONAUT_VERSION
 
     wait_for_container_log "micronaut-elasticsearch-native" "Startup completed in"
     micronaut_elasticsearch_native[startup_time]=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print substr(\$10,0,length(\$10)-1)}")
@@ -1260,7 +1264,7 @@ then
       -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      ivanfranchin/springboot-elasticsearch-jvm:1.0.0
+      ivanfranchin/springboot-elasticsearch-jvm:$SPRING_BOOT_VERSION
 
     wait_for_container_log "springboot-elasticsearch-jvm" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
@@ -1303,7 +1307,7 @@ then
       -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
       --network elasticsearch_default \
-      ivanfranchin/springboot-elasticsearch-native:1.0.0
+      ivanfranchin/springboot-elasticsearch-native:$SPRING_BOOT_VERSION
 
     wait_for_container_log "springboot-elasticsearch-native" "Started"
     startup_time_sec=$(extract_startup_time_from_log "$wait_for_container_log_matched_row" "{print \$13}")
