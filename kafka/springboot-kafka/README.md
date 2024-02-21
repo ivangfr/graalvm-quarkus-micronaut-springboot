@@ -89,7 +89,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       docker run --rm --name springboot-kafka-producer-jvm \
         -p 9104:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/springboot-kafka-producer-jvm:1.0.0
+        ivanfranchin/springboot-kafka-producer-jvm:latest
       ```
 
   - **kafka-consumer**
@@ -111,7 +111,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       docker run --rm --name springboot-kafka-consumer-jvm \
         -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/springboot-kafka-consumer-jvm:1.0.0
+        ivanfranchin/springboot-kafka-consumer-jvm:latest
       ```
 
 - **Simple Test**
@@ -151,7 +151,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       docker run --rm --name springboot-kafka-producer-native \
         -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/springboot-kafka-producer-native:1.0.0
+        ivanfranchin/springboot-kafka-producer-native:latest
       ```
 
   - **kafka-consumer**
@@ -173,7 +173,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
       docker run --rm --name springboot-kafka-consumer-native \
         -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/springboot-kafka-consumer-native:1.0.0
+        ivanfranchin/springboot-kafka-consumer-native:latest
       ```
 
 - **Simple Test**

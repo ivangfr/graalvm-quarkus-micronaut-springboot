@@ -64,7 +64,7 @@
                 <configuration>
                     <image>
                         <builder>paketobuildpacks/builder-jammy-tiny:latest</builder>
-                        <name>${docker-image.prefix}/springboot-${project.artifactId}-native:${project.version}</name>
+                        <name>${docker-image.prefix}/springboot-${project.artifactId}-native:latest</name>
                     </image>
                 </configuration>
             </plugin>
@@ -74,7 +74,7 @@
                 <version>${jib-maven-plugin.version}</version>
                 <configuration>
                     <to>
-                        <image>${docker-image.prefix}/springboot-${project.artifactId}-jvm:${project.version}</image>
+                        <image>${docker-image.prefix}/springboot-${project.artifactId}-jvm:latest</image>
                     </to>
                 </configuration>
             </plugin>

@@ -57,7 +57,7 @@
   docker run --rm --name springboot-elasticsearch-jvm \
     -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch \
     --network elasticsearch_default \
-    ivanfranchin/springboot-elasticsearch-jvm:1.0.0
+    ivanfranchin/springboot-elasticsearch-jvm:latest
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -89,7 +89,7 @@
   docker run --rm --name springboot-elasticsearch-native \
     -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
     --network elasticsearch_default \
-    ivanfranchin/springboot-elasticsearch-native:1.0.0
+    ivanfranchin/springboot-elasticsearch-native:latest
   ```
 
 - A simple test can be done by opening a new terminal and running

@@ -89,7 +89,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
       docker run --rm --name micronaut-kafka-producer-jvm \
         -p 9102:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/micronaut-kafka-producer-jvm:1.0.0
+        ivanfranchin/micronaut-kafka-producer-jvm:latest
       ```
 
   - **kafka-consumer**
@@ -111,7 +111,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
       docker run --rm --name micronaut-kafka-consumer-jvm \
         -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/micronaut-kafka-consumer-jvm:1.0.0
+        ivanfranchin/micronaut-kafka-consumer-jvm:latest
       ```
 
 - **Simple Test**
@@ -151,7 +151,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
       docker run --rm --name micronaut-kafka-producer-native \
         -p 9103:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/micronaut-kafka-producer-native:1.0.0
+        ivanfranchin/micronaut-kafka-producer-native:latest
       ```
 
   - **kafka-consumer**
@@ -173,7 +173,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
       docker run --rm --name micronaut-kafka-consumer-native \
         -p 9109:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/micronaut-kafka-consumer-native:1.0.0
+        ivanfranchin/micronaut-kafka-consumer-native:latest
       ```
 
 - **Simple Test**

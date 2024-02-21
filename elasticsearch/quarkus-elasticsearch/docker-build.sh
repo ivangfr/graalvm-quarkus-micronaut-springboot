@@ -4,9 +4,9 @@ SECONDS=0
 
 if [ "$1" = "native" ];
 then
-  docker build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-elasticsearch-native:1.0.0 .
+  docker build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-elasticsearch-native:latest .
 else
-  docker build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-elasticsearch-jvm:1.0.0 .
+  docker build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-elasticsearch-jvm:latest .
 fi
 
 duration=$SECONDS

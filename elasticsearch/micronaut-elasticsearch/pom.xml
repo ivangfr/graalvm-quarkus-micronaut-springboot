@@ -168,7 +168,7 @@
                 <version>${jib-maven-plugin.version}</version>
                 <configuration>
                     <to>
-                        <image>${docker-image.prefix}/${project.artifactId}-jvm:${project.version}</image>
+                        <image>${docker-image.prefix}/${project.artifactId}-jvm:latest</image>
                     </to>
                 </configuration>
             </plugin>

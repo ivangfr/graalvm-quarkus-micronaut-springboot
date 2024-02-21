@@ -4,7 +4,7 @@ SECONDS=0
 
 if [ "$1" = "native" ];
 then
-  ./mvnw package -Pgraalvm -Dpackaging=docker-native -Djib.to.image=ivanfranchin/micronaut-elasticsearch-native:1.0.0
+  ./mvnw package -Pgraalvm -Dpackaging=docker-native -Djib.to.image=ivanfranchin/micronaut-elasticsearch-native:latest
 else
   ./mvnw package -Dpackaging=docker
 fi

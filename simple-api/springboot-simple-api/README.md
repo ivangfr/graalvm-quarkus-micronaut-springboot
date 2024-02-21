@@ -49,7 +49,7 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name springboot-simple-api-jvm -p 9084:8080 \
-    ivanfranchin/springboot-simple-api-jvm:1.0.0
+    ivanfranchin/springboot-simple-api-jvm:latest
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -76,7 +76,7 @@
 - Run the following command to start the Docker container
   ```
   docker run --rm --name springboot-simple-api-native -p 9085:8080 \
-    ivanfranchin/springboot-simple-api-native:1.0.0
+    ivanfranchin/springboot-simple-api-native:latest
   ```
 
 - A simple test can be done by opening a new terminal and running

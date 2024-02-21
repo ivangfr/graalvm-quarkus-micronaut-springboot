@@ -58,7 +58,7 @@
   docker run --rm --name micronaut-jpa-mysql-jvm \
     -p 9088:8080 -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
-    ivanfranchin/micronaut-jpa-mysql-jvm:1.0.0
+    ivanfranchin/micronaut-jpa-mysql-jvm:latest
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -90,7 +90,7 @@
   docker run --rm --name micronaut-jpa-mysql-native \
     -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
-    ivanfranchin/micronaut-jpa-mysql-native:1.0.0
+    ivanfranchin/micronaut-jpa-mysql-native:latest
   ```
 
 - A simple test can be done by opening a new terminal and running

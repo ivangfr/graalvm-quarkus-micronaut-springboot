@@ -58,7 +58,7 @@
   docker run --rm --name quarkus-jpa-mysql-jvm \
     -p 9086:8080 -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
-    ivanfranchin/quarkus-jpa-mysql-jvm:1.0.0
+    ivanfranchin/quarkus-jpa-mysql-jvm:latest
   ```
 
 - A simple test can be done by opening a new terminal and running
@@ -90,7 +90,7 @@
   docker run --rm --name quarkus-jpa-mysql-native \
     -p 9087:8080 -e QUARKUS_PROFILE=native -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
-    ivanfranchin/quarkus-jpa-mysql-native:1.0.0
+    ivanfranchin/quarkus-jpa-mysql-native:latest
   ```
 
 - A simple test can be done by opening a new terminal and running

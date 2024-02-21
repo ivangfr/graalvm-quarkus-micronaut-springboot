@@ -37,7 +37,7 @@ services:
     depends_on:
       - kafka
     ports:
-      - "9000:9000"
+      - "9001:9000"
     environment:
       KAFKA_BROKERCONNECT: kafka:9092
     healthcheck:

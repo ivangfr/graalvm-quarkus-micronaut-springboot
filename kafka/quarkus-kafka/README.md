@@ -88,7 +88,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
       docker run --rm --name quarkus-kafka-producer-jvm \
         -p 9100:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/quarkus-kafka-producer-jvm:1.0.0
+        ivanfranchin/quarkus-kafka-producer-jvm:latest
       ```
 
   - **kafka-consumer**
@@ -110,7 +110,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
       docker run --rm --name quarkus-kafka-consumer-jvm \
         -p 9106:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/quarkus-kafka-consumer-jvm:1.0.0
+        ivanfranchin/quarkus-kafka-consumer-jvm:latest
       ```
 
 - **Simple Test**
@@ -150,7 +150,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
       docker run --rm --name quarkus-kafka-producer-native \
         -p 9101:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/quarkus-kafka-producer-native:1.0.0
+        ivanfranchin/quarkus-kafka-producer-native:latest
       ```
 
   - **kafka-consumer**
@@ -172,7 +172,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
       docker run --rm --name quarkus-kafka-consumer-native \
         -p 9107:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
-        ivanfranchin/quarkus-kafka-consumer-native:1.0.0
+        ivanfranchin/quarkus-kafka-consumer-native:latest
       ```
 
 - **Simple Test**

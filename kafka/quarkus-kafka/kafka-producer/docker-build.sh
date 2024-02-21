@@ -4,9 +4,9 @@ SECONDS=0
 
 if [ "$1" = "native" ];
 then
-  docker build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-kafka-producer-native:1.0.0 .
+  docker build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-kafka-producer-native:latest .
 else
-  docker build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-kafka-producer-jvm:1.0.0 .
+  docker build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-kafka-producer-jvm:latest .
 fi
 
 duration=$SECONDS

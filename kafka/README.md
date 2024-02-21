@@ -44,4 +44,4 @@ In this category, we have implemented three versions of `kafka-producer - kafka-
 
 - **Kafdrop**
 
-  `Kafdrop` can be accessed at http://localhost:9000
+  `Kafdrop` can be accessed at http://localhost:9001
