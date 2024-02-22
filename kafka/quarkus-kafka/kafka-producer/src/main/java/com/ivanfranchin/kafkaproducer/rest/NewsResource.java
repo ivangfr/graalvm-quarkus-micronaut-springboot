@@ -2,6 +2,8 @@ package com.ivanfranchin.kafkaproducer.rest;
 
 import com.ivanfranchin.kafkaproducer.domain.News;
 import com.ivanfranchin.kafkaproducer.rest.dto.CreateNewsRequest;
+
+import io.smallrye.common.annotation.NonBlocking;
 import io.smallrye.reactive.messaging.kafka.KafkaRecord;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -26,6 +28,7 @@ public class NewsResource {
     @OnOverflow(value = Strategy.BUFFER, bufferSize = 10000)
     Emitter<News> emitter;
 
+    @NonBlocking
     @POST
     public String createNews(@Valid CreateNewsRequest createNewsRequest) {
         String id = UUID.randomUUID().toString();

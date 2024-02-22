@@ -4,6 +4,8 @@ import com.ivanfranchin.quarkuselasticsearch.model.Movie;
 import com.ivanfranchin.quarkuselasticsearch.rest.dto.CreateMovieRequest;
 import com.ivanfranchin.quarkuselasticsearch.rest.dto.SearchMovieResponse;
 import com.ivanfranchin.quarkuselasticsearch.service.MovieService;
+
+import io.smallrye.common.annotation.NonBlocking;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -19,6 +21,7 @@ public class MovieResource {
     @Inject
     MovieService movieService;
 
+    @NonBlocking
     @POST
     public Response createMovie(@Valid CreateMovieRequest createMovieRequest) {
         Movie movie = toMovie(createMovieRequest);
@@ -26,6 +29,7 @@ public class MovieResource {
         return Response.status(Response.Status.CREATED).entity(id).build();
     }
 
+    @NonBlocking
     @GET
     public SearchMovieResponse searchMovies(@QueryParam("title") @NotBlank String title) {
         return movieService.searchMovies(title);

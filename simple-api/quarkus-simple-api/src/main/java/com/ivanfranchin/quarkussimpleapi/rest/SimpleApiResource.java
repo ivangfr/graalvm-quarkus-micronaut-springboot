@@ -2,6 +2,9 @@ package com.ivanfranchin.quarkussimpleapi.rest;
 
 import com.ivanfranchin.quarkussimpleapi.domain.Greeting;
 import com.ivanfranchin.quarkussimpleapi.service.GreetingService;
+
+import io.smallrye.common.annotation.NonBlocking;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +23,7 @@ public class SimpleApiResource {
     @Inject
     GreetingService greetingService;
 
+    @NonBlocking
     @GET
     public Greeting greetName(@QueryParam("name") @DefaultValue("World") @NotBlank String name) {
         log.info("Received request, name: {}", name);
