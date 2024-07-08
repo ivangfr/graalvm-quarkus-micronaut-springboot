@@ -22,9 +22,9 @@ On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-C
 
 | Framework   | Version |
 |-------------|---------|
-| Quarkus     | 3.7.2   |
-| Micronaut   | 4.3.1   |
-| Spring Boot | 3.2.2   |
+| Quarkus     | 3.12.0  |
+| Micronaut   | 4.5.0   |
+| Spring Boot | 3.3.1   |
 
 ## Prerequisites
 
@@ -102,7 +102,7 @@ In order to have a better insight about the Docker container's CPU and Memory Us
     -v /var/run/docker.sock:/var/run/docker.sock \
     --privileged \
     --device=/dev/kmsg \
-    gcr.io/cadvisor/cadvisor:v0.47.2
+    gcr.io/cadvisor/cadvisor:v0.49.1
   ```
 
 - In a browser, access

@@ -10,18 +10,17 @@
     <parent>
         <groupId>io.micronaut.platform</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>4.3.1</version>
+        <version>4.5.0</version>
     </parent>
-
     <properties>
         <packaging>jar</packaging>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <micronaut.version>4.3.1</micronaut.version>
+        <micronaut.version>4.5.0</micronaut.version>
+        <micronaut.runtime>netty</micronaut.runtime>
         <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>com.ivanfranchin.micronautjpamysql.aot.generated</micronaut.aot.packageName>
-        <micronaut.runtime>netty</micronaut.runtime>
         <exec.mainClass>com.ivanfranchin.micronautjpamysql.Application</exec.mainClass>
         <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
@@ -90,8 +89,8 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -120,7 +119,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

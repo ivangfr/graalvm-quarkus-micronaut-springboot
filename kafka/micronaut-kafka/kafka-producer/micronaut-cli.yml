@@ -3,4 +3,4 @@ defaultPackage: com.ivanfranchin.kafkaproducer
 testFramework: junit
 sourceLanguage: java
 buildTool: maven
-features: [app-name, graalvm, http-client, jackson-databind, java, java-application, jib, junit, kafka, logback, management, maven, maven-enforcer-plugin, micrometer, micrometer-prometheus, micronaut-aot, micronaut-http-validation, netty-server, properties, readme, shade, test-resources, validation]
+features: [app-name, graalvm, http-client, jackson-databind, java, java-application, jib, junit, kafka, logback, management, maven, maven-enforcer-plugin, micrometer, micrometer-prometheus, micronaut-aot, micronaut-http-validation, netty-server, properties, readme, shade, static-resources, test-resources, validation]
