@@ -4,9 +4,9 @@ SECONDS=0
 
 if [ "$1" = "native" ];
 then
-  ../mvnw -Pnative spring-boot:build-image
+  ../mvnw -Pnative spring-boot:build-image -Dspring-boot.build-image.imageName=ivanfranchin/springboot-kafka-producer-native:latest
 else
-  ../mvnw compile jib:dockerBuild
+  ../mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=ivanfranchin/springboot-kafka-producer-jvm:latest
 fi
 
 duration=$SECONDS

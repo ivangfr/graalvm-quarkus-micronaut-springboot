@@ -28,8 +28,6 @@
     </scm>
     <properties>
         <java.version>17</java.version>
-        <jib-maven-plugin.version>3.4.3</jib-maven-plugin.version>
-        <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
     <dependencies>
         <dependency>
@@ -99,26 +97,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <image>
-                    	<builder>paketobuildpacks/builder-jammy-tiny:latest</builder>
-                        <name>${docker-image.prefix}/${project.artifactId}-native:latest</name>
-                    </image>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib-maven-plugin.version}</version>
-                <configuration>
-                    <to>
-                        <image>${docker-image.prefix}/${project.artifactId}-jvm:latest</image>
-                    </to>
                 </configuration>
             </plugin>
         </plugins>
