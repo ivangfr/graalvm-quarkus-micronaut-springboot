@@ -21,7 +21,6 @@
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>com.ivanfranchin.kafkaconsumer.aot.generated</micronaut.aot.packageName>
         <exec.mainClass>com.ivanfranchin.kafkaconsumer.Application</exec.mainClass>
-        <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
     
     <repositories>
@@ -125,16 +124,6 @@
                         <arg>-Amicronaut.processing.group=com.ivanfranchin.kafkaconsumer</arg>
                         <arg>-Amicronaut.processing.module=micronaut-kafka-consumer</arg>
                     </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib-maven-plugin.version}</version>
-                <configuration>
-                    <to>
-                        <image>${docker-image.prefix}/micronaut-${project.artifactId}-jvm:latest</image>
-                    </to>
                 </configuration>
             </plugin>
         </plugins>

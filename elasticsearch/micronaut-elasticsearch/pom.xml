@@ -21,7 +21,6 @@
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>com.ivanfranchin.micronautelasticsearch.aot.generated</micronaut.aot.packageName>
         <exec.mainClass>com.ivanfranchin.micronautelasticsearch.Application</exec.mainClass>
-        <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
 
     <repositories>
@@ -158,16 +157,6 @@
                         <arg>-Amicronaut.processing.group=com.ivanfranchin.micronautelasticsearch</arg>
                         <arg>-Amicronaut.processing.module=micronaut-elasticsearch</arg>
                     </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib-maven-plugin.version}</version>
-                <configuration>
-                    <to>
-                        <image>${docker-image.prefix}/${project.artifactId}-jvm:latest</image>
-                    </to>
                 </configuration>
             </plugin>
         </plugins>

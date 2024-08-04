@@ -22,7 +22,6 @@
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>com.ivanfranchin.micronautjpamysql.aot.generated</micronaut.aot.packageName>
         <exec.mainClass>com.ivanfranchin.micronautjpamysql.Application</exec.mainClass>
-        <docker-image.prefix>ivanfranchin</docker-image.prefix>
     </properties>
 
     <repositories>
@@ -187,16 +186,6 @@
                         <arg>-Amicronaut.processing.group=com.ivanfranchin.micronautjpamysql</arg>
                         <arg>-Amicronaut.processing.module=micronaut-jpa-mysql</arg>
                     </compilerArgs>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>${jib-maven-plugin.version}</version>
-                <configuration>
-                    <to>
-                        <image>${docker-image.prefix}/${project.artifactId}-jvm:latest</image>
-                    </to>
                 </configuration>
             </plugin>
         </plugins>
