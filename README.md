@@ -43,17 +43,25 @@ We've implemented three bash scripts that collect data used in the frameworks co
 
 - **collect-jvm-jar-docker-size-times.sh**
   
-  It packages jar files and builds docker images of all JVM applications, collecting data like: jar packaging time, jar size, docker build time and docker image size.
+  It packages jar files and builds Docker image of JVM applications, collecting data like: jar packaging time, jar size, docker build time and docker image size.
 
 - **collect-native-jar-docker-size-times.sh**
 
-  It packages jar files and builds docker images of all Native applications, collecting data like: jar packaging time, jar size, docker build time and docker image size.
+  It packages jar files and builds Docker image of Native applications, collecting data like: jar packaging time, jar size, docker build time and docker image size.
   
   > **Note**: On Mac and Windows, it's recommended to increase the memory allocated to Docker to at least 8G (and potentially to add more CPUs as well) since native-image compiler is a heavy process. On Linux, Docker uses by default the resources available on the host so no configuration is needed.
 
 - **collect-ab-times-memory-usage.sh**
 
-  It starts docker container of all applications (JVM and Native), collecting data like: startup time, initial memory usage, time spent to run ab tests for the first time and (after some warm up) for the second time, final memory usage and shutdown time.
+  It starts Docker container of JVM and Native applications, collecting data like: startup time, initial memory usage, time spent to run ab tests for the first time and (after some warm up) for the second time, final memory usage and shutdown time.
+
+- **remove-jvm-docker-images.sh**
+
+  It removes the Docker image of JVM applications.
+
+- **remove-native-docker-images.sh**
+
+  It removes the Docker image of Native applications.
 
 ## AB Tests
 
