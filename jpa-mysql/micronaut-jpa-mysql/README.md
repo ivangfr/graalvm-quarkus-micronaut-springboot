@@ -5,7 +5,7 @@
 
 - ### micronaut-jpa-mysql
 
-  [`Micronaut`](https://micronaut.io/) Java Web application that exposes a REST API for managing books.
+  [`Micronaut`](https://micronaut.io/) Java Web application that exposes a REST API for managing books. [Micronaut Launch](https://micronaut.io/launch?type=DEFAULT&name=micronaut-jpa-mysql&package=com.ivanfranchin.micronautjpamysql&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=jib&features=graalvm&features=http-client&features=micrometer-prometheus&features=validation&features=jackson-databind&features=mysql&features=lombok&features=data-jpa&version=4.6.1)
 
   It has the following endpoints:
   ```

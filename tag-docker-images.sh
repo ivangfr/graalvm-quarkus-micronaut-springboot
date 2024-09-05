@@ -1,5 +1,5 @@
 QUARKUS_VERSION=3.12.0
-MICRONAUT_VERSION=4.5.0
+MICRONAUT_VERSION=4.6.1
 SPRINGBOOT_VERSION=3.3.3
 
 docker tag ivanfranchin/quarkus-simple-api-jvm:latest ivanfranchin/quarkus-simple-api-jvm:${QUARKUS_VERSION}

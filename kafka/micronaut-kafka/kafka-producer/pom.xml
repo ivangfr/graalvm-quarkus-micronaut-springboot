@@ -9,17 +9,17 @@
     <parent>
         <groupId>io.micronaut.platform</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>4.5.0</version>
+        <version>4.6.1</version>
     </parent>
     <properties>
         <packaging>jar</packaging>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <micronaut.version>4.5.0</micronaut.version>
-        <micronaut.runtime>netty</micronaut.runtime>
-        <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
+        <micronaut.version>4.6.1</micronaut.version>
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>com.ivanfranchin.kafkaproducer.aot.generated</micronaut.aot.packageName>
+        <micronaut.test.resources.enabled>true</micronaut.test.resources.enabled>
+        <micronaut.runtime>netty</micronaut.runtime>
         <exec.mainClass>com.ivanfranchin.kafkaproducer.Application</exec.mainClass>
     </properties>
 

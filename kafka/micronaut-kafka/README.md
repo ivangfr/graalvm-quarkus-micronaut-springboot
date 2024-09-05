@@ -7,7 +7,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
 - ### kafka-producer
 
-  `Micronaut` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`.
+  `Micronaut` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`. [Micronaut Launch](https://micronaut.io/launch?type=DEFAULT&name=micronaut-kafka-producer&package=com.ivanfranchin.kafkaproducer&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=jib&features=graalvm&features=http-client&features=micrometer-prometheus&features=validation&features=jackson-databind&features=kafka&version=4.6.1)
 
   It has the following endpoints:
   ```
@@ -18,7 +18,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
 - ### kafka-consumer
 
-  `Micronaut` Web Java application that listens to messages (published by the `kafka-producer`) and logs it.
+  `Micronaut` Web Java application that listens to messages (published by the `kafka-producer`) and logs it. [Micronaut Launch](https://micronaut.io/launch?type=DEFAULT&name=micronaut-kafka-consumer&package=com.ivanfranchin.kafkaconsumer&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=jib&features=graalvm&features=http-client&features=micrometer-prometheus&features=jackson-databind&features=kafka&version=4.6.1)
 
   It has the following endpoints:
   ```
