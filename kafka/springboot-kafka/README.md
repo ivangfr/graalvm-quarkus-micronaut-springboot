@@ -7,7 +7,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
 - ### kafka-producer
 
-  `Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`.
+  `Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.3.3&packaging=jar&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-kafka-producer&name=springboot-kafka-producer&description=Demo%20project%20for%20Spring%20Boot&packageName=com.ivanfranchin.springboot-kafka-producer&dependencies=webflux,actuator,validation,native,kafka)
 
   It has the following endpoints:
   ```
@@ -18,7 +18,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
 - ### kafka-consumer
 
-  `Spring Boot` Web Java application that listens to messages (published by the `kafka-producer`) and logs it.
+  `Spring Boot` Web Java application that listens to messages (published by the `kafka-producer`) and logs it. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.3.3&packaging=jar&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-kafka-consumer&name=springboot-kafka-consumer&description=Demo%20project%20for%20Spring%20Boot&packageName=com.ivanfranchin.springboot-kafka-consumer&dependencies=webflux,actuator,native,kafka)
 
   It has the following endpoints:
   ```
