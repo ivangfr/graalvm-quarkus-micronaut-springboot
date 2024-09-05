@@ -5,7 +5,7 @@
 
 - ### quarkus-simple-api
 
-  [`Quarkus`](https://quarkus.io/) Java Web application that exposes a simple REST API for greetings.
+  [`Quarkus`](https://quarkus.io/) Java Web application that exposes a simple REST API for greetings. [code.quarkus.io](https://code.quarkus.io/?g=com.ivanfranchin&a=quarkus-simple-api&j=17&e=hibernate-validator&e=smallrye-health&e=micrometer-registry-prometheus&e=rest-jackson)
   
   It has the following endpoints
   ```

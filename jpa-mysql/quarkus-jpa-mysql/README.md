@@ -5,7 +5,7 @@
 
 - ### quarkus-jpa-mysql
 
-  [`Quarkus`](https://quarkus.io/) Java Web application that exposes a REST API for managing books.
+  [`Quarkus`](https://quarkus.io/) Java Web application that exposes a REST API for managing books. [code.quarkus.io](https://code.quarkus.io/?g=com.ivanfranchin&a=quarkus-jpa-mysql&j=17&e=hibernate-validator&e=smallrye-health&e=spring-data-jpa&e=jdbc-mysql&e=micrometer-registry-prometheus&e=rest-jackson)
                                  
   It has the following endpoints:
   ```

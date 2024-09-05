@@ -7,7 +7,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
 - ### kafka-producer
 
-  `Quarkus` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`.
+  `Quarkus` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`. [code.quarkus.io](https://code.quarkus.io/?g=com.ivanfranchin&a=quarkus-producer&j=17&e=hibernate-validator&e=smallrye-health&e=micrometer-registry-prometheus&e=messaging-kafka&e=rest-jackson)
 
   It has the following endpoints:
   ```
@@ -18,7 +18,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
 - ### kafka-consumer
 
-  `Quarkus` Web Java application that listens to messages (published by the `kafka-producer`) and logs it.
+  `Quarkus` Web Java application that listens to messages (published by the `kafka-producer`) and logs it. [code.quarkus.io](https://code.quarkus.io/?g=com.ivanfranchin&a=quarkus-consumer&j=17&e=smallrye-health&e=micrometer-registry-prometheus&e=rest-jackson&e=messaging-kafka)
 
   It has the following endpoints:
   ```

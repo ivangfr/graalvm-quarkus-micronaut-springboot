@@ -5,7 +5,7 @@
 
 - ### quarkus-elasticsearch
 
-  [`Quarkus`](https://quarkus.io/) Java Web application that exposes a simple REST API for indexing and searching movies in `Elasticsearch`.
+  [`Quarkus`](https://quarkus.io/) Java Web application that exposes a simple REST API for indexing and searching movies in `Elasticsearch`. [code.quarkus.io](https://code.quarkus.io/?g=com.ivanfranchin&a=quarkus-elasticsearch&j=17&e=hibernate-validator&e=smallrye-health&e=elasticsearch-java-client&e=micrometer-registry-prometheus&e=rest-jackson)
   
   It has the following endpoints:
   ```

@@ -12,10 +12,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.12.0</quarkus.platform.version>
+        <quarkus.platform.version>3.14.2</quarkus.platform.version>
         <skipITs>true</skipITs>
-        <surefire-plugin.version>3.2.5</surefire-plugin.version>
-        <lombok.version>1.18.30</lombok.version>
+        <surefire-plugin.version>3.3.1</surefire-plugin.version>
+        <lombok.version>1.18.34</lombok.version>
     </properties>
 
     <dependencyManagement>
@@ -107,9 +107,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${compiler-plugin.version}</version>
                 <configuration>
-                    <compilerArgs>
-                        <arg>-parameters</arg>
-                    </compilerArgs>
+                    <parameters>true</parameters>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
