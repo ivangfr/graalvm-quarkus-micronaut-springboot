@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 QUARKUS_VERSION=3.14.2-17
-MICRONAUT_VERSION=4.6.1-17
+MICRONAUT_VERSION=4.6.3-17
 SPRING_BOOT_VERSION=3.3.4-17
 
 docker tag ivanfranchin/quarkus-simple-api-jvm:latest ivanfranchin/quarkus-simple-api-jvm:$QUARKUS_VERSION
