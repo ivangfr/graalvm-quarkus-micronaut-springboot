@@ -5,7 +5,7 @@
 
 - ### springboot-elasticsearch
 
-  [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a simple REST API for indexing and searching movies in `Elasticsearch`. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.3.3&packaging=jar&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-elasticsearch&name=springboot-elasticsearch&description=Demo%20project%20for%20Spring%20Boot&packageName=com.ivanfranchin.springboot-elasticsearch&dependencies=webflux,actuator,validation,native,data-elasticsearch)
+  [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a simple REST API for indexing and searching movies in `Elasticsearch`. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.3.4&packaging=jar&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-elasticsearch&name=springboot-elasticsearch&description=Demo%20project%20for%20Spring%20Boot&packageName=com.ivanfranchin.springboot-elasticsearch&dependencies=webflux,actuator,validation,native,data-elasticsearch)
   
   It has the following endpoints:
   ```
