@@ -15,7 +15,7 @@ In this category, we have implemented three versions of `kafka-producer - kafka-
 |-------------|--------------------|--------------|
 | Quarkus     | 7.7.x              | 3.7.1        |
 | Micronaut   | 7.7.x              | 3.8.0        |
-| Spring Boot | 7.7.x              | 3.7.1        |
+| Spring Boot | 7.8.x              | 3.8.1        |
 
 ## Start Environment
 
