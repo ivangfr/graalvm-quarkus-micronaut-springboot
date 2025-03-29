@@ -5,7 +5,7 @@
 
 - ### micronaut-elasticsearch
 
-  [`Micronaut`](https://micronaut.io/) Java Web application that exposes a simple REST API for indexing and searching movies in `Elasticsearch`. [Micronaut Launch](https://micronaut.io/launch?type=DEFAULT&name=micronaut-elasticsearch&package=com.ivanfranchin.micronautelasticsearch&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=jib&features=graalvm&features=http-client&features=micrometer-prometheus&features=validation&features=jackson-databind&features=elasticsearch&version=4.6.3)
+  [`Micronaut`](https://micronaut.io/) Java Web application that exposes a simple REST API for indexing and searching movies in `Elasticsearch`. [Micronaut Launch](https://micronaut.io/launch?type=DEFAULT&name=micronaut-elasticsearch&package=com.ivanfranchin.micronautelasticsearch&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=jib&features=graalvm&features=http-client&features=micrometer-prometheus&features=validation&features=jackson-databind&features=elasticsearch&version=4.7.6)
   
   It has the following endpoints:
   ```

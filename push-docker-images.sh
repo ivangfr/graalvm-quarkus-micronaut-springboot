@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 QUARKUS_VERSION=3.15.1-17
-MICRONAUT_VERSION=4.6.3-17
+MICRONAUT_VERSION=4.7.6-17
 SPRING_BOOT_VERSION=3.4.4-17
 
 docker push ivanfranchin/quarkus-simple-api-jvm:$QUARKUS_VERSION

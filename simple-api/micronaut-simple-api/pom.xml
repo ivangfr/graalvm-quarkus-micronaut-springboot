@@ -10,16 +10,16 @@
     <parent>
         <groupId>io.micronaut.platform</groupId>
         <artifactId>micronaut-parent</artifactId>
-        <version>4.6.3</version>
+        <version>4.7.6</version>
     </parent>
     <properties>
         <packaging>jar</packaging>
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
-        <micronaut.version>4.6.3</micronaut.version>
+        <micronaut.version>4.7.6</micronaut.version>
+        <micronaut.runtime>netty</micronaut.runtime>
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>com.ivanfranchin.micronautsimpleapi.aot.generated</micronaut.aot.packageName>
-        <micronaut.runtime>netty</micronaut.runtime>
         <exec.mainClass>com.ivanfranchin.micronautsimpleapi.Application</exec.mainClass>
     </properties>
 
