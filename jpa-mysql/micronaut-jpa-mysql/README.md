@@ -8,7 +8,7 @@
   [`Micronaut`](https://micronaut.io/) Java Web application that exposes a REST API for managing books. [Micronaut Launch](https://micronaut.io/launch?type=DEFAULT&name=micronaut-jpa-mysql&package=com.ivanfranchin.micronautjpamysql&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=jib&features=graalvm&features=http-client&features=micrometer-prometheus&features=validation&features=jackson-databind&features=mysql&features=lombok&features=data-jpa&version=4.7.6)
 
   It has the following endpoints:
-  ```
+  ```text
   GET /api/books
   GET /api/books/{id}
   POST /api/books {"isbn":"...", "title":"..."}
@@ -22,15 +22,15 @@
 
 ### Development Mode
 
-- Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/jpa-mysql/micronaut-jpa-mysql` folder
+- Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/jpa-mysql/micronaut-jpa-mysql` folder
 
 - Run the command below to start the application
-  ```
+  ```bash
   ./mvnw clean mn:run
   ```
 
 - A simple test can be done by opening a new terminal and running
-  ```
+  ```bash
   curl -i -X POST localhost:8080/api/books -H "Content-Type: application/json" \
     -d '{"isbn":"123", "title":"Learn Java"}'
   
@@ -41,20 +41,20 @@
 
 ### Docker in JVM Mode
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/jpa-mysql/micronaut-jpa-mysql` folder
+- In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/jpa-mysql/micronaut-jpa-mysql` folder
 
 - Clean the target folder
-  ```
+  ```bash
   ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
-  ```
+  ```bash
   ./docker-build.sh
   ```
 
 - Run the following command to start the Docker container
-  ```
+  ```bash
   docker run --rm --name micronaut-jpa-mysql-jvm \
     -p 9088:8080 -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
@@ -62,7 +62,7 @@
   ```
 
 - A simple test can be done by opening a new terminal and running
-  ```
+  ```bash
   curl -i -X POST localhost:9088/api/books -H "Content-Type: application/json" \
     -d '{"isbn":"456", "title":"Learn Docker"}'
   
@@ -73,20 +73,20 @@
 
 ### Docker in Native Mode
 
-- In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/jpa-mysql/micronaut-jpa-mysql` folder
+- In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/jpa-mysql/micronaut-jpa-mysql` folder
 
 - Clean the target folder
-  ```
+  ```bash
   ./mvnw clean
   ```
 
 - Run the script below to build the Docker image
-  ```
+  ```bash
   ./docker-build.sh native
   ```
 
 - Run the following command to start the Docker container
-  ```
+  ```bash
   docker run --rm --name micronaut-jpa-mysql-native \
     -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
@@ -94,7 +94,7 @@
   ```
 
 - A simple test can be done by opening a new terminal and running
-  ```
+  ```bash
   curl -i -X POST localhost:9089/api/books -H "Content-Type: application/json" \
     -d '{"isbn":"789", "title":"Learn GraalVM"}'
   

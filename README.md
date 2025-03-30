@@ -32,8 +32,8 @@ On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-C
 
 ## Prerequisites
 
-- [`Java 17+`](https://www.oracle.com/java/technologies/downloads/#java17)
-- [`Docker`](https://www.docker.com/)
+- [`Java 17`](https://www.oracle.com/java/technologies/downloads/#java17) or higher;
+- A containerization tool (e.g., [`Docker`](https://www.docker.com), [`Podman`](https://podman.io), etc.)
 
 ## Docker Images
 
@@ -67,7 +67,7 @@ We've implemented three bash scripts that collect data used in the frameworks co
 
 ## AB Tests
 
-  ```
+  ```text
                        Application | ab Test                                                                                     |
   -------------------------------- + ------------------------------------------------------------------------------------------- |
             quarkus-simple-api-jvm | ab -c 2 -n 6000 'http://localhost:9080/api/greeting?name=Ivan'                              |
@@ -104,7 +104,7 @@ We've implemented three bash scripts that collect data used in the frameworks co
 In order to have a better insight about the Docker container's CPU and Memory Usage, we can use [`cAdvisor`](https://github.com/google/cadvisor).
 
 - In a terminal, run the following command
-  ```
+  ```bash
   docker run -d --rm --name=cadvisor -p 8080:8080 \
     -v /:/rootfs:ro \
     -v /var/run:/var/run:ro \
@@ -122,6 +122,6 @@ In order to have a better insight about the Docker container's CPU and Memory Us
   - http://localhost:8080/docker/container-name to go directly to the info of a specific container.
 
 - To stop it, run
-  ```
+  ```bash
   docker stop cadvisor
   ```

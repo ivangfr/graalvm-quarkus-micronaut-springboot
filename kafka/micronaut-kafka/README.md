@@ -10,7 +10,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
   `Micronaut` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`. [Micronaut Launch](https://micronaut.io/launch?type=DEFAULT&name=micronaut-kafka-producer&package=com.ivanfranchin.kafkaproducer&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=jib&features=graalvm&features=http-client&features=micrometer-prometheus&features=validation&features=jackson-databind&features=kafka&version=4.7.6)
 
   It has the following endpoints:
-  ```
+  ```text
   POST /api/news {"source":"...", "title":"..."}
   GET /health
   GET /metrics
@@ -21,7 +21,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
   `Micronaut` Web Java application that listens to messages (published by the `kafka-producer`) and logs it. [Micronaut Launch](https://micronaut.io/launch?type=DEFAULT&name=micronaut-kafka-consumer&package=com.ivanfranchin.kafkaconsumer&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=jib&features=graalvm&features=http-client&features=micrometer-prometheus&features=jackson-databind&features=kafka&version=4.7.6)
 
   It has the following endpoints:
-  ```
+  ```text
   GET /health
   GET /metrics
   ```
@@ -36,26 +36,26 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   - **kafka-producer**
 
-    - Open a terminal and navigate to `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
+    - Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
 
     - Run the command below
-      ```
+      ```bash
       ./mvnw clean mn:run --projects kafka-producer
       ```
 
   - **kafka-consumer**
 
-    - Open another terminal and navigate to `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
+    - Open another terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
 
     - Run the command below
-      ```
+      ```bash
       export MICRONAUT_SERVER_PORT=8081 && ./mvnw clean mn:run --projects kafka-consumer
       ```
 
 - **Simple Test**
 
   - In a new terminal, post a news
-    ```
+    ```bash
     curl -i -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
       -d '{"source":"Micronaut Blog", "title":"Dev Micronaut Framework"}'
     ```
@@ -72,20 +72,20 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   - **kafka-producer**
 
-    - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
+    - In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
 
     - Clean the target folder
-      ```
+      ```bash
       ./mvnw clean --projects kafka-producer
       ```
 
     - Run the command below to build the Docker image
-      ```
+      ```bash
       cd kafka-producer && ./docker-build.sh && cd ..
       ```
 
     - Run the following command to start the Docker container
-      ```
+      ```bash
       docker run --rm --name micronaut-kafka-producer-jvm \
         -p 9102:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
@@ -94,20 +94,20 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   - **kafka-consumer**
 
-    - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
+    - In another terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
 
     - Clean the target folder
-      ```
+      ```bash
       ./mvnw clean --projects kafka-consumer
       ```
 
     - Run the command below to build the Docker image
-      ```
+      ```bash
       cd kafka-consumer && ./docker-build.sh && cd ..
       ```
 
     - Run the following command to start the Docker container
-      ```
+      ```bash
       docker run --rm --name micronaut-kafka-consumer-jvm \
         -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
@@ -117,7 +117,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 - **Simple Test**
 
   - In a new terminal, post a news
-    ```
+    ```bash
     curl -i -X POST localhost:9102/api/news -H 'Content-Type: application/json' \
       -d '{"source":"Micronaut Blog", "title":"Micronaut Framework"}'
     ```
@@ -134,20 +134,20 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   - **kafka-producer**
 
-    - In a terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
+    - In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
 
     - Clean the target folder
-      ```
+      ```bash
       ./mvnw clean --projects kafka-producer
       ```
 
     - Run the command below to build the Docker image
-      ```
+      ```bash
       cd kafka-producer && ./docker-build.sh native && cd ..
       ```
 
     - Run the following command to start the Docker container
-      ```
+      ```bash
       docker run --rm --name micronaut-kafka-producer-native \
         -p 9103:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
@@ -156,20 +156,20 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
   - **kafka-consumer**
 
-    - In another terminal, make sure you are inside `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
+    - In another terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/micronaut-kafka` folder
 
     - Clean the target folder
-      ```
+      ```bash
       ./mvnw clean --projects kafka-consumer
       ```
 
     - Run the command below to build the Docker image
-      ```
+      ```bash
       cd kafka-consumer && ./docker-build.sh native && cd ..
       ```
 
     - Run the following command to start the Docker container
-      ```
+      ```bash
       docker run --rm --name micronaut-kafka-consumer-native \
         -p 9109:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
@@ -179,7 +179,7 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 - **Simple Test**
 
   - In a new terminal, post a news
-    ```
+    ```bash
     curl -i -X POST localhost:9103/api/news -H 'Content-Type: application/json' \
       -d '{"source":"Micronaut Blog", "title":"Micronaut Framework & GraalVM"}'
     ```
