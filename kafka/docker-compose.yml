@@ -1,42 +1,42 @@
 services:
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.8.0
-    container_name: zookeeper
-    restart: unless-stopped
+    image: 'confluentinc/cp-zookeeper:7.8.0'
+    container_name: 'zookeeper'
+    restart: 'unless-stopped'
     ports:
-      - "2181:2181"
+      - '2181:2181'
     environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
+      - 'ZOOKEEPER_CLIENT_PORT=2181'
     healthcheck:
-      test: "echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT"
+      test: 'echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT'
 
   kafka:
-    image: confluentinc/cp-kafka:7.8.0
-    container_name: kafka
-    restart: unless-stopped
+    image: 'confluentinc/cp-kafka:7.8.0'
+    container_name: 'kafka'
+    restart: 'unless-stopped'
     depends_on:
-      - zookeeper
+      - 'zookeeper'
     ports:
-      - "9092:9092"
-      - "29092:29092"
+      - '9092:9092'
+      - '29092:29092'
     environment:
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      - 'KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181'
+      - 'KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      - 'KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092'
+      - 'KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1'
     healthcheck:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
 
   kafdrop:
-    image: obsidiandynamics/kafdrop:4.0.2
-    container_name: kafdrop
-    restart: unless-stopped
+    image: 'obsidiandynamics/kafdrop:4.0.2'
+    container_name: 'kafdrop'
+    restart: 'unless-stopped'
     depends_on:
-      - kafka
+      - 'kafka'
     ports:
-      - "9001:9000"
+      - '9001:9000'
     environment:
-      KAFKA_BROKERCONNECT: kafka:9092
+      - 'KAFKA_BROKERCONNECT=kafka:9092'
     healthcheck:
-      test: "curl -f http://localhost:9000 || exit 1"
+      test: 'curl -f http://localhost:9000 || exit 1'

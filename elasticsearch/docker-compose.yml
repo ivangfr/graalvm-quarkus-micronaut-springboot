@@ -1,15 +1,15 @@
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.5
-    container_name: elasticsearch
-    restart: unless-stopped
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:8.15.5'
+    container_name: 'elasticsearch'
+    restart: 'unless-stopped'
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - '9200:9200'
+      - '9300:9300'
     environment:
-      discovery.type: single-node
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-      xpack.security.enabled: false
+      - 'discovery.type=single-node'
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+      - 'xpack.security.enabled=false'
     healthcheck:
-      test: "curl -f http://localhost:9200 || exit 1"
+      test: 'curl -f http://localhost:9200 || exit 1'
