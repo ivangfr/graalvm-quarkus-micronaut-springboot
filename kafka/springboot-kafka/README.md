@@ -81,12 +81,12 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-producer && ./docker-build.sh && cd ..
+      cd kafka-producer && ./build-docker-images.sh && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name springboot-kafka-producer-jvm \
+      podman run --rm --name springboot-kafka-producer-jvm \
         -p 9104:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/springboot-kafka-producer-jvm:latest
@@ -103,12 +103,12 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-consumer && ./docker-build.sh && cd ..
+      cd kafka-consumer && ./build-docker-images.sh && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name springboot-kafka-consumer-jvm \
+      podman run --rm --name springboot-kafka-consumer-jvm \
         -p 9110:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/springboot-kafka-consumer-jvm:latest
@@ -143,12 +143,12 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-producer && ./docker-build.sh native && cd ..
+      cd kafka-producer && ./build-docker-images.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name springboot-kafka-producer-native \
+      podman run --rm --name springboot-kafka-producer-native \
         -p 9105:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/springboot-kafka-producer-native:latest
@@ -165,12 +165,12 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-consumer && ./docker-build.sh native && cd ..
+      cd kafka-consumer && ./build-docker-images.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name springboot-kafka-consumer-native \
+      podman run --rm --name springboot-kafka-consumer-native \
         -p 9111:8080 -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/springboot-kafka-consumer-native:latest

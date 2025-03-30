@@ -73,7 +73,7 @@ then
   echo "QUARKUS-SIMPLE-API-JVM"
   echo "----------------------"
 
-  docker run -d --rm --name quarkus-simple-api-jvm \
+  podman run -d --rm --name quarkus-simple-api-jvm \
     -p 9080:8080 \
     -m $CONTAINER_MAX_MEM \
     ivanfranchin/quarkus-simple-api-jvm:$QUARKUS_VERSION
@@ -94,7 +94,7 @@ then
 
   quarkus_simple_api_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-simple-api-jvm")
 
-  run_command "docker stop quarkus-simple-api-jvm"
+  run_command "podman stop quarkus-simple-api-jvm"
   quarkus_simple_api_jvm[shutdown_time]=$run_command_exec_time
 
 fi
@@ -114,7 +114,7 @@ then
   echo "QUARKUS-SIMPLE-API-NATIVE"
   echo "-------------------------"
 
-  docker run -d --rm --name quarkus-simple-api-native \
+  podman run -d --rm --name quarkus-simple-api-native \
     -p 9081:8080 \
     -m $CONTAINER_MAX_MEM \
     ivanfranchin/quarkus-simple-api-native:$QUARKUS_VERSION
@@ -135,7 +135,7 @@ then
 
   quarkus_simple_api_native[final_memory_usage]=$(get_container_memory_usage "quarkus-simple-api-native")
 
-  run_command "docker stop quarkus-simple-api-native"
+  run_command "podman stop quarkus-simple-api-native"
   quarkus_simple_api_native[shutdown_time]=$run_command_exec_time
 
 fi
@@ -155,7 +155,7 @@ then
   echo "MICRONAUT-SIMPLE-API-JVM"
   echo "------------------------"
 
-  docker run -d --rm --name micronaut-simple-api-jvm \
+  podman run -d --rm --name micronaut-simple-api-jvm \
     -p 9082:8080 \
     -m $CONTAINER_MAX_MEM \
     ivanfranchin/micronaut-simple-api-jvm:$MICRONAUT_VERSION
@@ -175,7 +175,7 @@ then
 
   micronaut_simple_api_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-simple-api-jvm")
 
-  run_command "docker stop micronaut-simple-api-jvm"
+  run_command "podman stop micronaut-simple-api-jvm"
   micronaut_simple_api_jvm[shutdown_time]=$run_command_exec_time
 
 fi
@@ -195,7 +195,7 @@ then
   echo "MICRONAUT-SIMPLE-API-NATIVE"
   echo "---------------------------"
 
-  docker run -d --rm --name micronaut-simple-api-native \
+  podman run -d --rm --name micronaut-simple-api-native \
     -p 9083:8080 \
     -m $CONTAINER_MAX_MEM \
     ivanfranchin/micronaut-simple-api-native:$MICRONAUT_VERSION
@@ -215,7 +215,7 @@ then
 
   micronaut_simple_api_native[final_memory_usage]=$(get_container_memory_usage "micronaut-simple-api-native")
 
-  run_command "docker stop micronaut-simple-api-native"
+  run_command "podman stop micronaut-simple-api-native"
   micronaut_simple_api_native[shutdown_time]=$run_command_exec_time
 
 fi
@@ -235,7 +235,7 @@ then
   echo "SPRINGBOOT-SIMPLE-API-JVM"
   echo "-------------------------"
 
-  docker run -d --rm --name springboot-simple-api-jvm \
+  podman run -d --rm --name springboot-simple-api-jvm \
     -p 9084:8080 \
     -m $CONTAINER_MAX_MEM \
     ivanfranchin/springboot-simple-api-jvm:$SPRING_BOOT_VERSION
@@ -256,7 +256,7 @@ then
 
   springboot_simple_api_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-simple-api-jvm")
 
-  run_command "docker stop springboot-simple-api-jvm"
+  run_command "podman stop springboot-simple-api-jvm"
   springboot_simple_api_jvm[shutdown_time]=$run_command_exec_time
 
 fi
@@ -276,7 +276,7 @@ then
   echo "SPRINGBOOT-SIMPLE-API-NATIVE"
   echo "----------------------------"
 
-  docker run -d --rm --name springboot-simple-api-native \
+  podman run -d --rm --name springboot-simple-api-native \
     -p 9085:8080 \
     -m $CONTAINER_MAX_MEM \
     ivanfranchin/springboot-simple-api-native:$SPRING_BOOT_VERSION
@@ -297,7 +297,7 @@ then
 
   springboot_simple_api_native[final_memory_usage]=$(get_container_memory_usage "springboot-simple-api-native")
 
-  run_command "docker stop springboot-simple-api-native"
+  run_command "podman stop springboot-simple-api-native"
   springboot_simple_api_native[shutdown_time]=$run_command_exec_time
 
 fi
@@ -319,10 +319,10 @@ then
 
   echo
   echo "=============="
-  echo "DOCKER COMPOSE"
+  echo "PODMAN COMPOSE"
   echo "=============="
 
-  docker compose up -d
+  podman compose up -d
   wait_for_container_log "mysql" "port: 3306"
 
   if [ "$1" = "quarkus-jpa-mysql-jvm" ] ||
@@ -340,7 +340,7 @@ then
     echo "QUARKUS-JPA-MYSQL-JVM"
     echo "---------------------"
 
-    docker run -d --rm --name quarkus-jpa-mysql-jvm \
+    podman run -d --rm --name quarkus-jpa-mysql-jvm \
       -p 9086:8080 \
       -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
@@ -363,7 +363,7 @@ then
 
     quarkus_jpa_mysql_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-jpa-mysql-jvm")
 
-    run_command "docker stop quarkus-jpa-mysql-jvm"
+    run_command "podman stop quarkus-jpa-mysql-jvm"
     quarkus_jpa_mysql_jvm[shutdown_time]=$run_command_exec_time
 
   fi
@@ -383,7 +383,7 @@ then
     echo "QUARKUS-JPA-MYSQL-NATIVE"
     echo "------------------------"
 
-    docker run -d --rm --name quarkus-jpa-mysql-native \
+    podman run -d --rm --name quarkus-jpa-mysql-native \
       -p 9087:8080 \
       -e QUARKUS_PROFILE=native -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
@@ -406,7 +406,7 @@ then
 
     quarkus_jpa_mysql_native[final_memory_usage]=$(get_container_memory_usage "quarkus-jpa-mysql-native")
 
-    run_command "docker stop quarkus-jpa-mysql-native"
+    run_command "podman stop quarkus-jpa-mysql-native"
     quarkus_jpa_mysql_native[shutdown_time]=$run_command_exec_time
 
   fi
@@ -426,7 +426,7 @@ then
     echo "MICRONAUT-JPA-MYSQL-JVM"
     echo "-----------------------"
 
-    docker run -d --rm --name micronaut-jpa-mysql-jvm \
+    podman run -d --rm --name micronaut-jpa-mysql-jvm \
       -p 9088:8080 \
       -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
@@ -448,7 +448,7 @@ then
 
     micronaut_jpa_mysql_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-jvm")
 
-    run_command "docker stop micronaut-jpa-mysql-jvm"
+    run_command "podman stop micronaut-jpa-mysql-jvm"
     micronaut_jpa_mysql_jvm[shutdown_time]=$run_command_exec_time
 
   fi
@@ -468,7 +468,7 @@ then
     echo "MICRONAUT-JPA-MYSQL-NATIVE"
     echo "--------------------------"
 
-    docker run -d --rm --name micronaut-jpa-mysql-native \
+    podman run -d --rm --name micronaut-jpa-mysql-native \
       -p 9089:8080 \
       -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
@@ -490,7 +490,7 @@ then
 
     micronaut_jpa_mysql_native[final_memory_usage]=$(get_container_memory_usage "micronaut-jpa-mysql-native")
 
-    run_command "docker stop micronaut-jpa-mysql-native"
+    run_command "podman stop micronaut-jpa-mysql-native"
     micronaut_jpa_mysql_native[shutdown_time]=$run_command_exec_time
 
   fi
@@ -510,7 +510,7 @@ then
     echo "SPRINGBOOT-JPA-MYSQL-JVM"
     echo "------------------------"
 
-    docker run -d --rm --name springboot-jpa-mysql-jvm \
+    podman run -d --rm --name springboot-jpa-mysql-jvm \
       -p 9090:8080 \
       -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
@@ -533,7 +533,7 @@ then
 
     springboot_jpa_mysql_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-jpa-mysql-jvm")
 
-    run_command "docker stop springboot-jpa-mysql-jvm"
+    run_command "podman stop springboot-jpa-mysql-jvm"
     springboot_jpa_mysql_jvm[shutdown_time]=$run_command_exec_time
 
   fi
@@ -553,7 +553,7 @@ then
     echo "SPRINGBOOT-JPA-MYSQL-NATIVE"
     echo "---------------------------"
 
-    docker run -d --rm --name springboot-jpa-mysql-native \
+    podman run -d --rm --name springboot-jpa-mysql-native \
       -p 9091:8080 \
       -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
       -m $CONTAINER_MAX_MEM \
@@ -576,17 +576,17 @@ then
 
     springboot_jpa_mysql_native[final_memory_usage]=$(get_container_memory_usage "springboot-jpa-mysql-native")
 
-    run_command "docker stop springboot-jpa-mysql-native"
+    run_command "podman stop springboot-jpa-mysql-native"
     springboot_jpa_mysql_native[shutdown_time]=$run_command_exec_time
 
   fi
 
   echo
   echo "=============="
-  echo "DOCKER COMPOSE"
+  echo "PODMAN COMPOSE"
   echo "=============="
 
-  docker compose down -v
+  podman compose down -v
 
   cd ..
 
@@ -609,10 +609,10 @@ then
 
   echo
   echo "=============="
-  echo "DOCKER COMPOSE"
+  echo "PODMAN COMPOSE"
   echo "=============="
 
-  docker compose up -d zookeeper kafka
+  podman compose up -d zookeeper kafka
   wait_for_container_status_healthy "9092"
 
   if [ "$1" = "quarkus-kafka-jvm" ] ||
@@ -630,7 +630,7 @@ then
     echo "QUARKUS-KAFKA / KAFKA-PRODUCER-JVM"
     echo "----------------------------------"
 
-    docker run -d --rm --name quarkus-kafka-producer-jvm \
+    podman run -d --rm --name quarkus-kafka-producer-jvm \
       -p 9100:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -658,7 +658,7 @@ then
     echo "QUARKUS-KAFKA / KAFKA-CONSUMER-JVM"
     echo "----------------------------------"
 
-    docker run -d --rm --name quarkus-kafka-consumer-jvm \
+    podman run -d --rm --name quarkus-kafka-consumer-jvm \
       -p 9106:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -676,12 +676,12 @@ then
 
     quarkus_kafka_consumer_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-kafka-consumer-jvm")
 
-    echo "== Stopping producer-consuner docker containers"
+    echo "== Stopping producer-consuner containers"
 
-    run_command "docker stop quarkus-kafka-producer-jvm"
+    run_command "podman stop quarkus-kafka-producer-jvm"
     quarkus_kafka_producer_jvm[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop quarkus-kafka-consumer-jvm"
+    run_command "podman stop quarkus-kafka-consumer-jvm"
     quarkus_kafka_consumer_jvm[shutdown_time]=$run_command_exec_time
 
   fi
@@ -701,7 +701,7 @@ then
     echo "QUARKUS-KAFKA / KAFKA-PRODUCER-NATIVE"
     echo "-------------------------------------"
 
-    docker run -d --rm --name quarkus-kafka-producer-native \
+    podman run -d --rm --name quarkus-kafka-producer-native \
       -p 9101:8080 \
       -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -729,7 +729,7 @@ then
     echo "QUARKUS-KAFKA / KAFKA-CONSUMER-NATIVE"
     echo "-------------------------------------"
 
-    docker run -d --rm --name quarkus-kafka-consumer-native \
+    podman run -d --rm --name quarkus-kafka-consumer-native \
       -p 9107:8080 \
       -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -747,12 +747,12 @@ then
 
     quarkus_kafka_consumer_native[final_memory_usage]=$(get_container_memory_usage "quarkus-kafka-consumer-native")
 
-    echo "== Stopping producer-consuner docker containers"
+    echo "== Stopping producer-consuner containers"
 
-    run_command "docker stop quarkus-kafka-producer-native"
+    run_command "podman stop quarkus-kafka-producer-native"
     quarkus_kafka_producer_native[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop quarkus-kafka-consumer-native"
+    run_command "podman stop quarkus-kafka-consumer-native"
     quarkus_kafka_consumer_native[shutdown_time]=$run_command_exec_time
 
   fi
@@ -772,7 +772,7 @@ then
     echo "MICRONAUT-KAFKA / KAFKA-PRODUCER-JVM"
     echo "------------------------------------"
 
-    docker run -d --rm --name micronaut-kafka-producer-jvm \
+    podman run -d --rm --name micronaut-kafka-producer-jvm \
       -p 9102:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -799,7 +799,7 @@ then
     echo "MICRONAUT-KAFKA / KAFKA-CONSUMER-JVM"
     echo "------------------------------------"
 
-    docker run -d --rm --name micronaut-kafka-consumer-jvm \
+    podman run -d --rm --name micronaut-kafka-consumer-jvm \
       -p 9108:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -816,12 +816,12 @@ then
 
     micronaut_kafka_consumer_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-kafka-consumer-jvm")
 
-    echo "== Stopping producer-consuner docker containers"
+    echo "== Stopping producer-consuner containers"
 
-    run_command "docker stop micronaut-kafka-producer-jvm"
+    run_command "podman stop micronaut-kafka-producer-jvm"
     micronaut_kafka_producer_jvm[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop micronaut-kafka-consumer-jvm"
+    run_command "podman stop micronaut-kafka-consumer-jvm"
     micronaut_kafka_consumer_jvm[shutdown_time]=$run_command_exec_time
 
   fi
@@ -841,7 +841,7 @@ then
     echo "MICRONAUT-KAFKA / KAFKA-PRODUCER-NATIVE"
     echo "---------------------------------------"
 
-    docker run -d --rm --name micronaut-kafka-producer-native \
+    podman run -d --rm --name micronaut-kafka-producer-native \
       -p 9103:8080 \
       -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -868,7 +868,7 @@ then
     echo "MICRONAUT-KAFKA / KAFKA-CONSUMER-NATIVE"
     echo "---------------------------------------"
 
-    docker run -d --rm --name micronaut-kafka-consumer-native \
+    podman run -d --rm --name micronaut-kafka-consumer-native \
       -p 9109:8080 \
       -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -885,12 +885,12 @@ then
 
     micronaut_kafka_consumer_native[final_memory_usage]=$(get_container_memory_usage "micronaut-kafka-consumer-native")
 
-    echo "== Stopping producer-consuner docker containers"
+    echo "== Stopping producer-consuner containers"
 
-    run_command "docker stop micronaut-kafka-producer-native"
+    run_command "podman stop micronaut-kafka-producer-native"
     micronaut_kafka_producer_native[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop micronaut-kafka-consumer-native"
+    run_command "podman stop micronaut-kafka-consumer-native"
     micronaut_kafka_consumer_native[shutdown_time]=$run_command_exec_time
 
   fi
@@ -910,7 +910,7 @@ then
     echo "SPRINGBOOT-KAFKA / KAFKA-PRODUCER-JVM"
     echo "-------------------------------------"
 
-    docker run -d --rm --name springboot-kafka-producer-jvm \
+    podman run -d --rm --name springboot-kafka-producer-jvm \
       -p 9104:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -938,7 +938,7 @@ then
     echo "SPRINGBOOT-KAFKA / KAFKA-CONSUMER-JVM"
     echo "-------------------------------------"
 
-    docker run -d --rm --name springboot-kafka-consumer-jvm \
+    podman run -d --rm --name springboot-kafka-consumer-jvm \
       -p 9110:8080 \
       -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -956,12 +956,12 @@ then
 
     springboot_kafka_consumer_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-kafka-consumer-jvm")
 
-    echo "== Stopping producer-consuner docker containers"
+    echo "== Stopping producer-consuner containers"
 
-    run_command "docker stop springboot-kafka-producer-jvm"
+    run_command "podman stop springboot-kafka-producer-jvm"
     springboot_kafka_producer_jvm[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop springboot-kafka-consumer-jvm"
+    run_command "podman stop springboot-kafka-consumer-jvm"
     springboot_kafka_consumer_jvm[shutdown_time]=$run_command_exec_time
 
   fi
@@ -981,7 +981,7 @@ then
     echo "SPRINGBOOT-KAFKA / KAFKA-PRODUCER-NATIVE"
     echo "----------------------------------------"
 
-    docker run -d --rm --name springboot-kafka-producer-native \
+    podman run -d --rm --name springboot-kafka-producer-native \
       -p 9105:8080 \
       -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -1009,7 +1009,7 @@ then
     echo "SPRINGBOOT-KAFKA / KAFKA-CONSUMER-NATIVE"
     echo "----------------------------------------"
 
-    docker run -d --rm --name springboot-kafka-consumer-native \
+    podman run -d --rm --name springboot-kafka-consumer-native \
       -p 9111:8080 \
       -e SPRING_PROFILES_ACTIVE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
       -m $CONTAINER_MAX_MEM \
@@ -1027,22 +1027,22 @@ then
 
     springboot_kafka_consumer_native[final_memory_usage]=$(get_container_memory_usage "springboot-kafka-consumer-native")
 
-    echo "== Stopping producer-consuner docker containers"
+    echo "== Stopping producer-consuner containers"
 
-    run_command "docker stop springboot-kafka-producer-native"
+    run_command "podman stop springboot-kafka-producer-native"
     springboot_kafka_producer_native[shutdown_time]=$run_command_exec_time
 
-    run_command "docker stop springboot-kafka-consumer-native"
+    run_command "podman stop springboot-kafka-consumer-native"
     springboot_kafka_consumer_native[shutdown_time]=$run_command_exec_time
 
   fi
 
   echo
   echo "=============="
-  echo "DOCKER COMPOSE"
+  echo "PODMAN COMPOSE"
   echo "=============="
 
-  docker compose down -v
+  podman compose down -v
 
   cd ..
 
@@ -1065,10 +1065,10 @@ then
 
   echo
   echo "=============="
-  echo "DOCKER COMPOSE"
+  echo "PODMAN COMPOSE"
   echo "=============="
 
-  docker compose up -d
+  podman compose up -d
   wait_for_container_status_healthy "9200"
 
   ./init-es-indexes.sh
@@ -1089,7 +1089,7 @@ then
     echo "QUARKUS-ELASTICSEARCH-JVM"
     echo "-------------------------"
 
-    docker run -d --rm --name quarkus-elasticsearch-jvm \
+    podman run -d --rm --name quarkus-elasticsearch-jvm \
       -p 9112:8080 \
       -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
@@ -1112,7 +1112,7 @@ then
 
     quarkus_elasticsearch_jvm[final_memory_usage]=$(get_container_memory_usage "quarkus-elasticsearch-jvm")
 
-    run_command "docker stop quarkus-elasticsearch-jvm"
+    run_command "podman stop quarkus-elasticsearch-jvm"
     quarkus_elasticsearch_jvm[shutdown_time]=$run_command_exec_time
 
   fi
@@ -1132,7 +1132,7 @@ then
     echo "QUARKUS-ELASTICSEARCH-NATIVE"
     echo "----------------------------"
 
-    docker run -d --rm --name quarkus-elasticsearch-native \
+    podman run -d --rm --name quarkus-elasticsearch-native \
       -p 9113:8080 \
       -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
@@ -1155,7 +1155,7 @@ then
 
     quarkus_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "quarkus-elasticsearch-native")
 
-    run_command "docker stop quarkus-elasticsearch-native"
+    run_command "podman stop quarkus-elasticsearch-native"
     quarkus_elasticsearch_native[shutdown_time]=$run_command_exec_time
 
   fi
@@ -1175,7 +1175,7 @@ then
     echo "MICRONAUT-ELASTICSEARCH-JVM"
     echo "---------------------------"
 
-    docker run -d --rm --name micronaut-elasticsearch-jvm \
+    podman run -d --rm --name micronaut-elasticsearch-jvm \
       -p 9114:8080 \
       -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
@@ -1197,7 +1197,7 @@ then
 
     micronaut_elasticsearch_jvm[final_memory_usage]=$(get_container_memory_usage "micronaut-elasticsearch-jvm")
 
-    run_command "docker stop micronaut-elasticsearch-jvm"
+    run_command "podman stop micronaut-elasticsearch-jvm"
     micronaut_elasticsearch_jvm[shutdown_time]=$run_command_exec_time
 
   fi
@@ -1217,7 +1217,7 @@ then
     echo "MICRONAUT-ELASTICSEARCH-NATIVE"
     echo "------------------------------"
 
-    docker run -d --rm --name micronaut-elasticsearch-native \
+    podman run -d --rm --name micronaut-elasticsearch-native \
       -p 9115:8080 \
       -e MICRONAUT_ENVIRONMENTS=native -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
@@ -1239,7 +1239,7 @@ then
 
     micronaut_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "micronaut-elasticsearch-native")
 
-    run_command "docker stop micronaut-elasticsearch-native"
+    run_command "podman stop micronaut-elasticsearch-native"
     micronaut_elasticsearch_native[shutdown_time]=$run_command_exec_time
 
   fi
@@ -1259,7 +1259,7 @@ then
     echo "SPRINGBOOT-ELASTICSEARCH-JVM"
     echo "----------------------------"
 
-    docker run -d --rm --name springboot-elasticsearch-jvm \
+    podman run -d --rm --name springboot-elasticsearch-jvm \
       -p 9116:8080 \
       -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
@@ -1282,7 +1282,7 @@ then
 
     springboot_elasticsearch_jvm[final_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-jvm")
 
-    run_command "docker stop springboot-elasticsearch-jvm"
+    run_command "podman stop springboot-elasticsearch-jvm"
     springboot_elasticsearch_jvm[shutdown_time]=$run_command_exec_time
 
   fi
@@ -1302,7 +1302,7 @@ then
     echo "SPRINGBOOT-ELASTICSEARCH-NATIVE"
     echo "-------------------------------"
 
-    docker run -d --rm --name springboot-elasticsearch-native \
+    podman run -d --rm --name springboot-elasticsearch-native \
       -p 9117:8080 \
       -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
       -m $CONTAINER_MAX_MEM \
@@ -1325,17 +1325,17 @@ then
 
     springboot_elasticsearch_native[final_memory_usage]=$(get_container_memory_usage "springboot-elasticsearch-native")
 
-    run_command "docker stop springboot-elasticsearch-native"
+    run_command "podman stop springboot-elasticsearch-native"
     springboot_elasticsearch_native[shutdown_time]=$run_command_exec_time
 
   fi
 
   echo
   echo "=============="
-  echo "DOCKER COMPOSE"
+  echo "PODMAN COMPOSE"
   echo "=============="
 
-  docker compose down -v
+  podman compose down -v
 
   cd ..
 

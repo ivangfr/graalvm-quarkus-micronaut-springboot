@@ -50,12 +50,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh
+  ./build-docker-images.sh
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name micronaut-jpa-mysql-jvm \
+  podman run --rm --name micronaut-jpa-mysql-jvm \
     -p 9088:8080 -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
     ivanfranchin/micronaut-jpa-mysql-jvm:latest
@@ -69,7 +69,7 @@
   curl -i localhost:9088/api/books
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal
 
 ### Docker in Native Mode
 
@@ -82,12 +82,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh native
+  ./build-docker-images.sh native
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name micronaut-jpa-mysql-native \
+  podman run --rm --name micronaut-jpa-mysql-native \
     -p 9089:8080 -e MICRONAUT_ENVIRONMENTS=native -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
     ivanfranchin/micronaut-jpa-mysql-native:latest
@@ -101,4 +101,4 @@
   curl -i localhost:9089/api/books
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal

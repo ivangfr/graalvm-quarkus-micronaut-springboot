@@ -43,12 +43,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh
+  ./build-docker-images.sh
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name quarkus-simple-api-jvm -p 9080:8080 \
+  podman run --rm --name quarkus-simple-api-jvm -p 9080:8080 \
     ivanfranchin/quarkus-simple-api-jvm:latest
   ```
 
@@ -57,7 +57,7 @@
   curl -i "localhost:9080/api/greeting?name=Ivan"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal
 
 ### Docker in Native Mode
 
@@ -70,12 +70,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh native
+  ./build-docker-images.sh native
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name quarkus-simple-api-native -p 9081:8080 \
+  podman run --rm --name quarkus-simple-api-native -p 9081:8080 \
     ivanfranchin/quarkus-simple-api-native:latest
   ```
 
@@ -84,4 +84,4 @@
   curl -i "localhost:9081/api/greeting?name=Ivan"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal

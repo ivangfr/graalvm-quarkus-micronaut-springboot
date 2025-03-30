@@ -2,7 +2,7 @@
 
 source my-functions.sh
 
-check_docker_manager_script_input_parameter $1
+check_script_input_parameter $1
 
 declare -A quarkus_simple_api_jvm
 declare -A micronaut_simple_api_jvm
@@ -42,7 +42,7 @@ then
     "./mvnw clean" \
     "./mvnw package" \
     "target/quarkus-app" \
-    "./docker-build.sh" \
+    "./build-docker-images.sh" \
     "ivanfranchin/quarkus-simple-api-jvm:latest"
   quarkus_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -70,7 +70,7 @@ then
     "./mvnw clean" \
     "./mvnw package" \
     "target/micronaut-simple-api-1.0.0.jar" \
-    "./docker-build.sh" \
+    "./build-docker-images.sh" \
     "ivanfranchin/micronaut-simple-api-jvm:latest"
   micronaut_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -98,7 +98,7 @@ then
     "./mvnw clean" \
     "./mvnw package" \
     "target/springboot-simple-api-1.0.0.jar" \
-    "./docker-build.sh" \
+    "./build-docker-images.sh" \
     "ivanfranchin/springboot-simple-api-jvm:latest"
   springboot_simple_api_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_simple_api_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -126,7 +126,7 @@ then
     "./mvnw clean" \
     "./mvnw package" \
     "target/quarkus-app" \
-    "./docker-build.sh" \
+    "./build-docker-images.sh" \
     "ivanfranchin/quarkus-jpa-mysql-jvm:latest"
   quarkus_jpa_mysql_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_jpa_mysql_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -154,7 +154,7 @@ then
     "./mvnw clean" \
     "./mvnw package" \
     "target/micronaut-jpa-mysql-1.0.0.jar" \
-    "./docker-build.sh" \
+    "./build-docker-images.sh" \
     "ivanfranchin/micronaut-jpa-mysql-jvm:latest"
   micronaut_jpa_mysql_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_jpa_mysql_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -182,7 +182,7 @@ then
     "./mvnw clean" \
     "./mvnw package" \
     "target/springboot-jpa-mysql-1.0.0.jar" \
-    "./docker-build.sh" \
+    "./build-docker-images.sh" \
     "ivanfranchin/springboot-jpa-mysql-jvm:latest"
   springboot_jpa_mysql_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_jpa_mysql_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -211,7 +211,7 @@ then
     "./mvnw clean --projects kafka-producer" \
     "./mvnw package --projects kafka-producer" \
     "kafka-producer/target/quarkus-app" \
-    "cd kafka-producer && ./docker-build.sh && cd .." \
+    "cd kafka-producer && ./build-docker-images.sh && cd .." \
     "ivanfranchin/quarkus-kafka-producer-jvm:latest"
   quarkus_kafka_producer_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_kafka_producer_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -240,7 +240,7 @@ then
     "./mvnw clean --projects kafka-consumer" \
     "./mvnw package --projects kafka-consumer" \
     "kafka-consumer/target/quarkus-app" \
-    "cd kafka-consumer && ./docker-build.sh && cd .." \
+    "cd kafka-consumer && ./build-docker-images.sh && cd .." \
     "ivanfranchin/quarkus-kafka-consumer-jvm:latest"
   quarkus_kafka_consumer_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_kafka_consumer_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -269,7 +269,7 @@ then
     "./mvnw clean --projects kafka-producer" \
     "./mvnw package --projects kafka-producer" \
     "kafka-producer/target/kafka-producer-1.0.0.jar" \
-    "cd kafka-producer && ./docker-build.sh && cd .." \
+    "cd kafka-producer && ./build-docker-images.sh && cd .." \
     "ivanfranchin/micronaut-kafka-producer-jvm:latest"
   micronaut_kafka_producer_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_kafka_producer_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -298,7 +298,7 @@ then
     "./mvnw clean --projects kafka-consumer" \
     "./mvnw package --projects kafka-consumer" \
     "kafka-consumer/target/kafka-consumer-1.0.0.jar" \
-    "cd kafka-consumer && ./docker-build.sh && cd .." \
+    "cd kafka-consumer && ./build-docker-images.sh && cd .." \
     "ivanfranchin/micronaut-kafka-consumer-jvm:latest"
   micronaut_kafka_consumer_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_kafka_consumer_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -327,7 +327,7 @@ then
     "./mvnw clean --projects kafka-producer" \
     "./mvnw package --projects kafka-producer" \
     "kafka-producer/target/kafka-producer-1.0.0.jar" \
-    "cd kafka-producer && ./docker-build.sh && cd .." \
+    "cd kafka-producer && ./build-docker-images.sh && cd .." \
     "ivanfranchin/springboot-kafka-producer-jvm:latest"
   springboot_kafka_producer_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_kafka_producer_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -356,7 +356,7 @@ then
     "./mvnw clean --projects kafka-consumer" \
     "./mvnw package --projects kafka-consumer" \
     "kafka-consumer/target/kafka-consumer-1.0.0.jar" \
-    "cd kafka-consumer && ./docker-build.sh && cd .." \
+    "cd kafka-consumer && ./build-docker-images.sh && cd .." \
     "ivanfranchin/springboot-kafka-consumer-jvm:latest"
   springboot_kafka_consumer_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_kafka_consumer_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -384,7 +384,7 @@ then
     "./mvnw clean" \
     "./mvnw package" \
     "target/quarkus-app" \
-    "./docker-build.sh" \
+    "./build-docker-images.sh" \
     "ivanfranchin/quarkus-elasticsearch-jvm:latest"
   quarkus_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
   quarkus_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -412,7 +412,7 @@ then
     "./mvnw clean" \
     "./mvnw package" \
     "target/micronaut-elasticsearch-1.0.0.jar" \
-    "./docker-build.sh" \
+    "./build-docker-images.sh" \
     "ivanfranchin/micronaut-elasticsearch-jvm:latest"
   micronaut_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
   micronaut_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -440,7 +440,7 @@ then
     "./mvnw clean" \
     "./mvnw package" \
     "target/springboot-elasticsearch-1.0.0.jar" \
-    "./docker-build.sh" \
+    "./build-docker-images.sh" \
     "ivanfranchin/springboot-elasticsearch-jvm:latest"
   springboot_elasticsearch_jvm[packaging_time]=$package_jar_build_image_packaging_time
   springboot_elasticsearch_jvm[jar_size]=$package_jar_build_image_jar_size
@@ -452,27 +452,27 @@ then
 fi
 
 printf "\n"
-printf "%30s | %14s | %14s | %17s | %17s |\n" "Application" "Packaging Time" "Packaging Size" "Docker Build Time" "Docker Image Size"
-printf "%30s + %14s + %14s + %17s + %17s |\n" "------------------------------" "--------------" "--------------" "-----------------" "-----------------"
-printf "%30s | %14s | %14s | %17s | %17s |\n" "quarkus-simple-api-jvm" ${quarkus_simple_api_jvm[packaging_time]} ${quarkus_simple_api_jvm[jar_size]} ${quarkus_simple_api_jvm[building_time]} ${quarkus_simple_api_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "micronaut-simple-api-jvm" ${micronaut_simple_api_jvm[packaging_time]} ${micronaut_simple_api_jvm[jar_size]} ${micronaut_simple_api_jvm[building_time]} ${micronaut_simple_api_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "springboot-simple-api-jvm" ${springboot_simple_api_jvm[packaging_time]} ${springboot_simple_api_jvm[jar_size]} ${springboot_simple_api_jvm[building_time]} ${springboot_simple_api_jvm[docker_image_size]}
-printf "%30s + %14s + %14s + %17s + %17s |\n" ".............................." ".............." ".............." "................." "................."
-printf "%30s | %14s | %14s | %17s | %17s |\n" "quarkus-jpa-mysql-jvm" ${quarkus_jpa_mysql_jvm[packaging_time]} ${quarkus_jpa_mysql_jvm[jar_size]} ${quarkus_jpa_mysql_jvm[building_time]} ${quarkus_jpa_mysql_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "micronaut-jpa-mysql-jvm" ${micronaut_jpa_mysql_jvm[packaging_time]} ${micronaut_jpa_mysql_jvm[jar_size]} ${micronaut_jpa_mysql_jvm[building_time]} ${micronaut_jpa_mysql_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "springboot-jpa-mysql-jvm" ${springboot_jpa_mysql_jvm[packaging_time]} ${springboot_jpa_mysql_jvm[jar_size]} ${springboot_jpa_mysql_jvm[building_time]} ${springboot_jpa_mysql_jvm[docker_image_size]}
-printf "%30s + %14s + %14s + %17s + %17s |\n" ".............................." ".............." ".............." "................." "................."
-printf "%30s | %14s | %14s | %17s | %17s |\n" "quarkus-kafka-producer-jvm" ${quarkus_kafka_producer_jvm[packaging_time]} ${quarkus_kafka_producer_jvm[jar_size]} ${quarkus_kafka_producer_jvm[building_time]} ${quarkus_kafka_producer_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "micronaut-kafka-producer-jvm" ${micronaut_kafka_producer_jvm[packaging_time]} ${micronaut_kafka_producer_jvm[jar_size]} ${micronaut_kafka_producer_jvm[building_time]} ${micronaut_kafka_producer_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "springboot-kafka-producer-jvm" ${springboot_kafka_producer_jvm[packaging_time]} ${springboot_kafka_producer_jvm[jar_size]} ${springboot_kafka_producer_jvm[building_time]} ${springboot_kafka_producer_jvm[docker_image_size]}
-printf "%30s + %14s + %14s + %17s + %17s |\n" ".............................." ".............." ".............." "................." "................."
-printf "%30s | %14s | %14s | %17s | %17s |\n" "quarkus-kafka-consumer-jvm" ${quarkus_kafka_consumer_jvm[packaging_time]} ${quarkus_kafka_consumer_jvm[jar_size]} ${quarkus_kafka_consumer_jvm[building_time]} ${quarkus_kafka_consumer_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "micronaut-kafka-consumer-jvm" ${micronaut_kafka_consumer_jvm[packaging_time]} ${micronaut_kafka_consumer_jvm[jar_size]} ${micronaut_kafka_consumer_jvm[building_time]} ${micronaut_kafka_consumer_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "springboot-kafka-consumer-jvm" ${springboot_kafka_consumer_jvm[packaging_time]} ${springboot_kafka_consumer_jvm[jar_size]} ${springboot_kafka_consumer_jvm[building_time]} ${springboot_kafka_consumer_jvm[docker_image_size]}
-printf "%30s + %14s + %14s + %17s + %17s |\n" ".............................." ".............." ".............." "................." "................."
-printf "%30s | %14s | %14s | %17s | %17s |\n" "quarkus-elasticsearch-jvm" ${quarkus_elasticsearch_jvm[packaging_time]} ${quarkus_elasticsearch_jvm[jar_size]} ${quarkus_elasticsearch_jvm[building_time]} ${quarkus_elasticsearch_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "micronaut-elasticsearch-jvm" ${micronaut_elasticsearch_jvm[packaging_time]} ${micronaut_elasticsearch_jvm[jar_size]} ${micronaut_elasticsearch_jvm[building_time]} ${micronaut_elasticsearch_jvm[docker_image_size]}
-printf "%30s | %14s | %14s | %17s | %17s |\n" "springboot-elasticsearch-jvm" ${springboot_elasticsearch_jvm[packaging_time]} ${springboot_elasticsearch_jvm[jar_size]} ${springboot_elasticsearch_jvm[building_time]} ${springboot_elasticsearch_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "Application" "Packaging Time" "Packaging Size" "Image Build Time" "Image Size"
+printf "%30s + %14s + %14s + %16s + %10s |\n" "------------------------------" "--------------" "--------------" "----------------" "----------"
+printf "%30s | %14s | %14s | %16s | %10s |\n" "quarkus-simple-api-jvm" ${quarkus_simple_api_jvm[packaging_time]} ${quarkus_simple_api_jvm[jar_size]} ${quarkus_simple_api_jvm[building_time]} ${quarkus_simple_api_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "micronaut-simple-api-jvm" ${micronaut_simple_api_jvm[packaging_time]} ${micronaut_simple_api_jvm[jar_size]} ${micronaut_simple_api_jvm[building_time]} ${micronaut_simple_api_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "springboot-simple-api-jvm" ${springboot_simple_api_jvm[packaging_time]} ${springboot_simple_api_jvm[jar_size]} ${springboot_simple_api_jvm[building_time]} ${springboot_simple_api_jvm[docker_image_size]}
+printf "%30s + %14s + %14s + %16s + %10s |\n" ".............................." ".............." ".............." "................" ".........."
+printf "%30s | %14s | %14s | %16s | %10s |\n" "quarkus-jpa-mysql-jvm" ${quarkus_jpa_mysql_jvm[packaging_time]} ${quarkus_jpa_mysql_jvm[jar_size]} ${quarkus_jpa_mysql_jvm[building_time]} ${quarkus_jpa_mysql_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "micronaut-jpa-mysql-jvm" ${micronaut_jpa_mysql_jvm[packaging_time]} ${micronaut_jpa_mysql_jvm[jar_size]} ${micronaut_jpa_mysql_jvm[building_time]} ${micronaut_jpa_mysql_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "springboot-jpa-mysql-jvm" ${springboot_jpa_mysql_jvm[packaging_time]} ${springboot_jpa_mysql_jvm[jar_size]} ${springboot_jpa_mysql_jvm[building_time]} ${springboot_jpa_mysql_jvm[docker_image_size]}
+printf "%30s + %14s + %14s + %16s + %10s |\n" ".............................." ".............." ".............." "................" ".........."
+printf "%30s | %14s | %14s | %16s | %10s |\n" "quarkus-kafka-producer-jvm" ${quarkus_kafka_producer_jvm[packaging_time]} ${quarkus_kafka_producer_jvm[jar_size]} ${quarkus_kafka_producer_jvm[building_time]} ${quarkus_kafka_producer_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "micronaut-kafka-producer-jvm" ${micronaut_kafka_producer_jvm[packaging_time]} ${micronaut_kafka_producer_jvm[jar_size]} ${micronaut_kafka_producer_jvm[building_time]} ${micronaut_kafka_producer_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "springboot-kafka-producer-jvm" ${springboot_kafka_producer_jvm[packaging_time]} ${springboot_kafka_producer_jvm[jar_size]} ${springboot_kafka_producer_jvm[building_time]} ${springboot_kafka_producer_jvm[docker_image_size]}
+printf "%30s + %14s + %14s + %16s + %10s |\n" ".............................." ".............." ".............." "................" ".........."
+printf "%30s | %14s | %14s | %16s | %10s |\n" "quarkus-kafka-consumer-jvm" ${quarkus_kafka_consumer_jvm[packaging_time]} ${quarkus_kafka_consumer_jvm[jar_size]} ${quarkus_kafka_consumer_jvm[building_time]} ${quarkus_kafka_consumer_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "micronaut-kafka-consumer-jvm" ${micronaut_kafka_consumer_jvm[packaging_time]} ${micronaut_kafka_consumer_jvm[jar_size]} ${micronaut_kafka_consumer_jvm[building_time]} ${micronaut_kafka_consumer_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "springboot-kafka-consumer-jvm" ${springboot_kafka_consumer_jvm[packaging_time]} ${springboot_kafka_consumer_jvm[jar_size]} ${springboot_kafka_consumer_jvm[building_time]} ${springboot_kafka_consumer_jvm[docker_image_size]}
+printf "%30s + %14s + %14s + %16s + %10s |\n" ".............................." ".............." ".............." "................" ".........."
+printf "%30s | %14s | %14s | %16s | %10s |\n" "quarkus-elasticsearch-jvm" ${quarkus_elasticsearch_jvm[packaging_time]} ${quarkus_elasticsearch_jvm[jar_size]} ${quarkus_elasticsearch_jvm[building_time]} ${quarkus_elasticsearch_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "micronaut-elasticsearch-jvm" ${micronaut_elasticsearch_jvm[packaging_time]} ${micronaut_elasticsearch_jvm[jar_size]} ${micronaut_elasticsearch_jvm[building_time]} ${micronaut_elasticsearch_jvm[docker_image_size]}
+printf "%30s | %14s | %14s | %16s | %10s |\n" "springboot-elasticsearch-jvm" ${springboot_elasticsearch_jvm[packaging_time]} ${springboot_elasticsearch_jvm[jar_size]} ${springboot_elasticsearch_jvm[building_time]} ${springboot_elasticsearch_jvm[docker_image_size]}
 
 echo
 echo "==>  START AT: ${start_time}"

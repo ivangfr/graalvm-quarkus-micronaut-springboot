@@ -23,12 +23,12 @@ In this category, we have implemented three versions of a Restful API for handli
 
 - Run the command
   ```bash
-  docker compose up -d
+  podman compose up -d
   ```
 
 - Wait for `Elasticsearch` container to be up and running. To check it, run
   ```bash
-  docker compose ps
+  podman compose ps
   ```
 
 - Finally, run the script below to initialize the `Elasticsearch` indexes
@@ -65,7 +65,7 @@ In this category, we have implemented three versions of a Restful API for handli
 
 - In a terminal, make sure you are in the `graalvm-quarkus-micronaut-springboot/elasticsearch` folder
 
-- To stop and remove docker compose containers, networks and volumes, run
+- To stop and remove compose containers, networks and volumes, run
   ```bash
-  docker compose down -v
+  podman compose down -v
   ```

@@ -15,12 +15,12 @@ In this category, we have implemented three versions of a Restful API for handli
 
 - Run the command
   ```bash
-  docker compose up -d
+  podman compose up -d
   ```
 
 - Wait for `MySQL` container to be up and running. To check it, run
   ```bash
-  docker compose ps
+  podman compose ps
   ```
 
 ## Useful Commands
@@ -35,11 +35,11 @@ In this category, we have implemented three versions of a Restful API for handli
   - Connecting to `MySQL Monitor`
     - JVM
       ```bash
-      docker exec -it -e MYSQL_PWD=secret mysql mysql -uroot --database bookdb_jvm
+      podman exec -it -e MYSQL_PWD=secret mysql mysql -uroot --database bookdb_jvm
       ```
     - Native
       ```bash
-      docker exec -it -e MYSQL_PWD=secret mysql mysql -uroot --database bookdb_native
+      podman exec -it -e MYSQL_PWD=secret mysql mysql -uroot --database bookdb_native
       ```
 
     Insite `MySQL Monitor` terminal
@@ -54,7 +54,7 @@ In this category, we have implemented three versions of a Restful API for handli
 
 - In a terminal, make sure you are in the `graalvm-quarkus-micronaut-springboot/jpa-mysql` folder
 
-- To stop and remove docker compose containers, networks and volumes, run
+- To stop and remove compose containers, networks and volumes, run
   ```bash
-  docker compose down -v
+  podman compose down -v
   ```

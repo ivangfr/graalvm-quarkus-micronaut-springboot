@@ -45,17 +45,15 @@ We've implemented three bash scripts that collect data used in the frameworks co
 
 - **collect-jvm-jar-docker-size-times.sh**
   
-  It packages jar files and builds Docker image of JVM applications, collecting data like: jar packaging time, jar size, docker build time and docker image size.
+  It packages JAR files and builds Docker images for JVM applications, collecting data such as JAR packaging time, JAR size, Docker image build time, and Docker image size.
 
 - **collect-native-jar-docker-size-times.sh**
 
-  It packages jar files and builds Docker image of Native applications, collecting data like: jar packaging time, jar size, docker build time and docker image size.
-  
-  > **Note**: On Mac and Windows, it's recommended to increase the memory allocated to Docker to at least 8G (and potentially to add more CPUs as well) since native-image compiler is a heavy process. On Linux, Docker uses by default the resources available on the host so no configuration is needed.
+  It packages JAR files and builds Docker images for native applications, collecting data such as JAR packaging time, JAR size, Docker image build time, and Docker image size.
 
 - **collect-ab-times-memory-usage.sh**
 
-  It starts Docker container of JVM and Native applications, collecting data like: startup time, initial memory usage, time spent to run ab tests for the first time and (after some warm up) for the second time, final memory usage and shutdown time.
+  It starts the container for JVM and native applications, collecting data such as startup time, initial memory usage, time taken to run A/B tests for the first time and (after a warm-up period) for the second time, final memory usage, and shutdown time.
 
 - **remove-jvm-docker-images.sh**
 
@@ -97,31 +95,4 @@ We've implemented three bash scripts that collect data used in the frameworks co
       quarkus-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9113/api/movies  |
     micronaut-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9115/api/movies  |
    springboot-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9117/api/movies  |
-  ```
-
-## Monitoring CPU and Memory with cAdvisor
-
-In order to have a better insight about the Docker container's CPU and Memory Usage, we can use [`cAdvisor`](https://github.com/google/cadvisor).
-
-- In a terminal, run the following command
-  ```bash
-  docker run -d --rm --name=cadvisor -p 8080:8080 \
-    -v /:/rootfs:ro \
-    -v /var/run:/var/run:ro \
-    -v /sys:/sys:ro \
-    -v /var/lib/docker/:/var/lib/docker:ro \
-    -v /dev/disk/:/dev/disk:ro \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    --privileged \
-    --device=/dev/kmsg \
-    gcr.io/cadvisor/cadvisor:v0.49.1
-  ```
-
-- In a browser, access
-  - http://localhost:8080/docker/ to explore the running containers;
-  - http://localhost:8080/docker/container-name to go directly to the info of a specific container.
-
-- To stop it, run
-  ```bash
-  docker stop cadvisor
   ```

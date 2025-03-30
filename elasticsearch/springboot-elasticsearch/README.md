@@ -49,12 +49,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh
+  ./build-docker-images.sh
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name springboot-elasticsearch-jvm \
+  podman run --rm --name springboot-elasticsearch-jvm \
     -p 9116:8080 -e ELASTICSEARCH_HOST=elasticsearch \
     --network elasticsearch_default \
     ivanfranchin/springboot-elasticsearch-jvm:latest
@@ -68,7 +68,7 @@
   curl -i "localhost:9116/api/movies?title=american"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal
 
 ### Docker in Native Mode
 
@@ -81,12 +81,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh native
+  ./build-docker-images.sh native
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name springboot-elasticsearch-native \
+  podman run --rm --name springboot-elasticsearch-native \
     -p 9117:8080 -e SPRING_PROFILES_ACTIVE=native -e ELASTICSEARCH_HOST=elasticsearch \
     --network elasticsearch_default \
     ivanfranchin/springboot-elasticsearch-native:latest
@@ -100,4 +100,4 @@
   curl -i "localhost:9117/api/movies?title=evil"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal

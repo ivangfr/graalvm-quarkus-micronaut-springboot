@@ -65,7 +65,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
   Press `Ctrl+C` in `kafka-producer` and `kafka-consumer` terminals
 
-### Docker in JVM Mode
+### podman in JVM Mode
 
 - **Startup**
 
@@ -80,12 +80,12 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-producer && ./docker-build.sh && cd ..
+      cd kafka-producer && ./build-docker-images.sh && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name quarkus-kafka-producer-jvm \
+      podman run --rm --name quarkus-kafka-producer-jvm \
         -p 9100:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/quarkus-kafka-producer-jvm:latest
@@ -102,12 +102,12 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-consumer && ./docker-build.sh && cd ..
+      cd kafka-consumer && ./build-docker-images.sh && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name quarkus-kafka-consumer-jvm \
+      podman run --rm --name quarkus-kafka-consumer-jvm \
         -p 9106:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/quarkus-kafka-consumer-jvm:latest
@@ -127,7 +127,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
   Press `Ctrl+C` in `kafka-producer` and `kafka-consumer` terminals
 
 
-### Docker in Native Mode
+### podman in Native Mode
 
 - **Startup**
 
@@ -142,12 +142,12 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-producer && ./docker-build.sh native && cd ..
+      cd kafka-producer && ./build-docker-images.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name quarkus-kafka-producer-native \
+      podman run --rm --name quarkus-kafka-producer-native \
         -p 9101:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/quarkus-kafka-producer-native:latest
@@ -164,12 +164,12 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-consumer && ./docker-build.sh native && cd ..
+      cd kafka-consumer && ./build-docker-images.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name quarkus-kafka-consumer-native \
+      podman run --rm --name quarkus-kafka-consumer-native \
         -p 9107:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/quarkus-kafka-consumer-native:latest

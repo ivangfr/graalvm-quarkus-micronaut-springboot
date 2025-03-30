@@ -50,12 +50,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh
+  ./build-docker-images.sh
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name springboot-jpa-mysql-jvm \
+  podman run --rm --name springboot-jpa-mysql-jvm \
     -p 9090:8080 -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
     ivanfranchin/springboot-jpa-mysql-jvm:latest
@@ -69,7 +69,7 @@
   curl -i localhost:9090/api/books
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal
 
 ### Docker in Native Mode
 
@@ -82,12 +82,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh native
+  ./build-docker-images.sh native
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name springboot-jpa-mysql-native \
+  podman run --rm --name springboot-jpa-mysql-native \
     -p 9091:8080 -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
     --network jpa-mysql_default \
     ivanfranchin/springboot-jpa-mysql-native:latest
@@ -101,4 +101,4 @@
   curl -i localhost:9091/api/books
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal

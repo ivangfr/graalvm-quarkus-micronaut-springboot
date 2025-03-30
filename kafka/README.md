@@ -23,21 +23,21 @@ In this category, we have implemented three versions of `kafka-producer - kafka-
 
 - Run the command
   ```bash
-  docker compose up -d
+  podman compose up -d
   ```
 
 - Wait for all containers to be up and running. To check it, run
   ```bash
-  docker compose ps
+  podman compose ps
   ```
 
 ## Shutdown
 
 - In a terminal, make sure you are in the `graalvm-quarkus-micronaut-springboot/kafka` folder
 
-- To stop and remove docker compose containers, networks and volumes, run
+- To stop and remove compose containers, networks and volumes, run
   ```bash
-  docker compose down -v
+  podman compose down -v
   ```
 
 ## Useful links

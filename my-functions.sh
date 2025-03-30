@@ -3,7 +3,7 @@
 TIMEOUT=120
 
 # -- wait_for_container_log --
-# $1: docker container name
+# $1: container name
 # S2: spring value to wait to appear in container logs
 # wait_for_container_log_exec_time: global variable that contains the execution time needed to wait for the string to appear
 # wait_for_container_log_matched_row: global variable that contains the log row matched
@@ -13,7 +13,7 @@ function wait_for_container_log() {
   SECONDS=0
 
   while true ; do
-    local log=$(docker logs $1 2>&1 | grep "$2")
+    local log=$(podman logs $1 2>&1 | grep "$2")
     if [ -n "$log" ] ; then
       echo $log
       wait_for_container_log_exec_time="${SECONDS}s"
@@ -39,10 +39,10 @@ function extract_startup_time_from_log() {
 }
 
 # -- get_container_memory_usage --
-# $1: docker container name
+# $1: container name
 function get_container_memory_usage() {
   while true ; do
-    local log=$(docker stats --no-stream 2>&1 | grep $1)
+    local log=$(podman stats --no-stream 2>&1 | grep $1)
     if [ -n "$log" ] ; then
       echo $log | awk '{print $4"/"$6"("$7")"}'
       break
@@ -52,11 +52,11 @@ function get_container_memory_usage() {
 }
 
 # -- wait_for_container_status_healthy --
-# $1: docker container port
+# $1: container port
 function wait_for_container_status_healthy() {
   echo "Waiting for container with port $1 to be 'healthy' ..."
   while true ; do
-    local log=$(docker ps | grep -E "healthy.*$1")
+    local log=$(podman ps | grep -E "healthy.*$1")
     if [ -n "$log" ] ; then
       echo $log
       break
@@ -78,23 +78,23 @@ function convert_seconds_to_millis() {
   echo "scale=0 ; ($1 * 1000)/1" | bc -l
 }
 
-# -- get_docker_size --
-# $1: docker container name
-function get_docker_size() {
-    echo $(docker images $1 --format='{{println .Size}}')
+# -- get_docker_image_size --
+# $1: container name
+function get_docker_image_size() {
+  echo $(podman images $1 --format='{{print .Size}}' | tr -d ' ')
 }
 
 # -- get_folder_file_size --
 # $1: file path
 function get_folder_file_size() {
-    echo $(du -hs "$1" | awk '{ print $1 }')
+  echo $(du -hs "$1" | awk '{ print $1 }')
 }
 
 # -- package_jar_build_image --
 # $1: jar clean command
 # $2: jar package/assemble command
 # $3: output jar file path
-# $4: docker command
+# $4: command
 # $5: docker image
 function package_jar_build_image() {
   eval "$1"
@@ -105,7 +105,7 @@ function package_jar_build_image() {
 
   run_command "$4"
   package_jar_build_image_building_time=$run_command_exec_time
-  package_jar_build_image_docker_image_size=$(get_docker_size $5)
+  package_jar_build_image_docker_image_size=$(get_docker_image_size $5)
 }
 
 # -- warm_up --
@@ -123,9 +123,9 @@ function warm_up() {
   echo
 }
 
-# -- check_docker_manager_script_input_parameter --
+# -- check_script_input_parameter --
 # $1: input parameter
-function check_docker_manager_script_input_parameter() {
+function check_script_input_parameter() {
   if [ "$1" != "all" ] &&
      [ "$1" != "quarkus" ] &&
      [ "$1" != "micronaut" ] &&

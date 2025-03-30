@@ -49,12 +49,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh
+  ./build-docker-images.sh
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name quarkus-elasticsearch-jvm \
+  podman run --rm --name quarkus-elasticsearch-jvm \
     -p 9112:8080 -e ELASTICSEARCH_HOST=elasticsearch \
     --network elasticsearch_default \
     ivanfranchin/quarkus-elasticsearch-jvm:latest
@@ -68,7 +68,7 @@
   curl -i "localhost:9112/api/movies?title=american"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal
 
 ### Docker in Native Mode
 
@@ -81,12 +81,12 @@
 
 - Run the script below to build the Docker image
   ```bash
-  ./docker-build.sh native
+  ./build-docker-images.sh native
   ```
 
-- Run the following command to start the Docker container
+- Run the following command to start the container
   ```bash
-  docker run --rm --name quarkus-elasticsearch-native \
+  podman run --rm --name quarkus-elasticsearch-native \
     -p 9113:8080 -e QUARKUS_PROFILE=native -e ELASTICSEARCH_HOST=elasticsearch \
     --network elasticsearch_default \
     ivanfranchin/quarkus-elasticsearch-native:latest
@@ -100,4 +100,4 @@
   curl -i "localhost:9113/api/movies?title=evil"
   ```
 
-- To stop and remove application Docker container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal

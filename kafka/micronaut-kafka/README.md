@@ -81,12 +81,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-producer && ./docker-build.sh && cd ..
+      cd kafka-producer && ./build-docker-images.sh && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name micronaut-kafka-producer-jvm \
+      podman run --rm --name micronaut-kafka-producer-jvm \
         -p 9102:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/micronaut-kafka-producer-jvm:latest
@@ -103,12 +103,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-consumer && ./docker-build.sh && cd ..
+      cd kafka-consumer && ./build-docker-images.sh && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name micronaut-kafka-consumer-jvm \
+      podman run --rm --name micronaut-kafka-consumer-jvm \
         -p 9108:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/micronaut-kafka-consumer-jvm:latest
@@ -143,12 +143,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-producer && ./docker-build.sh native && cd ..
+      cd kafka-producer && ./build-docker-images.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name micronaut-kafka-producer-native \
+      podman run --rm --name micronaut-kafka-producer-native \
         -p 9103:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/micronaut-kafka-producer-native:latest
@@ -165,12 +165,12 @@ The goal of this project is to implement two [`Micronaut`](https://micronaut.io/
 
     - Run the command below to build the Docker image
       ```bash
-      cd kafka-consumer && ./docker-build.sh native && cd ..
+      cd kafka-consumer && ./build-docker-images.sh native && cd ..
       ```
 
-    - Run the following command to start the Docker container
+    - Run the following command to start the container
       ```bash
-      docker run --rm --name micronaut-kafka-consumer-native \
+      dpodmanocker run --rm --name micronaut-kafka-consumer-native \
         -p 9109:8080 -e MICRONAUT_ENVIRONMENTS=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
         --network kafka_default \
         ivanfranchin/micronaut-kafka-consumer-native:latest
