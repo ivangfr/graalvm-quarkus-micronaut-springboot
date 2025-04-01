@@ -19,23 +19,23 @@ In this category, we have implemented three versions of `kafka-producer - kafka-
 
 ## Start Environment
 
-- Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka` folder
+- Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka` folder.
 
-- Run the command
+- Run the command:
   ```bash
   podman compose up -d
   ```
 
-- Wait for all containers to be up and running. To check it, run
+- Wait for all containers to be up and running. To check it, run:
   ```bash
   podman compose ps
   ```
 
 ## Shutdown
 
-- In a terminal, make sure you are in the `graalvm-quarkus-micronaut-springboot/kafka` folder
+- In a terminal, make sure you are in the `graalvm-quarkus-micronaut-springboot/kafka` folder.
 
-- To stop and remove compose containers, networks and volumes, run
+- To stop and remove compose containers, networks and volumes, run:
   ```bash
   podman compose down -v
   ```

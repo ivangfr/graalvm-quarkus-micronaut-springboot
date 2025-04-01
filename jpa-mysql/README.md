@@ -11,14 +11,14 @@ In this category, we have implemented three versions of a Restful API for handli
 
 ## Start Environment
 
-- Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/jpa-mysql` folder
+- Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/jpa-mysql` folder.
 
-- Run the command
+- Run the command:
   ```bash
   podman compose up -d
   ```
 
-- Wait for `MySQL` container to be up and running. To check it, run
+- Wait for `MySQL` container to be up and running. To check it, run:
   ```bash
   podman compose ps
   ```
@@ -27,7 +27,7 @@ In this category, we have implemented three versions of a Restful API for handli
 
 - **MySQL**
 
-  - Reset tables script (make sure you are in the `graalvm-quarkus-micronaut-springboot/jpa-mysql` folder)
+  - Reset tables script (make sure you are in the `graalvm-quarkus-micronaut-springboot/jpa-mysql` folder):
     ```bash
     ./reset-tables.sh
     ```
@@ -42,7 +42,7 @@ In this category, we have implemented three versions of a Restful API for handli
       podman exec -it -e MYSQL_PWD=secret mysql mysql -uroot --database bookdb_native
       ```
 
-    Insite `MySQL Monitor` terminal
+    Inside `MySQL Monitor` terminal
     ```sql
     show tables;
     select * from quarkus_books;
@@ -52,9 +52,9 @@ In this category, we have implemented three versions of a Restful API for handli
 
 ## Shutdown
 
-- In a terminal, make sure you are in the `graalvm-quarkus-micronaut-springboot/jpa-mysql` folder
+- In a terminal, make sure you are in the `graalvm-quarkus-micronaut-springboot/jpa-mysql` folder.
 
-- To stop and remove compose containers, networks and volumes, run
+- To stop and remove compose containers, networks and volumes, run:
   ```bash
   podman compose down -v
   ```

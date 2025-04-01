@@ -18,18 +18,18 @@
 
 ## Running application
 
-> **Note**: `MySQL` container must be running and initialized as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/jpa-mysql#start-environment)
+> **Note**: `MySQL` container must be running and initialized as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/jpa-mysql#start-environment).
 
 ### Development Mode
 
-- Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/jpa-mysql/springboot-jpa-mysql` folder
+- Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/jpa-mysql/springboot-jpa-mysql` folder.
 
-- Run the command below to start the application
+- Run the command below to start the application:
   ```bash
   ./mvnw clean spring-boot:run
   ```
 
-- A simple test can be done by opening a new terminal and running
+- A simple test can be done by opening a new terminal and running:
   ```bash
   curl -i -X POST localhost:8080/api/books -H "Content-Type: application/json" \
     -d '{"isbn":"123", "title":"Learn Java"}'
@@ -37,23 +37,23 @@
   curl -i localhost:8080/api/books
   ```
 
-- To stop the application, press `Ctrl+C` in its terminal
+- To stop the application, press `Ctrl+C` in its terminal.
 
 ### Docker in JVM Mode
 
-- In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/jpa-mysql/springboot-jpa-mysql` folder
+- In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/jpa-mysql/springboot-jpa-mysql` folder.
 
-- Clean the target folder
+- Clean the target folder:
   ```bash
   ./mvnw clean
   ```
 
-- Run the script below to build the Docker image
+- Run the script below to build the Docker image:
   ```bash
   ./build-docker-images.sh
   ```
 
-- Run the following command to start the container
+- Run the following command to start the container:
   ```bash
   podman run --rm --name springboot-jpa-mysql-jvm \
     -p 9090:8080 -e MYSQL_HOST=mysql \
@@ -61,7 +61,7 @@
     ivanfranchin/springboot-jpa-mysql-jvm:latest
   ```
 
-- A simple test can be done by opening a new terminal and running
+- A simple test can be done by opening a new terminal and running:
   ```bash
   curl -i -X POST localhost:9090/api/books -H "Content-Type: application/json" \
     -d '{"isbn":"456", "title":"Learn Docker"}'
@@ -69,23 +69,23 @@
   curl -i localhost:9090/api/books
   ```
 
-- To stop and remove application container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal.
 
 ### Docker in Native Mode
 
-- In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/jpa-mysql/springboot-jpa-mysql` folder
+- In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/jpa-mysql/springboot-jpa-mysql` folder.
 
-- Clean the target folder
+- Clean the target folder:
   ```bash
   ./mvnw clean
   ```
 
-- Run the script below to build the Docker image
+- Run the script below to build the Docker image:
   ```bash
   ./build-docker-images.sh native
   ```
 
-- Run the following command to start the container
+- Run the following command to start the container:
   ```bash
   podman run --rm --name springboot-jpa-mysql-native \
     -p 9091:8080 -e SPRING_PROFILES_ACTIVE=native -e MYSQL_HOST=mysql \
@@ -93,7 +93,7 @@
     ivanfranchin/springboot-jpa-mysql-native:latest
   ```
 
-- A simple test can be done by opening a new terminal and running
+- A simple test can be done by opening a new terminal and running:
   ```bash
   curl -i -X POST localhost:9091/api/books -H "Content-Type: application/json" \
     -d '{"isbn":"789", "title":"Learn GraalVM"}'
@@ -101,4 +101,4 @@
   curl -i localhost:9091/api/books
   ```
 
-- To stop and remove application container, press `Ctrl+C` in its terminal
+- To stop and remove application container, press `Ctrl+C` in its terminal.

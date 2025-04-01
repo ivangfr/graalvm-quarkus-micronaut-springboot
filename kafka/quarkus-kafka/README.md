@@ -28,7 +28,7 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
 ## Running applications
 
-> **Note**: `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/kafka#start-environment)
+> **Note**: `Kafka`, `Zookeeper` and other containers present in `docker-compose.yml` file must be up and running as explained [here](https://github.com/ivangfr/graalvm-quarkus-micronaut-springboot/tree/master/kafka#start-environment).
 
 ### Development Mode
 
@@ -36,34 +36,34 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
   - **kafka-producer**
 
-    - Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder
+    - Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder.
 
-    - Run the command below to start the application
+    - Run the command below to start the application:
       ```bash
       ./mvnw clean compile quarkus:dev --projects kafka-producer
       ```
 
   - **kafka-consumer**
 
-    - Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder
+    - Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder.
 
-    - Run the command below
+    - Run the command below:
       ```bash
       ./mvnw clean compile quarkus:dev --projects kafka-consumer -Ddebug=5006 -Dquarkus.http.port=8081
       ```
 
 - **Simple Test**
 
-  - In a new terminal, post a news
+  - In a new terminal, post a news:
     ```bash
     curl -i -X POST localhost:8080/api/news -H 'Content-Type: application/json' \
       -d '{"source":"Quarkus Blog", "title":"Dev Quarkus Framework"}'
     ```
-  - See `kafka-producer` and `kafka-consumer` logs
+  - See `kafka-producer` and `kafka-consumer` logs.
 
 - **Shutdown**
 
-  Press `Ctrl+C` in `kafka-producer` and `kafka-consumer` terminals
+  Press `Ctrl+C` in `kafka-producer` and `kafka-consumer` terminals.
 
 ### podman in JVM Mode
 
@@ -71,19 +71,19 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
   - **kafka-producer**
 
-    - In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder
+    - In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder.
 
-    - Clean and package the application
+    - Clean and package the application:
       ```bash
       ./mvnw clean package --projects kafka-producer
       ```
 
-    - Run the command below to build the Docker image
+    - Run the command below to build the Docker image:
       ```bash
       cd kafka-producer && ./build-docker-images.sh && cd ..
       ```
 
-    - Run the following command to start the container
+    - Run the following command to start the container:
       ```bash
       podman run --rm --name quarkus-kafka-producer-jvm \
         -p 9100:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
@@ -93,19 +93,19 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
   - **kafka-consumer**
 
-    - In another terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder
+    - In another terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder.
 
-    - Clean and package the application
+    - Clean and package the application:
       ```bash
       ./mvnw clean package --projects kafka-consumer
       ```
 
-    - Run the command below to build the Docker image
+    - Run the command below to build the Docker image:
       ```bash
       cd kafka-consumer && ./build-docker-images.sh && cd ..
       ```
 
-    - Run the following command to start the container
+    - Run the following command to start the container:
       ```bash
       podman run --rm --name quarkus-kafka-consumer-jvm \
         -p 9106:8080 -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
@@ -115,16 +115,16 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
 - **Simple Test**
 
-  - In a new terminal, post a news
+  - In a new terminal, post a news:
     ```bash
     curl -i -X POST localhost:9100/api/news -H 'Content-Type: application/json' \
       -d '{"source":"Quarkus Blog", "title":"Quarkus Framework"}'
     ```
-  - See `kafka-producer` and `kafka-consumer` logs
+  - See `kafka-producer` and `kafka-consumer` logs.
 
 - **Shutdown**
 
-  Press `Ctrl+C` in `kafka-producer` and `kafka-consumer` terminals
+  Press `Ctrl+C` in `kafka-producer` and `kafka-consumer` terminals.
 
 
 ### podman in Native Mode
@@ -133,19 +133,19 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
   - **kafka-producer**
 
-    - In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder
+    - In a terminal, make sure you are inside the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder.
 
-    - Clean and package the application
+    - Clean and package the application:
       ```bash
       ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects kafka-producer
       ```
 
-    - Run the command below to build the Docker image
+    - Run the command below to build the Docker image:
       ```bash
       cd kafka-producer && ./build-docker-images.sh native && cd ..
       ```
 
-    - Run the following command to start the container
+    - Run the following command to start the container:
       ```bash
       podman run --rm --name quarkus-kafka-producer-native \
         -p 9101:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
@@ -155,19 +155,19 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
   - **kafka-consumer**
 
-    - Open another terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder
+    - Open another terminal and navigate to the `graalvm-quarkus-micronaut-springboot/kafka/quarkus-kafka` folder.
 
-    - Clean and package the application
+    - Clean and package the application:
       ```bash
       ./mvnw clean package -Pnative -Dquarkus.native.container-build=true --projects kafka-consumer
       ```
 
-    - Run the command below to build the Docker image
+    - Run the command below to build the Docker image:
       ```bash
       cd kafka-consumer && ./build-docker-images.sh native && cd ..
       ```
 
-    - Run the following command to start the container
+    - Run the following command to start the container:
       ```bash
       podman run --rm --name quarkus-kafka-consumer-native \
         -p 9107:8080 -e QUARKUS_PROFILE=native -e KAFKA_HOST=kafka -e KAFKA_PORT=9092 \
@@ -177,13 +177,13 @@ The goal of this project is to implement two [`Quarkus`](https://quarkus.io/) ap
 
 - **Simple Test**
 
-  - In a new terminal, post a news
+  - In a new terminal, post a news:
     ```bash
     curl -i -X POST localhost:9101/api/news -H 'Content-Type: application/json' \
       -d '{"source":"Quarkus Blog", "title":"Quarkus Framework & GraalVM"}'
     ```
-  - See `kafka-producer` and `kafka-consumer` logs
+  - See `kafka-producer` and `kafka-consumer` logs.
 
 - **Shutdown**
 
-  Press `Ctrl+C` in `kafka-producer` and `kafka-consumer` terminals
+  Press `Ctrl+C` in `kafka-producer` and `kafka-consumer` terminals.

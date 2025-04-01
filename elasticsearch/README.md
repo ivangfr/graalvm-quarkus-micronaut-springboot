@@ -19,19 +19,19 @@ In this category, we have implemented three versions of a Restful API for handli
 
 ## Start Environment
 
-- Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/elasticsearch` folder
+- Open a terminal and navigate to the `graalvm-quarkus-micronaut-springboot/elasticsearch` folder.
 
-- Run the command
+- Run the command:
   ```bash
   podman compose up -d
   ```
 
-- Wait for `Elasticsearch` container to be up and running. To check it, run
+- Wait for `Elasticsearch` container to be up and running. To check it, run:
   ```bash
   podman compose ps
   ```
 
-- Finally, run the script below to initialize the `Elasticsearch` indexes
+- Finally, run the script below to initialize the `Elasticsearch` indexes:
   ```bash
   ./init-es-indexes.sh
   ```
@@ -40,17 +40,17 @@ In this category, we have implemented three versions of a Restful API for handli
 
 - **Elasticsearch**
 
-  - Reset indexes script (make sure you are in the `graalvm-quarkus-micronaut-springboot/elasticsearch` folder)
+  - Reset indexes script (make sure you are in the `graalvm-quarkus-micronaut-springboot/elasticsearch` folder):
     ```bash
     ./init-es-indexes.sh
     ```
 
-  - Check indexes
+  - Check indexes:
     ```bash
     curl "localhost:9200/_cat/indices?v"
     ```
 
-  - Perform search
+  - Perform search:
     ```bash
     curl "localhost:9200/quarkus.movies.jvm/_search?pretty"
     curl "localhost:9200/micronaut.movies.jvm/_search?pretty"
@@ -63,9 +63,9 @@ In this category, we have implemented three versions of a Restful API for handli
 
 ## Shutdown
 
-- In a terminal, make sure you are in the `graalvm-quarkus-micronaut-springboot/elasticsearch` folder
+- In a terminal, make sure you are in the `graalvm-quarkus-micronaut-springboot/elasticsearch` folder.
 
-- To stop and remove compose containers, networks and volumes, run
+- To stop and remove compose containers, networks and volumes, run:
   ```bash
   podman compose down -v
   ```
