@@ -29,7 +29,7 @@ services:
       test: [ "CMD", "nc", "-z", "localhost", "9092" ]
 
   kafdrop:
-    image: 'obsidiandynamics/kafdrop:4.0.2'
+    image: 'obsidiandynamics/kafdrop:4.1.0'
     container_name: 'kafdrop'
     restart: 'unless-stopped'
     depends_on:
