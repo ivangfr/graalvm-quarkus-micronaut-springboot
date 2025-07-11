@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TIMEOUT=120
+TIMEOUT=60
 
 # -- wait_for_container_log --
 # $1: container name

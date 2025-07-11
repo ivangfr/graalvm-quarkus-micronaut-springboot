@@ -13,7 +13,7 @@ In this category, we have implemented three versions of `kafka-producer - kafka-
 
 | Framework   | Confluent Platform | Apache Kafka |
 |-------------|--------------------|--------------|
-| Quarkus     | 7.9.x              | 3.9.0        |
+| Quarkus     | 8.0.x              | 4.0.0        |
 | Micronaut   | 7.9.x              | 3.9.1        |
 | Spring Boot | 7.9.x              | 3.9.1        |
 
