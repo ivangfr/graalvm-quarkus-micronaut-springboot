@@ -14,7 +14,7 @@ In this category, we have implemented three versions of a Restful API for handli
 | Framework   | Elasticsearch |
 |-------------|---------------|
 | Quarkus     | 9.0.2         |
-| Micronaut   | 8.18.2        |
+| Micronaut   | 8.19.5        |
 | Spring Boot | 9.2.6         |
 
 ## Start Environment

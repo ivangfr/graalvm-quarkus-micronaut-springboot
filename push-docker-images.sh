@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 QUARKUS_VERSION=3.24.3-17
-MICRONAUT_VERSION=4.9.0-17
+MICRONAUT_VERSION=4.10.11-17
 SPRING_BOOT_VERSION=4.0.5-17
 
 podman push ivanfranchin/quarkus-simple-api-jvm:$QUARKUS_VERSION
