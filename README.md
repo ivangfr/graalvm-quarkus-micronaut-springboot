@@ -1,5 +1,9 @@
 # graalvm-quarkus-micronaut-springboot
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ivan.franchin-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/ivan.franchin)
+
+
 The goal of this project is to compare some Java Microservices Frameworks like: [`Quarkus`](https://quarkus.io/), [`Micronaut`](https://micronaut.io/) and [`Spring Boot`](https://docs.spring.io/spring-boot/index.html). For it, we will implement applications using those frameworks, build their JVM and Native Docker images and measure start-up times, memory footprint, etc.
 
 ## Proof-of-Concepts & Articles
@@ -99,3 +103,13 @@ We've implemented three bash scripts that collect data used in the frameworks co
     micronaut-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9115/api/movies  |
    springboot-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9117/api/movies  |
   ```
+
+## Support
+
+If you find this useful, consider buying me a coffee:
+
+<a href="https://buymeacoffee.com/ivan.franchin"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
