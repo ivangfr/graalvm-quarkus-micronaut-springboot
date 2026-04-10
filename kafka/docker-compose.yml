@@ -1,7 +1,7 @@
 services:
 
   zookeeper:
-    image: 'confluentinc/cp-zookeeper:7.8.0'
+    image: 'confluentinc/cp-zookeeper:7.9.5'
     container_name: 'zookeeper'
     restart: 'unless-stopped'
     ports:
@@ -9,16 +9,16 @@ services:
     environment:
       - 'ZOOKEEPER_CLIENT_PORT=2181'
     healthcheck:
-      test: 'echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT'
+      test: ["CMD-SHELL", "echo stat | nc localhost $$ZOOKEEPER_CLIENT_PORT"]
 
   kafka:
-    image: 'confluentinc/cp-kafka:7.8.0'
+    image: 'confluentinc/cp-kafka:7.9.5'
     container_name: 'kafka'
     restart: 'unless-stopped'
     depends_on:
-      - 'zookeeper'
+      zookeeper:
+        condition: service_healthy
     ports:
-      - '9092:9092'
       - '29092:29092'
     environment:
       - 'KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181'
@@ -26,17 +26,17 @@ services:
       - 'KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092'
       - 'KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1'
     healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "9092" ]
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
 
   kafdrop:
-    image: 'obsidiandynamics/kafdrop:4.1.0'
+    image: 'obsidiandynamics/kafdrop:4.2.0'
     container_name: 'kafdrop'
     restart: 'unless-stopped'
     depends_on:
       - 'kafka'
     ports:
-      - '9001:9000'
+      - '9000:9000'
     environment:
       - 'KAFKA_BROKERCONNECT=kafka:9092'
     healthcheck:
-      test: 'curl -f http://localhost:9000 || exit 1'
+      test: ["CMD", "curl", "-f", "http://localhost:9000"]

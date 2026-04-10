@@ -2,7 +2,7 @@
 
 QUARKUS_VERSION=3.24.3-17
 MICRONAUT_VERSION=4.9.0-17
-SPRING_BOOT_VERSION=3.5.3-17
+SPRING_BOOT_VERSION=4.0.5-17
 
 podman tag ivanfranchin/quarkus-simple-api-jvm:latest ivanfranchin/quarkus-simple-api-jvm:$QUARKUS_VERSION
 podman tag ivanfranchin/quarkus-simple-api-native:latest ivanfranchin/quarkus-simple-api-native:$QUARKUS_VERSION

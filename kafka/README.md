@@ -15,7 +15,9 @@ In this category, we have implemented three versions of `kafka-producer - kafka-
 |-------------|--------------------|--------------|
 | Quarkus     | 8.0.x              | 4.0.0        |
 | Micronaut   | 7.9.x              | 3.9.1        |
-| Spring Boot | 7.9.x              | 3.9.1        |
+| Spring Boot | 8.1.x              | 4.1.2        |
+
+> [Supported Versions and Interoperability for Confluent Platform](https://docs.confluent.io/platform/current/installation/versions-interoperability.html)
 
 ## Start Environment
 

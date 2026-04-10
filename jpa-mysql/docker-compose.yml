@@ -1,7 +1,7 @@
 services:
 
   mysql:
-    image: 'mysql:9.2.0'
+    image: 'mysql:9.6.0'
     container_name: 'mysql'
     restart: 'unless-stopped'
     ports:
@@ -11,4 +11,4 @@ services:
     volumes:
         - './mysql/init:/docker-entrypoint-initdb.d'
     healthcheck:
-      test: 'mysqladmin ping -u root -p$${MYSQL_ROOT_PASSWORD}'
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "--password=$$MYSQL_ROOT_PASSWORD"]
