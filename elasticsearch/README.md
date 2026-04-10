@@ -13,7 +13,7 @@ In this category, we have implemented three versions of a Restful API for handli
 
 | Framework   | Elasticsearch |
 |-------------|---------------|
-| Quarkus     | 9.0.2         |
+| Quarkus     | 9.2.3         |
 | Micronaut   | 8.19.5        |
 | Spring Boot | 9.2.6         |
 
