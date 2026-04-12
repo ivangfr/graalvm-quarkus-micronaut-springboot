@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 SECONDS=0
+BUILDER="${BUILDER:-podman}"
 
 if [ "$1" = "native" ];
 then
-  podman build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-elasticsearch-native:latest .
+  $BUILDER build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-elasticsearch-native:latest .
 else
-  podman build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-elasticsearch-jvm:latest .
+  $BUILDER build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-elasticsearch-jvm:latest .
 fi
 
 duration=$SECONDS

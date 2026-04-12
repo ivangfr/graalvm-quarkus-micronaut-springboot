@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-podman exec -i mysql mysql -uroot -psecret < mysql/reset-tables.sql
+set -e
+
+BUILDER="${BUILDER:-podman}"
+
+$BUILDER exec -i mysql mysql -uroot -psecret < mysql/reset-tables.sql

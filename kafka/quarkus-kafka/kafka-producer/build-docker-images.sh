@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 SECONDS=0
+BUILDER="${BUILDER:-podman}"
 
 if [ "$1" = "native" ];
 then
-  podman build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-kafka-producer-native:latest .
+  $BUILDER build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-kafka-producer-native:latest .
 else
-  podman build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-kafka-producer-jvm:latest .
+  $BUILDER build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-kafka-producer-jvm:latest .
 fi
 
 duration=$SECONDS

@@ -1,12 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 SECONDS=0
+BUILDER="${BUILDER:-podman}"
 
 if [ "$1" = "native" ];
 then
-  podman build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-jpa-mysql-native:latest .
+  $BUILDER build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-jpa-mysql-native:latest .
 else
-  podman build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-jpa-mysql-jvm:latest .
+  $BUILDER build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-jpa-mysql-jvm:latest .
 fi
 
 duration=$SECONDS

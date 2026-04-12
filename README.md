@@ -48,61 +48,30 @@ The application’s JVM and Native Docker images can be found in [this Docker Hu
 
 ## Bash scripts
 
-We've implemented three bash scripts that collect data used in the frameworks comparison.
+We've implemented bash scripts to build, manage, and verify Docker images for the frameworks comparison.
 
-- **collect-jvm-jar-docker-size-times.sh**
-  
-  It packages JAR files and builds Docker images for JVM applications, collecting data such as JAR packaging time, JAR size, Docker image build time, and Docker image size.
+- **build-docker-images.sh**
+  Packages JAR files (via Maven) and builds Docker images for JVM or Native applications. Supports targeting all apps, by framework (quarkus/micronaut/springboot), by type (simple-api/jpa-mysql/kafka/elasticsearch), or specific apps.
 
-- **collect-native-jar-docker-size-times.sh**
+- **remove-docker-images.sh**
+  Removes Docker images. Supports targeting all, by framework, by type, or specific apps.
 
-  It packages JAR files and builds Docker images for native applications, collecting data such as JAR packaging time, JAR size, Docker image build time, and Docker image size.
+- **push-docker-images.sh**
+  Pushes Docker images to Docker Hub (or another registry). Supports targeting all, by framework, by type, or specific apps.
 
-- **collect-ab-times-memory-usage.sh**
+- **tag-docker-images.sh**
+  Tags local Docker images with specific version tags (e.g., v1.0, latest). Supports targeting all, by framework, by type, or specific apps.
 
-  It starts the container for JVM and native applications, collecting data such as startup time, initial memory usage, time taken to run A/B tests for the first time and (after a warm-up period) for the second time, final memory usage, and shutdown time.
+- **verify-docker-images.sh**
+  Starts Docker containers and runs HTTP tests to verify applications are working correctly. Tests different scenarios: simple-api, jpa-mysql, kafka (producer/consumer), elasticsearch. Also exports results to CSV.
 
-- **remove-jvm-docker-images.sh**
-
-  It removes the Docker image of JVM applications.
-
-- **remove-native-docker-images.sh**
-
-  It removes the Docker image of Native applications.
-
-## AB Tests
-
-  ```text
-                       Application | ab Test                                                                                     |
-  -------------------------------- + ------------------------------------------------------------------------------------------- |
-            quarkus-simple-api-jvm | ab -c 2 -n 6000 'http://localhost:9080/api/greeting?name=Ivan'                              |
-          micronaut-simple-api-jvm | ab -c 2 -n 6000 'http://localhost:9082/api/greeting?name=Ivan'                              |
-         springboot-simple-api-jvm | ab -c 2 -n 6000 'http://localhost:9084/api/greeting?name=Ivan'                              |
-         quarkus-simple-api-native | ab -c 2 -n 6000 'http://localhost:9081/api/greeting?name=Ivan'                              |
-       micronaut-simple-api-native | ab -c 2 -n 6000 'http://localhost:9083/api/greeting?name=Ivan'                              |
-      springboot-simple-api-native | ab -c 2 -n 6000 'http://localhost:9085/api/greeting?name=Ivan'                              |
-  ................................ + ........................................................................................... |
-             quarkus-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 2 -n 4000 http://localhost:9086/api/books     |
-           micronaut-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 2 -n 4000 http://localhost:9088/api/books     |
-          springboot-jpa-mysql-jvm | ab -p test-book.json -T 'application/json' -c 2 -n 4000 http://localhost:9090/api/books     |
-          quarkus-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 2 -n 4000 http://localhost:9087/api/books     |
-        micronaut-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 2 -n 4000 http://localhost:9089/api/books     |
-       springboot-jpa-mysql-native | ab -p test-book.json -T 'application/json' -c 2 -n 4000 http://localhost:9091/api/books     |
-  ................................ + ........................................................................................... |
-        quarkus-kafka-producer-jvm | ab -p test-news.json -T 'application/json' -c 2 -n 6000 http://localhost:9100/api/news      |
-      micronaut-kafka-producer-jvm | ab -p test-news.json -T 'application/json' -c 2 -n 6000 http://localhost:9102/api/news      |
-     springboot-kafka-producer-jvm | ab -p test-news.json -T 'application/json' -c 2 -n 6000 http://localhost:9104/api/news      |
-     quarkus-kafka-producer-native | ab -p test-news.json -T 'application/json' -c 2 -n 6000 http://localhost:9101/api/news      |
-   micronaut-kafka-producer-native | ab -p test-news.json -T 'application/json' -c 2 -n 6000 http://localhost:9103/api/news      |
-  springboot-kafka-producer-native | ab -p test-news.json -T 'application/json' -c 2 -n 6000 http://localhost:9105/api/news      |
-  ................................ + ........................................................................................... |
-         quarkus-elasticsearch-jvm | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9112/api/movies  |
-       micronaut-elasticsearch-jvm | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9114/api/movies  |
-      springboot-elasticsearch-jvm | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9116/api/movies  |
-      quarkus-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9113/api/movies  |
-    micronaut-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9115/api/movies  |
-   springboot-elasticsearch-native | ab -p test-movies.json -T 'application/json' -c 2 -n 4000 http://localhost:9117/api/movies  |
-  ```
+**Common options for all scripts:**
+- `--builder=BUILDER` — Container builder (podman or docker)
+- `--quarkus-version=TAG` — Quarkus image tag
+- `--micronaut-version=TAG` — Micronaut image tag
+- `--springboot-version=TAG` — Spring Boot image tag
+- `--dry-run` — Show what would be done without executing
+- `-h, --help` — Show help
 
 ## Support
 

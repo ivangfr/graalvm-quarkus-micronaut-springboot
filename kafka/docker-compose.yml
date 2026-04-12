@@ -19,6 +19,7 @@ services:
       zookeeper:
         condition: service_healthy
     ports:
+      - '9092:9092'
       - '29092:29092'
     environment:
       - 'KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181'

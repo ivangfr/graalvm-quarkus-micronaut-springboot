@@ -4,12 +4,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-ACTION="tag"
+ACTION="remove"
 MODE="jvm"
-
-QUARKUS_VERSION="${QUARKUS_VERSION:-3.34.3-17}"
-MICRONAUT_VERSION="${MICRONAUT_VERSION:-4.10.11-17}"
-SPRING_BOOT_VERSION="${SPRING_BOOT_VERSION:-4.0.5-17}"
 
 source "$SCRIPT_DIR/automation-lib.sh"
 
@@ -100,14 +96,18 @@ case "$TARGET_APP" in
   *-native)
     MODES_TO_TEST=(native)
     ;;
+  *-kafka)
+    MODES_TO_TEST=(jvm native)
+    ;;
   *)
     MODES_TO_TEST=(jvm native)
     ;;
 esac
 
-# Run tag for each mode
+# Run remove for each mode
 for mode in "${MODES_TO_TEST[@]}"; do
   MODE="$mode"
+  # Re-initialize configs for each mode
   init_configs
-  tag_images
+  remove_images
 done
