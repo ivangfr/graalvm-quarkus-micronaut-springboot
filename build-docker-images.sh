@@ -215,6 +215,14 @@ function init_configs() {
 parse_args "$@"
 init_configs
 
+echo
+echo "┌───────────────────────────────────────────"
+echo "│ BUILDING DOCKER IMAGES"
+echo "└───────────────────────────────────────────"
+echo "Target:   ${TARGET_APP}"
+echo "Builder:  ${BUILDER}"
+echo
+
 # Determine modes to test based on TARGET_APP
 MODES_TO_TEST=()
 
@@ -243,7 +251,7 @@ case "$TARGET_APP" in
 esac
 
 # Run build for each mode
-start_time=$(date)
+start_time=$(date +"%Y-%m-%d %H:%M:%S")
 build_failed=0
 
 declare -A RESULTS=()
@@ -262,12 +270,17 @@ if [[ -n "$CSV_OUTPUT" ]]; then
 fi
 
 echo
-echo "==>  START AT: ${start_time}"
-echo "==> FINISH AT: $(date)"
+echo "┌───────────────────────────────────────────"
+echo "│ BUILD SUMMARY"
+echo "└───────────────────────────────────────────"
+echo "Started:  ${start_time}"
+echo "Finished: $(date +"%Y-%m-%d %H:%M:%S")"
 echo
 
 if [[ $build_failed -eq 0 ]]; then
-  echo "Build completed successfully"
+  echo "✔ Build completed successfully"
 else
-  echo "Build completed with some failures"
+  echo "✘ Build completed with some failures"
 fi
+
+echo

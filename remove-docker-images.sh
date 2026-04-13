@@ -105,9 +105,20 @@ case "$TARGET_APP" in
 esac
 
 # Run remove for each mode
+start_time=$(date +"%Y-%m-%d %H:%M:%S")
+
 for mode in "${MODES_TO_TEST[@]}"; do
   MODE="$mode"
   # Re-initialize configs for each mode
   init_configs
   remove_images
 done
+
+echo
+echo "┌───────────────────────────────────────────"
+echo "│ REMOVE SUMMARY"
+echo "└───────────────────────────────────────────"
+echo "Started:  ${start_time}"
+echo "Finished: $(date +"%Y-%m-%d %H:%M:%S")"
+echo
+echo "✔ Remove completed successfully"

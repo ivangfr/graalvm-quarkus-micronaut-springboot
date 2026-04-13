@@ -100,14 +100,28 @@ case "$TARGET_APP" in
   *-native)
     MODES_TO_TEST=(native)
     ;;
+  *-kafka)
+    MODES_TO_TEST=(jvm native)
+    ;;
   *)
     MODES_TO_TEST=(jvm native)
     ;;
 esac
 
 # Run push for each mode
+start_time=$(date +"%Y-%m-%d %H:%M:%S")
+
 for mode in "${MODES_TO_TEST[@]}"; do
   MODE="$mode"
   init_configs
   push_images
 done
+
+echo
+echo "┌───────────────────────────────────────────"
+echo "│ PUSH SUMMARY"
+echo "└───────────────────────────────────────────"
+echo "Started:  ${start_time}"
+echo "Finished: $(date +"%Y-%m-%d %H:%M:%S")"
+echo
+echo "✔ Push completed successfully"

@@ -45,6 +45,11 @@ function check_dependencies() {
   fi
 }
 
+function check_image_exists() {
+  local image="$1"
+  $BUILDER inspect "$image" &>/dev/null && return 0 || return 1
+}
+
 function convert_seconds_to_millis() {
   echo "scale=0 ; ($1 * 1000)/1" | bc -l
 }
@@ -202,9 +207,9 @@ function build_app() {
   local image_tag="${image}:${tag_version}"
 
   echo
-  echo "========================================"
-  echo "${framework^^}-${app#*-} (${MODE^^})"
-  echo "========================================"
+  echo "┌───────────────────────────────────────────"
+  echo "│ ${framework^^}-${app#*-} (${MODE^^})"
+  echo "└───────────────────────────────────────────"
   echo "Directory: $full_dir"
   echo "Image:     $image_tag"
   echo
@@ -695,8 +700,6 @@ function verify_stop_container() {
   local name="$1"
   
   echo "Stopping container: $name"
-  echo "--------------------------------------------------------"
-  echo
   $BUILDER stop -t 5 "$name" > /dev/null 2>&1 || true
 }
 
@@ -903,18 +906,21 @@ function verify_stop_infrastructure() {
   
   case "$type" in
     jpa-mysql)
+      echo ""
       echo "Stopping JPA-MySQL infrastructure..."
       cd jpa-mysql
       $BUILDER compose down -v
       cd ..
       ;;
     kafka)
+      echo ""
       echo "Stopping Kafka infrastructure..."
       cd kafka
       $BUILDER compose down -v
       cd ..
       ;;
     elasticsearch)
+      echo ""
       echo "Stopping Elasticsearch infrastructure..."
       cd elasticsearch
       $BUILDER compose down -v
@@ -956,9 +962,9 @@ function print_verify_results() {
   fi
   
   printf "\n"
-  echo "======================================================================="
-  echo "SUMMARY: $passed/$total tests passed"
-  echo "======================================================================="
+  echo "┌───────────────────────────────────────────"
+  echo "│ SUMMARY: $passed/$total tests passed"
+  echo "└───────────────────────────────────────────"
 }
 
 function export_verify_csv() {
@@ -1031,6 +1037,7 @@ function verify_stop_infrastructure_once() {
   done
   
   if [[ "$elasticsearch_needed" == "true" ]]; then
+    echo ""
     echo "Stopping Elasticsearch infrastructure..."
     cd elasticsearch
     $BUILDER compose down -v
@@ -1038,6 +1045,7 @@ function verify_stop_infrastructure_once() {
   fi
   
   if [[ "$kafka_needed" == "true" ]]; then
+    echo ""
     echo "Stopping Kafka infrastructure..."
     cd kafka
     $BUILDER compose down -v
@@ -1045,6 +1053,7 @@ function verify_stop_infrastructure_once() {
   fi
   
   if [[ "$jpa_mysql_needed" == "true" ]]; then
+    echo ""
     echo "Stopping JPA-MySQL infrastructure..."
     cd jpa-mysql
     $BUILDER compose down -v
@@ -1062,14 +1071,6 @@ function verify_main() {
   
   if [[ "$DRY_RUN" == "true" ]]; then
     local -a apps=($(get_apps_to_build "$TARGET_APP"))
-    
-    echo "========================================"
-    echo "DOCKER IMAGE VERIFICATION (DRY RUN)"
-    echo "========================================"
-    echo "Target: $TARGET_APP"
-    echo "Mode: ${MODE}"
-    echo "Builder: $BUILDER"
-    echo ""
     
     for app in "${apps[@]}"; do
       local config="${APP_CONFIG[$app]}"
@@ -1137,11 +1138,15 @@ function verify_main() {
       
       local full_app="${app}-${MODE}"
       
+      echo
+      echo "┌───────────────────────────────────────────"
+      echo "│ ${framework^^}-${app#*-} (${MODE^^})"
+      echo "└───────────────────────────────────────────"
+
       echo "Would test: ${framework^^}-${app#*-}-${MODE}"
       echo "  Image: ${image}:${tag_version}"
       echo "  Port: $port"
       echo "  Test: $test_type"
-      echo ""
       
       VERIFY_ORDER+=("$full_app")
       VERIFY_RESULTS["${full_app}_status"]="DRY-RUN"
@@ -1156,14 +1161,6 @@ function verify_main() {
   fi
   
   local -a apps=($(get_apps_to_build "$TARGET_APP"))
-  
-  echo "========================================"
-  echo "DOCKER IMAGE VERIFICATION"
-  echo "========================================"
-  echo "Target: $TARGET_APP"
-  echo "Mode: ${MODE}"
-  echo "Builder: $BUILDER"
-  echo ""
   
   if [[ "$manage_infrastructure" == "true" ]]; then
     verify_start_infrastructure_once
@@ -1245,6 +1242,27 @@ function verify_app() {
     *) test_type="unknown" ;;
   esac
   
+  local tag_version
+  case "$framework" in
+    quarkus) tag_version="${QUARKUS_VERSION:-latest}" ;;
+    micronaut) tag_version="${MICRONAUT_VERSION:-latest}" ;;
+    springboot) tag_version="${SPRING_BOOT_VERSION:-latest}" ;;
+    *) tag_version="latest" ;;
+  esac
+
+  echo
+  echo "┌───────────────────────────────────────────"
+  echo "│ ${framework^^}-${app#*-} (${MODE^^})"
+  echo "└───────────────────────────────────────────"
+  
+  local full_image="${image}:${tag_version}"
+  if ! check_image_exists "$full_image"; then
+    echo "✘ Image not found: $full_image"
+    store_verify_result "$app-${MODE}" "FAIL" "N/A" "Image not found"
+    VERIFY_ORDER+=("${app}-${MODE}")
+    return 1
+  fi
+  
   case "$test_type" in
     simple-api)
       verify_test_simple_api "$app" "$framework" "$image" "$port"
@@ -1272,14 +1290,6 @@ function verify_test_simple_api() {
   local image="$3"
   local port="$4"
   local container_name="${app}-${MODE}"
-  
-  local tag_version
-  case "$framework" in
-    quarkus) tag_version="${QUARKUS_VERSION:-latest}" ;;
-    micronaut) tag_version="${MICRONAUT_VERSION:-latest}" ;;
-    springboot) tag_version="${SPRING_BOOT_VERSION:-latest}" ;;
-    *) tag_version="latest" ;;
-  esac
   
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" || {
     store_verify_result "$app-${MODE}" "FAIL" "N/A" "Container start failed"
@@ -1318,14 +1328,6 @@ function verify_test_jpa_mysql() {
   local image="$3"
   local port="$4"
   local container_name="${app}-${MODE}"
-  
-  local tag_version
-  case "$framework" in
-    quarkus) tag_version="${QUARKUS_VERSION:-latest}" ;;
-    micronaut) tag_version="${MICRONAUT_VERSION:-latest}" ;;
-    springboot) tag_version="${SPRING_BOOT_VERSION:-latest}" ;;
-    *) tag_version="latest" ;;
-  esac
   
   local env_vars="-e MYSQL_HOST=mysql --network jpa-mysql_default"
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" "$env_vars" || {
@@ -1368,14 +1370,6 @@ function verify_test_kafka_producer() {
   local port="$4"
   local container_name="${app}-${MODE}"
   
-  local tag_version
-  case "$framework" in
-    quarkus) tag_version="${QUARKUS_VERSION:-latest}" ;;
-    micronaut) tag_version="${MICRONAUT_VERSION:-latest}" ;;
-    springboot) tag_version="${SPRING_BOOT_VERSION:-latest}" ;;
-    *) tag_version="latest" ;;
-  esac
-  
   local env_vars="-e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network kafka_default"
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" "$env_vars" || {
     store_verify_result "$app-${MODE}" "FAIL" "N/A" "Container start failed"
@@ -1417,14 +1411,6 @@ function verify_test_kafka_consumer() {
   local port="$4"
   local container_name="${app}-${MODE}"
   
-  local tag_version
-  case "$framework" in
-    quarkus) tag_version="${QUARKUS_VERSION:-latest}" ;;
-    micronaut) tag_version="${MICRONAUT_VERSION:-latest}" ;;
-    springboot) tag_version="${SPRING_BOOT_VERSION:-latest}" ;;
-    *) tag_version="latest" ;;
-  esac
-  
   local env_vars="-e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network kafka_default"
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" "$env_vars" || {
     store_verify_result "$app-${MODE}" "FAIL" "N/A" "Container start failed"
@@ -1463,14 +1449,6 @@ function verify_test_elasticsearch() {
   local image="$3"
   local port="$4"
   local container_name="${app}-${MODE}"
-  
-  local tag_version
-  case "$framework" in
-    quarkus) tag_version="${QUARKUS_VERSION:-latest}" ;;
-    micronaut) tag_version="${MICRONAUT_VERSION:-latest}" ;;
-    springboot) tag_version="${SPRING_BOOT_VERSION:-latest}" ;;
-    *) tag_version="latest" ;;
-  esac
   
   local env_vars="-e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default"
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" "$env_vars" || {

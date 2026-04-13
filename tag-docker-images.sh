@@ -100,14 +100,28 @@ case "$TARGET_APP" in
   *-native)
     MODES_TO_TEST=(native)
     ;;
+  *-kafka)
+    MODES_TO_TEST=(jvm native)
+    ;;
   *)
     MODES_TO_TEST=(jvm native)
     ;;
 esac
 
 # Run tag for each mode
+start_time=$(date +"%Y-%m-%d %H:%M:%S")
+
 for mode in "${MODES_TO_TEST[@]}"; do
   MODE="$mode"
   init_configs
   tag_images
 done
+
+echo
+echo "┌───────────────────────────────────────────"
+echo "│ TAG SUMMARY"
+echo "└───────────────────────────────────────────"
+echo "Started:  ${start_time}"
+echo "Finished: $(date +"%Y-%m-%d %H:%M:%S")"
+echo
+echo "✔ Tag completed successfully"

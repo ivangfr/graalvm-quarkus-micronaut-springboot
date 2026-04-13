@@ -173,6 +173,14 @@ function init_configs() {
 parse_args "$@"
 init_configs
 
+echo
+echo "┌───────────────────────────────────────────"
+echo "│ VERIFYING DOCKER IMAGES"
+echo "└───────────────────────────────────────────"
+echo "Target:   ${TARGET_APP}"
+echo "Builder:  ${BUILDER}"
+echo
+
 validate_kafka_verify_target() {
   local base="${TARGET_APP%-jvm}"
   base="${base%-native}"
@@ -229,7 +237,7 @@ case "$TARGET_APP" in
 esac
 
 # Run verification for each mode
-start_time=$(date)
+start_time=$(date +"%Y-%m-%d %H:%M:%S")
 verify_failed=0
 
 declare -a VERIFY_ORDER=()
@@ -259,13 +267,18 @@ if [[ -n "$CSV_OUTPUT" ]]; then
   export_verify_csv
 fi
 
+echo
+echo "┌───────────────────────────────────────────"
+echo "│ VERIFICATION SUMMARY"
+echo "└───────────────────────────────────────────"
+echo "Started:  ${start_time}"
+echo "Finished: $(date +"%Y-%m-%d %H:%M:%S")"
+echo
+
 if [[ $verify_failed -eq 0 ]]; then
-  echo "Verification completed successfully"
+  echo "✔ Verification completed successfully"
 else
-  echo "Verification completed with some failures"
+  echo "✘ Verification completed with some failures"
 fi
 
-echo
-echo "==>  START AT: ${start_time}"
-echo "==> FINISH AT: $(date)"
 echo
