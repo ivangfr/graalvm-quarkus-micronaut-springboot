@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
@@ -38,7 +37,7 @@ public class BookController {
     @GetMapping
     public List<BookResponse> getBooks() {
         log.info("Received request to get all books");
-        return bookService.getBooks().stream().map(bookMapper::toBookResponse).collect(Collectors.toList());
+        return bookService.getBooks().stream().map(bookMapper::toBookResponse).toList();
     }
 
     @GetMapping("/{id}")

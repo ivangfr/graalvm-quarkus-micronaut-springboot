@@ -1,7 +1,6 @@
 package com.ivanfranchin.quarkuselasticsearch.service;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch._types.FieldValue;
 import co.elastic.clients.elasticsearch.core.IndexResponse;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
@@ -53,8 +52,8 @@ public class MovieServiceImpl implements MovieService {
             SearchResponse<Movie> searchResponse = client.search(searchRequestBuilder -> searchRequestBuilder
                             .index(moviesIndex)
                             .query(queryBuilder -> queryBuilder
-                                    .term(termQueryBuilder -> termQueryBuilder
-                                            .field("title").value(FieldValue.of(title)))),
+                                    .match(matchQueryBuilder -> matchQueryBuilder
+                                            .field("title").query(title))),
                     Movie.class);
             List<Hit<Movie>> hits = searchResponse.hits().hits();
             log.info("Searching for '{}' took {} and found {}", title, searchResponse.took(), hits.size());

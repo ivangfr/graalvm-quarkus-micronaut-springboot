@@ -17,7 +17,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Path("/api/books")
 public class BookResource {
@@ -33,7 +32,7 @@ public class BookResource {
     @GET
     public List<BookResponse> getBooks() {
         log.info("Received request to get all books");
-        return bookService.getBooks().stream().map(bookMapper::toBookResponse).collect(Collectors.toList());
+        return bookService.getBooks().stream().map(bookMapper::toBookResponse).toList();
     }
 
     @GET

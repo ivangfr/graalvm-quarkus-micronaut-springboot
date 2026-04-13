@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import jakarta.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller("/api/books")
 public class BookController {
@@ -35,7 +34,7 @@ public class BookController {
     @Get
     public List<BookResponse> getBooks() {
         log.info("Received request to get all books");
-        return bookService.getBooks().stream().map(bookMapper::toBookResponse).collect(Collectors.toList());
+        return bookService.getBooks().stream().map(bookMapper::toBookResponse).toList();
     }
 
     @Get("/{id}")
