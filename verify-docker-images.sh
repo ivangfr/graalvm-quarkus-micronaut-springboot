@@ -174,9 +174,9 @@ parse_args "$@"
 init_configs
 
 echo
-echo "┌───────────────────────────────────────────"
-echo "│ VERIFYING DOCKER IMAGES"
-echo "└───────────────────────────────────────────"
+echo "╔═══════════════════════════════════════════"
+echo "║ VERIFYING DOCKER IMAGES"
+echo "╚═══════════════════════════════════════════"
 echo "Target:   ${TARGET_APP}"
 echo "Builder:  ${BUILDER}"
 echo
@@ -268,9 +268,9 @@ if [[ -n "$CSV_OUTPUT" ]]; then
 fi
 
 echo
-echo "┌───────────────────────────────────────────"
-echo "│ VERIFICATION SUMMARY"
-echo "└───────────────────────────────────────────"
+echo "╔═══════════════════════════════════════════"
+echo "║ VERIFICATION SUMMARY"
+echo "╚═══════════════════════════════════════════"
 echo "Started:  ${start_time}"
 echo "Finished: $(date +"%Y-%m-%d %H:%M:%S")"
 echo

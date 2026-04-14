@@ -5,7 +5,7 @@
 
 - ### springboot-simple-api
 
-  [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a simple REST API for greetings. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.5&packaging=jar&configurationFileFormat=properties&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-simple-api&packageName=com.ivanfranchin.springboot-simple-api&dependencies=webflux,actuator,validation,native)
+  [`Spring Boot`](https://docs.spring.io/spring-boot/index.html) Java Web application that exposes a simple REST API for greetings. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.5&packaging=jar&configurationFileFormat=properties&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-simple-api&packageName=com.ivanfranchin.springboot-simple-api&dependencies=web,actuator,validation,native)
   
   It has the following endpoints:
   ```text

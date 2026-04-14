@@ -11,11 +11,13 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.http.annotation.Status;
-
+import io.micronaut.scheduling.TaskExecutors;
+import io.micronaut.scheduling.annotation.ExecuteOn;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
 @Controller("/api/movies")
+@ExecuteOn(TaskExecutors.BLOCKING)
 public class MovieController {
 
     private final MovieService movieService;

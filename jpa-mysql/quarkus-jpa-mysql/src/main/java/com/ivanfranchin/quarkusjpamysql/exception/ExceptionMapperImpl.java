@@ -1,12 +1,11 @@
-package com.ivanfranchin.quarkusjpamysql.mapper;
-
-import com.ivanfranchin.quarkusjpamysql.exception.BookNotFoundException;
+package com.ivanfranchin.quarkusjpamysql.exception;
 
 import jakarta.json.Json;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
+
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 

@@ -618,8 +618,8 @@ function main() {
 # Verification Functions
 # =============================================================================
 
-VERIFY_TIMEOUT="${VERIFY_TIMEOUT:-120}"
-VERIFY_CONTAINER_MAX_MEM="${VERIFY_CONTAINER_MAX_MEM:-512M}"
+VERIFY_TIMEOUT="${VERIFY_TIMEOUT:-60}"
+VERIFY_CONTAINER_MAX_MEM="${VERIFY_CONTAINER_MAX_MEM:-1G}"
 
 declare -A VERIFY_RESULTS=()
 
@@ -686,13 +686,29 @@ function verify_start_container() {
   
   echo "Starting container: $name (image: $image, port: $port)"
   
-  local run_cmd="$BUILDER run -d --rm --name $name -p ${port}:8080 -m $VERIFY_CONTAINER_MAX_MEM $env_vars $image"
+  local run_output
+  run_output=$($BUILDER run -d --name "$name" -p ${port}:8080 -m $VERIFY_CONTAINER_MAX_MEM $env_vars "$image" 2>&1)
+  local run_exit_code=$?
   
-  if ! $run_cmd > /dev/null 2>&1; then
-    echo "ERROR: Failed to start container $name"
+  if [[ $run_exit_code -ne 0 ]]; then
+    echo "ERROR: Failed to start container $name (exit code: $run_exit_code)"
+    echo "$run_output"
     return 1
   fi
   
+  sleep 3
+  
+  local status
+  status=$($BUILDER ps --filter "name=$name" --format "{{.Status}}" 2>/dev/null || echo "")
+  
+  if [[ -z "$status" ]] || [[ "$status" == "Exited"* ]]; then
+    echo "ERROR: Container $name failed to start"
+    echo "Container output:"
+    $BUILDER logs "$name" 2>&1 | head -20
+    $BUILDER rm -f "$name" >/dev/null 2>&1 || true
+    return 1
+  fi
+
   return 0
 }
 
@@ -701,6 +717,7 @@ function verify_stop_container() {
   
   echo "Stopping container: $name"
   $BUILDER stop -t 5 "$name" > /dev/null 2>&1 || true
+  $BUILDER rm -f "$name" > /dev/null 2>&1 || true
 }
 
 function extract_startup_time_from_log() {
@@ -1293,6 +1310,7 @@ function verify_test_simple_api() {
   
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" || {
     store_verify_result "$app-${MODE}" "FAIL" "N/A" "Container start failed"
+    VERIFY_ORDER+=("${app}-${MODE}")
     verify_stop_container "$container_name" 2>/dev/null || true
     return 1
   }
@@ -1304,7 +1322,7 @@ function verify_test_simple_api() {
     springboot) startup_pattern="Started" ;;
   esac
   
-  if verify_wait_for_container_log "$container_name" "$startup_pattern" 120; then
+  if verify_wait_for_container_log "$container_name" "$startup_pattern" 60; then
     local startup_time
     startup_time=$(extract_startup_time_from_log "$framework")
     
@@ -1332,6 +1350,7 @@ function verify_test_jpa_mysql() {
   local env_vars="-e MYSQL_HOST=mysql --network jpa-mysql_default"
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" "$env_vars" || {
     store_verify_result "$app-${MODE}" "FAIL" "N/A" "Container start failed"
+    VERIFY_ORDER+=("${app}-${MODE}")
     verify_stop_container "$container_name" 2>/dev/null || true
     return 1
   }
@@ -1343,7 +1362,7 @@ function verify_test_jpa_mysql() {
     springboot) startup_pattern="Started" ;;
   esac
   
-  if verify_wait_for_container_log "$container_name" "$startup_pattern" 120; then
+  if verify_wait_for_container_log "$container_name" "$startup_pattern" 60; then
     local startup_time
     startup_time=$(extract_startup_time_from_log "$framework")
     
@@ -1373,6 +1392,7 @@ function verify_test_kafka_producer() {
   local env_vars="-e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network kafka_default"
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" "$env_vars" || {
     store_verify_result "$app-${MODE}" "FAIL" "N/A" "Container start failed"
+    VERIFY_ORDER+=("${app}-${MODE}")
     verify_stop_container "$container_name" 2>/dev/null || true
     return 1
   }
@@ -1384,7 +1404,7 @@ function verify_test_kafka_producer() {
     springboot) startup_pattern="Started" ;;
   esac
   
-  if verify_wait_for_container_log "$container_name" "$startup_pattern" 120; then
+  if verify_wait_for_container_log "$container_name" "$startup_pattern" 60; then
     local startup_time
     startup_time=$(extract_startup_time_from_log "$framework")
     
@@ -1414,6 +1434,7 @@ function verify_test_kafka_consumer() {
   local env_vars="-e KAFKA_HOST=kafka -e KAFKA_PORT=9092 --network kafka_default"
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" "$env_vars" || {
     store_verify_result "$app-${MODE}" "FAIL" "N/A" "Container start failed"
+    VERIFY_ORDER+=("${app}-${MODE}")
     verify_stop_container "$container_name" 2>/dev/null || true
     return 1
   }
@@ -1425,7 +1446,7 @@ function verify_test_kafka_consumer() {
     springboot) startup_pattern="Started" ;;
   esac
   
-  if verify_wait_for_container_log "$container_name" "$startup_pattern" 120; then
+  if verify_wait_for_container_log "$container_name" "$startup_pattern" 60; then
     local startup_time
     startup_time=$(extract_startup_time_from_log "$framework")
     
@@ -1453,6 +1474,7 @@ function verify_test_elasticsearch() {
   local env_vars="-e ELASTICSEARCH_HOST=elasticsearch --network elasticsearch_default"
   verify_start_container "$container_name" "${image}:${tag_version}" "$port" "$env_vars" || {
     store_verify_result "$app-${MODE}" "FAIL" "N/A" "Container start failed"
+    VERIFY_ORDER+=("${app}-${MODE}")
     verify_stop_container "$container_name" 2>/dev/null || true
     return 1
   }
@@ -1464,7 +1486,7 @@ function verify_test_elasticsearch() {
     springboot) startup_pattern="Started" ;;
   esac
   
-  if verify_wait_for_container_log "$container_name" "$startup_pattern" 120; then
+  if verify_wait_for_container_log "$container_name" "$startup_pattern" 60; then
     local startup_time
     startup_time=$(extract_startup_time_from_log "$framework")
     

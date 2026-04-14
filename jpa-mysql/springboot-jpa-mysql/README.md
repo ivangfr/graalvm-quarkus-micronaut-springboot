@@ -5,7 +5,7 @@
 
 - ### springboot-jpa-mysql
 
-  [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) Java Web application that exposes a REST API for managing books. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.5&packaging=jar&configurationFileFormat=properties&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-jpa-mysql&packageName=com.ivanfranchin.springboot-jpa-mysql&dependencies=webflux,actuator,validation,native,data-jpa,mysql,lombok)
+  [`Spring Boot`](https://docs.spring.io/spring-boot/index.html) Java Web application that exposes a REST API for managing books. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.5&packaging=jar&configurationFileFormat=properties&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-jpa-mysql&packageName=com.ivanfranchin.springboot-jpa-mysql&dependencies=web,actuator,validation,native,data-jpa,mysql,lombok)
 
   It has the following endpoints:
   ```text

@@ -18,7 +18,7 @@ import java.util.Map;
 public class NewsProducerConfig {
 
     @Bean
-    public ProducerFactory<String, News> producerFactory(@Value("${spring.kafka.bootstrap-servers}") String bootstrapServers) {
+    ProducerFactory<String, News> producerFactory(@Value("${spring.kafka.bootstrap-servers}") String bootstrapServers) {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -28,7 +28,7 @@ public class NewsProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, News> kafkaTemplate(ProducerFactory<String, News> producerFactory) {
+    KafkaTemplate<String, News> kafkaTemplate(ProducerFactory<String, News> producerFactory) {
         return new KafkaTemplate<>(producerFactory);
     }
 }

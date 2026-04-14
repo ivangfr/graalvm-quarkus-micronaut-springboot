@@ -1,13 +1,13 @@
 # graalvm-quarkus-micronaut-springboot
 ## `> kafka > springboot-kafka`
 
-The goal of this project is to implement two [`Spring Boot`](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) applications: one that _produces_ messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_ those messages.
+The goal of this project is to implement two [`Spring Boot`](https://docs.spring.io/spring-boot/index.html) applications: one that _produces_ messages to a [`Kafka`](https://kafka.apache.org/) topic and another that _consumes_ those messages.
 
 ## Applications
 
 - ### kafka-producer
 
-  `Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.5&packaging=jar&configurationFileFormat=properties&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-kafka-producer&packageName=com.ivanfranchin.springboot-kafka-producer&dependencies=webflux,actuator,validation,native,kafka)
+  `Spring Boot` Web Java application that exposes one endpoint at which users can post `news`. Once a request is made, `kafka-producer` pushes a message about the `news` to `Kafka`. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.5&packaging=jar&configurationFileFormat=properties&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-kafka-producer&packageName=com.ivanfranchin.springboot-kafka-producer&dependencies=web,actuator,validation,native,kafka)
 
   It has the following endpoints:
   ```text
@@ -18,7 +18,7 @@ The goal of this project is to implement two [`Spring Boot`](https://docs.spring
 
 - ### kafka-consumer
 
-  `Spring Boot` Web Java application that listens to messages (published by the `kafka-producer`) and logs it. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.5&packaging=jar&configurationFileFormat=properties&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-kafka-consumer&packageName=com.ivanfranchin.springboot-kafka-consumer&dependencies=webflux,actuator,native,kafka)
+  `Spring Boot` Web Java application that listens to messages (published by the `kafka-producer`) and logs it. [Spring Initializr](https://start.spring.io/#!type=maven-project&language=java&platformVersion=4.0.5&packaging=jar&configurationFileFormat=properties&jvmVersion=17&groupId=com.ivanfranchin&artifactId=springboot-kafka-consumer&packageName=com.ivanfranchin.springboot-kafka-consumer&dependencies=web,actuator,native,kafka)
 
   It has the following endpoints:
   ```text

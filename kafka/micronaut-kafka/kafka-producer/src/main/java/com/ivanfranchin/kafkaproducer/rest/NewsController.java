@@ -6,6 +6,9 @@ import com.ivanfranchin.kafkaproducer.rest.dto.CreateNewsRequest;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
+import io.micronaut.scheduling.TaskExecutors;
+import io.micronaut.scheduling.annotation.ExecuteOn;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +16,7 @@ import jakarta.validation.Valid;
 import java.util.UUID;
 
 @Controller("/api/news")
+@ExecuteOn(TaskExecutors.BLOCKING)
 public class NewsController {
 
     private static final Logger log = LoggerFactory.getLogger(NewsController.class);

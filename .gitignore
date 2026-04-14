@@ -1,3 +1,5 @@
+results-*.csv
+
 # Maven
 target/
 pom.xml.tag

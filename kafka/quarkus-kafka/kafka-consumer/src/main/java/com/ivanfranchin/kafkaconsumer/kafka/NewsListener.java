@@ -13,6 +13,8 @@ public class NewsListener {
 
     private static final Logger log = LoggerFactory.getLogger(NewsListener.class);
 
+    // I didn't find a way to make the method blocking and with metadata, so I kept it as is.
+    // If you know how to make it non-blocking, please let me know.
     @Incoming("news")
     public CompletionStage<Void> receive(Message<News> message) {
         var metadata = message.getMetadata(IncomingKafkaRecordMetadata.class).orElseThrow();

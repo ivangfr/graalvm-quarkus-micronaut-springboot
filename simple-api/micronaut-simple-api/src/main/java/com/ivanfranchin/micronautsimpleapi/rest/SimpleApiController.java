@@ -5,12 +5,16 @@ import com.ivanfranchin.micronautsimpleapi.service.GreetingService;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.QueryValue;
+import io.micronaut.scheduling.TaskExecutors;
+import io.micronaut.scheduling.annotation.ExecuteOn;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jakarta.validation.constraints.NotBlank;
 
 @Controller("/api/greeting")
+@ExecuteOn(TaskExecutors.BLOCKING)
 public class SimpleApiController {
 
     private static final Logger log = LoggerFactory.getLogger(SimpleApiController.class);

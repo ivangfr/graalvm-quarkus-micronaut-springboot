@@ -20,15 +20,15 @@ import java.util.Map;
 public class NewsConsumerConfig {
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, News> kafkaListenerContainerFactory(ConsumerFactory<String, News> consumerFactory) {
+    ConcurrentKafkaListenerContainerFactory<String, News> kafkaListenerContainerFactory(ConsumerFactory<String, News> consumerFactory) {
         ConcurrentKafkaListenerContainerFactory<String, News> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
         return factory;
     }
 
     @Bean
-    public ConsumerFactory<String, News> consumerFactory(@Value("${spring.kafka.bootstrap-servers}") String bootstrapServers,
-                                                         @Value("${spring.kafka.consumer.auto-offset-reset}") String autoOffsetReset) {
+    ConsumerFactory<String, News> consumerFactory(@Value("${spring.kafka.bootstrap-servers}") String bootstrapServers,
+                                                  @Value("${spring.kafka.consumer.auto-offset-reset}") String autoOffsetReset) {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
