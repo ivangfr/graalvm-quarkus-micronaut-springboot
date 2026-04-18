@@ -4,9 +4,9 @@ SECONDS=0
 
 if [ "$1" = "native" ];
 then
-  ../mvnw package -Pgraalvm -Dpackaging=docker-native -Djib.to.image=ivanfranchin/micronaut-kafka-consumer-native:latest
+  ../mvnw package -Pgraalvm -Dpackaging=docker-native -Djib.to.image=docker.io/ivanfranchin/micronaut-kafka-consumer-native:latest
 else
-  ../mvnw package -Dpackaging=docker -Djib.to.image=ivanfranchin/micronaut-kafka-consumer-jvm:latest
+  ../mvnw package -Dpackaging=docker -Djib.to.image=docker.io/ivanfranchin/micronaut-kafka-consumer-jvm:latest
 fi
 
 duration=$SECONDS

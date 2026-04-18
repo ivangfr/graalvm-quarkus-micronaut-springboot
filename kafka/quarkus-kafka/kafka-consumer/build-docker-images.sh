@@ -5,9 +5,9 @@ BUILDER="${BUILDER:-podman}"
 
 if [ "$1" = "native" ];
 then
-  $BUILDER build -f src/main/docker/Dockerfile.native -t ivanfranchin/quarkus-kafka-consumer-native:latest .
+  $BUILDER build -f src/main/docker/Dockerfile.native -t docker.io/ivanfranchin/quarkus-kafka-consumer-native:latest .
 else
-  $BUILDER build -f src/main/docker/Dockerfile.jvm -t ivanfranchin/quarkus-kafka-consumer-jvm:latest .
+  $BUILDER build -f src/main/docker/Dockerfile.jvm -t docker.io/ivanfranchin/quarkus-kafka-consumer-jvm:latest .
 fi
 
 duration=$SECONDS

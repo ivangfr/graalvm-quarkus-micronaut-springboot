@@ -4,9 +4,9 @@ SECONDS=0
 
 if [ "$1" = "native" ];
 then
-  ./mvnw -Pnative spring-boot:build-image -Dspring-boot.build-image.imageName=ivanfranchin/springboot-elasticsearch-native:latest
+  ./mvnw -Pnative spring-boot:build-image -Dspring-boot.build-image.imageName=docker.io/ivanfranchin/springboot-elasticsearch-native:latest
 else
-  ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=ivanfranchin/springboot-elasticsearch-jvm:latest
+  ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=docker.io/ivanfranchin/springboot-elasticsearch-jvm:latest
 fi
 
 duration=$SECONDS
