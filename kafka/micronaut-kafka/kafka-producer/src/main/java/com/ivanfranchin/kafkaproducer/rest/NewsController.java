@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 import java.util.UUID;
 
 @Controller("/api/news")
-@ExecuteOn(TaskExecutors.BLOCKING)
+@ExecuteOn(TaskExecutors.IO)
 public class NewsController {
 
     private static final Logger log = LoggerFactory.getLogger(NewsController.class);

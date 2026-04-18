@@ -37,6 +37,47 @@ On [ivangfr.github.io](https://ivangfr.github.io), I have compiled my Proof-of-C
 | Micronaut   | 4.10.11 |
 | Spring Boot | 4.0.5   |
 
+## Thread Pool Configuration
+
+For fair benchmarking across frameworks, the Quarkus and Micronaut applications are configured to use 200 worker threads, matching Spring Boot's default Tomcat thread pool.
+
+| Framework   | Configuration Property | Default (without config) |
+|-------------|------------------------|--------------------------|
+| Spring Boot | `server.tomcat.threads.max=200` (Tomcat default) | 200 |
+| Quarkus     | `quarkus.thread-pool.max-threads=200` | Math.max(8×CPU, 200) |
+| Micronaut   | `micronaut.executors.io.number-of-threads=200`<br>`micronaut.executors.io.type=fixed` | 2 × CPU |
+
+### Applications Updated
+
+- **simple-api**: All three frameworks
+- **jpa-mysql**: All three frameworks
+- **elasticsearch**: All three frameworks
+- **kafka-producer**: All three frameworks (has HTTP endpoints)
+- **kafka-consumer**: Not updated (no HTTP endpoints)
+
+---
+
+## Blocking vs Non-Blocking Behavior
+
+The sample applications use blocking endpoints (synchronous return types) across all frameworks:
+
+| Framework | Embedded Server | Endpoint Behavior |
+|-----------|-----------------|-------------------|
+| Spring Boot | Tomcat (blocking) | **Blocking** |
+| Quarkus | Vert.x (non-blocking) | **Blocking** (smart dispatch → worker thread) |
+| Micronaut | Netty (non-blocking) | **Blocking** (`@ExecuteOn(TaskExecutors.IO)`) |
+
+### Key Points
+
+- **Spring Boot**: Uses `@RestController` with synchronous return types. Spring MVC on Tomcat is blocking by default.
+- **Quarkus**: Uses JAX-RS (`@Path`, `@GET`). Quarkus uses smart dispatch based on method return type:
+  - Returns `T` → Worker thread (blocking)
+  - Returns `Uni<T>` → I/O thread (non-blocking)
+  - All sample endpoints return synchronous types, so they run on worker threads.
+- **Micronaut**: Uses `@Controller` with `@ExecuteOn(TaskExecutors.BLOCKING)` annotation. Without this, Micronaut defaults to non-blocking on Netty's I/O threads.
+
+> **Note**: Even though Quarkus and Micronaut use non-blocking servers (Vert.x/Netty), the endpoint behavior depends on the code within the endpoint. Blocking endpoints run on worker threads in all frameworks.
+
 ## Prerequisites
 
 - [`Java 17`](https://www.oracle.com/java/technologies/downloads/#java17) or higher;

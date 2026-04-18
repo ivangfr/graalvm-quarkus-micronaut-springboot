@@ -15,10 +15,14 @@ import io.micronaut.scheduling.TaskExecutors;
 import io.micronaut.scheduling.annotation.ExecuteOn;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller("/api/movies")
-@ExecuteOn(TaskExecutors.BLOCKING)
+@ExecuteOn(TaskExecutors.IO)
 public class MovieController {
+
+    private static final Logger log = LoggerFactory.getLogger(MovieController.class);
 
     private final MovieService movieService;
 
@@ -29,12 +33,14 @@ public class MovieController {
     @Status(HttpStatus.CREATED)
     @Post
     public String createMovie(@Valid @Body CreateMovieRequest createMovieRequest) {
+        log.info("Received request to create movie: {}", createMovieRequest);
         Movie movie = toMovie(createMovieRequest);
         return movieService.saveMovie(movie);
     }
 
     @Get
     public SearchMovieResponse searchMovies(@QueryValue("title") @NotBlank String title) {
+        log.info("Received request to search movies with title: {}", title);
         return movieService.searchMovies(title);
     }
 

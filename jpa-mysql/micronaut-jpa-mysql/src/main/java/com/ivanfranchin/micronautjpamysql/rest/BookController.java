@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @Controller("/api/books")
-@ExecuteOn(TaskExecutors.BLOCKING)
+@ExecuteOn(TaskExecutors.IO)
 public class BookController {
 
     private static final Logger log = LoggerFactory.getLogger(BookController.class);

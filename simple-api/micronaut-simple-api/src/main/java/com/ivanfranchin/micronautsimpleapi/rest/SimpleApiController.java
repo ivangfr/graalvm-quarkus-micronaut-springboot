@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import jakarta.validation.constraints.NotBlank;
 
 @Controller("/api/greeting")
-@ExecuteOn(TaskExecutors.BLOCKING)
+@ExecuteOn(TaskExecutors.IO)
 public class SimpleApiController {
 
     private static final Logger log = LoggerFactory.getLogger(SimpleApiController.class);

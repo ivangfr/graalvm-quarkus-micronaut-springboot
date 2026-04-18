@@ -13,15 +13,20 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/api/movies")
 public class MovieResource {
+
+    private static final Logger log = LoggerFactory.getLogger(MovieResource.class);
 
     @Inject
     MovieService movieService;
 
     @POST
     public Response createMovie(@Valid CreateMovieRequest createMovieRequest) {
+        log.info("Received request to create movie: {}.", createMovieRequest);
         Movie movie = toMovie(createMovieRequest);
         String id = movieService.saveMovie(movie);
         return Response.status(Response.Status.CREATED).entity(id).build();
@@ -29,6 +34,7 @@ public class MovieResource {
 
     @GET
     public SearchMovieResponse searchMovies(@QueryParam("title") @NotBlank String title) {
+        log.info("Received request to search movies with title: {}.", title);
         return movieService.searchMovies(title);
     }
 
