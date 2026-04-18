@@ -265,10 +265,6 @@ done
 
 print_results
 
-if [[ -n "$CSV_OUTPUT" ]]; then
-  export_csv
-fi
-
 echo
 echo "╔═══════════════════════════════════════════"
 echo "║ BUILD SUMMARY"

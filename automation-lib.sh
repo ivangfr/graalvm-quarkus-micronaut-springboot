@@ -273,6 +273,7 @@ function build_app() {
 
 function print_results() {
   local -a apps=($(get_apps_to_build "$TARGET_APP"))
+  local csv_written=false
 
   printf "\n"
   printf "| %-32s | %-9s | %-8s | %-11s | %-10s |\n" "Application" "Pkg Time" "Pkg Size" "Build Time" "Image Size"
@@ -303,41 +304,55 @@ function print_results() {
           "${RESULTS[${app}${suffix}_jar_size]:-N/A}" \
           "${RESULTS[${app}${suffix}_build_time]:-N/A}" \
           "${RESULTS[${app}${suffix}_image_size]:-N/A}"
+
+        if [[ -n "$CSV_OUTPUT" && "$csv_written" == "false" ]]; then
+          write_csv_header
+          csv_written=true
+        fi
+        if [[ -n "$CSV_OUTPUT" ]]; then
+          write_csv_row "$mode" "$app" "$suffix"
+        fi
       done
     done
   else
     # Original behavior for single mode
     for app in "${apps[@]}"; do
+      local suffix=""
+      [[ "$MODE" == "native" ]] && suffix="_native"
+
       printf "| %-32s | %-9s | %-8s | %-11s | %-10s |\n" \
         "${app}-${MODE}" \
-        "${RESULTS[${app}_packaging_time]:-N/A}" \
-        "${RESULTS[${app}_jar_size]:-N/A}" \
-        "${RESULTS[${app}_build_time]:-N/A}" \
-        "${RESULTS[${app}_image_size]:-N/A}"
+        "${RESULTS[${app}${suffix}_packaging_time]:-N/A}" \
+        "${RESULTS[${app}${suffix}_jar_size]:-N/A}" \
+        "${RESULTS[${app}${suffix}_build_time]:-N/A}" \
+        "${RESULTS[${app}${suffix}_image_size]:-N/A}"
+
+      if [[ -n "$CSV_OUTPUT" && "$csv_written" == "false" ]]; then
+        write_csv_header
+        csv_written=true
+      fi
+      if [[ -n "$CSV_OUTPUT" ]]; then
+        write_csv_row "$MODE" "$app" "$suffix"
+      fi
     done
+  fi
+
+  if [[ -n "$CSV_OUTPUT" ]]; then
+    echo "Results exported to: $CSV_OUTPUT"
   fi
 }
 
-function export_csv() {
-  local -a apps=($(get_apps_to_build "$TARGET_APP"))
-  local file="${CSV_OUTPUT:-results-$(date +%Y%m%d-%H%M%S).csv}"
-
+function write_csv_header() {
   {
-    echo "application,framework,packing_time,jar_size,build_time,image_size,version"
-    for app in "${apps[@]}"; do
-      local framework="${app%-*}"
-      local version
-      case "$framework" in
-        quarkus) version="${QUARKUS_VERSION:-latest}" ;;
-        micronaut) version="${MICRONAUT_VERSION:-latest}" ;;
-        springboot) version="${SPRING_BOOT_VERSION:-latest}" ;;
-        *) version="latest" ;;
-      esac
-      echo "${app}-${MODE},$framework,${RESULTS[${app}_packaging_time]:-},${RESULTS[${app}_jar_size]:-},${RESULTS[${app}_build_time]:-},${RESULTS[${app}_image_size]:-},${version}"
-    done
-  } >> "$file"
+    echo "application,packing_time,jar_size,build_time,image_size"
+  } >> "$CSV_OUTPUT"
+}
 
-  echo "Results exported to: $file"
+function write_csv_row() {
+  local mode="$1"
+  local app="$2"
+  local suffix="$3"
+  echo "${app}-${mode},${RESULTS[${app}${suffix}_packaging_time]:-},${RESULTS[${app}${suffix}_jar_size]:-},${RESULTS[${app}${suffix}_build_time]:-},${RESULTS[${app}${suffix}_image_size]:-}" >> "$CSV_OUTPUT"
 }
 
 function show_help() {
