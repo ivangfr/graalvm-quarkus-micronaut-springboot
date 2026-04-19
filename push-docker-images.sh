@@ -110,11 +110,12 @@ esac
 
 # Run push for each mode
 start_time=$(date +"%Y-%m-%d %H:%M:%S")
+push_failed=0
 
 for mode in "${MODES_TO_TEST[@]}"; do
   MODE="$mode"
   init_configs
-  push_images
+  push_images || push_failed=1
 done
 
 echo
@@ -124,4 +125,9 @@ echo "└───────────────────────�
 echo "Started:  ${start_time}"
 echo "Finished: $(date +"%Y-%m-%d %H:%M:%S")"
 echo
-echo "✔ Push completed successfully"
+
+if [[ $push_failed -eq 0 ]]; then
+  echo "✔ Push completed successfully"
+else
+  echo "✘ Push completed with some failures"
+fi

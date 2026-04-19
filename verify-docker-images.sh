@@ -44,9 +44,9 @@ Elasticsearch:
 
 Options:
   --builder=BUILDER           Container builder (podman or docker)
-  --quarkus-version=TAG       Quarkus image tag (default: latest)
-  --micronaut-version=TAG     Micronaut image tag (default: latest)
-  --springboot-version=TAG    Spring Boot image tag (default: latest)
+  --quarkus-version=TAG       Quarkus image tag (default: ${QUARKUS_VERSION:-latest})
+  --micronaut-version=TAG     Micronaut image tag (default: ${MICRONAUT_VERSION:-latest})
+  --springboot-version=TAG    Spring Boot image tag (default: ${SPRING_BOOT_VERSION:-latest})
   --csv[=FILE]                Export results to CSV file (default: results-TIMESTAMP.csv)
   --dry-run                   Show what would be tested
   -h, --help                  Show this help

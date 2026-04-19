@@ -106,12 +106,13 @@ esac
 
 # Run remove for each mode
 start_time=$(date +"%Y-%m-%d %H:%M:%S")
+remove_failed=0
 
 for mode in "${MODES_TO_TEST[@]}"; do
   MODE="$mode"
   # Re-initialize configs for each mode
   init_configs
-  remove_images
+  remove_images || remove_failed=1
 done
 
 echo
@@ -121,4 +122,9 @@ echo "└───────────────────────�
 echo "Started:  ${start_time}"
 echo "Finished: $(date +"%Y-%m-%d %H:%M:%S")"
 echo
-echo "✔ Remove completed successfully"
+
+if [[ $remove_failed -eq 0 ]]; then
+  echo "✔ Remove completed successfully"
+else
+  echo "✘ Remove completed with some failures"
+fi

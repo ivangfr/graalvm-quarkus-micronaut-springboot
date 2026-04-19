@@ -409,9 +409,9 @@ Elasticsearch:
 
 Options:
   --builder=BUILDER           Container builder (podman or docker)
-  --quarkus-version=TAG       Quarkus image tag (default: latest)
-  --micronaut-version=TAG     Micronaut image tag (default: latest)
-  --springboot-version=TAG    Spring Boot image tag (default: latest)
+  --quarkus-version=TAG       Quarkus image tag (default: ${QUARKUS_VERSION:-latest})
+  --micronaut-version=TAG     Micronaut image tag (default: ${MICRONAUT_VERSION:-latest})
+  --springboot-version=TAG    Spring Boot image tag (default: ${SPRING_BOOT_VERSION:-latest})
   --csv[=FILE]                Export results to CSV file (default: results-TIMESTAMP.csv)
   --dry-run                   Show what would be $action_past
   -h, --help                  Show this help
@@ -537,6 +537,8 @@ function tag_images() {
   echo "Tagging $count app(s) for: ${TARGET_APP}"
   echo
 
+  declare -A TAG_RESULTS
+
   for app in "${apps[@]}"; do
     local config="${APP_CONFIG[$app]}"
     IFS=':' read -r framework dir mvn_cmd jar_path build_cmd image <<< "$config"
@@ -557,15 +559,37 @@ function tag_images() {
     local src_tag="${image}:latest"
     local dst_tag="${image}:${tag_version}"
 
-      echo "Tagging: $src_tag -> $dst_tag"
+    echo "Tagging: $src_tag -> $dst_tag"
 
-      if [[ "$DRY_RUN" == "true" ]]; then
-        echo "  [DRY RUN] Would run: $BUILDER tag $src_tag $dst_tag"
+    if [[ "$DRY_RUN" == "true" ]]; then
+      echo "  [DRY RUN] Would run: $BUILDER tag $src_tag $dst_tag"
+      TAG_RESULTS["$app"]="DRY-RUN"
+    else
+      if $BUILDER tag "$src_tag" "$dst_tag" 2>&1; then
+        echo "  ✔ Tagged successfully"
+        TAG_RESULTS["$app"]="SUCCESS"
       else
-        $BUILDER tag "$src_tag" "$dst_tag" 2>/dev/null || true
+        echo "  ✘ Tag failed"
+        TAG_RESULTS["$app"]="FAILED"
       fi
+    fi
   done
 
+  echo
+  echo "Tag Results:"
+  local success=0
+  local failed=0
+  for app in "${apps[@]}"; do
+    local result="${TAG_RESULTS[$app]:-SKIPPED}"
+    if [[ "$result" == "SUCCESS" ]]; then
+      ((success++))
+    elif [[ "$result" == "FAILED" ]]; then
+      ((failed++))
+    fi
+    echo "  $app: $result"
+  done
+  echo
+  echo "Summary: $success tagged, $failed failed"
   echo
   echo "Done."
 }
@@ -576,6 +600,8 @@ function push_images() {
 
   echo "Pushing $count app(s) for: ${TARGET_APP}"
   echo
+
+  declare -A PUSH_RESULTS
 
   for app in "${apps[@]}"; do
     local config="${APP_CONFIG[$app]}"
@@ -596,15 +622,37 @@ function push_images() {
 
     local image_tag="${image}:${tag_version}"
 
-      echo "Pushing: $image_tag"
+    echo "Pushing: $image_tag"
 
-      if [[ "$DRY_RUN" == "true" ]]; then
-        echo "  [DRY RUN] Would run: $BUILDER push $image_tag"
+    if [[ "$DRY_RUN" == "true" ]]; then
+      echo "  [DRY RUN] Would run: $BUILDER push $image_tag"
+      PUSH_RESULTS["$app"]="DRY-RUN"
+    else
+      if $BUILDER push "$image_tag" 2>&1; then
+        echo "  ✔ Pushed successfully"
+        PUSH_RESULTS["$app"]="SUCCESS"
       else
-        $BUILDER push "$image_tag" 2>/dev/null || true
+        echo "  ✘ Push failed"
+        PUSH_RESULTS["$app"]="FAILED"
       fi
+    fi
   done
 
+  echo
+  echo "Push Results:"
+  local success=0
+  local failed=0
+  for app in "${apps[@]}"; do
+    local result="${PUSH_RESULTS[$app]:-SKIPPED}"
+    if [[ "$result" == "SUCCESS" ]]; then
+      ((success++))
+    elif [[ "$result" == "FAILED" ]]; then
+      ((failed++))
+    fi
+    echo "  $app: $result"
+  done
+  echo
+  echo "Summary: $success pushed, $failed failed"
   echo
   echo "Done."
 }

@@ -36,46 +36,46 @@ function init_configs() {
     # =========================================================================
     # Native image configs
     # =========================================================================
-    add_app_image "quarkus-simple-api" "quarkus" "ivanfranchin/quarkus-simple-api-native"
-    add_app_image "micronaut-simple-api" "micronaut" "ivanfranchin/micronaut-simple-api-native"
-    add_app_image "springboot-simple-api" "springboot" "ivanfranchin/springboot-simple-api-native"
+    add_app_image "quarkus-simple-api" "quarkus" "docker.io/ivanfranchin/quarkus-simple-api-native"
+    add_app_image "micronaut-simple-api" "micronaut" "docker.io/ivanfranchin/micronaut-simple-api-native"
+    add_app_image "springboot-simple-api" "springboot" "docker.io/ivanfranchin/springboot-simple-api-native"
 
-    add_app_image "quarkus-jpa-mysql" "quarkus" "ivanfranchin/quarkus-jpa-mysql-native"
-    add_app_image "micronaut-jpa-mysql" "micronaut" "ivanfranchin/micronaut-jpa-mysql-native"
-    add_app_image "springboot-jpa-mysql" "springboot" "ivanfranchin/springboot-jpa-mysql-native"
+    add_app_image "quarkus-jpa-mysql" "quarkus" "docker.io/ivanfranchin/quarkus-jpa-mysql-native"
+    add_app_image "micronaut-jpa-mysql" "micronaut" "docker.io/ivanfranchin/micronaut-jpa-mysql-native"
+    add_app_image "springboot-jpa-mysql" "springboot" "docker.io/ivanfranchin/springboot-jpa-mysql-native"
 
-    add_app_image "quarkus-kafka-producer" "quarkus" "ivanfranchin/quarkus-kafka-producer-native"
-    add_app_image "quarkus-kafka-consumer" "quarkus" "ivanfranchin/quarkus-kafka-consumer-native"
-    add_app_image "micronaut-kafka-producer" "micronaut" "ivanfranchin/micronaut-kafka-producer-native"
-    add_app_image "micronaut-kafka-consumer" "micronaut" "ivanfranchin/micronaut-kafka-consumer-native"
-    add_app_image "springboot-kafka-producer" "springboot" "ivanfranchin/springboot-kafka-producer-native"
-    add_app_image "springboot-kafka-consumer" "springboot" "ivanfranchin/springboot-kafka-consumer-native"
+    add_app_image "quarkus-kafka-producer" "quarkus" "docker.io/ivanfranchin/quarkus-kafka-producer-native"
+    add_app_image "quarkus-kafka-consumer" "quarkus" "docker.io/ivanfranchin/quarkus-kafka-consumer-native"
+    add_app_image "micronaut-kafka-producer" "micronaut" "docker.io/ivanfranchin/micronaut-kafka-producer-native"
+    add_app_image "micronaut-kafka-consumer" "micronaut" "docker.io/ivanfranchin/micronaut-kafka-consumer-native"
+    add_app_image "springboot-kafka-producer" "springboot" "docker.io/ivanfranchin/springboot-kafka-producer-native"
+    add_app_image "springboot-kafka-consumer" "springboot" "docker.io/ivanfranchin/springboot-kafka-consumer-native"
 
-    add_app_image "quarkus-elasticsearch" "quarkus" "ivanfranchin/quarkus-elasticsearch-native"
-    add_app_image "micronaut-elasticsearch" "micronaut" "ivanfranchin/micronaut-elasticsearch-native"
-    add_app_image "springboot-elasticsearch" "springboot" "ivanfranchin/springboot-elasticsearch-native"
+    add_app_image "quarkus-elasticsearch" "quarkus" "docker.io/ivanfranchin/quarkus-elasticsearch-native"
+    add_app_image "micronaut-elasticsearch" "micronaut" "docker.io/ivanfranchin/micronaut-elasticsearch-native"
+    add_app_image "springboot-elasticsearch" "springboot" "docker.io/ivanfranchin/springboot-elasticsearch-native"
   else
     # =========================================================================
     # JVM image configs
     # =========================================================================
-    add_app_image "quarkus-simple-api" "quarkus" "ivanfranchin/quarkus-simple-api-jvm"
-    add_app_image "micronaut-simple-api" "micronaut" "ivanfranchin/micronaut-simple-api-jvm"
-    add_app_image "springboot-simple-api" "springboot" "ivanfranchin/springboot-simple-api-jvm"
+    add_app_image "quarkus-simple-api" "quarkus" "docker.io/ivanfranchin/quarkus-simple-api-jvm"
+    add_app_image "micronaut-simple-api" "micronaut" "docker.io/ivanfranchin/micronaut-simple-api-jvm"
+    add_app_image "springboot-simple-api" "springboot" "docker.io/ivanfranchin/springboot-simple-api-jvm"
 
-    add_app_image "quarkus-jpa-mysql" "quarkus" "ivanfranchin/quarkus-jpa-mysql-jvm"
-    add_app_image "micronaut-jpa-mysql" "micronaut" "ivanfranchin/micronaut-jpa-mysql-jvm"
-    add_app_image "springboot-jpa-mysql" "springboot" "ivanfranchin/springboot-jpa-mysql-jvm"
+    add_app_image "quarkus-jpa-mysql" "quarkus" "docker.io/ivanfranchin/quarkus-jpa-mysql-jvm"
+    add_app_image "micronaut-jpa-mysql" "micronaut" "docker.io/ivanfranchin/micronaut-jpa-mysql-jvm"
+    add_app_image "springboot-jpa-mysql" "springboot" "docker.io/ivanfranchin/springboot-jpa-mysql-jvm"
 
-    add_app_image "quarkus-kafka-producer" "quarkus" "ivanfranchin/quarkus-kafka-producer-jvm"
-    add_app_image "quarkus-kafka-consumer" "quarkus" "ivanfranchin/quarkus-kafka-consumer-jvm"
-    add_app_image "micronaut-kafka-producer" "micronaut" "ivanfranchin/micronaut-kafka-producer-jvm"
-    add_app_image "micronaut-kafka-consumer" "micronaut" "ivanfranchin/micronaut-kafka-consumer-jvm"
-    add_app_image "springboot-kafka-producer" "springboot" "ivanfranchin/springboot-kafka-producer-jvm"
-    add_app_image "springboot-kafka-consumer" "springboot" "ivanfranchin/springboot-kafka-consumer-jvm"
+    add_app_image "quarkus-kafka-producer" "quarkus" "docker.io/ivanfranchin/quarkus-kafka-producer-jvm"
+    add_app_image "quarkus-kafka-consumer" "quarkus" "docker.io/ivanfranchin/quarkus-kafka-consumer-jvm"
+    add_app_image "micronaut-kafka-producer" "micronaut" "docker.io/ivanfranchin/micronaut-kafka-producer-jvm"
+    add_app_image "micronaut-kafka-consumer" "micronaut" "docker.io/ivanfranchin/micronaut-kafka-consumer-jvm"
+    add_app_image "springboot-kafka-producer" "springboot" "docker.io/ivanfranchin/springboot-kafka-producer-jvm"
+    add_app_image "springboot-kafka-consumer" "springboot" "docker.io/ivanfranchin/springboot-kafka-consumer-jvm"
 
-    add_app_image "quarkus-elasticsearch" "quarkus" "ivanfranchin/quarkus-elasticsearch-jvm"
-    add_app_image "micronaut-elasticsearch" "micronaut" "ivanfranchin/micronaut-elasticsearch-jvm"
-    add_app_image "springboot-elasticsearch" "springboot" "ivanfranchin/springboot-elasticsearch-jvm"
+    add_app_image "quarkus-elasticsearch" "quarkus" "docker.io/ivanfranchin/quarkus-elasticsearch-jvm"
+    add_app_image "micronaut-elasticsearch" "micronaut" "docker.io/ivanfranchin/micronaut-elasticsearch-jvm"
+    add_app_image "springboot-elasticsearch" "springboot" "docker.io/ivanfranchin/springboot-elasticsearch-jvm"
   fi
 }
 
@@ -110,11 +110,12 @@ esac
 
 # Run tag for each mode
 start_time=$(date +"%Y-%m-%d %H:%M:%S")
+tag_failed=0
 
 for mode in "${MODES_TO_TEST[@]}"; do
   MODE="$mode"
   init_configs
-  tag_images
+  tag_images || tag_failed=1
 done
 
 echo
@@ -124,4 +125,9 @@ echo "└───────────────────────�
 echo "Started:  ${start_time}"
 echo "Finished: $(date +"%Y-%m-%d %H:%M:%S")"
 echo
-echo "✔ Tag completed successfully"
+
+if [[ $tag_failed -eq 0 ]]; then
+  echo "✔ Tag completed successfully"
+else
+  echo "✘ Tag completed with some failures"
+fi
