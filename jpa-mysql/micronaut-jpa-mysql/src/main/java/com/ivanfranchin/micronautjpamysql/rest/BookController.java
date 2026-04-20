@@ -11,8 +11,6 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Status;
-import io.micronaut.scheduling.TaskExecutors;
-import io.micronaut.scheduling.annotation.ExecuteOn;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +18,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @Controller("/api/books")
-@ExecuteOn(TaskExecutors.IO)
 public class BookController {
 
     private static final Logger log = LoggerFactory.getLogger(BookController.class);

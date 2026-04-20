@@ -17,9 +17,9 @@
         <jdk.version>17</jdk.version>
         <release.version>17</release.version>
         <micronaut.version>4.10.11</micronaut.version>
+        <micronaut.runtime>tomcat</micronaut.runtime>
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>com.ivanfranchin.micronautelasticsearch.aot.generated</micronaut.aot.packageName>
-        <micronaut.runtime>netty</micronaut.runtime>
         <exec.mainClass>com.ivanfranchin.micronautelasticsearch.Application</exec.mainClass>
     </properties>
 
@@ -34,11 +34,6 @@
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-client</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-http-server-netty</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -64,6 +59,11 @@
         <dependency>
             <groupId>io.micronaut.micrometer</groupId>
             <artifactId>micronaut-micrometer-registry-prometheus</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.servlet</groupId>
+            <artifactId>micronaut-http-server-tomcat</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -139,6 +139,17 @@
                             <groupId>io.micronaut</groupId>
                             <artifactId>micronaut-http-validation</artifactId>
                             <version>${micronaut.core.version}</version>
+                        </path>
+                        <path>
+                            <groupId>io.micronaut.servlet</groupId>
+                            <artifactId>micronaut-servlet-processor</artifactId>
+                            <version>${micronaut.servlet.version}</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>io.micronaut</groupId>
+                                    <artifactId>micronaut-inject</artifactId>
+                                </exclusion>
+                            </exclusions>
                         </path>
                         <path>
                             <groupId>io.micronaut.validation</groupId>

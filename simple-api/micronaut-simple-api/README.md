@@ -5,7 +5,7 @@
 
 - ### micronaut-simple-api
 
-  [`Micronaut`](https://micronaut.io/) Java Web application that exposes a simple REST API for greetings. [Micronaut Launch](https://micronaut.io/launch/?type=DEFAULT&name=micronaut-simple-api&package=com.ivanfranchin.micronautsimpleapi&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=jib&features=graalvm&features=http-client&features=micrometer-prometheus&features=validation&features=jackson-databind&version=4.10.11)
+  [`Micronaut`](https://micronaut.io/) Java Web application that exposes a simple REST API for greetings. [Micronaut Launch](https://micronaut.io/launch/?type=DEFAULT&name=micronaut-simple-api&package=com.ivanfranchin.micronautsimpleapi&javaVersion=JDK_17&lang=JAVA&build=MAVEN&test=JUNIT&features=http-client&features=micrometer-prometheus&features=validation&features=jackson-databind&features=tomcat-server&version=4.10.11)
   
   It has the following endpoints:
   ```text
