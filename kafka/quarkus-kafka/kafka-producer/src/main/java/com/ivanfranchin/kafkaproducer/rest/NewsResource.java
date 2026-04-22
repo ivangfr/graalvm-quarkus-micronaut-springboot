@@ -31,7 +31,7 @@ public class NewsResource {
     public String createNews(@Valid CreateNewsRequest createNewsRequest) {
         String id = UUID.randomUUID().toString();
         News news = new News(id, createNewsRequest.source(), createNewsRequest.title());
-        log.info("Sending News message: key={}, {}", id, news);
+        log.info("Sending News message: key={}, {}. Processed by {}", id, news, Thread.currentThread());
         emitter.send(KafkaRecord.of(id, news));
         return id;
     }

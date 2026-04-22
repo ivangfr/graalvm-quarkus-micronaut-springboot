@@ -24,7 +24,7 @@ public class SimpleApiController {
 
     @Get
     public Greeting greetName(@QueryValue(defaultValue = "World") @NotBlank String name) {
-        log.info("Received request, name: {}", name);
+        log.info("Received request, name: {}. Processed by {}", name, Thread.currentThread());
         return greetingService.greet(name);
     }
 }

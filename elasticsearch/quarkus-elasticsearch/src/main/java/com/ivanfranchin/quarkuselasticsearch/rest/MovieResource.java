@@ -26,7 +26,7 @@ public class MovieResource {
 
     @POST
     public Response createMovie(@Valid CreateMovieRequest createMovieRequest) {
-        log.info("Received request to create movie: {}.", createMovieRequest);
+        log.info("Received request to create movie: {}. Processed by {}", createMovieRequest, Thread.currentThread());
         Movie movie = toMovie(createMovieRequest);
         String id = movieService.saveMovie(movie);
         return Response.status(Response.Status.CREATED).entity(id).build();
@@ -34,7 +34,7 @@ public class MovieResource {
 
     @GET
     public SearchMovieResponse searchMovies(@QueryParam("title") @NotBlank String title) {
-        log.info("Received request to search movies with title: {}.", title);
+        log.info("Received request to search movies with title: {}. Processed by {}", title, Thread.currentThread());
         return movieService.searchMovies(title);
     }
 

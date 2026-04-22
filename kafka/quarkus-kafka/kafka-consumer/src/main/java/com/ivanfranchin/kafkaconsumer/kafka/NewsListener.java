@@ -24,7 +24,8 @@ public class NewsListener {
                 metadata.getOffset(),
                 metadata.getTimestamp(),
                 metadata.getKey(),
-                message.getPayload());
+                message.getPayload(),
+                Thread.currentThread());
         return message.ack();
     }
 }

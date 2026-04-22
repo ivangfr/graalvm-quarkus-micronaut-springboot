@@ -15,7 +15,7 @@ public class NewsListener {
 
     @Topic("${app.kafka.input.topics}")
     public void receive(@KafkaKey String key, News newsMessage, long offset, int partition, String topic, long timestamp) {
-        log.info("Received message\n---\nTOPIC: {}; PARTITION: {}; OFFSET: {}; TIMESTAMP: {};\nKEY: {}\nPAYLOAD: {}\n---",
-                topic, partition, offset, timestamp, key, newsMessage);
+        log.info("Received message\n---\nTOPIC: {}; PARTITION: {}; OFFSET: {}; TIMESTAMP: {};\nKEY: {}\nPAYLOAD: {}\n---. Processed by {}",
+                topic, partition, offset, timestamp, key, newsMessage, Thread.currentThread());
     }
 }

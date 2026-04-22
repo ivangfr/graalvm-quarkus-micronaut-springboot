@@ -37,7 +37,7 @@ public class MovieServiceImpl implements MovieService {
                     .index(moviesIndex)
                     .document(movie));
             String id = indexResponse.id();
-            log.info("Document for '{}' {} successfully in ES. The id is: {}", movie, indexResponse.result(), id);
+            log.info("Document for '{}' {} successfully in ES. The id is: {}. Processed by {}", movie, indexResponse.result(), id, Thread.currentThread());
             return id;
         } catch (Exception e) {
             String errorMessage = String.format("An exception occurred while indexing '%s'. %s", movie, e.getMessage());
@@ -56,7 +56,7 @@ public class MovieServiceImpl implements MovieService {
                                             .field("title").query(title))),
                     Movie.class);
             List<Hit<Movie>> hits = searchResponse.hits().hits();
-            log.info("Searching for '{}' took {} and found {}", title, searchResponse.took(), hits.size());
+            log.info("Searching for '{}' took {} and found {}. Processed by {}", title, searchResponse.took(), hits.size(), Thread.currentThread());
             return toSearchMovieResponse(hits, searchResponse.took());
         } catch (Exception e) {
             String errorMessage = String.format("An exception occurred while searching for title '%s'. %s", title, e.getMessage());

@@ -22,7 +22,7 @@ public class NewsProducer {
     private String kafkaTopic;
 
     public void send(News news) {
-        log.info("Sending News '{}' to topic '{}'", news, kafkaTopic);
+        log.info("Sending News '{}' to topic '{}'. Processed by {}", news, kafkaTopic, Thread.currentThread());
         kafkaTemplate.send(kafkaTopic, news.id(), news);
     }
 }

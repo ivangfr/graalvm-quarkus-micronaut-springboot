@@ -23,7 +23,7 @@ public class SimpleApiResource {
 
     @GET
     public Greeting greetName(@QueryParam("name") @DefaultValue("World") @NotBlank String name) {
-        log.info("Received request, name: {}", name);
+        log.info("Received request, name: {}. Processed by {}", name, Thread.currentThread());
         return greetingService.greet(name);
     }
 }

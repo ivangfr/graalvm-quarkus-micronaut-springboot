@@ -28,7 +28,7 @@ public class NewsController {
     public String createNews(@Valid @Body CreateNewsRequest createNewsRequest) {
         String id = UUID.randomUUID().toString();
         News newsMessage = new News(id, createNewsRequest.source(), createNewsRequest.title());
-        log.info("Sending News message: id={}, {}", id, newsMessage);
+        log.info("Sending News message: id={}, {}. Processed by {}", id, newsMessage, Thread.currentThread());
         newsClient.send(id, newsMessage);
         return id;
     }

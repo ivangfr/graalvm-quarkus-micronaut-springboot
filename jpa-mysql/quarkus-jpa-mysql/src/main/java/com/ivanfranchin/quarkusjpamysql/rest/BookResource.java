@@ -27,20 +27,20 @@ public class BookResource {
 
     @GET
     public List<BookResponse> getBooks() {
-        log.info("Received request to get all books");
+        log.info("Received request to get all books. Processed by {}", Thread.currentThread());
         return bookService.getBooks().stream().map(BookResponse::fromBook).toList();
     }
 
     @GET
     @Path("/{id}")
     public BookResponse getBook(@PathParam("id") Long id) throws BookNotFoundException {
-        log.info("Received request to get books with id: {}", id);
+        log.info("Received request to get books with id: {}. Processed by {}", id, Thread.currentThread());
         return BookResponse.fromBook(bookService.validateAndGetBook(id));
     }
 
     @POST
     public Response createBook(@Valid CreateBookRequest createBookRequest) {
-        log.info("Received request to create book: {}", createBookRequest);
+        log.info("Received request to create book: {}. Processed by {}", createBookRequest, Thread.currentThread());
         Book book = bookService.saveBook(CreateBookRequest.toBook(createBookRequest));
         return Response.status(Response.Status.CREATED).entity(BookResponse.fromBook(book)).build();
     }

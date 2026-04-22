@@ -20,6 +20,6 @@ public class NewsListener {
                        @Header(KafkaHeaders.RECEIVED_KEY) String key,
                        @Header(KafkaHeaders.RECEIVED_TIMESTAMP) long timestamp,
                        ConsumerRecordMetadata metadata) {
-        log.info("Received message\n---\nTOPIC: {}; PARTITION: {}; OFFSET: {}; TIMESTAMP: {};\nKEY: {}\nPAYLOAD: {}\n---", metadata.topic(), metadata.partition(), metadata.offset(), timestamp, key, news);
+        log.info("Received message\n---\nTOPIC: {}; PARTITION: {}; OFFSET: {}; TIMESTAMP: {};\nKEY: {}\nPAYLOAD: {}\n---. Processed by {}", metadata.topic(), metadata.partition(), metadata.offset(), timestamp, key, news, Thread.currentThread());
     }
 }

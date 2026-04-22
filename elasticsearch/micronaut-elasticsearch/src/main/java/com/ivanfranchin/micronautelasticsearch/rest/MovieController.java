@@ -30,14 +30,14 @@ public class MovieController {
     @Status(HttpStatus.CREATED)
     @Post
     public String createMovie(@Valid @Body CreateMovieRequest createMovieRequest) {
-        log.info("Received request to create movie: {}", createMovieRequest);
+        log.info("Received request to create movie: {}. Processed by {}", createMovieRequest, Thread.currentThread());
         Movie movie = toMovie(createMovieRequest);
         return movieService.saveMovie(movie);
     }
 
     @Get
     public SearchMovieResponse searchMovies(@QueryValue("title") @NotBlank String title) {
-        log.info("Received request to search movies with title: {}", title);
+        log.info("Received request to search movies with title: {}. Processed by {}", title, Thread.currentThread());
         return movieService.searchMovies(title);
     }
 

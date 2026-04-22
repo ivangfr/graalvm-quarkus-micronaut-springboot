@@ -32,14 +32,14 @@ public class MoviesController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public String createMovie(@Valid @RequestBody CreateMovieRequest createMovieRequest) {
-        log.info("Received request to create movie: {}", createMovieRequest);
+        log.info("Received request to create movie: {}. Processed by {}", createMovieRequest, Thread.currentThread());
         Movie movie = toMovie(createMovieRequest);
         return movieService.saveMovie(movie);
     }
 
     @GetMapping
     public SearchMovieResponse searchMovies(@RequestParam(value = "title") @NotBlank String title) {
-        log.info("Received request to search movies with title: {}", title);
+        log.info("Received request to search movies with title: {}. Processed by {}", title, Thread.currentThread());
         return movieService.searchMovies(title);
     }
 

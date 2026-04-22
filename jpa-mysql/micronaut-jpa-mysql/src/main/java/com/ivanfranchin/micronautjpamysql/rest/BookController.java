@@ -30,20 +30,20 @@ public class BookController {
 
     @Get
     public List<BookResponse> getBooks() {
-        log.info("Received request to get all books");
+        log.info("Received request to get all books. Processed by {}", Thread.currentThread());
         return bookService.getBooks().stream().map(BookResponse::fromBook).toList();
     }
 
     @Get("/{id}")
     public BookResponse getBook(Long id) throws BookNotFoundException {
-        log.info("Received request to get books with id: {}", id);
+        log.info("Received request to get books with id: {}. Processed by {}", id, Thread.currentThread());
         return BookResponse.fromBook(bookService.validateAndGetBook(id));
     }
 
     @Status(HttpStatus.CREATED)
     @Post
     public BookResponse saveBook(@Valid @Body CreateBookRequest createBookRequest) {
-        log.info("Received request to create book: {}", createBookRequest);
+        log.info("Received request to create book: {}. Processed by {}", createBookRequest, Thread.currentThread());
         Book book = bookService.saveBook(CreateBookRequest.toBook(createBookRequest));
         return BookResponse.fromBook(book);
     }
